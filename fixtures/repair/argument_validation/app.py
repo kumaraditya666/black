@@ -4,5 +4,5 @@
 def parse_port(value):
     try:
         return int(value)
-    except TypeError:
+    except ValueError:
         raise ValueError('port must be numeric')
