@@ -213,3 +213,39 @@ Latency remains practical on the same 16 GB configuration: per-case medians 6.5�
 ### Readiness
 
 A restricted, developer-approved Proof-of-Fix prototype is defensible for incidents with a validated `LIKELY_CAUSE` and a resolved source, with `INVESTIGATION_FAILED` and `INSUFFICIENT_EVIDENCE` as hard terminal states and human review of every hypothesis. This does not establish broad diagnostic accuracy, and Milestone 3 was not started.
+
+## Milestone 3A — restricted Proof-of-Fix, 2026-11-04
+
+Full report: [research/27_M3A_PROOF_OF_FIX.md](research/27_M3A_PROOF_OF_FIX.md). Local Windows, Python 3.14, `qwen3.5:4b` through Ollama at 2,048 context, thinking off, temperature 0. Fixture revision `a7ee4fe747c6b1cf051412801194ec2693598420`. No new dependency. Docker was not installed, so evaluation used the trusted-fixture process jail.
+
+### Result
+
+| Fixture | Investigation | Gate | Attempt | Repro before | Repro after | Regression |
+|---|---|---|---|---|---:|---:|---:|
+| division_by_zero | LIKELY_CAUSE | eligible | **VERIFIED** | fail (rc 1) | pass (rc 0) | pass (rc 0) |
+| argument_validation | LIKELY_CAUSE | eligible | **VERIFIED** | fail (rc 1) | pass (rc 0) | pass (rc 0) |
+| off_by_one | LIKELY_CAUSE | eligible | **VERIFIED** | fail (rc 1) | pass (rc 0) | pass (rc 0) |
+| missing_config | INSUFFICIENT_EVIDENCE | blocked | not attempted | — | — | — |
+| unreproducible | LIKELY_CAUSE | eligible | **UNVERIFIED** | **pass (rc 0)** | not run | not run |
+
+Four of five investigations produced a likely cause; one abstained and was hard-blocked. Of four attempts, three were verified and one was stopped as unverified before the patch generator ran. No patch failed, was rejected, or hit an environment or generation failure in this real run. Patch generation succeeded for 3/3 attempts that reached it. **A passing test is not production proof.**
+
+### Measured cost
+
+Investigation median 9.05 s; repair pipeline 4.9–7.3 s per verified case; end-to-end median 14.43 s and maximum 17.14 s; patch generation 2.56–5.71 s; 1,326–1,381 input and 139–278 output tokens. Same model, context and laptop configuration; no resource limit increased.
+
+### The key inversion
+
+On `unreproducible` the model returned `LIKELY_CAUSE` for a revision where the reported failure does not exist. The reproduction test passed before the patch, so the pipeline returned `UNVERIFIED` and never generated a patch. The model's confidence was irrelevant; the recorded evidence stopped it. The division, argument and off-by-one patches were each applied in a fresh temporary copy, and the same reproduction test that failed before the patch passed afterward together with the full regression suite.
+
+The argument patch adds a `None` check rather than broadening the exception handler. It passes all available tests but fixes only the observed input, not the general class of non-numeric arguments. This is exactly why `VERIFIED_IN_TEST_ENVIRONMENT` is not a claim of semantic correctness.
+
+### Deterministic tests and isolation
+
+The project suite is **83 passed** (70 existing + 13 repair), one deprecation warning. The repair tests cover verification, reproduction failure, regression failure, unreproducibility, missing/stale approval, failed and abstained investigations, missing revision, unresolved frames, invalid references, untrusted repository, path escapes, test edits, forbidden constructs, mismatched replacements and proof that the fixture repository is never mutated. Three mocked unsafe proposals were rejected; zero accepted. Mocked results are plumbing evidence, not model accuracy.
+
+Docker is unavailable. The process jail uses a temporary copy, sanitized environment, Python-level socket blocking, disabled third-party pytest plugins and a 60-second timeout. It has no OS-level network, filesystem, CPU or memory confinement, so only pinned trusted fixtures are executable and general-purpose repair execution is blocked. The implemented Docker path (no network, read-only root, dropped capabilities, memory/CPU/PID limits) was not exercised.
+
+### Visible limitations
+
+Five tiny fixtures, one model, one session and one operator. Benchmark approvals were fixture-level (`m3a-benchmark`), not human review. No real-model patch was rejected, so live rejection rate is unmeasured. The 2.9.1 issues remain visible: `misleading_logs` changed outcome across sessions on identical bytes, and the 42/42 result covers a limited synthetic set. No merge, PR, deployment, dashboard or autonomous repair was built. No production behaviour was observed.

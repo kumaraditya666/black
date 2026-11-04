@@ -1,6 +1,7 @@
 import hashlib
 import json
 import sqlite3
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -33,6 +34,22 @@ class Store:
                 );
                 CREATE UNIQUE INDEX IF NOT EXISTS one_running_investigation ON investigations
                     (incident_id, provider, model, evidence_hash) WHERE status='running';
+                CREATE TABLE IF NOT EXISTS repair_approvals (
+                    id TEXT PRIMARY KEY, investigation_id TEXT NOT NULL,
+                    hypothesis_index INTEGER NOT NULL, hypothesis_sha256 TEXT NOT NULL,
+                    evidence_hash TEXT NOT NULL, reviewer TEXT NOT NULL, note TEXT,
+                    created_at TEXT NOT NULL
+                );
+                CREATE UNIQUE INDEX IF NOT EXISTS one_repair_approval ON repair_approvals
+                    (investigation_id, hypothesis_index, hypothesis_sha256);
+                CREATE TABLE IF NOT EXISTS repair_attempts (
+                    id TEXT PRIMARY KEY, incident_id INTEGER, investigation_id TEXT NOT NULL,
+                    fixture TEXT NOT NULL, "commit" TEXT, status TEXT NOT NULL, approval_id TEXT,
+                    proposal TEXT, validation TEXT, diff TEXT, reproduction_before TEXT,
+                    reproduction_after TEXT, regression TEXT, isolation TEXT, error TEXT,
+                    timings TEXT, usage TEXT, review TEXT, created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL
+                );
             ''')
 
     def connect(self):
@@ -76,6 +93,70 @@ class Store:
     def investigations(self, incident_id: int):
         with self.connect() as db:
             return [dict(row) for row in db.execute('SELECT id, incident_id, provider, model, status, created_at, updated_at FROM investigations WHERE incident_id=? ORDER BY rowid DESC', (incident_id,))]
+
+    def add_repair_approval(self, investigation_id: str, hypothesis_index: int, hypothesis_sha256: str,
+                            evidence_hash: str, reviewer: str, note: str | None = None) -> dict:
+        now = datetime.now(timezone.utc).isoformat()
+        with self.connect() as db:
+            db.execute('INSERT OR IGNORE INTO repair_approvals (id,investigation_id,hypothesis_index,hypothesis_sha256,evidence_hash,reviewer,note,created_at) VALUES (?,?,?,?,?,?,?,?)',
+                       (str(uuid.uuid4()), investigation_id, hypothesis_index, hypothesis_sha256,
+                        evidence_hash, reviewer, note, now))
+            row = db.execute('SELECT * FROM repair_approvals WHERE investigation_id=? AND hypothesis_index=? AND hypothesis_sha256=?',
+                             (investigation_id, hypothesis_index, hypothesis_sha256)).fetchone()
+        return dict(row)
+
+    def repair_approvals(self, investigation_id: str) -> list[dict]:
+        with self.connect() as db:
+            return [dict(row) for row in db.execute(
+                'SELECT * FROM repair_approvals WHERE investigation_id=? ORDER BY created_at DESC',
+                (investigation_id,))]
+
+    def save_repair_attempt(self, record: dict):
+        columns = ('id', 'incident_id', 'investigation_id', 'fixture', 'commit', 'status', 'approval_id',
+                   'proposal', 'validation', 'diff', 'reproduction_before', 'reproduction_after',
+                   'regression', 'isolation', 'error', 'timings', 'usage', 'review', 'created_at', 'updated_at')
+        encoded = []
+        for key in columns:
+            value = record.get(key)
+            if key in ('proposal', 'validation', 'reproduction_before', 'reproduction_after', 'regression',
+                       'isolation', 'timings', 'usage', 'review') and value is not None:
+                value = json.dumps(value, ensure_ascii=False)
+            encoded.append(value)
+        quoted = [f'"{column}"' if column == 'commit' else column for column in columns]
+        with self.connect() as db:
+            db.execute(f"INSERT OR REPLACE INTO repair_attempts ({','.join(quoted)}) VALUES ({','.join('?' * len(columns))})", encoded)
+
+    def repair_attempt(self, attempt_id: str):
+        with self.connect() as db:
+            row = db.execute('SELECT * FROM repair_attempts WHERE id=?', (attempt_id,)).fetchone()
+        if not row:
+            return None
+        result = dict(row)
+        for key in ('proposal', 'validation', 'reproduction_before', 'reproduction_after', 'regression',
+                    'isolation', 'timings', 'usage', 'review'):
+            result[key] = json.loads(result[key]) if result[key] else None
+        return result
+
+    def repair_attempts(self) -> list[dict]:
+        with self.connect() as db:
+            return [dict(row) for row in db.execute(
+                'SELECT id, incident_id, investigation_id, fixture, "commit", status, created_at, updated_at '
+                'FROM repair_attempts ORDER BY rowid DESC')]
+
+    def review_repair_attempt(self, attempt_id: str, decision: str, reviewer: str, note: str | None = None):
+        if decision not in ('accept', 'reject'):
+            raise ValueError('review decision must be accept or reject')
+        if not reviewer.strip():
+            raise ValueError('reviewer is required')
+        review = {'decision': decision, 'reviewer': reviewer.strip(), 'note': note,
+                  'reviewed_at': datetime.now(timezone.utc).isoformat(),
+                  'notice': 'Developer review of the attempt; it cannot change the test-derived verification status.'}
+        with self.connect() as db:
+            updated = db.execute('UPDATE repair_attempts SET review=?, updated_at=? WHERE id=?',
+                                 (json.dumps(review, ensure_ascii=False), review['reviewed_at'], attempt_id))
+            if not updated.rowcount:
+                return None
+        return self.repair_attempt(attempt_id)
 
     def investigation(self, investigation_id: str):
         with self.connect() as db:

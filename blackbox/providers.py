@@ -48,6 +48,16 @@ class Provider:
         self.name, self.model, self.api_key = name, model, api_key
 
     def analyze(self, prompt: str) -> ProviderResult:
+        """Investigation adapter: the Findings schema is fixed and is never caller-supplied."""
+        return self.structured(prompt, Findings.model_json_schema())
+
+    def structured(self, prompt: str, schema: dict, system: str | None = None,
+                   max_output_tokens: int | None = None) -> ProviderResult:
+        """One structured completion against a caller-supplied JSON schema.
+
+        The schema is used for constrained decoding, so a patch proposal cannot be an unbounded or
+        free-form instruction stream. No tool or command channel exists.
+        """
         if self.name == 'ollama':
             url = os.environ.get('BLACKBOX_OLLAMA_URL', 'http://127.0.0.1:11434')
             parsed = urlparse(url)
@@ -66,10 +76,11 @@ class Provider:
                     raise ValueError
             except ValueError as exc:
                 raise ProviderError('BLACKBOX_OLLAMA_TIMEOUT_SECONDS must be between 1 and 600') from exc
-            prediction_budget = output_budget(prompt, context_length)
+            prediction_budget = min(max_output_tokens or MAX_OUTPUT_TOKENS, output_budget(prompt, context_length))
+            messages = ([{'role': 'system', 'content': system}] if system else []) + [{'role': 'user', 'content': prompt}]
             response = httpx.post(url.rstrip('/') + '/api/chat', json={'model': self.model, 'stream': False, 'think': False, 'truncate': False, 'shift': False,
-                'options': {'num_ctx': context_length, 'num_predict': prediction_budget, 'temperature': 0}, 'format': Findings.model_json_schema(),
-                'messages': [{'role': 'user', 'content': prompt}]}, timeout=timeout_seconds, follow_redirects=False, trust_env=False)
+                'options': {'num_ctx': context_length, 'num_predict': prediction_budget, 'temperature': 0}, 'format': schema,
+                'messages': messages}, timeout=timeout_seconds, follow_redirects=False, trust_env=False)
             response.raise_for_status()
             data = response.json()
             if data.get('done_reason') == 'length':
@@ -87,8 +98,10 @@ class Provider:
                 raise ProviderError('Install google-genai to use Gemini') from exc
             client = genai.Client(api_key=self.api_key, http_options=types.HttpOptions(timeout=60000, retry_options=types.HttpRetryOptions(attempts=1)))
             try:
-                response = client.models.generate_content(model=self.model, contents=prompt,
-                    config=types.GenerateContentConfig(response_mime_type='application/json', response_json_schema=Findings.model_json_schema(), max_output_tokens=2048))
+                config = types.GenerateContentConfig(response_mime_type='application/json',
+                    response_json_schema=schema, max_output_tokens=max_output_tokens or 2048,
+                    system_instruction=system)
+                response = client.models.generate_content(model=self.model, contents=prompt, config=config)
                 usage = response.usage_metadata
                 return ProviderResult(response.text or '', {'input_tokens': getattr(usage, 'prompt_token_count', None), 'output_tokens': getattr(usage, 'candidates_token_count', None), 'estimated_cost': None})
             finally:

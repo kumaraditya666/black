@@ -1,6 +1,6 @@
 # BLACKBOX — local evidence and AI investigation
 
-Milestone 1 captures a real sample exception and resolves its frames against an exact Git commit. It does not determine root cause or make repairs. The sample is intentionally broken and all sample reports are demonstrations.
+Milestone 1 captures a real sample exception and resolves its frames against an exact Git commit. That milestone does not determine root cause or make repairs; later milestones add a reviewed AI investigation and a restricted, test-verified repair workflow. The sample is intentionally broken and all sample reports are demonstrations.
 
 ## Setup
 
@@ -34,7 +34,7 @@ The resolver reads committed Git objects, never working-tree content. Missing co
 
 ## Limits
 
-This is a local, single-user prototype with no authentication or tenant isolation; do not expose it on a public network or use production secrets. Redaction is a best-effort set of patterns for common key/value secrets and token formats, not a guarantee against all secrets, personal data, multiline credentials or secrets embedded in arbitrary file paths. Minimize data before sending it, and inspect reports before sharing. Validation errors may echo invalid input. Exact duplicates are compared after redaction, so two payloads differing only in redacted values are indistinguishable. Existing SQLite files, the sample Git history and generated reports are not encrypted or automatically deleted. Event grouping is a simple stack signature and is not causal analysis. Incoming frames are client-provided evidence, not proof the reported code actually executed. Only one configured local repository is supported, and only full SHA-1 Git commits are accepted. No code repair or deployment is involved.
+This is a local, single-user prototype with no authentication or tenant isolation; do not expose it on a public network or use production secrets. Redaction is a best-effort set of patterns for common key/value secrets and token formats, not a guarantee against all secrets, personal data, multiline credentials or secrets embedded in arbitrary file paths. Minimize data before sending it, and inspect reports before sharing. Validation errors may echo invalid input. Exact duplicates are compared after redaction, so two payloads differing only in redacted values are indistinguishable. Existing SQLite files, the sample Git history and generated reports are not encrypted or automatically deleted. Event grouping is a simple stack signature and is not causal analysis. Incoming frames are client-provided evidence, not proof the reported code actually executed. Only one configured local repository is supported, and only full SHA-1 Git commits are accepted. Repair is a restricted local proposal-and-test workflow on pinned trusted fixtures; there is no merge, pull request, deployment or autonomous repair permission.
 
 ## AI investigation (opt-in)
 
@@ -74,3 +74,29 @@ For a separate real-model check run `python scripts/live_evaluate.py 1` (with th
 `python scripts/evaluate_m29.py --mode replay` re-runs each 2.8 scenario three times against the exact stored evidence snapshots and asserts each replayed `evidence_hash` matches; `--mode fresh` builds equivalent snapshots with fixed IDs and timestamps in per-scenario databases. `--runs`, `--output` and `--extra` adjust the repetition count, artifact path and two unseen generalization scenarios. Both write `data/milestone29-run.json` and `data/milestone29-replay-run.json` with per-run latency, tokens, status, validity, abstention, evidence hash and fact digest. The measurements and their limits are in [research/25_M29_STABILITY_EVALUATION.md](research/25_M29_STABILITY_EVALUATION.md).
 
 `python scripts/evaluate_m27.py` runs five labeled synthetic cases against the configured provider and stores them in `data/milestone27-evaluation.db`, separately from the original incident database. It sends their text to the configured provider; use Ollama locally for this evaluation. Review results in `data/milestone27-live-cases.json`. The synthetic events are not production failures, the set is tiny and repeated runs can accumulate incident history, so do not generalize its results into product-wide accuracy claims.
+
+## Restricted Proof-of-Fix (Milestone 3A)
+
+Repair is a separate, opt-in workflow. It is allowed only when an investigation is `completed` with outcome `LIKELY_CAUSE`, a human review record matches the exact hypothesis and evidence hashes, the cited source frame is resolved at the recorded revision, every evidence reference resolves, every fixture file matches its pinned content hash, and the repository is the trusted fixture repository in this project. `INVESTIGATION_FAILED`, `INSUFFICIENT_EVIDENCE`, stale approvals, missing revisions, unresolved frames, invalid references and untrusted repositories are hard blocks. Model confidence is never treated as proof.
+
+Start from a stored investigation ID (use `scripts/investigate.py history <incident>` to find one):
+
+```powershell
+python scripts/repair_cli.py eligibility <investigation-id> --fixture division_by_zero
+python scripts/repair_cli.py approve <investigation-id> --hypothesis 0 --reviewer <name>
+# The first call prints the hypothesis hash; review the text, then re-run with --confirm-hash <hash>.
+python scripts/repair_cli.py attempt <investigation-id> --fixture division_by_zero
+python scripts/repair_cli.py show <attempt-id>
+python scripts/repair_cli.py review <attempt-id> --decision accept --reviewer <name>
+python scripts/repair_cli.py list
+```
+
+A `show` report contains the original incident, approved hypothesis and reviewer, proposed changes, unified diff, reproduction output before and after the patch, regression output, exact revision, status, timings, token usage and remaining risks. Review records a developer decision but cannot change the test-derived status.
+
+The patch generator receives only verified records, the approved hypothesis, pinned source, allowed files, expected behaviour and the trusted reproduction test. It must return a bounded structured proposal of exact `find`/`replace` changes. Paths outside the allowed files, test edits, missing or repeated `find` text, unsafe process/network/dynamic-code constructs, invalid Python and oversized diffs are rejected before writing. No model-proposed shell command is executed, and the real repository is never modified.
+
+Statuses are `VERIFIED_IN_TEST_ENVIRONMENT` (reproduction failed before, passed after, regression passed), `PATCH_FAILED`, `UNVERIFIED` (the bug was not reproduced), `ENVIRONMENT_FAILED`, `PATCH_REJECTED`, `GENERATION_FAILED` and `ELIGIBILITY_BLOCKED`. `VERIFIED_IN_TEST_ENVIRONMENT` is not production success or proof that the tests are adequate.
+
+`BLACKBOX_REPAIR_ISOLATION` selects `auto`, `docker` or `process` (default `auto`). Docker was not installed for the milestone evaluation, so tests ran in a process jail: a temporary copy of the pinned revision, a sanitized environment, Python-level socket blocking, disabled third-party pytest plugins and a timeout (`BLACKBOX_REPAIR_TEST_TIMEOUT`, default 60 seconds). That is not OS-level confinement. Consequently only the trusted fixtures under `fixtures/repair/` are executable and general-purpose repair execution is blocked. A Docker path with `--network none`, a read-only root, dropped capabilities and memory/CPU/PID limits exists but requires `BLACKBOX_REPAIR_DOCKER_IMAGE` with pytest installed and was not exercised.
+
+`fixtures/repair/registry.json` pins every fixture file by SHA-256; `pytest.ini` keeps these disposable fixture suites out of the project test run. `python scripts/evaluate_m3a.py --approve-all` runs the five real model cases and writes `data/milestone3a-run.json`. Benchmark approvals are fixture-level and are not evidence of human review. There is no merge, pull request, deployment, dashboard or autonomous repair permission. Measurements and limits are in [research/27_M3A_PROOF_OF_FIX.md](research/27_M3A_PROOF_OF_FIX.md).
