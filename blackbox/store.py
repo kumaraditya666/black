@@ -87,9 +87,16 @@ class Store:
             result[key] = json.loads(result[key]) if result[key] else None
         if result['status'] == 'failed':
             result['outcome'] = 'INVESTIGATION_FAILED'
-            result['failure_kind'] = ('INVALID_MODEL_RESPONSE' if result['error'] in
-                ('Provider returned invalid structured output.', 'Evidence validation failed: output references unsupported evidence or a source line.')
-                else 'PROVIDER_FAILURE')
+            error = result['error'] or ''
+            if error.startswith(('Provider returned invalid structured output', 'Evidence validation failed',
+                                 'Model output reached the token limit')):
+                result['failure_kind'] = 'INVALID_MODEL_RESPONSE'
+            elif error.startswith('Provider request timed out'):
+                result['failure_kind'] = 'PROVIDER_TIMEOUT'
+            elif error.startswith('Provider configuration or local endpoint'):
+                result['failure_kind'] = 'PROVIDER_UNAVAILABLE'
+            else:
+                result['failure_kind'] = 'PROVIDER_FAILURE'
         elif result['status'] == 'completed' and result['findings']:
             result['outcome'] = result['findings'].get('outcome', 'LEGACY_UNCLASSIFIED')
         else:
