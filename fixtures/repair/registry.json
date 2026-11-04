@@ -1,0 +1,165 @@
+{
+  "milestone": "M3A",
+  "fixtures": [
+    {
+      "name": "division_by_zero",
+      "approved_for_m3a": true,
+      "description": "Averaging an empty collection divides by zero instead of rejecting it.",
+      "expected_behavior": "average([]) must raise ValueError mentioning an empty collection.",
+      "files": {
+        "app.py": "49b55794d30cab9f1681031d5a3092690666297dcd15455fd088bc11a6fe7b7c",
+        "conftest.py": "f081e82d493f4c3bf1d6edd537fda704597291b53ac157f5702e830514e989fe",
+        "tests/test_regression.py": "8b151c181bc8582460807eefcbfa9044ca552917e6b5c661c3d0863f011e89c7",
+        "tests/test_reproduction.py": "3640dba3e2f656cf1b7136afad4073d465cbc7eb85e8b082c0f3287eddd7be5c"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "ZeroDivisionError",
+        "message": "division by zero",
+        "frame": {
+          "path": "fixtures/repair/division_by_zero/app.py",
+          "line": 5,
+          "function": "average"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_average_rejects_empty_input",
+        "failure_marker": "ZeroDivisionError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "argument_validation",
+      "approved_for_m3a": true,
+      "description": "parse_port accepts a numeric port above 65535.",
+      "expected_behavior": "parse_port must raise ValueError unless the port is between 1 and 65535.",
+      "files": {
+        "app.py": "0b2c5f8f875fdf3bac09bcf5a8e821e3697de8b7f9edcd5edcb1a67b8926a464",
+        "conftest.py": "f081e82d493f4c3bf1d6edd537fda704597291b53ac157f5702e830514e989fe",
+        "tests/test_regression.py": "164c05473e5a2f2ac628225c91f7ad66af5053cbbc16273d0f40529c4bd5b951",
+        "tests/test_reproduction.py": "f64979b7d900c152f67cfb92eddb3665af4bd9a883d2ca251917b3d26abe048c"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "ValueError",
+        "message": "70000 is not a valid port",
+        "frame": {
+          "path": "fixtures/repair/argument_validation/app.py",
+          "line": 5,
+          "function": "parse_port"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_port_above_range_is_rejected",
+        "failure_marker": "DID NOT RAISE",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "off_by_one",
+      "approved_for_m3a": true,
+      "description": "last_n returns one item too many for the requested count.",
+      "expected_behavior": "last_n(items, count) must return exactly the last count items and an empty list for zero.",
+      "files": {
+        "app.py": "fd511ea613bb812af7dc1e15a703a8cb2eb9e3e71c91486b7f0b7b7f4a7d1d20",
+        "conftest.py": "f081e82d493f4c3bf1d6edd537fda704597291b53ac157f5702e830514e989fe",
+        "tests/test_regression.py": "23e391695ea7872541dc0aed1707d01043892af00dc559352ec385343c139886",
+        "tests/test_reproduction.py": "2a41b2efd2e266a8736a7ad3ffdb7070604dbaed2d1a1c23879f1461b9c5c8e8"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "IndexError",
+        "message": "list index out of range",
+        "frame": {
+          "path": "fixtures/repair/off_by_one/app.py",
+          "line": 5,
+          "function": "last_n"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_last_two_items",
+        "failure_marker": "[1, 2, 3]",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "missing_config",
+      "approved_for_m3a": true,
+      "description": "A configuration without a timeout key raises KeyError.",
+      "expected_behavior": "request_timeout must return 30 when the timeout key is absent and preserve explicit values.",
+      "files": {
+        "app.py": "1d33c3e07f94a32a7d4ad0fb9a3d98aab56453c6073d77dbf297470f4a7c7705",
+        "conftest.py": "f081e82d493f4c3bf1d6edd537fda704597291b53ac157f5702e830514e989fe",
+        "tests/test_regression.py": "64c4ba02c0ce586707c01e2c9b97974122e89b0b2c31766b4581b24ace2493a2",
+        "tests/test_reproduction.py": "0118adb06516109b07c77f45bfb59989e93096745773aa098ee6d0fd6f00ce0e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "KeyError",
+        "message": "'timeout'",
+        "frame": {
+          "path": "fixtures/repair/missing_config/app.py",
+          "line": 5,
+          "function": "request_timeout"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_missing_timeout_uses_default",
+        "failure_marker": "KeyError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "unreproducible",
+      "approved_for_m3a": true,
+      "description": "The reported failure is not present at the pinned revision.",
+      "expected_behavior": "average([]) already raises ValueError at this revision, so the reported bug cannot be reproduced.",
+      "files": {
+        "app.py": "02da2b3f7b2cf527b6f3d5546c292e2b399ce7a2da84395dad8857cd50e3a43d",
+        "conftest.py": "f081e82d493f4c3bf1d6edd537fda704597291b53ac157f5702e830514e989fe",
+        "tests/test_regression.py": "c3915c5772db5d70c65fc191453a14231525183ecb074f7e9d1622aaae572d9c",
+        "tests/test_reproduction.py": "3640dba3e2f656cf1b7136afad4073d465cbc7eb85e8b082c0f3287eddd7be5c"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "ZeroDivisionError",
+        "message": "division by zero",
+        "frame": {
+          "path": "fixtures/repair/unreproducible/app.py",
+          "line": 7,
+          "function": "average"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_average_rejects_empty_input",
+        "failure_marker": "ZeroDivisionError",
+        "reproducible": false
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    }
+  ]
+}
