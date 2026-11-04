@@ -232,7 +232,7 @@ Four of five investigations produced a likely cause; one abstained and was hard-
 
 ### Measured cost
 
-Investigation median 9.05 s; repair pipeline 4.9–7.3 s per verified case; end-to-end median 14.43 s and maximum 17.14 s; patch generation 2.56–5.71 s; 1,326–1,381 input and 139–278 output tokens. Same model, context and laptop configuration; no resource limit increased.
+Investigation median 9.05 s; repair pipeline 4.9–7.3 s per verified case; end-to-end median 14.43 s and maximum 17.14 s; patch generation requests 3.62–5.71 s wall time (model evaluation 2.56–5.11 s); 1,326–1,381 input and 139–278 output tokens. Same model, context and laptop configuration; no resource limit increased.
 
 ### The key inversion
 

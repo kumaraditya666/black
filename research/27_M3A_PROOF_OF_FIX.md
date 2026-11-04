@@ -149,7 +149,7 @@ Measurement:
 - investigation latency median **9.05 s** (7.58–9.68 s);
 - repair pipeline **4.9–7.3 s** per verified case;
 - end-to-end median **14.43 s**, maximum **17.14 s**;
-- patch generation alone **2.56–5.71 s**;
+- patch generation requests **3.62–5.71 s** wall time (Ollama evaluation **2.56–5.11 s**);
 - patch prompt **1,326–1,381 input tokens**; proposals **139–278 output tokens**;
 - local inference stayed on the same 2,048-token context and the same 4B model; no resource limit was raised.
 

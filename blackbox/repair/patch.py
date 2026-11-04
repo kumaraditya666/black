@@ -42,8 +42,9 @@ class PatchFormatError(Exception):
     pass
 
 
+# Namespaced calls such as re.compile are ordinary code; a preceding dot excludes them.
 FORBIDDEN = re.compile(
-    r'\b(?:subprocess|os\.system|os\.popen|socket|requests|urllib|httpx|http\.client|ctypes|'
+    r'(?<![\w.])(?:subprocess|os\.system|os\.popen|socket|requests|urllib|httpx|http\.client|ctypes|'
     r'importlib|__import__|eval|exec|compile|pickle|shutil\.rmtree)\b', re.IGNORECASE)
 
 

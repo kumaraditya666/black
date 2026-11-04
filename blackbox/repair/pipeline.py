@@ -154,7 +154,7 @@ def run_repair(store, repo: Path, investigation_id: str, fixture_name: str, prov
             mark = time.monotonic()
             materialize(repo, commit, fixture, after_dir)
             try:
-                updated, diff = validate_and_apply(proposal, fixture, files, after_dir)
+                _, diff = validate_and_apply(proposal, fixture, files, after_dir)
             except PatchRejected as exc:
                 record['status'] = 'PATCH_REJECTED'
                 record['error'] = '; '.join(exc.errors)

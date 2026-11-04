@@ -41,11 +41,6 @@ def revision_available(repo: Path, commit: str) -> bool:
     return result.returncode == 0 and result.stdout.strip() == b'commit'
 
 
-def blob_at(repo: Path, commit: str, relative: str) -> bytes | None:
-    result = _git(Path(repo), 'show', f'{commit}:{fixture_path({"name": ""})}/{relative}'.replace('//', '/'))
-    return result.stdout if result.returncode == 0 else None
-
-
 def trusted(repo: Path, fixture: dict) -> tuple[bool, str]:
     if not fixture.get('approved_for_m3a'):
         return False, 'fixture is not approved for Milestone 3A'
