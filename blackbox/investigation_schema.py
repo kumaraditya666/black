@@ -1,6 +1,11 @@
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+# Bounds are part of the JSON schema sent to the provider, so constrained decoding cannot emit a
+# long list, and validation applies the same limit. The prompt asks for at most three of each.
+OBSERVED_FACT_LIMIT = 3
+VERIFICATION_STEP_LIMIT = 3
+
 
 class Claim(BaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -19,11 +24,11 @@ class Findings(BaseModel):
     model_config = ConfigDict(extra='forbid')
     outcome: Literal['ROOT_CAUSE_SUPPORTED', 'LIKELY_CAUSE', 'INSUFFICIENT_EVIDENCE', 'INVESTIGATION_FAILED']
     observed_failure: Claim
-    observed_facts: list[Claim] = Field(default_factory=list, max_length=20)
+    observed_facts: list[Claim] = Field(default_factory=list, max_length=OBSERVED_FACT_LIMIT)
     hypotheses: list[Hypothesis] = Field(default_factory=list, max_length=10)
     alternatives: list[Hypothesis] = Field(default_factory=list, max_length=10)
     missing_evidence: list[str] = Field(default_factory=list, max_length=20)
-    verification_steps: list[str] = Field(default_factory=list, max_length=20)
+    verification_steps: list[str] = Field(default_factory=list, max_length=VERIFICATION_STEP_LIMIT)
 
     @model_validator(mode='after')
     def validate_claims(self):

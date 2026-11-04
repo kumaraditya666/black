@@ -486,3 +486,91 @@ def test_mocked_scenarios(setup, monkeypatch, case):
     assert result['findings']['outcome'] == ('LIKELY_CAUSE' if case['expected'] == 'plausible' else 'INSUFFICIENT_EVIDENCE')
     if case.get('missing_file') or case.get('missing_commit'):
         assert any('frame:0' in x for x in result['evidence']['missing_evidence'])
+
+
+def test_model_facing_schema_bounds_observation_and_step_lists():
+    from pydantic import ValidationError
+    from blackbox.investigation_schema import Findings, OBSERVED_FACT_LIMIT, VERIFICATION_STEP_LIMIT
+    properties = Findings.model_json_schema()['properties']
+    # The bound must be in the schema sent to the provider, not only in validation.
+    assert properties['observed_facts']['maxItems'] == OBSERVED_FACT_LIMIT == 3
+    assert properties['verification_steps']['maxItems'] == VERIFICATION_STEP_LIMIT == 3
+    data = {'outcome': 'INSUFFICIENT_EVIDENCE', 'observed_failure': {'text': 'failure', 'evidence_ids': ['event:1']},
+            'observed_facts': [], 'hypotheses': [], 'alternatives': [], 'missing_evidence': ['missing source'],
+            'verification_steps': ['a', 'b', 'c']}
+    assert Findings.model_validate(data).verification_steps == ['a', 'b', 'c']
+    with pytest.raises(ValidationError):
+        Findings.model_validate({**data, 'verification_steps': ['a', 'b', 'c', 'd']})
+    with pytest.raises(ValidationError):
+        Findings.model_validate({**data, 'observed_facts': [{'text': text, 'evidence_ids': ['event:1']}
+                                                            for text in ('a', 'b', 'c', 'd')]})
+
+
+def test_output_budget_shrinks_for_large_prompts_without_dropping_evidence():
+    from blackbox.providers import ProviderError, output_budget
+    assert output_budget('evidence', 2048) == 768
+    assert 320 <= output_budget('x' * 5000, 2048) < 768
+    with pytest.raises(ProviderError, match='does not fit'):
+        output_budget('x' * 8000, 2048)
+
+
+def test_ollama_adapter_sends_bounded_schema_and_adaptive_budget(monkeypatch):
+    from blackbox.providers import Provider, output_budget
+    captured = {}
+    class Response:
+        def raise_for_status(self): pass
+        def json(self): return {'message': {'content': '{}'}, 'prompt_eval_count': 1400, 'eval_count': 5}
+    def post(url, **kwargs):
+        captured.update(kwargs)
+        return Response()
+    monkeypatch.setattr('blackbox.providers.httpx.post', post)
+    prompt = 'x' * 5000
+    Provider('ollama', 'configured-model').analyze(prompt)
+    options = captured['json']['options']
+    assert options['num_predict'] == output_budget(prompt, 2048) < 768
+    assert captured['json']['format']['properties']['observed_facts']['maxItems'] == 3
+    assert captured['json']['format']['properties']['verification_steps']['maxItems'] == 3
+
+
+def test_truncated_json_is_a_hard_failure(setup, monkeypatch):
+    from blackbox.providers import ProviderResult
+    client, event, _, _ = setup
+    class Truncated(MockProvider):
+        def analyze(self, prompt):
+            return ProviderResult('{"outcome": "INSUFFICIENT_EVIDENCE", "observed_facts": [{"text": "cut', {})
+    monkeypatch.setattr('blackbox.app.configured_provider', lambda: Truncated())
+    iid = client.post('/events', json=event).json()['incident_id']
+    result = client.post(f'/incidents/{iid}/investigations', json={}).json()['investigation']
+    assert result['status'] == 'failed' and result['failure_kind'] == 'INVALID_MODEL_RESPONSE'
+    assert result['outcome'] == 'INVESTIGATION_FAILED'
+    assert result['findings']['hypotheses'] == [] and result['findings']['model_response_valid'] is False
+    assert any(claim['category'] == 'exception_type' for claim in result['findings']['atomic_claims'])
+
+
+def test_truncated_completion_keeps_token_usage(setup, monkeypatch):
+    from blackbox.providers import ProviderError
+    client, event, _, _ = setup
+    class Truncated(MockProvider):
+        def analyze(self, prompt):
+            raise ProviderError('Model output reached the token limit; no complete result returned',
+                                {'input_tokens': 900, 'output_tokens': 768, 'output_limit': 768})
+    monkeypatch.setattr('blackbox.app.configured_provider', lambda: Truncated())
+    iid = client.post('/events', json=event).json()['incident_id']
+    result = client.post(f'/incidents/{iid}/investigations', json={}).json()['investigation']
+    assert result['status'] == 'failed' and result['failure_kind'] == 'INVALID_MODEL_RESPONSE'
+    assert result['usage']['output_tokens'] == 768 and result['findings']['hypotheses'] == []
+
+
+def test_oversized_evidence_reports_a_distinct_failure(setup, monkeypatch):
+    from blackbox.providers import ProviderError
+    client, event, _, _ = setup
+    class TooLarge(MockProvider):
+        def analyze(self, prompt):
+            raise ProviderError('Evidence prompt does not fit safely in the configured context window; '
+                                'raise BLACKBOX_OLLAMA_CONTEXT_LENGTH or reduce the frame evidence.')
+    monkeypatch.setattr('blackbox.app.configured_provider', lambda: TooLarge())
+    iid = client.post('/events', json=event).json()['incident_id']
+    result = client.post(f'/incidents/{iid}/investigations', json={}).json()['investigation']
+    assert result['status'] == 'failed' and result['failure_kind'] == 'EVIDENCE_TOO_LARGE'
+    assert result['findings']['diagnosis_source'] == 'DETERMINISTIC_FALLBACK'
+    assert result['findings']['hypotheses'] == []

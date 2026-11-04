@@ -93,6 +93,8 @@ class Store:
                 result['failure_kind'] = 'INVALID_MODEL_RESPONSE'
             elif error.startswith('Provider request timed out'):
                 result['failure_kind'] = 'PROVIDER_TIMEOUT'
+            elif error.startswith('Evidence prompt does not fit'):
+                result['failure_kind'] = 'EVIDENCE_TOO_LARGE'
             elif error.startswith('Provider configuration or local endpoint'):
                 result['failure_kind'] = 'PROVIDER_UNAVAILABLE'
             else:

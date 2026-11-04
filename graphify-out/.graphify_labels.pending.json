@@ -22,7 +22,7 @@
   "20": "buggy_apps/README.md",
   "21": "runtime.py",
   "22": "Targeted inspection findings",
-  "23": "Exception",
+  "23": "Milestone 2.9.1 — structured-output reliability fix and revalidation",
   "24": "Observable workflow research",
   "25": "Open-source architecture research",
   "26": "Quality and evaluation plan",
@@ -31,8 +31,10 @@
   "29": "09_DEPENDENCY_GRAPHS.md",
   "30": "14_TECH_STACK_FEASIBILITY.md",
   "31": "23_M28_FAILURE_ANALYSIS.md",
-  "32": "Exception",
+  "32": "Investigation evaluation record",
   "33": "start_ollama.ps1",
   "34": "Path",
-  "35": "fixture"
+  "35": "fixture",
+  "36": "BaseModel",
+  "37": "Exception"
 }

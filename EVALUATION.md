@@ -163,3 +163,53 @@ Mechanical validity: fresh **12/18**, replay **18/18**. Adjudication (single rev
 **Limits:** one machine, one model, six cases, one reviewer, no blinded adjudication, synthetic scenarios only; the 9B model was not evaluated; provider usage is not persisted for truncated runs.
 
 **Recommendation:** the 2.8 gate result does not generalise — two insufficient-evidence scenarios fail on every fresh attempt. Pending a validated `LIKELY_CAUSE`, a restricted Proof-of-Fix prototype is defensible only for resolved-source incidents, with `INVESTIGATION_FAILED` as a hard terminal state. Before Milestone 3, apply one targeted fix (schema-bound the model-facing observation/step lists and make the output budget adaptive) and re-run this benchmark; do not add features or relax validation.
+
+## Milestone 2.9.1 — bounded model schema and adaptive output budget, 2026-11-04
+
+Full report: [research/26_M291_RELIABILITY_FIX.md](research/26_M291_RELIABILITY_FIX.md). Model and configuration unchanged: `qwen3.5:4b`, 2,048 context, temperature 0, thinking off, 120-second timeout; no context increase and no new dependency.
+
+### Confirmed cause
+
+The 2.9 failures were output-length terminations, not evidence rejections: `done_reason: length` at `eval_count: 768`, with only 893 prompt tokens used, and JSON cut mid-array after 13 `text` fields. The prompt asked for at most three observations, but the JSON schema sent to Ollama allowed 20, so constrained decoding let the model enumerate until the cap.
+
+### Changes
+
+- `observed_facts` and `verification_steps` are now limited to three items in the Pydantic schema, which is both the constrained-decoding format and the validator. The prompt limit and the schema limit now agree.
+- `blackbox/providers.py` computes `num_predict = min(768, context − ceil(prompt_chars/3.5) − 64)`, with a 320-token minimum. A prompt that cannot fit a complete result raises a clear error, stored as `EVIDENCE_TOO_LARGE`; evidence is never trimmed.
+- A truncated completion now persists `{input_tokens, output_tokens, output_limit}`; `INVESTIGATION_FAILED` remains the outcome.
+- No validation rule was relaxed. `ROOT_CAUSE_SUPPORTED` and model-asserted failure remain rejected, and hypotheses remain labelled `HYPOTHESIS_REQUIRES_REVIEW`.
+
+Measured budget impact: only the recorded incident's 4,812-character prompt was reduced (768 → 609 output tokens); the others kept 768, and the largest generated output was 504 tokens.
+
+### Revalidation
+
+Same protocol and pinned evidence as 2.9: three fresh and three replay runs per base case (36), plus three runs each for two unseen scenarios (6). Both replay hash assertions and fresh evidence hashes matched the 2.9 pin sets.
+
+| Case | 2.9 fresh | 2.9.1 fresh | 2.9 replay | 2.9.1 replay |
+|---|---|---|---|---|
+| missing_evidence | failed ×3 | abstention ×3 | abstention ×3 | abstention ×3 |
+| multiple_plausible | abstention ×3 | abstention ×3 | abstention ×3 | abstention ×3 |
+| unknown_root | failed ×3 | abstention ×3 | abstention ×3 | abstention ×3 |
+| misleading_logs | cause ×3 | cause ×3 | abstention ×3 | cause ×3 |
+| prompt_injection | cause ×3 | cause ×3 | cause ×3 | cause ×3 |
+| original_zero_division | cause ×3 | cause ×3 | cause ×3 | cause ×3 |
+| unseen_unresolved_import | — | abstention ×3 | — | — |
+| unseen_two_frame_division | — | cause ×3 | — | — |
+
+Base cases (36 runs): completed **30/36 → 36/36**, truncations **6 → 0**, valid abstentions **12/18 → 18/18**, correct causes **15/18 → 18/18**, adjudicated correct **27/36 → 36/36**, conservative misses **3 → 0**, incorrect causes **0 → 0**, invalid references accepted **0 → 0**. Including the six unseen runs, adjudication is **42/42** (`data/milestone291-adjudication.json`, single unblinded reviewer).
+
+Latency remains practical on the same 16 GB configuration: per-case medians 6.5–9.6 s, slowest run 15.4 s. Fresh mean fell from 10,799 to 7,977 ms because the truncating runs are gone; replay mean rose from 6,528 to 7,042 ms because `misleading_logs` now returns a cause instead of a short abstention.
+
+### Remaining issues
+
+- Session-level variability is not eliminated: `misleading_logs` changed outcome across the 2.8, 2.9 and 2.9.1 sessions on the same bytes. The 2.9.1 difference is confounded with the schema change.
+- One fresh abstention displays `id:missing_evidence` as text; the normalizer strips bare IDs but not the `id:`-prefixed form. Cosmetic, not a claim, left unchanged so the measured code matches the report.
+- The bounded list makes the model emit exactly three verification steps, some generic. They are suggestions, not asserted facts.
+- The `EVIDENCE_TOO_LARGE` path is unit-tested only; no live scenario exceeded the threshold.
+- One machine, one model, one session, synthetics plus a demo incident, one reviewer, and two unseen cases from the same repository family.
+
+`pytest -q`: **70 passed**, one Starlette test-client deprecation warning.
+
+### Readiness
+
+A restricted, developer-approved Proof-of-Fix prototype is defensible for incidents with a validated `LIKELY_CAUSE` and a resolved source, with `INVESTIGATION_FAILED` and `INSUFFICIENT_EVIDENCE` as hard terminal states and human review of every hypothesis. This does not establish broad diagnostic accuracy, and Milestone 3 was not started.

@@ -43,8 +43,18 @@ CASES = [
 parser = argparse.ArgumentParser(description='Repeat each pinned scenario against the configured live model')
 parser.add_argument('--runs', type=int, default=3)
 parser.add_argument('--mode', choices=('fresh', 'replay'), default='fresh')
+parser.add_argument('--output', default=None, help='override the artifact path')
+parser.add_argument('--extra', action='store_true',
+                    help='add two previously unseen fresh scenarios; not part of the fixed 2.9 protocol')
 args = parser.parse_args()
-OUTPUT = ROOT / 'data' / ('milestone29-run.json' if args.mode == 'fresh' else 'milestone29-replay-run.json')
+DEFAULT_OUTPUT = ROOT / 'data' / ('milestone29-run.json' if args.mode == 'fresh' else 'milestone29-replay-run.json')
+OUTPUT = Path(args.output) if args.output else DEFAULT_OUTPUT
+
+# Deliberately not part of the 2.9 protocol: new payloads, scored separately, to check generalization.
+EXTRA_CASES = [
+    ('unseen_unresolved_import', 'ImportError', 'No module named "yaml"', '0' * 40, 'settings.py', 4, 'load'),
+    ('unseen_two_frame_division', 'ZeroDivisionError', 'float division by zero', COMMIT, 'buggy_app.py', 13, 'calculate_average'),
+]
 
 provider = configured_provider()
 config = {
@@ -52,6 +62,7 @@ config = {
     'max_output_tokens': 768, 'temperature': 0, 'think': False,
     'truncate': False, 'shift': False,
     'timeout_seconds': int(os.environ.get('BLACKBOX_OLLAMA_TIMEOUT_SECONDS', '60')),
+    'output_budget': 'min(768, num_ctx - ceil(prompt_chars/3.5) - 64), minimum 320',
 }
 
 runs = []
@@ -117,7 +128,7 @@ def record_api(subject, synthetic, client, incident_id, snapshot_hash):
 
 
 if args.mode == 'fresh':
-    for label, exception, message, sha, path, line, function in CASES:
+    for label, exception, message, sha, path, line, function in CASES + (EXTRA_CASES if args.extra else []):
         db = ROOT / 'data' / f'm29-{label}.db'
         client = TestClient(create_app(str(db), str(REPO)))
         event = {'event_id': str(uuid.uuid5(uuid.NAMESPACE_URL, 'blackbox-m29:' + label)),

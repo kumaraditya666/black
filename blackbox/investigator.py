@@ -333,8 +333,15 @@ def investigate(store: Store, repo: Path, incident_id: int, provider, force=Fals
         elif isinstance(exc, httpx.TimeoutException):
             error = 'Provider request timed out.'
         elif isinstance(exc, ProviderError):
-            error = ('Model output reached the token limit; no complete result was returned.'
-                     if 'token limit' in str(exc) else 'Provider configuration or local endpoint is unavailable.')
+            # Keep token counters for a truncated completion so the failure is measurable.
+            usage = json.dumps(exc.usage) if exc.usage else None
+            if 'token limit' in str(exc):
+                error = 'Model output reached the token limit; no complete result was returned.'
+            elif 'does not fit' in str(exc):
+                error = ('Evidence prompt does not fit safely in the configured context window; '
+                         'raise BLACKBOX_OLLAMA_CONTEXT_LENGTH or reduce the frame evidence.')
+            else:
+                error = 'Provider configuration or local endpoint is unavailable.'
         else:
             error = 'Provider request failed; check local provider configuration and availability.'
     elapsed = int((time.monotonic() - start) * 1000)
