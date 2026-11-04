@@ -36,29 +36,29 @@
     {
       "name": "argument_validation",
       "approved_for_m3a": true,
-      "description": "parse_port accepts a numeric port above 65535.",
-      "expected_behavior": "parse_port must raise ValueError unless the port is between 1 and 65535.",
+      "description": "parse_port lets a non-numeric argument raise TypeError instead of ValueError.",
+      "expected_behavior": "parse_port must raise ValueError for every non-numeric argument, including None.",
       "files": {
-        "app.py": "0b2c5f8f875fdf3bac09bcf5a8e821e3697de8b7f9edcd5edcb1a67b8926a464",
+        "app.py": "d9d2cda2c4c568ca7972682af10e4476c57feebe77721ee61feeaf82768443de",
         "conftest.py": "f081e82d493f4c3bf1d6edd537fda704597291b53ac157f5702e830514e989fe",
-        "tests/test_regression.py": "164c05473e5a2f2ac628225c91f7ad66af5053cbbc16273d0f40529c4bd5b951",
-        "tests/test_reproduction.py": "f64979b7d900c152f67cfb92eddb3665af4bd9a883d2ca251917b3d26abe048c"
+        "tests/test_regression.py": "819d056963d9294d05fdbe62bcbc1f27b986a119f721139eae4a103e8151caeb",
+        "tests/test_reproduction.py": "224fbeac3a31c0c1232c9f0428bec4f4de526e8e2c11f8ffa940477f43b8f936"
       },
       "allowed_files": [
         "app.py"
       ],
       "event": {
-        "exception_type": "ValueError",
-        "message": "70000 is not a valid port",
+        "exception_type": "TypeError",
+        "message": "int() argument must be a string, a bytes-like object or a real number, not 'NoneType'",
         "frame": {
           "path": "fixtures/repair/argument_validation/app.py",
-          "line": 5,
+          "line": 6,
           "function": "parse_port"
         }
       },
       "reproduction": {
-        "test": "tests/test_reproduction.py::test_port_above_range_is_rejected",
-        "failure_marker": "DID NOT RAISE",
+        "test": "tests/test_reproduction.py::test_none_is_rejected_as_invalid_argument",
+        "failure_marker": "TypeError",
         "reproducible": true
       },
       "regression": {
@@ -68,13 +68,13 @@
     {
       "name": "off_by_one",
       "approved_for_m3a": true,
-      "description": "last_n returns one item too many for the requested count.",
-      "expected_behavior": "last_n(items, count) must return exactly the last count items and an empty list for zero.",
+      "description": "find_index scans one element past the list and raises IndexError.",
+      "expected_behavior": "find_index must return -1 when the target is absent and must not scan past the list.",
       "files": {
-        "app.py": "fd511ea613bb812af7dc1e15a703a8cb2eb9e3e71c91486b7f0b7b7f4a7d1d20",
+        "app.py": "385fa65d9b33f70d3a13cdd8312d457d400e7c3f7c53682def6fa2e02053caa2",
         "conftest.py": "f081e82d493f4c3bf1d6edd537fda704597291b53ac157f5702e830514e989fe",
-        "tests/test_regression.py": "23e391695ea7872541dc0aed1707d01043892af00dc559352ec385343c139886",
-        "tests/test_reproduction.py": "2a41b2efd2e266a8736a7ad3ffdb7070604dbaed2d1a1c23879f1461b9c5c8e8"
+        "tests/test_regression.py": "e4f0d8b479d38a2467b9d1417a7c525bc3449ebcb726acb53850c1a884b05a86",
+        "tests/test_reproduction.py": "788dd90a1346f135377cc125cc303b6fa9335447cd448fa2335bc78b01290d50"
       },
       "allowed_files": [
         "app.py"
@@ -84,13 +84,13 @@
         "message": "list index out of range",
         "frame": {
           "path": "fixtures/repair/off_by_one/app.py",
-          "line": 5,
-          "function": "last_n"
+          "line": 6,
+          "function": "find_index"
         }
       },
       "reproduction": {
-        "test": "tests/test_reproduction.py::test_last_two_items",
-        "failure_marker": "[1, 2, 3]",
+        "test": "tests/test_reproduction.py::test_absent_target_returns_minus_one",
+        "failure_marker": "IndexError",
         "reproducible": true
       },
       "regression": {

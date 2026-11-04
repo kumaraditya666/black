@@ -1,5 +1,8 @@
-"""Trusted M3A fixture: port parsing accepts numbers outside 1-65535."""
+"""Trusted M3A fixture: a non-numeric argument raises the wrong exception type."""
 
 
 def parse_port(value):
-    return int(value)
+    try:
+        return int(value)
+    except TypeError:
+        raise ValueError('port must be numeric')

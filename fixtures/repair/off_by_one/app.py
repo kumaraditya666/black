@@ -1,5 +1,8 @@
-"""Trusted M3A fixture: last_n returns one item too many."""
+"""Trusted M3A fixture: find_index scans one element past the list."""
 
 
-def last_n(items, count):
-    return items[-count - 1:]
+def find_index(items, target):
+    for index in range(len(items) + 1):
+        if items[index] == target:
+            return index
+    return -1

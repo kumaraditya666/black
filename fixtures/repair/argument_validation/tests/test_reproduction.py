@@ -3,6 +3,6 @@ import pytest
 from app import parse_port
 
 
-def test_port_above_range_is_rejected():
+def test_none_is_rejected_as_invalid_argument():
     with pytest.raises(ValueError):
-        parse_port('70000')
+        parse_port(None)

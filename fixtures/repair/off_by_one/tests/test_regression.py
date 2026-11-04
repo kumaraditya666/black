@@ -1,13 +1,13 @@
-from app import last_n
+from app import find_index
 
 
-def test_zero_count_returns_empty():
-    assert last_n([1, 2], 0) == []
+def test_first_item_is_found():
+    assert find_index([1, 2, 3], 1) == 0
 
 
-def test_count_larger_than_list_returns_all():
-    assert last_n([1, 2], 5) == [1, 2]
+def test_last_item_is_found():
+    assert find_index([1, 2, 3], 3) == 2
 
 
-def test_whole_list_is_returned():
-    assert last_n([1, 2, 3], 3) == [1, 2, 3]
+def test_empty_list_has_no_match():
+    assert find_index([], 1) == -1
