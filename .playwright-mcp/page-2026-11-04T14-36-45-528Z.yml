@@ -1,0 +1,513 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner "Site navigation" [ref=e3]:
+    - navigation "main" [ref=e5]:
+      - link "Welcome Page" [ref=e6] [cursor=pointer]:
+        - /url: https://sentry.io/welcome/
+      - button "Menu" [ref=e9] [cursor=pointer]
+      - text: • • • • • • • • • • • •
+  - main "Main content" [ref=e14]:
+    - generic [ref=e15]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - heading "Let your issues fix themselves" [level=1] [ref=e20]
+          - paragraph [ref=e22]: Seer is Sentry's debugging agent. It turns your telemetry into answers and gets you the fix, right where you're already working.
+          - generic [ref=e23]:
+            - link "Try Sentry For Free" [ref=e24] [cursor=pointer]:
+              - /url: https://sentry.io/signup/
+            - link "Try in sandbox" [ref=e26] [cursor=pointer]:
+              - /url: https://sandbox.sentry.io/
+        - generic [ref=e32] [cursor=pointer]:
+          - img "Video thumbnail" [ref=e33]
+          - button "Play video" [ref=e34]
+      - generic [ref=e736]:
+        - generic [ref=e737]:
+          - heading "New issue at 2am. PR is ready for review." [level=2] [ref=e738]
+          - generic [ref=e740]:
+            - generic [ref=e741]:
+              - generic [ref=e742]:
+                - paragraph [ref=e743]: When a new issue hits, Seer investigates automatically to find what broke and why.
+                - paragraph [ref=e744]: By the time you open your laptop, there's already a pull request waiting.
+              - link "Learn more about Seer" [ref=e745] [cursor=pointer]:
+                - /url: https://docs.sentry.io/product/ai-in-sentry/seer/
+            - iframe [ref=e749]:
+              - generic [ref=f1e1]:
+                - generic [ref=f1e6]:
+                  - generic [ref=f1e11]:
+                    - generic [ref=f1e13]:
+                      - 'region "Step21: File IO on Main Thread: ***.lck (0 B) — demo — android" [ref=f1e14]'
+                      - 'region "Last step: Feed — demo — Sentry" [ref=f1e15]'
+                    - 'button "Hotspot on the following text: File IO on Main Thread" [ref=f1e17] [cursor=pointer]'
+                  - generic [ref=f1e22]:
+                    - generic [ref=f1e23] [cursor=pointer]
+                    - generic [ref=f1e26]: 1/4
+                    - generic [ref=f1e27]: Seer can automatically draft fixes for certain issues.
+                    - generic [ref=f1e32] [cursor=pointer]
+                - alert [ref=f1e35]
+        - generic [ref=e750]:
+          - heading "Ask Seer anything." [level=2] [ref=e754]
+          - generic [ref=e756]:
+            - iframe [ref=e759]:
+              - generic [ref=f2e1]:
+                - generic [ref=f2e6]:
+                  - generic [ref=f2e11]:
+                    - 'region "Last step: Backend Overview — demo — Sentry" [ref=f2e14]'
+                    - 'button "Hotspot on the following text: Ask Seer /" [ref=f2e16] [cursor=pointer]'
+                  - generic [ref=f2e21]:
+                    - generic [ref=f2e22]: 1/7
+                    - generic [ref=f2e28] [cursor=pointer]
+                - alert [ref=f2e31]
+            - generic [ref=e760]:
+              - generic [ref=e761]:
+                - paragraph [ref=e762]: Not everything starts with a Sentry alert. Sometimes you just know something is… off.
+                - paragraph [ref=e763]: Describe what you're seeing in plain language. Seer pulls the relevant signals and answers the questions that don't have an obvious starting point or solution.
+              - link "Learn more about Seer Agent" [ref=e764] [cursor=pointer]:
+                - /url: https://docs.sentry.io/product/ai-in-sentry/seer/#seer-agent
+        - generic [ref=e766]:
+          - heading "Debug wherever you work." [level=2] [ref=e770]
+          - generic [ref=e772]:
+            - generic [ref=e774]:
+              - paragraph [ref=e775]: Seer doesn't just live in Sentry's UI.
+              - list [ref=e776]:
+                - listitem [ref=e777]:
+                  - paragraph [ref=e778]: Send fixes to Claude, Copilot, or Cursor.
+                - listitem [ref=e779]:
+                  - paragraph [ref=e780]: Fix bugs from a Slack alert.
+                - listitem [ref=e781]:
+                  - paragraph [ref=e782]: Start an incident investigation in Slack where your whole team can see what's happening.
+            - generic:
+              - img "Sentry Slack alert with a Fix with Seer button"
+      - generic [ref=e784]:
+        - heading "Features" [level=2] [ref=e787]
+        - generic [ref=e790]:
+          - link [ref=e791] [cursor=pointer]:
+            - /url: https://sentry.io/product/seer/agent/
+            - heading "Ask Seer Anything" [level=3] [ref=e797]
+            - paragraph [ref=e799]: No context-gathering, no copy-pasting stack traces. Just ask Seer Agent what's wrong and get an answer from your actual production data.
+          - link [ref=e800] [cursor=pointer]:
+            - /url: https://sentry.io/product/seer/autofix/
+            - heading "Errors come with fixes now." [level=3] [ref=e805]
+            - paragraph [ref=e807]: Seer Autofix reads the stack trace, traces the root cause through your codebase, and drafts a fix — before you've finished reading the alert.
+          - link [ref=e808] [cursor=pointer]:
+            - /url: https://sentry.io/product/seer/ai-code-review/
+            - heading "Catch tomorrow's bugs in today's PR." [level=3] [ref=e813]
+            - paragraph [ref=e815]: Seer reviews your PRs against real production data — the errors, traces, and failure patterns Sentry has already seen from your app. If your change is going to cause problems, Seer tells you without spamming your PR.
+      - generic [ref=e817]:
+        - heading "Use Cases" [level=2] [ref=e820]
+        - generic [ref=e823]:
+          - link [ref=e824] [cursor=pointer]:
+            - /url: https://sentry.io/cookbook/seer-agent-use-cases/
+            - heading "Investigate issues with Seer" [level=3] [ref=e830]
+          - link [ref=e831] [cursor=pointer]:
+            - /url: https://sentry.io/cookbook/fix-sentry-issues-from-slack/
+            - heading "Fix issues from Slack with Seer" [level=3] [ref=e836]
+          - link [ref=e837] [cursor=pointer]:
+            - /url: https://sentry.io/cookbook/self-healing-workflow-seer/
+            - heading "Build automated debugging with Seer" [level=3] [ref=e845]
+          - link [ref=e846] [cursor=pointer]:
+            - /url: https://sentry.io/cookbook/fix-issues-sentry-mcp-cursor/
+            - heading "Fix issues with Sentry MCP + Cursor" [level=3] [ref=e851]
+          - link [ref=e852] [cursor=pointer]:
+            - /url: https://sentry.io/cookbook/debug-with-sentry-mcp-claude-code/
+            - heading "Debug with Sentry MCP + Claude Code" [level=3] [ref=e857]
+          - link [ref=e858] [cursor=pointer]:
+            - /url: https://sentry.io/cookbook/debug-with-sentry-mcp-warp/
+            - heading "Debug with Sentry MCP + Warp" [level=3] [ref=e863]
+          - link [ref=e864] [cursor=pointer]:
+            - /url: https://sentry.io/cookbook/connect-sentry-to-gitlab/
+            - heading "Connect GitLab to Sentry" [level=3] [ref=e869]
+      - generic [ref=e872]:
+        - generic [ref=e873]:
+          - paragraph [ref=e876]: Seer gives us exactly what we need — straight to the point, fast, and accurate. It’s saved us hours per feature, and that translates to the bottom line.
+          - generic [ref=e878]:
+            - paragraph [ref=e879]: Marc Maciera Zayas
+            - paragraph [ref=e880]: President @Honra
+          - link "Read More President @Honra testimonial" [ref=e881] [cursor=pointer]:
+            - /url: https://sentry.io/customers/honra/
+            - generic [ref=e882]:
+              - text: Read More
+              - generic [ref=e883]: President @Honra testimonial
+        - generic [ref=e884]:
+          - paragraph [ref=e887]: Sentry [Seer] is actually… good? One-shot fixed this error that I've spent the last 2 hours debugging
+          - paragraph [ref=e890]: "@aidenybai"
+          - link "Read More" [ref=e891] [cursor=pointer]:
+            - /url: https://x.com/aidenybai/status/1907845804263416198
+        - generic [ref=e893]:
+          - paragraph [ref=e896]: Seer provided insights that led us to a fix within 30 minutes, for a bug that would have taken an engineer at least a day otherwise.
+          - generic [ref=e898]:
+            - paragraph [ref=e899]: Neil Wang
+            - paragraph [ref=e900]: Engineering Manager @ Curai Health,
+        - generic [ref=e901]:
+          - paragraph [ref=e904]: Amazing. @getsentry Seer did better than I would have. I wouldn't have thought to have a special ogType for articles. https://t.co/Y44lHdMitM
+          - paragraph [ref=e907]: "@kentcdodds"
+          - link "Read More" [ref=e908] [cursor=pointer]:
+            - /url: https://x.com/kentcdodds/status/1943864584148070459
+      - generic [ref=e914]:
+        - heading "FAQs" [level=2] [ref=e915]
+        - generic [ref=e916]:
+          - generic [ref=e917]:
+            - heading [level=3] [ref=e918]:
+              - button "How much does Seer cost?" [ref=e919] [cursor=pointer]
+            - generic [ref=e923]:
+              - paragraph [ref=e924]: Seer is available to all Sentry users on a paid plan (Team, Business, or Enterprise) at $40 per active contributor, per month. An active contributor is anyone who commits two or more PRs in a connected repo.
+              - paragraph [ref=e925]:
+                - text: More details are available in the
+                - link "Seer pricing docs" [ref=e926] [cursor=pointer]:
+                  - /url: https://docs.sentry.io/pricing/#seer-pricing
+                - text: .
+          - generic [ref=e927]:
+            - heading [level=3] [ref=e928]:
+              - button "How do I enable Seer?" [ref=e929] [cursor=pointer]
+            - paragraph [ref=e934]: All Sentry users on a paid plan or trial can use Seer. You will be prompted to enable Seer and generative AI features within the Sentry interface upon attempting to use them for the first time.
+          - generic [ref=e935]:
+            - heading [level=3] [ref=e936]:
+              - button "What issues can Seer fix?" [ref=e937] [cursor=pointer]
+            - paragraph [ref=e942]: Seer can fix most bugs and performance issues in your application. Seer includes issue scan, which intelligently tries to determine the likelihood that an issue can be fixed with a code change, and enables you to run Seer on those issues. Alternatively, you can configure Seer to run issue fix automatically on issues that it believes it can help you fix.
+          - generic [ref=e943]:
+            - heading [level=3] [ref=e944]:
+              - button "What programming languages does Seer support?" [ref=e945] [cursor=pointer]
+            - paragraph [ref=e950]: Seer supports all programming languages and frameworks supported by Sentry, including web (frontend and backend), mobile, and desktop. Virtually all modern programming and configuration languages are supported, and then some more.
+          - generic [ref=e951]:
+            - heading [level=3] [ref=e952]:
+              - button "How does Seer protect my data?" [ref=e953] [cursor=pointer]
+            - generic [ref=e957]:
+              - paragraph [ref=e958]: "Seer respects your privacy and your data, and it comes with robust guarantees:"
+              - list [ref=e959]:
+                - listitem [ref=e960]:
+                  - paragraph [ref=e961]: AI-generated output from your data is shown only to you, not other customers
+                - listitem [ref=e962]:
+                  - paragraph [ref=e963]: Your data is not used to train generative AI models without your express consent (off by default)
+                - listitem [ref=e964]:
+                  - paragraph [ref=e965]:
+                    - text: We process your data only via
+                    - link "trusted subprocessors" [ref=e966] [cursor=pointer]:
+                      - /url: https://sentry.io/legal/subprocessors/
+                    - text: that are not allowed to use your data to train their own models
+              - paragraph [ref=e967]:
+                - text: You can
+                - link "read more" [ref=e968] [cursor=pointer]:
+                  - /url: https://docs.sentry.io/product/ai-in-sentry/ai-privacy-and-security/
+                - text: in our docs.
+          - generic [ref=e969]:
+            - heading [level=3] [ref=e970]:
+              - button "Can I disable Seer and generative AI features in Sentry?" [ref=e971] [cursor=pointer]
+            - paragraph [ref=e976]:
+              - text: Teams that want to turn off Seer and generative AI features can go to
+              - emphasis [ref=e977]: Settings
+              - text: →
+              - emphasis [ref=e978]: Organization
+              - text: →
+              - emphasis [ref=e979]: General Settings
+              - text: →
+              - emphasis [ref=e980]: Enable Generative AI Features
+              - text: and disable the feature toggle.
+      - generic [ref=e981]:
+        - heading "Of course we have more content" [level=2] [ref=e984]
+        - region "Resources carousel" [ref=e985]:
+          - generic [ref=e987]:
+            - link [ref=e989] [cursor=pointer]:
+              - /url: https://blog.sentry.io/seer-debug-with-ai-at-every-stage-of-development/
+              - generic [ref=e990]:
+                - generic:
+                  - 'img "Seer: debug with AI at every stage of development"'
+                - 'heading "Seer: debug with AI at every stage of development" [level=3] [ref=e991]'
+                - paragraph [ref=e993]: Seer already accurately root causes and fixes bugs in production. Now we're expanding its capabilities to help you debug during local development and...
+            - link [ref=e995] [cursor=pointer]:
+              - /url: https://docs.sentry.io/product/ai-in-sentry/seer/
+              - generic [ref=e996]:
+                - generic:
+                  - img "Seer Docs"
+                - heading "Seer Docs" [level=3] [ref=e997]
+                - paragraph [ref=e999]: Learn about Seer, Sentry's AI agent, and managing generative AI features.
+            - link [ref=e1001] [cursor=pointer]:
+              - /url: https://blog.sentry.io/seer-fixes-seer-debugging-agent/
+              - generic [ref=e1002]:
+                - generic:
+                  - 'img "Seer fixes Seer: How Seer pointed us toward a bug and helped fix an outage"'
+                - 'heading "Seer fixes Seer: How Seer pointed us toward a bug and helped fix an outage" [level=3] [ref=e1003]'
+                - paragraph [ref=e1005]: How Sentry's AI debugging tool Seer helped identify and fix a cascading region blocklist bug that caused an outage in Seer's own EU deployment.
+            - link [ref=e1007] [cursor=pointer]:
+              - /url: https://changelog.sentry.io/changelog/?categories=cmaxs61ka001h5lgk9p052rs5
+              - generic [ref=e1008]:
+                - heading [level=3] [ref=e1009]: Seer Changelog
+                - paragraph [ref=e1011]: Stay informed with new features and updates for Seer
+            - link [ref=e1013] [cursor=pointer]:
+              - /url: https://sentry.io/cookbook/debug-with-sentry-mcp-claude-code/
+              - generic [ref=e1014]:
+                - heading [level=3] [ref=e1015]: Debug Faster with Sentry MCP and Claude Code
+                - paragraph [ref=e1017]: Connect Sentry to Claude Code via MCP so your AI agent can pull issues, read traces and logs, and apply fixes without leaving your editor.
+            - link [ref=e1019] [cursor=pointer]:
+              - /url: https://sentry.io/cookbook/fix-issues-sentry-mcp-cursor/
+              - generic [ref=e1020]:
+                - heading [level=3] [ref=e1021]: Fix Production Issues in Cursor with Sentry MCP + Seer
+                - paragraph [ref=e1023]: Connect the Sentry MCP server to Cursor to query issues, trigger Seer root cause analysis, investigate database performance, and apply fixes — all wit...
+            - link [ref=e1025] [cursor=pointer]:
+              - /url: https://sentry.io/cookbook/performance-bot-sentry-claude/
+              - generic [ref=e1026]:
+                - heading [level=3] [ref=e1027]: Automate Weekly Performance Triage with Claude Code + Sentry MCP
+                - paragraph [ref=e1029]: Use Claude Code scheduled tasks and the Sentry MCP server to automatically find your worst performance issues every week and create GitHub PRs with fi...
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://blog.sentry.io/seer-debug-with-ai-at-every-stage-of-development/
+                - generic:
+                  - heading [level=3]: "Seer: debug with AI at every stage of development"
+                  - generic:
+                    - paragraph: Seer already accurately root causes and fixes bugs in production. Now we're expanding its capabilities to help you debug during local development and...
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://docs.sentry.io/product/ai-in-sentry/seer/
+                - generic:
+                  - heading [level=3]: Seer Docs
+                  - generic:
+                    - paragraph: Learn about Seer, Sentry's AI agent, and managing generative AI features.
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://blog.sentry.io/seer-fixes-seer-debugging-agent/
+                - generic:
+                  - heading [level=3]: "Seer fixes Seer: How Seer pointed us toward a bug and helped fix an outage"
+                  - generic:
+                    - paragraph: How Sentry's AI debugging tool Seer helped identify and fix a cascading region blocklist bug that caused an outage in Seer's own EU deployment.
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://changelog.sentry.io/changelog/?categories=cmaxs61ka001h5lgk9p052rs5
+                - generic:
+                  - heading [level=3]: Seer Changelog
+                  - generic:
+                    - paragraph: Stay informed with new features and updates for Seer
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://sentry.io/cookbook/debug-with-sentry-mcp-claude-code/
+                - generic:
+                  - heading [level=3]: Debug Faster with Sentry MCP and Claude Code
+                  - generic:
+                    - paragraph: Connect Sentry to Claude Code via MCP so your AI agent can pull issues, read traces and logs, and apply fixes without leaving your editor.
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://sentry.io/cookbook/fix-issues-sentry-mcp-cursor/
+                - generic:
+                  - heading [level=3]: Fix Production Issues in Cursor with Sentry MCP + Seer
+                  - generic:
+                    - paragraph: Connect the Sentry MCP server to Cursor to query issues, trigger Seer root cause analysis, investigate database performance, and apply fixes — all wit...
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://sentry.io/cookbook/performance-bot-sentry-claude/
+                - generic:
+                  - heading [level=3]: Automate Weekly Performance Triage with Claude Code + Sentry MCP
+                  - generic:
+                    - paragraph: Use Claude Code scheduled tasks and the Sentry MCP server to automatically find your worst performance issues every week and create GitHub PRs with fi...
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://blog.sentry.io/seer-debug-with-ai-at-every-stage-of-development/
+                - generic:
+                  - heading [level=3]: "Seer: debug with AI at every stage of development"
+                  - generic:
+                    - paragraph: Seer already accurately root causes and fixes bugs in production. Now we're expanding its capabilities to help you debug during local development and...
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://docs.sentry.io/product/ai-in-sentry/seer/
+                - generic:
+                  - heading [level=3]: Seer Docs
+                  - generic:
+                    - paragraph: Learn about Seer, Sentry's AI agent, and managing generative AI features.
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://blog.sentry.io/seer-fixes-seer-debugging-agent/
+                - generic:
+                  - heading [level=3]: "Seer fixes Seer: How Seer pointed us toward a bug and helped fix an outage"
+                  - generic:
+                    - paragraph: How Sentry's AI debugging tool Seer helped identify and fix a cascading region blocklist bug that caused an outage in Seer's own EU deployment.
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://changelog.sentry.io/changelog/?categories=cmaxs61ka001h5lgk9p052rs5
+                - generic:
+                  - heading [level=3]: Seer Changelog
+                  - generic:
+                    - paragraph: Stay informed with new features and updates for Seer
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://sentry.io/cookbook/debug-with-sentry-mcp-claude-code/
+                - generic:
+                  - heading [level=3]: Debug Faster with Sentry MCP and Claude Code
+                  - generic:
+                    - paragraph: Connect Sentry to Claude Code via MCP so your AI agent can pull issues, read traces and logs, and apply fixes without leaving your editor.
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://sentry.io/cookbook/fix-issues-sentry-mcp-cursor/
+                - generic:
+                  - heading [level=3]: Fix Production Issues in Cursor with Sentry MCP + Seer
+                  - generic:
+                    - paragraph: Connect the Sentry MCP server to Cursor to query issues, trigger Seer root cause analysis, investigate database performance, and apply fixes — all wit...
+            - generic [aria-hidden]:
+              - link:
+                - /url: https://sentry.io/cookbook/performance-bot-sentry-claude/
+                - generic:
+                  - heading [level=3]: Automate Weekly Performance Triage with Claude Code + Sentry MCP
+                  - generic:
+                    - paragraph: Use Claude Code scheduled tasks and the Sentry MCP server to automatically find your worst performance issues every week and create GitHub PRs with fi...
+          - button "Next slide" [ref=e1030] [cursor=pointer]
+      - generic [ref=e1035]:
+        - generic [ref=e1037]:
+          - heading "Get monthly product updates from Sentry" [level=2] [ref=e1038]
+          - heading [level=3] [ref=e1039]:
+            - paragraph [ref=e1040]: Sign up for our newsletter.
+          - paragraph [ref=e1042]: And yes, it really is monthly. Ok, maybe the occasional twice a month, but for sure not like one of those daily ones that you just tune out after a while.
+        - generic [ref=e1053]:
+          - generic [ref=e1056]:
+            - generic [ref=e1057]: "Your Email:"
+            - textbox "Your Email:" [ref=e1058]:
+              - /placeholder: ""
+          - generic [ref=e1062] [cursor=pointer]:
+            - checkbox "I want to receive the monthly newsletter and other updates from Sentry. You may unsubscribe at any time." [ref=e1063]
+            - text: I want to receive the monthly newsletter and other updates from Sentry. You may unsubscribe at any time.
+          - generic [ref=e1066]:
+            - generic [ref=e1067]: By filling out this form, you agree to our
+            - link "privacy policy" [ref=e1068] [cursor=pointer]:
+              - /url: https://sentry.io/privacy/
+            - generic [ref=e1069]:
+              - text: . This form is protected by reCAPTCHA and Google's
+              - link "Privacy Policy" [ref=e1070] [cursor=pointer]:
+                - /url: https://policies.google.com/privacy
+              - text: and
+              - link "Terms of Service" [ref=e1071] [cursor=pointer]:
+                - /url: https://policies.google.com/terms
+              - text: apply.
+          - button "Subscribe" [ref=e1073] [cursor=pointer]
+      - generic [ref=e1080]:
+        - heading "Fix It" [level=2] [ref=e1081]
+        - paragraph [ref=e1083]: Get started with the only application monitoring platform that empowers developers to fix application problems without compromising on velocity.
+        - generic [ref=e1084]:
+          - link "Try Sentry for Free" [ref=e1085] [cursor=pointer]:
+            - /url: https://sentry.io/signup/
+          - link "Get a Demo" [ref=e1087] [cursor=pointer]:
+            - /url: https://sentry.io/demo/
+  - contentinfo "Site footer" [ref=e1089]:
+    - generic [ref=e1092]:
+      - navigation "footer navigation" [ref=e1095]:
+        - generic [ref=e1096]:
+          - generic [ref=e1098]:
+            - heading "Company" [level=3] [ref=e1099]
+            - list [ref=e1100]:
+              - listitem [ref=e1101]:
+                - link "About" [ref=e1102] [cursor=pointer]:
+                  - /url: https://sentry.io/about/
+              - listitem [ref=e1103]:
+                - link "Blog" [ref=e1104] [cursor=pointer]:
+                  - /url: https://blog.sentry.io/
+              - listitem [ref=e1105]:
+                - link "Careers" [ref=e1106] [cursor=pointer]:
+                  - /url: https://sentry.io/careers/
+              - listitem [ref=e1107]:
+                - link "Contact Us" [ref=e1108] [cursor=pointer]:
+                  - /url: https://sentry.io/contact/enterprise/
+              - listitem [ref=e1109]:
+                - link "Trust" [ref=e1110] [cursor=pointer]:
+                  - /url: https://sentry.io/trust/
+          - generic [ref=e1112]:
+            - heading "Platform" [level=3] [ref=e1113]
+            - list [ref=e1114]:
+              - listitem [ref=e1115]:
+                - link "Error Monitoring" [ref=e1116] [cursor=pointer]:
+                  - /url: https://sentry.io/product/error-monitoring/
+              - listitem [ref=e1117]:
+                - link "Logs" [ref=e1118] [cursor=pointer]:
+                  - /url: https://sentry.io/product/logs/
+              - listitem [ref=e1119]:
+                - link "Seer" [ref=e1120] [cursor=pointer]:
+                  - /url: https://sentry.io/product/seer/
+              - listitem [ref=e1121]:
+                - link "Session Replay" [ref=e1122] [cursor=pointer]:
+                  - /url: https://sentry.io/product/session-replay/
+              - listitem [ref=e1123]:
+                - link "Metrics" [ref=e1124] [cursor=pointer]:
+                  - /url: https://sentry.io/product/metrics/
+              - listitem [ref=e1125]:
+                - link "Tracing" [ref=e1126] [cursor=pointer]:
+                  - /url: https://sentry.io/product/tracing/
+              - listitem [ref=e1127]:
+                - link "Uptime Monitoring" [ref=e1128] [cursor=pointer]:
+                  - /url: https://sentry.io/product/uptime-monitoring/
+              - listitem [ref=e1129]:
+                - link "Profiling" [ref=e1130] [cursor=pointer]:
+                  - /url: https://sentry.io/product/profiling/
+              - listitem [ref=e1131]:
+                - link "Cron Monitoring" [ref=e1132] [cursor=pointer]:
+                  - /url: https://sentry.io/product/cron-monitoring/
+              - listitem [ref=e1133]:
+                - link "Integrations" [ref=e1134] [cursor=pointer]:
+                  - /url: https://sentry.io/integrations/
+          - generic [ref=e1136]:
+            - heading "Solutions" [level=3] [ref=e1137]
+            - list [ref=e1138]:
+              - listitem [ref=e1139]:
+                - link "Web / Full Stack Development" [ref=e1140] [cursor=pointer]:
+                  - /url: https://sentry.io/for/full-stack/
+              - listitem [ref=e1141]:
+                - link "Mobile Crash Reporting" [ref=e1142] [cursor=pointer]:
+                  - /url: https://sentry.io/solutions/mobile-developers/
+              - listitem [ref=e1143]:
+                - link "Game Crash Reporting" [ref=e1144] [cursor=pointer]:
+                  - /url: https://sentry.io/solutions/game-developers/
+              - listitem [ref=e1145]:
+                - link "AI Observability" [ref=e1146] [cursor=pointer]:
+                  - /url: https://sentry.io/solutions/ai-observability/
+              - listitem [ref=e1147]:
+                - link "Application Performance Monitoring" [ref=e1148] [cursor=pointer]:
+                  - /url: https://sentry.io/solutions/application-performance-monitoring/
+              - listitem [ref=e1149]:
+                - link "Application Observability" [ref=e1150] [cursor=pointer]:
+                  - /url: https://sentry.io/solutions/application-observability/
+              - listitem [ref=e1151]:
+                - link "Real User Monitoring" [ref=e1152] [cursor=pointer]:
+                  - /url: https://sentry.io/solutions/real-user-monitoring-rum/
+              - listitem [ref=e1153]:
+                - link "Ecommerce" [ref=e1154] [cursor=pointer]:
+                  - /url: https://sentry.io/solutions/ecommerce/
+              - listitem [ref=e1155]:
+                - link "Enterprise" [ref=e1156] [cursor=pointer]:
+                  - /url: https://sentry.io/for/enterprise/
+              - listitem [ref=e1157]:
+                - link "Startups" [ref=e1158] [cursor=pointer]:
+                  - /url: https://sentry.io/for/startups/
+          - generic [ref=e1160]:
+            - heading "Get Help" [level=3] [ref=e1161]
+            - list [ref=e1162]:
+              - listitem [ref=e1163]:
+                - link "Docs" [ref=e1164] [cursor=pointer]:
+                  - /url: https://docs.sentry.io/
+              - listitem [ref=e1165]:
+                - link "Help Center" [ref=e1166] [cursor=pointer]:
+                  - /url: https://help.sentry.io/
+              - listitem [ref=e1167]:
+                - link "Status" [ref=e1168] [cursor=pointer]:
+                  - /url: https://status.sentry.io/
+              - listitem [ref=e1169]:
+                - link "Cookbook" [ref=e1170] [cursor=pointer]:
+                  - /url: https://sentry.io/cookbook/
+              - listitem [ref=e1171]:
+                - link "Dev Resources" [ref=e1172] [cursor=pointer]:
+                  - /url: https://develop.sentry.dev/getting-started/
+      - generic [ref=e1175]:
+        - generic [ref=e1178]:
+          - link "Terms" [ref=e1179] [cursor=pointer]:
+            - /url: https://sentry.io/terms/
+          - link "Security & Compliance" [ref=e1180] [cursor=pointer]:
+            - /url: https://sentry.io/security/
+          - link "Privacy" [ref=e1181] [cursor=pointer]:
+            - /url: https://sentry.io/privacy/
+        - generic [ref=e1182]:
+          - generic [ref=e1183]:
+            - link "home" [ref=e1184] [cursor=pointer]:
+              - /url: https://sentry.io/
+            - link "Open Source Pledge" [ref=e1187] [cursor=pointer]:
+              - /url: https://opensourcepledge.com/members/sentry/
+          - generic [ref=e1200]:
+            - link "Twitter Menu Button" [ref=e1201] [cursor=pointer]:
+              - /url: https://x.com/sentry/
+            - link "Github Social Menu Button" [ref=e1204] [cursor=pointer]:
+              - /url: https://github.com/getsentry/
+            - link "LinkedIn Menu Button" [ref=e1207] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/getsentry/
+            - link "Discord Menu Button" [ref=e1210] [cursor=pointer]:
+              - /url: https://discord.gg/sentry
+      - generic [ref=e1213]: © 2026 • Sentry is a registered Trademark of Functional Software, Inc.

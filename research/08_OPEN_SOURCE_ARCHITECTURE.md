@@ -1,0 +1,13 @@
+# Open-source architecture research
+
+Accessed 2026-11-04. Evidence labels: CONFIRMED = directly observed or documented; INFERRED = reasoned from evidence; UNKNOWN = not verified.
+
+## Observability pipeline
+
+**CONFIRMED:** [OpenTelemetry Collector architecture](https://opentelemetry.io/docs/collector/architecture/) describes signal-specific pipelines of receivers, optional ordered processors and exporters; processors can filter or modify data, and exporters can fan out. Separate trace, metric and log pipelines must use compatible components. **INFERRED:** an independently built ingestion service can adopt these interfaces without adopting the whole collector; buffering and durability must be designed and tested separately. SDK instrumentation → receiver → validation/redaction → grouping/enrichment → storage → incident query → investigation is a proposed architecture, not a claim about Sentry's private deployment. Source maps need a release/build identifier to avoid mapping a trace against the wrong revision; retention and grouping rules should be explicit and observable.
+
+**CONFIRMED:** [Relay](https://github.com/getsentry/relay) describes itself as Sentry's event forwarding and ingestion service. [Sentry](https://github.com/getsentry/sentry) and [sentry-mcp](https://github.com/getsentry/sentry-mcp) are public repositories, but public source does not establish the current hosted service topology. This review did not clone or map full Sentry or Relay; their internal dependencies and production retention remain UNKNOWN. Check licenses for each dependency and version before reuse; do not assume every file shares identical permissions.
+
+## MCP boundary: direct source inspection
+
+**CONFIRMED:** Graphify located `apiServiceFromContext` and `SentryApiService` in a shallow sentry-mcp checkout at commit `b8c480fc09c6ef2fbab337c1027705955d255456`. In [api.ts lines 19–40](https://github.com/getsentry/sentry-mcp/blob/b8c480fc09c6ef2fbab337c1027705955d255456/packages/mcp-core/src/internal/tool-helpers/api.ts#L19), the helper constructs the API service using context access token and host; it validates an optional region URL before using it. Authentication errors propagate separately. [Client](https://github.com/getsentry/sentry-mcp/blob/b8c480fc09c6ef2fbab337c1027705955d255456/packages/mcp-core/src/api-client/client.ts#L637) creates a client core and defaults to HTTPS. **INFERRED:** typed context, scoped credentials, endpoint validation and error taxonomy are useful independent design patterns. This is not proof of full authorization enforcement, rate limits or audit coverage; those remain UNKNOWN.

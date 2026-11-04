@@ -1,0 +1,340 @@
+{
+  "id": "4e8a6ebf-900c-4cf0-9cfc-ef5d1ba2ec83",
+  "incident_id": 1,
+  "provider": "ollama",
+  "model": "qwen3.5:4b",
+  "evidence_hash": "ab9d4b766231daa18a011c0bb37e367604229fbaee850eadf3c471ebd3eb6bfa",
+  "status": "completed",
+  "created_at": "2026-11-04T17:39:26.621761+00:00",
+  "updated_at": "2026-11-04T17:39:35.893820+00:00",
+  "evidence": {
+    "evidence": [
+      {
+        "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+        "event_id": "826fec0d-5f3f-4394-9355-c6cb7ec31531",
+        "exception_type": "ZeroDivisionError",
+        "id": "event:826fec0d-5f3f-4394-9355-c6cb7ec31531",
+        "message": "division by zero",
+        "occurred_at": "2026-11-04T15:42:38.863709Z",
+        "type": "event"
+      },
+      {
+        "count": 2,
+        "event_ids": [
+          "0f2c6c16-d944-4596-87ba-03ba1a0b0957",
+          "826fec0d-5f3f-4394-9355-c6cb7ec31531"
+        ],
+        "event_ids_truncated": false,
+        "id": "occurrences",
+        "type": "occurrences"
+      },
+      {
+        "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+        "context": [
+          {
+            "line": 24,
+            "text": "        raise SystemExit('Sample source differs from its commit; commit or restore it before capture')"
+          },
+          {
+            "line": 25,
+            "text": "    try:"
+          },
+          {
+            "line": 26,
+            "text": "        main()"
+          },
+          {
+            "line": 27,
+            "text": "    except Exception as exc:"
+          },
+          {
+            "line": 28,
+            "text": "        frames = []"
+          }
+        ],
+        "function": "<module>",
+        "id": "frame:0",
+        "line": 26,
+        "path": "buggy_app.py",
+        "source_line": "        main()",
+        "status": "resolved",
+        "type": "stack_frame"
+      },
+      {
+        "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+        "context": [
+          {
+            "line": 15,
+            "text": ""
+          },
+          {
+            "line": 16,
+            "text": "def main():"
+          },
+          {
+            "line": 17,
+            "text": "    return calculate_average([])"
+          },
+          {
+            "line": 18,
+            "text": ""
+          },
+          {
+            "line": 19,
+            "text": ""
+          }
+        ],
+        "function": "main",
+        "id": "frame:1",
+        "line": 17,
+        "path": "buggy_app.py",
+        "source_line": "    return calculate_average([])",
+        "status": "resolved",
+        "type": "stack_frame"
+      },
+      {
+        "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+        "context": [
+          {
+            "line": 11,
+            "text": ""
+          },
+          {
+            "line": 12,
+            "text": "def calculate_average(values):"
+          },
+          {
+            "line": 13,
+            "text": "    return sum(values) / len(values)"
+          },
+          {
+            "line": 14,
+            "text": ""
+          },
+          {
+            "line": 15,
+            "text": ""
+          }
+        ],
+        "function": "calculate_average",
+        "id": "frame:2",
+        "line": 13,
+        "path": "buggy_app.py",
+        "source_line": "    return sum(values) / len(values)",
+        "status": "resolved",
+        "type": "stack_frame"
+      },
+      {
+        "callee": "calculate_average",
+        "caller": "main",
+        "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+        "id": "static:0",
+        "line": 17,
+        "notice": "Static same-file name match only; execution and binding are unverified.",
+        "path": "buggy_app.py",
+        "source_line": "    return calculate_average([])",
+        "type": "static_call"
+      },
+      {
+        "id": "missing_evidence",
+        "items": [
+          "Deployment information was not captured by the event schema.",
+          "Static caller matches are incomplete and do not prove execution."
+        ],
+        "type": "missing_evidence"
+      }
+    ],
+    "incident_id": 1,
+    "missing_evidence": [
+      "Deployment information was not captured by the event schema.",
+      "Static caller matches are incomplete and do not prove execution."
+    ],
+    "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+  },
+  "findings": {
+    "outcome": "INSUFFICIENT_EVIDENCE",
+    "observed_failure": {
+      "text": "ZeroDivisionError: division by zero",
+      "evidence_ids": [
+        "event:826fec0d-5f3f-4394-9355-c6cb7ec31531"
+      ]
+    },
+    "observed_facts": [],
+    "hypotheses": [],
+    "alternatives": [],
+    "missing_evidence": [
+      "Deployment information was not captured by the event schema.",
+      "Static caller matches are incomplete and do not prove execution."
+    ],
+    "verification_steps": [
+      "Capture runtime evidence showing the actual call stack when `calculate_average` is invoked with an empty list.",
+      "Verify that the argument passed to `calculate_average` in the live process is indeed an empty list `[]`.",
+      "Confirm that the division operation `sum(values) / len(values)` is executed on the empty list before the exception is raised."
+    ],
+    "atomic_claims": [
+      {
+        "category": "exception_type",
+        "value": "ZeroDivisionError",
+        "evidence_ids": [
+          "event:826fec0d-5f3f-4394-9355-c6cb7ec31531"
+        ],
+        "verification_status": "RECORDED",
+        "limitations": "Client-reported event data; not independently verified execution."
+      },
+      {
+        "category": "exception_message",
+        "value": "division by zero",
+        "evidence_ids": [
+          "event:826fec0d-5f3f-4394-9355-c6cb7ec31531"
+        ],
+        "verification_status": "RECORDED",
+        "limitations": "Client-reported event data; not independently verified execution."
+      },
+      {
+        "category": "commit",
+        "value": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+        "evidence_ids": [
+          "event:826fec0d-5f3f-4394-9355-c6cb7ec31531"
+        ],
+        "verification_status": "RECORDED",
+        "limitations": "Client-reported event data; not independently verified execution."
+      },
+      {
+        "category": "frame_order",
+        "value": "0",
+        "evidence_ids": [
+          "frame:0"
+        ],
+        "verification_status": "RECORDED",
+        "limitations": "Order within the retained client-reported stack; earlier frames may be omitted."
+      },
+      {
+        "category": "frame_function",
+        "value": "<module>",
+        "evidence_ids": [
+          "frame:0"
+        ],
+        "verification_status": "RECORDED",
+        "limitations": "Function name and order are reported by the client."
+      },
+      {
+        "category": "frame_location",
+        "value": "buggy_app.py:26",
+        "evidence_ids": [
+          "frame:0"
+        ],
+        "verification_status": "RECORDED",
+        "limitations": "Reported stack location; source resolution is separate."
+      },
+      {
+        "category": "source_statement",
+        "value": "        main()",
+        "evidence_ids": [
+          "frame:0"
+        ],
+        "verification_status": "VERIFIED_SOURCE",
+        "limitations": "Line read from the recorded Git revision; does not prove execution."
+      },
+      {
+        "category": "frame_order",
+        "value": "1",
+        "evidence_ids": [
+          "frame:1"
+        ],
+        "verification_status": "RECORDED",
+        "limitations": "Order within the retained client-reported stack; earlier frames may be omitted."
+      },
+      {
+        "category": "frame_function",
+        "value": "main",
+        "evidence_ids": [
+          "frame:1"
+        ],
+        "verification_status": "RECORDED",
+        "limitations": "Function name and order are reported by the client."
+      },
+      {
+        "category": "frame_location",
+        "value": "buggy_app.py:17",
+        "evidence_ids": [
+          "frame:1"
+        ],
+        "verification_status": "RECORDED",
+        "limitations": "Reported stack location; source resolution is separate."
+      },
+      {
+        "category": "source_statement",
+        "value": "    return calculate_average([])",
+        "evidence_ids": [
+          "frame:1"
+        ],
+        "verification_status": "VERIFIED_SOURCE",
+        "limitations": "Line read from the recorded Git revision; does not prove execution."
+      },
+      {
+        "category": "frame_order",
+        "value": "2",
+        "evidence_ids": [
+          "frame:2"
+        ],
+        "verification_status": "RECORDED",
+        "limitations": "Order within the retained client-reported stack; earlier frames may be omitted."
+      },
+      {
+        "category": "frame_function",
+        "value": "calculate_average",
+        "evidence_ids": [
+          "frame:2"
+        ],
+        "verification_status": "RECORDED",
+        "limitations": "Function name and order are reported by the client."
+      },
+      {
+        "category": "frame_location",
+        "value": "buggy_app.py:13",
+        "evidence_ids": [
+          "frame:2"
+        ],
+        "verification_status": "RECORDED",
+        "limitations": "Reported stack location; source resolution is separate."
+      },
+      {
+        "category": "source_statement",
+        "value": "    return sum(values) / len(values)",
+        "evidence_ids": [
+          "frame:2"
+        ],
+        "verification_status": "VERIFIED_SOURCE",
+        "limitations": "Line read from the recorded Git revision; does not prove execution."
+      },
+      {
+        "category": "division_denominator",
+        "value": "len(values)",
+        "evidence_ids": [
+          "frame:2"
+        ],
+        "verification_status": "VERIFIED_SOURCE",
+        "limitations": "Single-line AST division operand; not runtime value or causality."
+      },
+      {
+        "category": "static_call",
+        "value": "main -> calculate_average",
+        "evidence_ids": [
+          "static:0"
+        ],
+        "verification_status": "STATIC_ONLY",
+        "limitations": "Static same-file name match only; execution and binding are unverified."
+      }
+    ]
+  },
+  "error": null,
+  "latency_ms": 9265,
+  "usage": {
+    "input_tokens": 1218,
+    "output_tokens": 452,
+    "load_duration_ns": 7568600,
+    "eval_duration_ns": 8712410000,
+    "estimated_cost": null
+  },
+  "outcome": "INSUFFICIENT_EVIDENCE"
+}

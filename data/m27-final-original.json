@@ -1,0 +1,214 @@
+{
+  "cached": false,
+  "investigation": {
+    "id": "a961639e-6374-48a6-abbb-c2853954c86e",
+    "incident_id": 1,
+    "provider": "ollama",
+    "model": "qwen3.5:4b",
+    "evidence_hash": "608df18bca68e56cf9bfa8fe70af70ef2b47838ba1a0fa94724818bcd2139b20",
+    "status": "completed",
+    "created_at": "2026-11-04T17:31:56.861773+00:00",
+    "updated_at": "2026-11-04T17:32:05.834222+00:00",
+    "evidence": {
+      "evidence": [
+        {
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "event_id": "826fec0d-5f3f-4394-9355-c6cb7ec31531",
+          "exception_type": "ZeroDivisionError",
+          "id": "event:826fec0d-5f3f-4394-9355-c6cb7ec31531",
+          "message": "division by zero",
+          "occurred_at": "2026-11-04T15:42:38.863709Z",
+          "type": "event"
+        },
+        {
+          "count": 2,
+          "event_ids": [
+            "0f2c6c16-d944-4596-87ba-03ba1a0b0957",
+            "826fec0d-5f3f-4394-9355-c6cb7ec31531"
+          ],
+          "event_ids_truncated": false,
+          "id": "occurrences",
+          "type": "occurrences"
+        },
+        {
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "context": [
+            {
+              "line": 24,
+              "text": "        raise SystemExit('Sample source differs from its commit; commit or restore it before capture')"
+            },
+            {
+              "line": 25,
+              "text": "    try:"
+            },
+            {
+              "line": 26,
+              "text": "        main()"
+            },
+            {
+              "line": 27,
+              "text": "    except Exception as exc:"
+            },
+            {
+              "line": 28,
+              "text": "        frames = []"
+            }
+          ],
+          "function": "<module>",
+          "id": "frame:0",
+          "line": 26,
+          "path": "buggy_app.py",
+          "source_line": "        main()",
+          "status": "resolved",
+          "type": "stack_frame"
+        },
+        {
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "context": [
+            {
+              "line": 15,
+              "text": ""
+            },
+            {
+              "line": 16,
+              "text": "def main():"
+            },
+            {
+              "line": 17,
+              "text": "    return calculate_average([])"
+            },
+            {
+              "line": 18,
+              "text": ""
+            },
+            {
+              "line": 19,
+              "text": ""
+            }
+          ],
+          "function": "main",
+          "id": "frame:1",
+          "line": 17,
+          "path": "buggy_app.py",
+          "source_line": "    return calculate_average([])",
+          "status": "resolved",
+          "type": "stack_frame"
+        },
+        {
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "context": [
+            {
+              "line": 11,
+              "text": ""
+            },
+            {
+              "line": 12,
+              "text": "def calculate_average(values):"
+            },
+            {
+              "line": 13,
+              "text": "    return sum(values) / len(values)"
+            },
+            {
+              "line": 14,
+              "text": ""
+            },
+            {
+              "line": 15,
+              "text": ""
+            }
+          ],
+          "function": "calculate_average",
+          "id": "frame:2",
+          "line": 13,
+          "path": "buggy_app.py",
+          "source_line": "    return sum(values) / len(values)",
+          "status": "resolved",
+          "type": "stack_frame"
+        },
+        {
+          "callee": "calculate_average",
+          "caller": "main",
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "id": "static:0",
+          "line": 17,
+          "notice": "Static same-file name match only; execution and binding are unverified.",
+          "path": "buggy_app.py",
+          "source_line": "    return calculate_average([])",
+          "type": "static_call"
+        },
+        {
+          "id": "missing_evidence",
+          "items": [
+            "Deployment information was not captured by the event schema.",
+            "Static caller matches are incomplete and do not prove execution."
+          ],
+          "type": "missing_evidence"
+        }
+      ],
+      "incident_id": 1,
+      "missing_evidence": [
+        "Deployment information was not captured by the event schema.",
+        "Static caller matches are incomplete and do not prove execution."
+      ],
+      "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+    },
+    "findings": {
+      "outcome": "INSUFFICIENT_EVIDENCE",
+      "observed_failure": {
+        "text": "A ZeroDivisionError was raised during execution.",
+        "evidence_ids": [
+          "event:826fec0d-5f3f-4394-9355-c6cb7ec31531"
+        ]
+      },
+      "observed_facts": [
+        {
+          "text": "The exception message indicates a division by zero occurred.",
+          "evidence_ids": [
+            "event:826fec0d-5f3f-4394-9355-c6cb7ec31531"
+          ]
+        },
+        {
+          "text": "The error occurred within the function `main` at line 26.",
+          "evidence_ids": [
+            "frame:0"
+          ]
+        },
+        {
+          "text": "Function `main` calls `calculate_average([])` with an empty list argument.",
+          "evidence_ids": [
+            "frame:1"
+          ]
+        },
+        {
+          "text": "The function `calculate_average` performs the operation `sum(values) / len(values)`.",
+          "evidence_ids": [
+            "frame:2"
+          ]
+        }
+      ],
+      "hypotheses": [],
+      "alternatives": [],
+      "missing_evidence": [
+        "Deployment information was not captured by the event schema.",
+        "Static caller matches are incomplete and do not prove execution."
+      ],
+      "verification_steps": [
+        "Capture runtime evidence showing the actual call stack when `calculate_average` is invoked with an empty list.",
+        "Verify that the argument passed to `calculate_average` in the live process is indeed an empty list `[]`.",
+        "Confirm that the division operation `sum(values) / len(values)` is executed on the empty list before the exception is raised."
+      ]
+    },
+    "error": null,
+    "latency_ms": 8968,
+    "usage": {
+      "input_tokens": 1218,
+      "output_tokens": 452,
+      "load_duration_ns": 3682100,
+      "eval_duration_ns": 8180209000,
+      "estimated_cost": null
+    },
+    "outcome": "INSUFFICIENT_EVIDENCE"
+  },
+  "warning": "Citation IDs are checked; narrative accuracy and causal claims require human review."
+}

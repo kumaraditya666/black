@@ -1,0 +1,143 @@
+{
+  "cached": false,
+  "investigation": {
+    "id": "f6891fb8-614e-4641-ace0-95d980ebb160",
+    "incident_id": 1,
+    "provider": "ollama",
+    "model": "qwen3.5:9b-q4_K_M",
+    "evidence_hash": "941f591189f13ff63ab1a5f6316d55822ea80f40bed49feaf6eda0725a096c92",
+    "status": "failed",
+    "created_at": "2026-11-04T17:11:42.699267+00:00",
+    "updated_at": "2026-11-04T17:12:40.228326+00:00",
+    "evidence": {
+      "evidence": [
+        {
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "event_id": "826fec0d-5f3f-4394-9355-c6cb7ec31531",
+          "exception_type": "ZeroDivisionError",
+          "id": "event:826fec0d-5f3f-4394-9355-c6cb7ec31531",
+          "message": "division by zero",
+          "occurred_at": "2026-11-04T15:42:38.863709Z",
+          "type": "event"
+        },
+        {
+          "count": 2,
+          "event_ids": [
+            "0f2c6c16-d944-4596-87ba-03ba1a0b0957",
+            "826fec0d-5f3f-4394-9355-c6cb7ec31531"
+          ],
+          "event_ids_truncated": false,
+          "id": "occurrences",
+          "type": "occurrences"
+        },
+        {
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "context": [
+            {
+              "line": 24,
+              "text": "        raise SystemExit('Sample source differs from its commit; commit or restore it before capture')"
+            },
+            {
+              "line": 25,
+              "text": "    try:"
+            },
+            {
+              "line": 26,
+              "text": "        main()"
+            },
+            {
+              "line": 27,
+              "text": "    except Exception as exc:"
+            },
+            {
+              "line": 28,
+              "text": "        frames = []"
+            }
+          ],
+          "function": "<module>",
+          "id": "frame:0",
+          "line": 26,
+          "path": "buggy_app.py",
+          "source_line": "        main()",
+          "status": "resolved",
+          "type": "stack_frame"
+        },
+        {
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "context": [
+            {
+              "line": 15,
+              "text": ""
+            },
+            {
+              "line": 16,
+              "text": "def main():"
+            },
+            {
+              "line": 17,
+              "text": "    return calculate_average([])"
+            },
+            {
+              "line": 18,
+              "text": ""
+            },
+            {
+              "line": 19,
+              "text": ""
+            }
+          ],
+          "function": "main",
+          "id": "frame:1",
+          "line": 17,
+          "path": "buggy_app.py",
+          "source_line": "    return calculate_average([])",
+          "status": "resolved",
+          "type": "stack_frame"
+        },
+        {
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "context": [
+            {
+              "line": 11,
+              "text": ""
+            },
+            {
+              "line": 12,
+              "text": "def calculate_average(values):"
+            },
+            {
+              "line": 13,
+              "text": "    return sum(values) / len(values)"
+            },
+            {
+              "line": 14,
+              "text": ""
+            },
+            {
+              "line": 15,
+              "text": ""
+            }
+          ],
+          "function": "calculate_average",
+          "id": "frame:2",
+          "line": 13,
+          "path": "buggy_app.py",
+          "source_line": "    return sum(values) / len(values)",
+          "status": "resolved",
+          "type": "stack_frame"
+        }
+      ],
+      "incident_id": 1,
+      "missing_evidence": [
+        "Deployment information was not captured by the event schema.",
+        "Dependencies and nearby functions are not independently indexed."
+      ],
+      "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+    },
+    "findings": null,
+    "error": "Evidence validation failed: output references unsupported evidence or a source line.",
+    "latency_ms": 57524,
+    "usage": null
+  },
+  "warning": "Citation IDs are checked; narrative accuracy and causal claims require human review."
+}

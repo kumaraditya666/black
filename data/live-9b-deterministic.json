@@ -1,0 +1,199 @@
+{
+  "cached": false,
+  "investigation": {
+    "id": "b9c87b49-a4d6-4a96-a45c-8be028d8f161",
+    "incident_id": 1,
+    "provider": "ollama",
+    "model": "qwen3.5:9b-q4_K_M",
+    "evidence_hash": "941f591189f13ff63ab1a5f6316d55822ea80f40bed49feaf6eda0725a096c92",
+    "status": "completed",
+    "created_at": "2026-11-04T17:12:56.137176+00:00",
+    "updated_at": "2026-11-04T17:13:54.443181+00:00",
+    "evidence": {
+      "evidence": [
+        {
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "event_id": "826fec0d-5f3f-4394-9355-c6cb7ec31531",
+          "exception_type": "ZeroDivisionError",
+          "id": "event:826fec0d-5f3f-4394-9355-c6cb7ec31531",
+          "message": "division by zero",
+          "occurred_at": "2026-11-04T15:42:38.863709Z",
+          "type": "event"
+        },
+        {
+          "count": 2,
+          "event_ids": [
+            "0f2c6c16-d944-4596-87ba-03ba1a0b0957",
+            "826fec0d-5f3f-4394-9355-c6cb7ec31531"
+          ],
+          "event_ids_truncated": false,
+          "id": "occurrences",
+          "type": "occurrences"
+        },
+        {
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "context": [
+            {
+              "line": 24,
+              "text": "        raise SystemExit('Sample source differs from its commit; commit or restore it before capture')"
+            },
+            {
+              "line": 25,
+              "text": "    try:"
+            },
+            {
+              "line": 26,
+              "text": "        main()"
+            },
+            {
+              "line": 27,
+              "text": "    except Exception as exc:"
+            },
+            {
+              "line": 28,
+              "text": "        frames = []"
+            }
+          ],
+          "function": "<module>",
+          "id": "frame:0",
+          "line": 26,
+          "path": "buggy_app.py",
+          "source_line": "        main()",
+          "status": "resolved",
+          "type": "stack_frame"
+        },
+        {
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "context": [
+            {
+              "line": 15,
+              "text": ""
+            },
+            {
+              "line": 16,
+              "text": "def main():"
+            },
+            {
+              "line": 17,
+              "text": "    return calculate_average([])"
+            },
+            {
+              "line": 18,
+              "text": ""
+            },
+            {
+              "line": 19,
+              "text": ""
+            }
+          ],
+          "function": "main",
+          "id": "frame:1",
+          "line": 17,
+          "path": "buggy_app.py",
+          "source_line": "    return calculate_average([])",
+          "status": "resolved",
+          "type": "stack_frame"
+        },
+        {
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "context": [
+            {
+              "line": 11,
+              "text": ""
+            },
+            {
+              "line": 12,
+              "text": "def calculate_average(values):"
+            },
+            {
+              "line": 13,
+              "text": "    return sum(values) / len(values)"
+            },
+            {
+              "line": 14,
+              "text": ""
+            },
+            {
+              "line": 15,
+              "text": ""
+            }
+          ],
+          "function": "calculate_average",
+          "id": "frame:2",
+          "line": 13,
+          "path": "buggy_app.py",
+          "source_line": "    return sum(values) / len(values)",
+          "status": "resolved",
+          "type": "stack_frame"
+        }
+      ],
+      "incident_id": 1,
+      "missing_evidence": [
+        "Deployment information was not captured by the event schema.",
+        "Dependencies and nearby functions are not independently indexed."
+      ],
+      "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+    },
+    "findings": {
+      "assessment": "plausible",
+      "observed_facts": [
+        {
+          "text": "A ZeroDivisionError occurred with the message 'division by zero' at timestamp 2026-11-04T15:42:38.863709Z.",
+          "evidence_ids": [
+            "event:826fec0d-5f3f-4394-9355-c6cb7ec31531"
+          ]
+        },
+        {
+          "text": "The error originated in the function 'calculate_average' at line 13, which executes 'return sum(values) / len(values)'.",
+          "evidence_ids": [
+            "frame:2"
+          ]
+        },
+        {
+          "text": "The function 'main' calls 'calculate_average([])', passing an empty list as the argument.",
+          "evidence_ids": [
+            "frame:1"
+          ]
+        }
+      ],
+      "hypotheses": [
+        {
+          "explanation": "The application crashed because the 'main' function invoked 'calculate_average' with an empty list. Since the length of an empty list is zero, dividing by it causes a ZeroDivisionError.",
+          "supporting_evidence": [
+            "frame:1",
+            "frame:2",
+            "event:826fec0d-5f3f-4394-9355-c6cb7ec31531"
+          ],
+          "contradicting_evidence": []
+        }
+      ],
+      "alternatives": [
+        {
+          "explanation": "The error might be caused by a different input list that became empty due to a prior filtering operation not shown in the stack trace, or a race condition where the list was emptied between the check and the division.",
+          "supporting_evidence": [],
+          "contradicting_evidence": [
+            "frame:1"
+          ]
+        }
+      ],
+      "missing_evidence": [
+        "Deployment information was not captured by the event schema.",
+        "Dependencies and nearby functions are not independently indexed."
+      ],
+      "verification_steps": [
+        "Review the call stack to confirm no other arguments were passed to 'calculate_average' before the crash.",
+        "Check if 'main' is intended to handle empty lists or if this is an expected failure mode requiring a guard clause."
+      ]
+    },
+    "error": null,
+    "latency_ms": 58301,
+    "usage": {
+      "input_tokens": 881,
+      "output_tokens": 563,
+      "load_duration_ns": 3366600,
+      "eval_duration_ns": 57799984000,
+      "estimated_cost": null
+    }
+  },
+  "warning": "Citation IDs are checked; narrative accuracy and causal claims require human review."
+}

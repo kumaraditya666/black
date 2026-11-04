@@ -1,0 +1,112 @@
+{
+  "incident_id": 1,
+  "event_count": 2,
+  "events": [
+    {
+      "received_at": "2026-11-04T15:41:10.376235+00:00",
+      "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+      "event_id": "0f2c6c16-d944-4596-87ba-03ba1a0b0957",
+      "exception_type": "ZeroDivisionError",
+      "frames": [
+        {
+          "function": "<module>",
+          "line": 26,
+          "path": "buggy_app.py"
+        },
+        {
+          "function": "main",
+          "line": 17,
+          "path": "buggy_app.py"
+        },
+        {
+          "function": "calculate_average",
+          "line": 13,
+          "path": "buggy_app.py"
+        }
+      ],
+      "message": "division by zero",
+      "occurred_at": "2026-11-04T15:41:10.335975Z",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\Adi\\Documents\\ChatGPT\\black\\sample_repo\\buggy_app.py\", line 26, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\Adi\\Documents\\ChatGPT\\black\\sample_repo\\buggy_app.py\", line 17, in main\n    return calculate_average([])\n  File \"C:\\Users\\Adi\\Documents\\ChatGPT\\black\\sample_repo\\buggy_app.py\", line 13, in calculate_average\n    return sum(values) / len(values)\n           ~~~~~~~~~~~~^~~~~~~~~~~~~\nZeroDivisionError: division by zero\n",
+      "source_evidence": [
+        {
+          "path": "buggy_app.py",
+          "line": 26,
+          "function": "<module>",
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "status": "resolved",
+          "source_line": "        main()"
+        },
+        {
+          "path": "buggy_app.py",
+          "line": 17,
+          "function": "main",
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "status": "resolved",
+          "source_line": "    return calculate_average([])"
+        },
+        {
+          "path": "buggy_app.py",
+          "line": 13,
+          "function": "calculate_average",
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "status": "resolved",
+          "source_line": "    return sum(values) / len(values)"
+        }
+      ]
+    },
+    {
+      "received_at": "2026-11-04T15:42:38.908809+00:00",
+      "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+      "event_id": "826fec0d-5f3f-4394-9355-c6cb7ec31531",
+      "exception_type": "ZeroDivisionError",
+      "frames": [
+        {
+          "function": "<module>",
+          "line": 26,
+          "path": "buggy_app.py"
+        },
+        {
+          "function": "main",
+          "line": 17,
+          "path": "buggy_app.py"
+        },
+        {
+          "function": "calculate_average",
+          "line": 13,
+          "path": "buggy_app.py"
+        }
+      ],
+      "message": "division by zero",
+      "occurred_at": "2026-11-04T15:42:38.863709Z",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\Adi\\Documents\\ChatGPT\\black\\sample_repo\\buggy_app.py\", line 26, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\Adi\\Documents\\ChatGPT\\black\\sample_repo\\buggy_app.py\", line 17, in main\n    return calculate_average([])\n  File \"C:\\Users\\Adi\\Documents\\ChatGPT\\black\\sample_repo\\buggy_app.py\", line 13, in calculate_average\n    return sum(values) / len(values)\n           ~~~~~~~~~~~~^~~~~~~~~~~~~\nZeroDivisionError: division by zero\n",
+      "source_evidence": [
+        {
+          "path": "buggy_app.py",
+          "line": 26,
+          "function": "<module>",
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "status": "resolved",
+          "source_line": "        main()"
+        },
+        {
+          "path": "buggy_app.py",
+          "line": 17,
+          "function": "main",
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "status": "resolved",
+          "source_line": "    return calculate_average([])"
+        },
+        {
+          "path": "buggy_app.py",
+          "line": 13,
+          "function": "calculate_average",
+          "commit": "dbe9423ebefe281824c2bd1c26f0eb9b9d923939",
+          "status": "resolved",
+          "source_line": "    return sum(values) / len(values)"
+        }
+      ]
+    }
+  ],
+  "notice": "Evidence only; no root cause has been established.",
+  "demonstration": "Intentionally buggy local sample; not a production incident."
+}
