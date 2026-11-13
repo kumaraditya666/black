@@ -28,7 +28,19 @@ The script creates `sample_repo/` as an independent Git repository from `sample_
 .\.venv\Scripts\python -m pytest -q
 ```
 
-Set `BLACKBOX_DB` and `BLACKBOX_REPO` to select the database and an authorized local Git repository; defaults are `data/events.db` and `sample_repo`. Interactive API documentation is at `http://127.0.0.1:8000/docs`. `POST /events` accepts a UUID `event_id`, timezone-aware `occurred_at`, full 40-character lowercase Git commit SHA, exception type, message, traceback and repository-relative POSIX stack frames. `GET /incidents/{id}/report` returns stored events and source evidence. Schema validation errors return 422. Reposting the same redacted payload and ID is idempotent; reusing an ID for different redacted content returns 409. Distinct IDs with the same exception type and ordered frame path, line and function are grouped into one incident; commit and message do not affect grouping. A changed stack may create a different incident.
+Set `BLACKBOX_DB` and `BLACKBOX_REPO` to select the database and an authorized local Git repository; defaults are `data/events.db` and `sample_repo`. Interactive API documentation is at `http://127.0.0.1:8000/docs`.
+
+`POST /events` accepts a UUID `event_id`, timezone-aware `occurred_at`, full 40-character lowercase Git commit SHA, exception type, message, traceback and repository-relative POSIX stack frames. `GET /incidents/{id}/report` returns stored events and source evidence. Schema validation errors return 422. Reposting the same redacted payload and ID is idempotent; reusing an ID for different redacted content returns 409. Distinct IDs with the same exception type and ordered frame path, line and function are grouped into one incident; commit and message do not affect grouping. A changed stack may create a different incident.
+
+## Local web dashboard
+
+For the shortest path, start the dashboard and open it in a browser:
+
+```powershell
+.\.venv\Scripts\python scripts/ui.py
+```
+
+It serves the same local app at `http://127.0.0.1:8000/` and refuses non-loopback hosts. To run it alongside the existing server command instead, start uvicorn as above and open the same URL. The dashboard lists incidents, shows stored events with pinned source evidence, previews the exact investigation context and hash, and displays persisted investigations. Starting an investigation still requires reviewing that snapshot and checking the consent box; local Ollama runs locally, while a configured cloud provider receives the reviewed snapshot. The dashboard is single-user, has no authentication or tenant isolation, and must not be exposed on a public network.
 
 The resolver reads committed Git objects, never working-tree content. Missing commits, files, lines, Git errors, binary files and oversized source files are explicitly reported unresolved. Repository location is configured on the server, not supplied per event. Reports resolve on request; retain the repository and referenced Git objects for later access.
 
@@ -99,4 +111,4 @@ Statuses are `VERIFIED_IN_TEST_ENVIRONMENT` (reproduction failed before, passed 
 
 `BLACKBOX_REPAIR_ISOLATION` selects `auto`, `docker` or explicit `process`. Auto requires Docker and never silently falls back. Docker execution requires `BLACKBOX_REPAIR_DOCKER_IMAGE_ID` set to an explicitly approved full local `sha256:` image ID with Python and pytest. The runner forces UID/GID 65534, checks container settings and effective security state, and journals each owned container. If cleanup is uncertain, new Docker runs are blocked. After confirming no repair is active and Docker is connected to the original daemon, an operator may run `python -m blackbox.repair.execution --recover`; inspect the pending journal and audit first. Abrupt host termination or daemon failure can prevent immediate cleanup. Explicit process mode is a cooperative jail without OS-level confinement, permitted only for pinned trusted fixtures. General-purpose untrusted repair remains blocked.
 
-`fixtures/repair/registry.json` pins every fixture file by SHA-256; `pytest.ini` keeps these disposable fixture suites out of the project test run. `python scripts/evaluate_m3a.py --approve-all` runs the five real model cases and writes `data/milestone3a-run.json`. Benchmark approvals are fixture-level and are not evidence of human review. There is no merge, pull request, deployment, dashboard or autonomous repair permission. Measurements and limits are in [research/27_M3A_PROOF_OF_FIX.md](research/27_M3A_PROOF_OF_FIX.md).
+`fixtures/repair/registry.json` pins every fixture file by SHA-256; `pytest.ini` keeps these disposable fixture suites out of the project test run. `python scripts/evaluate_m3a.py --approve-all` runs the five real model cases and writes `data/milestone3a-run.json`. Benchmark approvals are fixture-level and are not evidence of human review. There is no merge, pull request, deployment or autonomous repair permission. Measurements and limits are in [research/27_M3A_PROOF_OF_FIX.md](research/27_M3A_PROOF_OF_FIX.md).

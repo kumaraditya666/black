@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from .schemas import Event
 from .source import resolve
 from .store import ConflictError, Store
@@ -73,6 +75,13 @@ def create_app(db_path: str | None = None, repo_path: str | None = None) -> Fast
         if result is None:
             raise HTTPException(404, 'investigation not found')
         return result
+
+    ui_dir = Path(__file__).with_name('ui')
+    app.mount('/ui', StaticFiles(directory=ui_dir), name='ui')
+
+    @app.get('/', include_in_schema=False)
+    def dashboard():
+        return FileResponse(ui_dir / 'index.html', headers={'Cache-Control': 'no-store'})
 
     return app
 
