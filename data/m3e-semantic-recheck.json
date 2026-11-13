@@ -1,0 +1,4997 @@
+{
+  "note": "Post-experiment deterministic reassessment after corrected abstention-status display and pinned-source preflight; no model rerun.",
+  "rows": [
+    {
+      "case": "m3c_trim_total",
+      "arm": "A",
+      "repeat": false,
+      "investigation_id": "3bf2172b-c1b6-44be-9ff0-9fa1501d5606",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "exception_type": "ValueError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "ValueError",
+            "supporting_evidence_ids": [
+              "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "parse_amount",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return int(cleaned.replace(',', ''))",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "SOURCE_EXCERPT",
+            "value": "def total(records):\n    return sum(parse_amount(item) for item in records)",
+            "supporting_evidence_ids": [
+              "code:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/app.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "An empty string was passed to parse_amount, likely because the input record contained no valid amount or whitespace-only data that failed to strip correctly",
+            "supporting_evidence_ids": [
+              "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "parse_amount@fixtures/repair/m3c_trim_total/cleaner.py:3",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "ValueError",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "invalid literal for int() with base 10: ''",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "parse_amount",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_trim_total/cleaner.py:3",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return int(cleaned.replace(',', ''))",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_trim_total",
+      "arm": "B",
+      "repeat": false,
+      "investigation_id": "ba640bd1-debe-4ec1-a415-8d93a17f95c1",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "exception_type": "ValueError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "ValueError",
+            "supporting_evidence_ids": [
+              "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "parse_amount",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return int(cleaned.replace(',', ''))",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "SOURCE_EXCERPT",
+            "value": "def total(records):\n    return sum(parse_amount(item) for item in records)",
+            "supporting_evidence_ids": [
+              "code:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/app.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "An empty string was passed to parse_amount, likely because the input value contained no digits or was null/None before stripping",
+            "supporting_evidence_ids": [
+              "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "parse_amount@fixtures/repair/m3c_trim_total/cleaner.py:3",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "ValueError",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "invalid literal for int() with base 10: ''",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "parse_amount",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_trim_total/cleaner.py:3",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return int(cleaned.replace(',', ''))",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_trim_total",
+      "arm": "B",
+      "repeat": true,
+      "investigation_id": "8a130bd1-ff1c-49ae-8a00-eac8c5d63e9c",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "exception_type": "ValueError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "ValueError",
+            "supporting_evidence_ids": [
+              "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "parse_amount",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return int(cleaned.replace(',', ''))",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "SOURCE_EXCERPT",
+            "value": "def total(records):\n    return sum(parse_amount(item) for item in records)",
+            "supporting_evidence_ids": [
+              "code:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/app.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "An empty string was passed to parse_amount, likely because the input value contained no digits or was null/None before stripping",
+            "supporting_evidence_ids": [
+              "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "parse_amount@fixtures/repair/m3c_trim_total/cleaner.py:3",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "ValueError",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "invalid literal for int() with base 10: ''",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "parse_amount",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_trim_total/cleaner.py:3",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return int(cleaned.replace(',', ''))",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_trim_total",
+      "arm": "A",
+      "repeat": true,
+      "investigation_id": "1bb3dc6b-0bdd-4f06-894f-409a4fc56281",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "exception_type": "ValueError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "ValueError",
+            "supporting_evidence_ids": [
+              "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "parse_amount",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return int(cleaned.replace(',', ''))",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "SOURCE_EXCERPT",
+            "value": "def total(records):\n    return sum(parse_amount(item) for item in records)",
+            "supporting_evidence_ids": [
+              "code:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/app.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "An empty string was passed to parse_amount, likely because the input record contained no valid amount or whitespace-only data that failed to strip correctly",
+            "supporting_evidence_ids": [
+              "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+                "line": 3,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "parse_amount@fixtures/repair/m3c_trim_total/cleaner.py:3",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "ValueError",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "invalid literal for int() with base 10: ''",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:fd159e13-d498-4bd7-966e-461e4eb8717a"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:fd159e13-d498-4bd7-966e-461e4eb8717a",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "parse_amount",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_trim_total/cleaner.py:3",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return int(cleaned.replace(',', ''))",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_window",
+      "arm": "B",
+      "repeat": false,
+      "investigation_id": "acc410c0-2566-477a-97cb-89794b80e09b",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "exception_type": "IndexError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "IndexError",
+            "supporting_evidence_ids": [
+              "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "require_full_window",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 7,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "        raise IndexError('partial window')",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 7,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "SOURCE_EXCERPT",
+            "value": "def rolling_sum(values, size):\n    return [sum(values[i:i + size]) for i in range(len(values) - size + 2)]",
+            "supporting_evidence_ids": [
+              "code:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 1,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "require_full_window@fixtures/repair/m3c_window/app.py:7",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "IndexError",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "partial window",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "require_full_window",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_window/app.py:7",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "        raise IndexError('partial window')",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_window",
+      "arm": "A",
+      "repeat": false,
+      "investigation_id": "ff0772a4-13f8-4b82-a323-fcb71c5a16b3",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "exception_type": "IndexError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "IndexError",
+            "supporting_evidence_ids": [
+              "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "require_full_window",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 7,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "        raise IndexError('partial window')",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 7,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "SOURCE_EXCERPT",
+            "value": "def rolling_sum(values, size):\n    return [sum(values[i:i + size]) for i in range(len(values) - size + 2)]",
+            "supporting_evidence_ids": [
+              "code:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 1,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "The input data passed to rolling_sum was shorter than expected, causing window size mismatches that triggered the validation check",
+            "supporting_evidence_ids": [
+              "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 7,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "require_full_window@fixtures/repair/m3c_window/app.py:7",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "IndexError",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "partial window",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "require_full_window",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_window/app.py:7",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "        raise IndexError('partial window')",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_window",
+      "arm": "A",
+      "repeat": true,
+      "investigation_id": "960f9320-a40e-4dff-ae9b-f3767f2175bf",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "exception_type": "IndexError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "IndexError",
+            "supporting_evidence_ids": [
+              "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "require_full_window",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 7,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "        raise IndexError('partial window')",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 7,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "SOURCE_EXCERPT",
+            "value": "def rolling_sum(values, size):\n    return [sum(values[i:i + size]) for i in range(len(values) - size + 2)]",
+            "supporting_evidence_ids": [
+              "code:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 1,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "The input data passed to rolling_sum was shorter than expected, causing window size mismatches that triggered the validation check",
+            "supporting_evidence_ids": [
+              "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 7,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "require_full_window@fixtures/repair/m3c_window/app.py:7",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "IndexError",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "partial window",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "require_full_window",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_window/app.py:7",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "        raise IndexError('partial window')",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_window",
+      "arm": "B",
+      "repeat": true,
+      "investigation_id": "a2f8cf65-5455-483a-ab50-24cf4ed72c07",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "exception_type": "IndexError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "IndexError",
+            "supporting_evidence_ids": [
+              "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "require_full_window",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 7,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "        raise IndexError('partial window')",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 7,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "SOURCE_EXCERPT",
+            "value": "def rolling_sum(values, size):\n    return [sum(values[i:i + size]) for i in range(len(values) - size + 2)]",
+            "supporting_evidence_ids": [
+              "code:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_window/app.py",
+                "line": 1,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "require_full_window@fixtures/repair/m3c_window/app.py:7",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "IndexError",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "partial window",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:2fe6307f-ad48-4999-a384-f0a6bbbe24af",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "require_full_window",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_window/app.py:7",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "        raise IndexError('partial window')",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_config",
+      "arm": "A",
+      "repeat": false,
+      "investigation_id": "6800c598-9532-4d8d-a240-8f3250d071e6",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "exception_type": "KeyError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "KeyError",
+            "supporting_evidence_ids": [
+              "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "connect_options",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_config/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    retries = int(config['retries'])",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_config/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "The config object passed to connect_options does not contain a 'retries' key, causing int(config['retries']) to raise KeyError",
+            "supporting_evidence_ids": [
+              "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_config/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "connect_options@fixtures/repair/m3c_config/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "KeyError",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "'retries'",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "connect_options",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_config/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    retries = int(config['retries'])",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_config",
+      "arm": "B",
+      "repeat": false,
+      "investigation_id": "93027851-d746-4856-9e43-0fc1d48b17e9",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "exception_type": "KeyError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "KeyError",
+            "supporting_evidence_ids": [
+              "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "connect_options",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_config/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    retries = int(config['retries'])",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_config/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "The config object passed to connect_options does not contain a 'retries' key, causing int(config['retries']) to raise KeyError",
+            "supporting_evidence_ids": [
+              "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_config/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "connect_options@fixtures/repair/m3c_config/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "KeyError",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "'retries'",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "connect_options",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_config/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    retries = int(config['retries'])",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_config",
+      "arm": "B",
+      "repeat": true,
+      "investigation_id": "8b4b8cf8-5482-4ccb-b1c9-ee3a1c042b09",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "exception_type": "KeyError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "KeyError",
+            "supporting_evidence_ids": [
+              "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "connect_options",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_config/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    retries = int(config['retries'])",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_config/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "The config object passed to connect_options does not contain a 'retries' key, causing int(config['retries']) to raise KeyError",
+            "supporting_evidence_ids": [
+              "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_config/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "connect_options@fixtures/repair/m3c_config/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "KeyError",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "'retries'",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "connect_options",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_config/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    retries = int(config['retries'])",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_config",
+      "arm": "A",
+      "repeat": true,
+      "investigation_id": "5e412cc3-a5bb-47fc-938f-1bb2a2d50db3",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "exception_type": "KeyError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "KeyError",
+            "supporting_evidence_ids": [
+              "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "connect_options",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_config/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    retries = int(config['retries'])",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_config/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "The config object passed to connect_options does not contain a 'retries' key, causing int(config['retries']) to raise KeyError",
+            "supporting_evidence_ids": [
+              "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_config/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "connect_options@fixtures/repair/m3c_config/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "KeyError",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "'retries'",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:35ca1c8f-5817-4c29-b063-2dd1aa109fda",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "connect_options",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_config/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    retries = int(config['retries'])",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_ambiguous",
+      "arm": "B",
+      "repeat": false,
+      "investigation_id": "65e356e0-ec78-4509-93f1-1d03a16fe942",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "exception_type": "ValueError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "ValueError",
+            "supporting_evidence_ids": [
+              "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "load_number",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_ambiguous/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return int(text)",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_ambiguous/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "load_number@fixtures/repair/m3c_ambiguous/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "ValueError",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "invalid literal for int() with base 10: 'red'",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "load_number",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_ambiguous/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return int(text)",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_ambiguous",
+      "arm": "A",
+      "repeat": false,
+      "investigation_id": "e7ecc482-6b2a-4dfc-8960-d5c9a86c26a9",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "exception_type": "ValueError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "ValueError",
+            "supporting_evidence_ids": [
+              "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "load_number",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_ambiguous/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return int(text)",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_ambiguous/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "The function load_number received a non-numeric string 'red' and failed to convert it to an integer",
+            "supporting_evidence_ids": [
+              "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_ambiguous/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "load_number@fixtures/repair/m3c_ambiguous/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "ValueError",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "invalid literal for int() with base 10: 'red'",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "load_number",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_ambiguous/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return int(text)",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_ambiguous",
+      "arm": "A",
+      "repeat": true,
+      "investigation_id": "9fd5acf4-3dac-4724-858e-01ca3662c5a5",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "exception_type": "ValueError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "ValueError",
+            "supporting_evidence_ids": [
+              "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "load_number",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_ambiguous/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return int(text)",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_ambiguous/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "The function load_number received a non-numeric string 'red' and failed to convert it to an integer",
+            "supporting_evidence_ids": [
+              "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_ambiguous/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "load_number@fixtures/repair/m3c_ambiguous/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "ValueError",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "invalid literal for int() with base 10: 'red'",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "load_number",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_ambiguous/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return int(text)",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_ambiguous",
+      "arm": "B",
+      "repeat": true,
+      "investigation_id": "b1bb7bab-02d3-4f0b-8b1f-6a8dac7a890d",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "exception_type": "ValueError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "ValueError",
+            "supporting_evidence_ids": [
+              "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "load_number",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_ambiguous/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return int(text)",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_ambiguous/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "load_number@fixtures/repair/m3c_ambiguous/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "ValueError",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "invalid literal for int() with base 10: 'red'",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:f3a96cb4-80e7-4962-8a16-62a9677a79d4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "load_number",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_ambiguous/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return int(text)",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_negative",
+      "arm": "A",
+      "repeat": false,
+      "investigation_id": "62b1a5f9-fe8c-43ab-885c-936636f3e009",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "exception_type": "IndexError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "IndexError",
+            "supporting_evidence_ids": [
+              "event:11499e06-3fab-40fb-bfae-461267a633c4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:11499e06-3fab-40fb-bfae-461267a633c4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "first_or_none",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_negative/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return items[0] if items else None",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_negative/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "The list passed to first_or_none was empty, causing the conditional check to fail and triggering an IndexError on items[0]",
+            "supporting_evidence_ids": [
+              "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_negative/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "first_or_none@fixtures/repair/m3c_negative/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "IndexError",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "list index out of range",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "first_or_none",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_negative/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return items[0] if items else None",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_negative",
+      "arm": "B",
+      "repeat": false,
+      "investigation_id": "d3c2acc1-e716-4ec1-a30e-46646f3c2311",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "exception_type": "IndexError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "IndexError",
+            "supporting_evidence_ids": [
+              "event:11499e06-3fab-40fb-bfae-461267a633c4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:11499e06-3fab-40fb-bfae-461267a633c4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "first_or_none",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_negative/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return items[0] if items else None",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_negative/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "first_or_none@fixtures/repair/m3c_negative/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "IndexError",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "list index out of range",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "first_or_none",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_negative/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return items[0] if items else None",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_negative",
+      "arm": "B",
+      "repeat": true,
+      "investigation_id": "ec1b5509-496c-44f8-84dc-fd1ce9a9afae",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "exception_type": "IndexError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "IndexError",
+            "supporting_evidence_ids": [
+              "event:11499e06-3fab-40fb-bfae-461267a633c4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:11499e06-3fab-40fb-bfae-461267a633c4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "first_or_none",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_negative/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return items[0] if items else None",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_negative/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "first_or_none@fixtures/repair/m3c_negative/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "IndexError",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "list index out of range",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "first_or_none",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_negative/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return items[0] if items else None",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case": "m3c_negative",
+      "arm": "A",
+      "repeat": true,
+      "investigation_id": "7b5a156b-606a-4bdc-92a4-9190c9455b13",
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "exception_type": "IndexError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "HYPOTHESIS_REQUIRES_REVIEW",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "IndexError",
+            "supporting_evidence_ids": [
+              "event:11499e06-3fab-40fb-bfae-461267a633c4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+            "supporting_evidence_ids": [
+              "event:11499e06-3fab-40fb-bfae-461267a633c4"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "first_or_none",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_negative/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return items[0] if items else None",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_negative/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "CAUSAL_HYPOTHESIS",
+            "value": "The list passed to first_or_none was empty, causing the conditional check to fail and triggering an IndexError on items[0]",
+            "supporting_evidence_ids": [
+              "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3c_negative/app.py",
+                "line": 2,
+                "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+              }
+            ],
+            "mechanically_verifiable": false,
+            "verification_outcome": "UNVERIFIABLE",
+            "unsupported_assumptions": [
+              "Citation existence does not verify natural-language mechanism or upstream cause."
+            ]
+          }
+        ]
+      },
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "first_or_none@fixtures/repair/m3c_negative/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "IndexError",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "list index out of range",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "evidence_ids": [
+            "event:11499e06-3fab-40fb-bfae-461267a633c4"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:11499e06-3fab-40fb-bfae-461267a633c4",
+              "type": "event",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "first_or_none",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3c_negative/app.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return items[0] if items else None",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+              "status": "resolved"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

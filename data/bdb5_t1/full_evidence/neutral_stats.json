@@ -1,0 +1,719 @@
+{
+  "carts": {
+    "log_errors": {
+      "post": 1,
+      "pre": 4,
+      "samples": [
+        "2024-11-22 02:50:33.789  INFO [carts,e2c6e86dced4d500,d8c078e227389403,false] 7 --- [-nio-80-exec-11] w.w.s.cart.controllers.CartsController   : Merge carts request received for ids: 673ff179b0df5c00019b0971 and m7tqqWakHxD90sn69NbpFpdgCpax"
+      ]
+    },
+    "metrics": [
+      {
+        "metric": "carts_error",
+        "post_mean": 3.2462,
+        "pre_mean": 0.3596,
+        "relative": 8.027,
+        "z": 1.657
+      },
+      {
+        "metric": "carts_socket",
+        "post_mean": 35.9363,
+        "pre_mean": 24.9681,
+        "relative": 0.439,
+        "z": 0.985
+      },
+      {
+        "metric": "carts_mem",
+        "post_mean": 453840326.9465,
+        "pre_mean": 388279608.8889,
+        "relative": 0.169,
+        "z": 0.524
+      },
+      {
+        "metric": "carts_cpu",
+        "post_mean": 10.2033,
+        "pre_mean": 7.3709,
+        "relative": 0.384,
+        "z": 0.441
+      },
+      {
+        "metric": "carts_latency-90",
+        "post_mean": 0.1245,
+        "pre_mean": 0.1083,
+        "relative": 0.15,
+        "z": 0.087
+      },
+      {
+        "metric": "carts_workload",
+        "post_mean": 8.1959,
+        "pre_mean": 8.1072,
+        "relative": 0.011,
+        "z": 0.067
+      },
+      {
+        "metric": "carts_latency-50",
+        "post_mean": 0.025,
+        "pre_mean": 0.0241,
+        "relative": 0.037,
+        "z": 0.058
+      }
+    ]
+  },
+  "carts-db": {
+    "log_errors": {
+      "post": 0,
+      "pre": 0,
+      "samples": []
+    },
+    "metrics": [
+      {
+        "metric": "carts-db_cpu",
+        "post_mean": 1.155,
+        "pre_mean": 1.4293,
+        "relative": -0.192,
+        "z": -0.788
+      },
+      {
+        "metric": "carts-db_diskio",
+        "post_mean": 3734740.267,
+        "pre_mean": 4697285.0015,
+        "relative": -0.205,
+        "z": -0.66
+      },
+      {
+        "metric": "carts-db_socket",
+        "post_mean": 22.8683,
+        "pre_mean": 18.6375,
+        "relative": 0.227,
+        "z": 0.637
+      },
+      {
+        "metric": "carts-db_mem",
+        "post_mean": 76086039.3401,
+        "pre_mean": 83866754.8444,
+        "relative": -0.093,
+        "z": -0.287
+      }
+    ]
+  },
+  "catalogue": {
+    "log_errors": {
+      "post": 3,
+      "pre": 2,
+      "samples": [
+        "ts=2024-11-22T02:40:03Z caller=logging.go:36 method=List tags= order=id pageNum=1 pageSize=10 result=9 err=null took=4.522504ms",
+        "ts=2024-11-22T02:40:06Z caller=logging.go:62 method=Get id=3395a43e-2d88-40de-b95f-e00e1502085b sock=3395a43e-2d88-40de-b95f-e00e1502085b err=null took=4.218364ms",
+        "ts=2024-11-22T02:41:09Z caller=logging.go:62 method=Get id=3395a43e-2d88-40de-b95f-e00e1502085b sock=3395a43e-2d88-40de-b95f-e00e1502085b err=null took=4.540053ms"
+      ]
+    },
+    "metrics": [
+      {
+        "metric": "catalogue_latency-90",
+        "post_mean": 0.0093,
+        "pre_mean": 0.0093,
+        "relative": 0.004,
+        "z": 0.547
+      },
+      {
+        "metric": "catalogue_latency-50",
+        "post_mean": 0.0062,
+        "pre_mean": 0.0062,
+        "relative": 0.011,
+        "z": 0.247
+      },
+      {
+        "metric": "catalogue_mem",
+        "post_mean": 8832855.0622,
+        "pre_mean": 9482649.6,
+        "relative": -0.069,
+        "z": -0.202
+      },
+      {
+        "metric": "catalogue_socket",
+        "post_mean": 7.7742,
+        "pre_mean": 8.4806,
+        "relative": -0.083,
+        "z": -0.19
+      },
+      {
+        "metric": "catalogue_cpu",
+        "post_mean": 0.244,
+        "pre_mean": 0.2445,
+        "relative": -0.002,
+        "z": -0.02
+      },
+      {
+        "metric": "catalogue_workload",
+        "post_mean": 4.1353,
+        "pre_mean": 4.144,
+        "relative": -0.002,
+        "z": -0.02
+      }
+    ]
+  },
+  "catalogue-db": {
+    "log_errors": {
+      "post": 0,
+      "pre": 0,
+      "samples": []
+    },
+    "metrics": [
+      {
+        "metric": "catalogue-db_cpu",
+        "post_mean": 0.251,
+        "pre_mean": 0.2347,
+        "relative": 0.07,
+        "z": 0.751
+      },
+      {
+        "metric": "catalogue-db_mem",
+        "post_mean": 417362026.6975,
+        "pre_mean": 480556265.2444,
+        "relative": -0.132,
+        "z": -0.422
+      },
+      {
+        "metric": "catalogue-db_socket",
+        "post_mean": 4.0,
+        "pre_mean": 4.5944,
+        "relative": -0.129,
+        "z": -0.418
+      },
+      {
+        "metric": "catalogue-db_diskio",
+        "post_mean": 0.0,
+        "pre_mean": 0.0,
+        "relative": 0.0,
+        "z": 0.0
+      }
+    ]
+  },
+  "front-end": {
+    "log_errors": {
+      "post": 46,
+      "pre": 24,
+      "samples": [
+        "POST /orders 500 - ms - -",
+        "DELETE /cart 503 - ms - -",
+        "User cart deleted with status: 503"
+      ]
+    },
+    "metrics": [
+      {
+        "metric": "front-end_error",
+        "post_mean": 2.8823,
+        "pre_mean": 0.4598,
+        "relative": 5.268,
+        "z": 1.794
+      },
+      {
+        "metric": "front-end_cpu",
+        "post_mean": 3.9064,
+        "pre_mean": 4.2988,
+        "relative": -0.091,
+        "z": -0.748
+      },
+      {
+        "metric": "front-end_mem",
+        "post_mean": 71662003.6816,
+        "pre_mean": 80293950.5778,
+        "relative": -0.108,
+        "z": -0.368
+      },
+      {
+        "metric": "front-end_latency-50",
+        "post_mean": 0.0224,
+        "pre_mean": 0.0211,
+        "relative": 0.061,
+        "z": 0.22
+      },
+      {
+        "metric": "front-end_socket",
+        "post_mean": 6.6585,
+        "pre_mean": 6.8278,
+        "relative": -0.025,
+        "z": -0.059
+      },
+      {
+        "metric": "front-end_latency-90",
+        "post_mean": 0.1016,
+        "pre_mean": 0.1038,
+        "relative": -0.021,
+        "z": -0.033
+      },
+      {
+        "metric": "front-end_workload",
+        "post_mean": 24.4691,
+        "pre_mean": 24.436,
+        "relative": 0.001,
+        "z": 0.019
+      }
+    ]
+  },
+  "orders": {
+    "log_errors": {
+      "post": 8,
+      "pre": 3,
+      "samples": [
+        "2024-11-22 02:40:24.574 ERROR [orders,,,] 6 --- [-nio-80-exec-14] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested except",
+        "2024-11-22 02:41:14.248 ERROR [orders,,,] 6 --- [p-nio-80-exec-4] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested except",
+        "org.springframework.web.client.HttpServerErrorException: 503 Service Unavailable\\n\tat org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:94) ~[spring-web-4.3.6.RELEASE.jar!/:4.3.6.RELEASE"
+      ]
+    },
+    "metrics": [
+      {
+        "metric": "orders_cpu",
+        "post_mean": 2.3965,
+        "pre_mean": 4.4646,
+        "relative": -0.463,
+        "z": -0.728
+      },
+      {
+        "metric": "orders_mem",
+        "post_mean": 333236956.0637,
+        "pre_mean": 471450794.6667,
+        "relative": -0.293,
+        "z": -0.445
+      },
+      {
+        "metric": "orders_error",
+        "post_mean": 0.4361,
+        "pre_mean": 0.2639,
+        "relative": 0.653,
+        "z": 0.409
+      },
+      {
+        "metric": "orders_socket",
+        "post_mean": 24.5268,
+        "pre_mean": 26.4833,
+        "relative": -0.074,
+        "z": -0.296
+      },
+      {
+        "metric": "orders_latency-50",
+        "post_mean": 0.0454,
+        "pre_mean": 0.0426,
+        "relative": 0.066,
+        "z": 0.228
+      },
+      {
+        "metric": "orders_latency-90",
+        "post_mean": 0.2742,
+        "pre_mean": 0.3965,
+        "relative": -0.309,
+        "z": -0.099
+      },
+      {
+        "metric": "orders_workload",
+        "post_mean": 2.1072,
+        "pre_mean": 2.0699,
+        "relative": 0.018,
+        "z": 0.095
+      }
+    ]
+  },
+  "orders-db": {
+    "log_errors": {
+      "post": 0,
+      "pre": 0,
+      "samples": []
+    },
+    "metrics": [
+      {
+        "metric": "orders-db_mem",
+        "post_mean": 72013311.259,
+        "pre_mean": 81458619.7333,
+        "relative": -0.116,
+        "z": -0.386
+      },
+      {
+        "metric": "orders-db_diskio",
+        "post_mean": 2277982.1916,
+        "pre_mean": 2099014.7864,
+        "relative": 0.085,
+        "z": 0.254
+      },
+      {
+        "metric": "orders-db_socket",
+        "post_mean": 15.0,
+        "pre_mean": 15.2139,
+        "relative": -0.014,
+        "z": -0.122
+      },
+      {
+        "metric": "orders-db_cpu",
+        "post_mean": 0.4518,
+        "pre_mean": 0.4511,
+        "relative": 0.001,
+        "z": 0.011
+      }
+    ]
+  },
+  "payment": {
+    "log_errors": {
+      "post": 0,
+      "pre": 0,
+      "samples": []
+    },
+    "metrics": [
+      {
+        "metric": "payment_cpu",
+        "post_mean": 0.0865,
+        "pre_mean": 0.0974,
+        "relative": -0.111,
+        "z": -0.695
+      },
+      {
+        "metric": "payment_workload",
+        "post_mean": 1.6729,
+        "pre_mean": 1.9717,
+        "relative": -0.152,
+        "z": -0.504
+      },
+      {
+        "metric": "payment_latency-50",
+        "post_mean": 0.0014,
+        "pre_mean": 0.0012,
+        "relative": 0.183,
+        "z": 0.432
+      },
+      {
+        "metric": "payment_socket",
+        "post_mean": 4.0,
+        "pre_mean": 4.7028,
+        "relative": -0.149,
+        "z": -0.381
+      },
+      {
+        "metric": "payment_mem",
+        "post_mean": 8715143.9653,
+        "pre_mean": 9114663.8222,
+        "relative": -0.044,
+        "z": -0.145
+      },
+      {
+        "metric": "payment_latency-90",
+        "post_mean": 0.0043,
+        "pre_mean": 0.0043,
+        "relative": 0.003,
+        "z": 0.094
+      }
+    ]
+  },
+  "queue-master": {
+    "log_errors": {
+      "post": 63,
+      "pre": 52,
+      "samples": [
+        "2024-11-22 02:42:50.920  INFO 6 --- [ool-6-thread-13] o.apache.http.impl.execchain.RetryExec   : I/O exception (org.newsclub.net.unix.AFUNIXSocketException) caught when processing request to {}->unix://localhost:80: No such file or director",
+        "2024-11-22 02:42:54.836  INFO 6 --- [ool-6-thread-19] o.apache.http.impl.execchain.RetryExec   : I/O exception (org.newsclub.net.unix.AFUNIXSocketException) caught when processing request to {}->unix://localhost:80: No such file or director",
+        "2024-11-22 02:43:04.900  INFO 6 --- [ool-6-thread-28] o.apache.http.impl.execchain.RetryExec   : I/O exception (org.newsclub.net.unix.AFUNIXSocketException) caught when processing request to {}->unix://localhost:80: No such file or director"
+      ]
+    },
+    "metrics": [
+      {
+        "metric": "queue-master_cpu",
+        "post_mean": 0.5991,
+        "pre_mean": 1.3007,
+        "relative": -0.539,
+        "z": -0.559
+      },
+      {
+        "metric": "queue-master_socket",
+        "post_mean": 5.0,
+        "pre_mean": 5.5667,
+        "relative": -0.102,
+        "z": -0.483
+      },
+      {
+        "metric": "queue-master_mem",
+        "post_mean": 298406036.191,
+        "pre_mean": 350131478.7556,
+        "relative": -0.148,
+        "z": -0.472
+      },
+      {
+        "metric": "queue-master_latency-50",
+        "post_mean": 0.003,
+        "pre_mean": 0.0033,
+        "relative": -0.091,
+        "z": -0.309
+      },
+      {
+        "metric": "queue-master_latency-90",
+        "post_mean": 0.0046,
+        "pre_mean": 0.054,
+        "relative": -0.915,
+        "z": -0.168
+      },
+      {
+        "metric": "queue-master_error",
+        "post_mean": 0.0,
+        "pre_mean": 0.0,
+        "relative": 0.0,
+        "z": 0.0
+      },
+      {
+        "metric": "queue-master_workload",
+        "post_mean": 0.067,
+        "pre_mean": 0.067,
+        "relative": 0.0,
+        "z": 0.0
+      }
+    ]
+  },
+  "rabbitmq": {
+    "log_errors": {
+      "post": 0,
+      "pre": 0,
+      "samples": []
+    },
+    "metrics": [
+      {
+        "metric": "rabbitmq_socket",
+        "post_mean": 11.0,
+        "pre_mean": 12.5111,
+        "relative": -0.121,
+        "z": -0.404
+      },
+      {
+        "metric": "rabbitmq_mem",
+        "post_mean": 95155373.3835,
+        "pre_mean": 105242123.3778,
+        "relative": -0.096,
+        "z": -0.319
+      },
+      {
+        "metric": "rabbitmq_cpu",
+        "post_mean": 0.6062,
+        "pre_mean": 0.6325,
+        "relative": -0.042,
+        "z": -0.27
+      },
+      {
+        "metric": "rabbitmq_diskio",
+        "post_mean": 0.0,
+        "pre_mean": 15053.2595,
+        "relative": -1.0,
+        "z": -0.217
+      }
+    ]
+  },
+  "rabbitmq-exporter": {
+    "log_errors": {
+      "post": 0,
+      "pre": 0,
+      "samples": []
+    },
+    "metrics": [
+      {
+        "metric": "rabbitmq-exporter_mem",
+        "post_mean": 4534272.0,
+        "pre_mean": 5115744.7111,
+        "relative": -0.114,
+        "z": -0.383
+      },
+      {
+        "metric": "rabbitmq-exporter_socket",
+        "post_mean": 1.0,
+        "pre_mean": 1.1278,
+        "relative": -0.113,
+        "z": -0.383
+      },
+      {
+        "metric": "rabbitmq-exporter_cpu",
+        "post_mean": 0.0001,
+        "pre_mean": 0.0001,
+        "relative": -0.04,
+        "z": -0.037
+      }
+    ]
+  },
+  "session-db": {
+    "log_errors": {
+      "post": 0,
+      "pre": 0,
+      "samples": []
+    },
+    "metrics": [
+      {
+        "metric": "session-db_diskio",
+        "post_mean": 35716.1263,
+        "pre_mean": 11981.0063,
+        "relative": 1.981,
+        "z": 0.473
+      },
+      {
+        "metric": "session-db_mem",
+        "post_mean": 3311648.602,
+        "pre_mean": 3805104.3556,
+        "relative": -0.13,
+        "z": -0.421
+      },
+      {
+        "metric": "session-db_socket",
+        "post_mean": 3.0,
+        "pre_mean": 3.4208,
+        "relative": -0.123,
+        "z": -0.404
+      },
+      {
+        "metric": "session-db_cpu",
+        "post_mean": 0.6115,
+        "pre_mean": 0.6135,
+        "relative": -0.003,
+        "z": -0.029
+      }
+    ]
+  },
+  "shipping": {
+    "log_errors": {
+      "post": 0,
+      "pre": 0,
+      "samples": []
+    },
+    "metrics": [
+      {
+        "metric": "shipping_socket",
+        "post_mean": 5.1288,
+        "pre_mean": 6.0833,
+        "relative": -0.157,
+        "z": -0.55
+      },
+      {
+        "metric": "shipping_mem",
+        "post_mean": 297409344.8336,
+        "pre_mean": 347710577.7778,
+        "relative": -0.145,
+        "z": -0.448
+      },
+      {
+        "metric": "shipping_cpu",
+        "post_mean": 0.63,
+        "pre_mean": 1.8207,
+        "relative": -0.654,
+        "z": -0.414
+      },
+      {
+        "metric": "shipping_latency-90",
+        "post_mean": 0.0046,
+        "pre_mean": 0.0177,
+        "relative": -0.737,
+        "z": -0.222
+      },
+      {
+        "metric": "shipping_workload",
+        "post_mean": 1.6754,
+        "pre_mean": 1.801,
+        "relative": -0.07,
+        "z": -0.22
+      },
+      {
+        "metric": "shipping_latency-50",
+        "post_mean": 0.003,
+        "pre_mean": 0.0049,
+        "relative": -0.377,
+        "z": -0.198
+      },
+      {
+        "metric": "shipping_error",
+        "post_mean": 0.0,
+        "pre_mean": 0.0,
+        "relative": 0.0,
+        "z": 0.0
+      }
+    ]
+  },
+  "user": {
+    "log_errors": {
+      "post": 5,
+      "pre": 5,
+      "samples": [
+        "ts=2024-11-22T02:40:18.250282822Z caller=middlewares.go:75 method=GetUsers id=673fef03b0df5c00019b01eb result=1 took=969.985\u00b5s",
+        "ts=2024-11-22T02:46:55.693502303Z caller=middlewares.go:75 method=GetUsers id=673ff08ab0df5c00019b0698 result=1 took=1.313419ms",
+        "ts=2024-11-22T02:48:40.870150066Z caller=middlewares.go:75 method=GetUsers id=673ff0f7b0df5c00019b07dd result=1 took=789.856\u00b5s"
+      ]
+    },
+    "metrics": [
+      {
+        "metric": "user_cpu",
+        "post_mean": 1.0092,
+        "pre_mean": 0.9452,
+        "relative": 0.068,
+        "z": 0.758
+      },
+      {
+        "metric": "user_socket",
+        "post_mean": 15.7496,
+        "pre_mean": 18.5236,
+        "relative": -0.15,
+        "z": -0.252
+      },
+      {
+        "metric": "user_latency-50",
+        "post_mean": 0.0033,
+        "pre_mean": 0.0033,
+        "relative": -0.007,
+        "z": -0.242
+      },
+      {
+        "metric": "user_latency-90",
+        "post_mean": 0.006,
+        "pre_mean": 0.0062,
+        "relative": -0.024,
+        "z": -0.147
+      },
+      {
+        "metric": "user_mem",
+        "post_mean": 11644382.657,
+        "pre_mean": 11816874.6667,
+        "relative": -0.015,
+        "z": -0.041
+      },
+      {
+        "metric": "user_workload",
+        "post_mean": 18.3965,
+        "pre_mean": 18.424,
+        "relative": -0.001,
+        "z": -0.013
+      }
+    ]
+  },
+  "user-db": {
+    "log_errors": {
+      "post": 0,
+      "pre": 0,
+      "samples": []
+    },
+    "metrics": [
+      {
+        "metric": "user-db_cpu",
+        "post_mean": 1.0345,
+        "pre_mean": 0.9488,
+        "relative": 0.09,
+        "z": 0.918
+      },
+      {
+        "metric": "user-db_socket",
+        "post_mean": 7.741,
+        "pre_mean": 9.2986,
+        "relative": -0.168,
+        "z": -0.272
+      },
+      {
+        "metric": "user-db_mem",
+        "post_mean": 38324333.6614,
+        "pre_mean": 41858548.6222,
+        "relative": -0.084,
+        "z": -0.235
+      },
+      {
+        "metric": "user-db_diskio",
+        "post_mean": 6156799.6997,
+        "pre_mean": 5982118.4859,
+        "relative": 0.029,
+        "z": 0.168
+      }
+    ]
+  }
+}

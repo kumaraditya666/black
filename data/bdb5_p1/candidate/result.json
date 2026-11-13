@@ -1,0 +1,251 @@
+{
+  "abstention": null,
+  "case_id": "BDB5-P1",
+  "claimed_source_revision": "cffd4e0f86fefd4802349a9f9b19ed70934ea354",
+  "claims": [
+    {
+      "asserts_execution": false,
+      "category": "OBSERVATION",
+      "confidence": null,
+      "evidence_ids": [
+        "issue:1",
+        "source:1"
+      ],
+      "material": true,
+      "text": "The issue reports that Symbol instances gained a __dict__ after the parent mixin stopped declaring __slots__, and the pinned source shows Printable has no __slots__ declaration.",
+      "uncertainty": null
+    },
+    {
+      "asserts_execution": false,
+      "category": "PATCH",
+      "confidence": null,
+      "evidence_ids": [
+        "source:1"
+      ],
+      "material": true,
+      "text": "The candidate adds __slots__ = () to Printable in sympy/core/_print_helpers.py and changes no other file.",
+      "uncertainty": null
+    }
+  ],
+  "fault_class": null,
+  "l1_causal_status": "NOT_ASSESSED",
+  "l2_causal_status": "NOT_ASSESSED",
+  "mechanism_evidence_ids": [],
+  "patch": {
+    "applied": true,
+    "changed_files": [
+      "sympy/core/_print_helpers.py"
+    ],
+    "diff_sha256": "607f8ec383ed349bff64088b278ca22c3efbc4351e22dc42c723a24487eefcd3",
+    "tests_modified": false
+  },
+  "predicted_files": [
+    "sympy/core/_print_helpers.py"
+  ],
+  "predicted_function": null,
+  "predicted_line": null,
+  "predicted_mechanism": null,
+  "service_ranked": [],
+  "test_executions": [
+    {
+      "artifact_sha256": "d562b281a56471a9f530f38c9d088fd2c7efa1d8be103257dc1bdd42b59f992f",
+      "command": "bin/test sympy/core/tests/test_basic.py::test_immutable --no-colors --no-subprocess",
+      "failure_signature_matched": true,
+      "name": "test_immutable",
+      "outcome": "FAIL",
+      "role": "REPRODUCTION_BEFORE"
+    },
+    {
+      "artifact_sha256": "8025ad53489618629ba7db60f29eebf42e4632063b12ee459d8ad022f79b3fb5",
+      "command": "bin/test sympy/core/tests/test_basic.py::test_immutable --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_immutable",
+      "outcome": "PASS",
+      "role": "REPRODUCTION_AFTER"
+    },
+    {
+      "artifact_sha256": "8025ad53489618629ba7db60f29eebf42e4632063b12ee459d8ad022f79b3fb5",
+      "command": "bin/test sympy/core/tests/test_basic.py::test_immutable --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_immutable",
+      "outcome": "PASS",
+      "role": "FAIL_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "sympy/core/tests/test_basic.py",
+      "outcome": "PASS",
+      "role": "REGRESSION"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test__aresame",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_structure",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_equality",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_matches_basic",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_has",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_subs",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_subs_with_unicode_symbols",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_atoms",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_free_symbols_empty",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_doit",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_S",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_xreplace",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_preorder_traversal",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_sorted_args",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_call",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_rewrite",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_literal_evalf_is_number_is_zero_is_comparable",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_as_Basic",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_atomic",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_as_dummy",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    },
+    {
+      "artifact_sha256": "fe0852a0943b9b552e2d14d06ebe5a223d14609eff05cef0a680dd59b8bee8db",
+      "command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+      "failure_signature_matched": null,
+      "name": "test_canonical_variables",
+      "outcome": "PASS",
+      "role": "PASS_TO_PASS"
+    }
+  ]
+}

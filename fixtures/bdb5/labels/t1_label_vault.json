@@ -1,0 +1,29 @@
+{
+  "schema_version": "bdb5-label-vault-v1",
+  "cases": {
+    "BDB5-T1": {
+      "truth": {
+        "case_id": "BDB5-T1",
+        "expected_service": "carts",
+        "expected_fault_class": "F1",
+        "causal_level": "L1",
+        "expected_l1_status": "SUPPORTED",
+        "expected_l2_status": "NOT_ESTABLISHED",
+        "expected_abstention": true,
+        "expected_abstention_scope": "SOURCE",
+        "expected_abstention_evidence": [
+          "runtime source map"
+        ],
+        "forbidden_public_literals": [
+          "re3ss_carts_f1_1",
+          "root_cause.txt"
+        ]
+      },
+      "rationale": "The RCAEval case label is L1 service carts and fault F1 (incorrect parameter values). The dataset supplies no source-file/function/line label, so L2+ must remain NOT_ESTABLISHED. The label vault is evaluator-only and is not part of the model-visible packet.",
+      "references": [
+        "phamquiluan/RCAEval@afeacb11bcc94dadfd1c8f483ee4377b2b8b614e",
+        "fixtures/bdb5/t1/service_inventory.json"
+      ]
+    }
+  }
+}

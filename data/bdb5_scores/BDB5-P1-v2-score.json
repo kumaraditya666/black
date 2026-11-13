@@ -1,0 +1,161 @@
+{
+  "approval_hash": "6f48124c44a61dbb30a2d05ec15f9289c3aabef6d608d4f19447f803bbbcf516",
+  "approved": true,
+  "benchmark_result": false,
+  "candidate_checks": {
+    "actual_test_command": "bin/test sympy/core/tests/test_basic.py::test_immutable --no-colors --no-subprocess",
+    "changed_files": [
+      "sympy/core/_print_helpers.py"
+    ],
+    "docstring_preserved": true,
+    "full_test_file": "23 passed",
+    "gold_patch_sent_to_model": false,
+    "hidden_tests_sent_to_model": false,
+    "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-20590@sha256:bcdff110a35d19a6838fde5f678d1b5103610234bd034e5703df46878aad3b63",
+    "patch_applied": true,
+    "test_command": "bin/test sympy/core/tests/test_basic.py::test_immutable --no-colors --no-subprocess",
+    "test_immutable": "PASS"
+  },
+  "case_id": "BDB5-P1",
+  "label_vault_path": "data/bdb5_p1/p1_label_vault_v2.json",
+  "label_vault_sha256": "2a7db5774ff015837be8a80bde5e2ed5599658763405c2aad5477f02d82d1854",
+  "mode": "REAL_CASE_SCORED",
+  "model_call_record": {
+    "attempt": 2,
+    "changed_files": [
+      "sympy/core/_print_helpers.py"
+    ],
+    "docstring_preserved": true,
+    "find": "\"\"\"\n    The default implementation of printing for SymPy classes.\n\n    This implements a hack that allows us to print elements of built-in\n    Python containers in a readable way. Natively Python uses ``repr()``\n    even if ``str()`` was explicitly requested. Mix in this trait into\n    a class to get proper default printing.\n\n    This also adds support for LaTeX printing in jupyter notebooks.\n    \"\"\"",
+    "gold_patch_in_prompt": false,
+    "hidden_tests_in_prompt": false,
+    "model": "qwen3.5:9b-q4_K_M",
+    "model_calls_this_generation": 2,
+    "patch_chars": 326,
+    "prior_docstring_breaking_candidate": "data/bdb5_p1/candidate/candidate_docstring_broken.diff",
+    "replace": "\"\"\"\n    The default implementation of printing for SymPy classes.\n\n    This implements a hack that allows us to print elements of built-in\n    Python containers in a readable way. Natively Python uses ``repr()``\n    even if ``str()`` was explicitly requested. Mix in this trait into\n    a class to get proper default printing.\n\n    This also adds support for LaTeX printing in jupyter notebooks.\n    \"\"\"\n    __slots__ = ()",
+    "request_hash": "6f073b874935d919844f61e5abfd8a55003c6219664ac69bf15297abd72b477b",
+    "response_hash": "3f1733060c083f80b1bcd8f382786c0e1d5926f28b7a6d7a804e20f362bb2353",
+    "summary": "Added `__slots__ = ()` immediately after the Printable class docstring to prevent accidental `__dict__` creation and maintain memory efficiency.",
+    "total_model_calls": 6,
+    "usage": {
+      "eval_count": 249,
+      "prompt_eval_count": 837
+    }
+  },
+  "notes": [
+    "This score uses the fresh two-reviewer approval bound to the 21-name v2 vault.",
+    "The original P1 packet/manifest/model-visible evidence are unchanged.",
+    "The original strict-fail score remains at data/bdb5_scores/BDB5-P1-score.json for audit.",
+    "The evaluator-only test command and image metadata were corrected to the verified preflight values; the model-visible packet and manifest hash are unchanged."
+  ],
+  "prepared_payload_hash": "1353671dd6c86594dbdfb2bfc4defcaee3196239baad46aad1723d23d4dd954f",
+  "provider_calls": 6,
+  "score": {
+    "case_id": "BDB5-P1",
+    "citations": {
+      "cited": [
+        "issue:1",
+        "source:1"
+      ],
+      "coverage": 1.0,
+      "fabricated_rate": 0.0,
+      "invalid": [],
+      "required_evidence_types": [
+        "ISSUE_TEXT",
+        "SOURCE_EXCERPT"
+      ],
+      "valid": [
+        "issue:1",
+        "source:1"
+      ],
+      "valid_evidence_types": [
+        "ISSUE_TEXT",
+        "SOURCE_EXCERPT"
+      ],
+      "validity": 1.0
+    },
+    "dimension_explanations": {
+      "app_abstention": "value=None",
+      "app_causal_status": "value=None",
+      "app_source_claim": "value=0.0",
+      "causal_status": "value=None; expected='NOT_ASSESSED'",
+      "citation_coverage": "value=1.0",
+      "citation_validity": "value=1.0",
+      "execution_overclaims": "value=0",
+      "fabricated_citations": "value=0.0",
+      "fail_to_pass": "value=1.0",
+      "false_abstention": "value=None",
+      "fault_accuracy": "value=None; expected=None",
+      "file_exactness": "value=1.0; expected=('sympy/core/_print_helpers.py',)",
+      "function_exactness": "value=None; expected=None",
+      "harness_claim": "value=0.0",
+      "harness_identification": "value=None",
+      "l1_causal_status": "value=None; expected='NOT_ASSESSED'",
+      "l2_abstention": "value=None",
+      "l2_causal_status": "value=None; expected='NOT_ASSESSED'",
+      "line_exactness": "value=None; expected=None",
+      "mechanism": "value=None",
+      "pass_to_pass": "value=1.0",
+      "patch_applies": "value=1.0",
+      "patch_scope": "value=1.0",
+      "regression_safety": "value=1.0",
+      "reproduction_after": "value=1.0",
+      "reproduction_before": "value=1.0",
+      "service_top1": "value=None; expected=None",
+      "service_top3": "value=None",
+      "unsupported_claim_rate": "value=0.0"
+    },
+    "dimensions": {
+      "app_abstention": null,
+      "app_causal_status": null,
+      "app_source_claim": 0.0,
+      "causal_status": null,
+      "citation_coverage": 1.0,
+      "citation_validity": 1.0,
+      "execution_overclaims": 0,
+      "fabricated_citations": 0.0,
+      "fail_to_pass": 1.0,
+      "false_abstention": null,
+      "fault_accuracy": null,
+      "file_exactness": 1.0,
+      "function_exactness": null,
+      "harness_claim": 0.0,
+      "harness_identification": null,
+      "l1_causal_status": null,
+      "l2_abstention": null,
+      "l2_causal_status": null,
+      "line_exactness": null,
+      "mechanism": null,
+      "pass_to_pass": 1.0,
+      "patch_applies": 1.0,
+      "patch_scope": 1.0,
+      "regression_safety": 1.0,
+      "reproduction_after": 1.0,
+      "reproduction_before": 1.0,
+      "service_top1": null,
+      "service_top3": null,
+      "unsupported_claim_rate": 0.0
+    },
+    "failures": [],
+    "mode": "REAL_CASE_EVALUATION",
+    "required_dimensions": [
+      "patch_applies",
+      "patch_scope",
+      "fail_to_pass",
+      "pass_to_pass",
+      "reproduction_before",
+      "reproduction_after",
+      "regression_safety"
+    ],
+    "result_class": "REAL_CASE_SCORE_NOT_BENCHMARK_RESULT",
+    "result_hash": "33c36432983c0ab0cf24334271123b421d38626b11189898395b96cf9747248a",
+    "scenario": null,
+    "strict_pass": true,
+    "synthetic": false,
+    "validation_issues": []
+  },
+  "scored": true,
+  "status": "REAL_CASE_SCORED",
+  "supersedes": "data/bdb5_scores/BDB5-P1-score.json (original vault; strict-fail retained for audit)"
+}

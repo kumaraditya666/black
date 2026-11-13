@@ -1,0 +1,10 @@
+{
+  "anomaly": 16.667,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "pre",
+  "service": "user",
+  "summary": "The telemetry shows a sudden spike in latency at the beginning of the window (16.667ms) followed by a return to normal levels (~15.867ms), then another sustained increase later (up to 20.8ms). This pattern suggests transient issues rather than a persistent fault in a single service. However, without logs or additional context linking these spikes to specific services, the source cause is NOT_ESTABLISHED."
+}

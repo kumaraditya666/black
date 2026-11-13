@@ -1,0 +1,36 @@
+{
+  "mode": "EXPLORATORY_LIVE_RUN_CLIENT_ERROR",
+  "authorization": "EXPLORATORY_USER_AUTHORIZED_ONLY",
+  "independent_approval": false,
+  "approved": false,
+  "scored": false,
+  "case_id": "BDB5-R1",
+  "provider": "ollama-native",
+  "model": "qwen3.5:9b-q4_K_M",
+  "base_url": "http://localhost:11434",
+  "context_length": 8192,
+  "max_output_tokens": 2048,
+  "prepared_path": "C:\\Users\\Adi\\Documents\\ChatGPT\\black\\data\\bdb5_handoff\\bdb5_r1_prepared.json",
+  "payload_hash": "0e940779081d1fda071f4acec3c2847227a7480056bc46d1d4d897c3806b6c8c",
+  "gate": {
+    "kind": "EXPLORATORY_NOT_APPROVAL",
+    "hash": "209ce46e51e7c8a61ed614c1a9936ec2256996a954a9bb6b1d28dff10bb2db56",
+    "real_approval": false
+  },
+  "outcome": "CLIENT_CAPTURE_ERROR",
+  "provider_calls": 1,
+  "http_status": 200,
+  "provider_run": null,
+  "runner": null,
+  "result": null,
+  "contract": {
+    "passed": null,
+    "codes": [],
+    "details": []
+  },
+  "error": "ResponseNotRead: Attempted to access streaming response content, without having called `read()`.",
+  "response_hash": null,
+  "raw_response_path": null,
+  "result_path": null,
+  "note": "HTTP 200 response was not readable by the response hook; no model result was parsed. This is not a provider or contract rejection."
+}

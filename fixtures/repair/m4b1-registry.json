@@ -1,0 +1,264 @@
+{
+  "fixtures": [
+    {
+      "name": "m4b1_scale",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M4B.1 synthetic fixture",
+      "expected_behavior": "scale divides by value minus one",
+      "files": {
+        "app.py": "186d8cd69aef19777f637b6a92108c1c97b2e0e1a428ce4b03c9c3177d8c0a26",
+        "helper.py": "9f074c2baa4eddfd11d9423ede9be3c94702e46eb0ba120e33f081f8d6ff9a71",
+        "tests/test_reproduction.py": "646951ef66f63b5a7a03be14bcbf1a2bc127291361f637268b496f77358499bd",
+        "tests/test_regression.py": "2c8d9f54650e903b63976d5f66332c069c8bfcb4c6cfb8febc1422bc971d154b",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "ZeroDivisionError",
+        "message": "division by zero",
+        "frame": {
+          "path": "fixtures/repair/m4b1_scale/app.py",
+          "line": 4,
+          "function": "run"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_case",
+        "failure_marker": "ZeroDivisionError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m4b1_config",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M4B.1 synthetic fixture",
+      "expected_behavior": "configuration lookup omits default workers",
+      "files": {
+        "app.py": "9eb05b64a07843c7f75f440234ab747bae7b31b0c1148ddbfd6fc9a85393776f",
+        "helper.py": "308802ccb99e77de37edf8f6e2fb2e3d023fc6550a9097053b876fcaa663ff96",
+        "tests/test_reproduction.py": "243d5a1fd8a8f2581cdac4cba985f16c63325cdf31c74ef9269ed4879623d699",
+        "tests/test_regression.py": "2c8d9f54650e903b63976d5f66332c069c8bfcb4c6cfb8febc1422bc971d154b",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "KeyError",
+        "message": "'workers'",
+        "frame": {
+          "path": "fixtures/repair/m4b1_config/app.py",
+          "line": 4,
+          "function": "run"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_case",
+        "failure_marker": "KeyError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m4b1_index",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M4B.1 synthetic fixture",
+      "expected_behavior": "index equals length and is outside the list",
+      "files": {
+        "app.py": "6b0c80d277cf3fc5b2e5245004f5cae8842cc593c99a03c5f4d60e30e82ca876",
+        "helper.py": "a033452eea0da42e0d2a61a7532c1edb17a4cb9d77c972483a71b0a2d03f8e70",
+        "tests/test_reproduction.py": "f52908eee3174cbe23da59b4189f8ea6271e97d9e55bc0b255266c92bd10ec52",
+        "tests/test_regression.py": "2c8d9f54650e903b63976d5f66332c069c8bfcb4c6cfb8febc1422bc971d154b",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "IndexError",
+        "message": "list index out of range",
+        "frame": {
+          "path": "fixtures/repair/m4b1_index/app.py",
+          "line": 4,
+          "function": "run"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_case",
+        "failure_marker": "IndexError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m4b1_injected",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M4B.1 synthetic fixture",
+      "expected_behavior": "division by value minus two",
+      "files": {
+        "app.py": "eaf91be8d7155d6d3b7d70f7e9cd2970a6a7a5789ab02a2e10928d1f3fdfec50",
+        "helper.py": "f135b3e2f8f9d633ebda6db15034f8557ea72d03361b491683a5994f9938ee80",
+        "tests/test_reproduction.py": "99203d74482adafa5c91cfa3ff436abd85da94cf586a508d8a910938027801b5",
+        "tests/test_regression.py": "2c8d9f54650e903b63976d5f66332c069c8bfcb4c6cfb8febc1422bc971d154b",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "ZeroDivisionError",
+        "message": "division by zero",
+        "frame": {
+          "path": "fixtures/repair/m4b1_injected/app.py",
+          "line": 4,
+          "function": "run"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_case",
+        "failure_marker": "ZeroDivisionError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m4b1_caller",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M4B.1 synthetic fixture",
+      "expected_behavior": "run subtracts one before relaying input",
+      "files": {
+        "app.py": "2d7341bfc0a313ddd680aef831e26e8aecb9becec29ec5ad5414c98d3c6d1db1",
+        "tests/test_reproduction.py": "646951ef66f63b5a7a03be14bcbf1a2bc127291361f637268b496f77358499bd",
+        "tests/test_regression.py": "2c8d9f54650e903b63976d5f66332c069c8bfcb4c6cfb8febc1422bc971d154b",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "ZeroDivisionError",
+        "message": "division by zero",
+        "frame": {
+          "path": "fixtures/repair/m4b1_caller/app.py",
+          "line": 2,
+          "function": "calculate"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_case",
+        "failure_marker": "ZeroDivisionError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m4b1_visible",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M4B.1 synthetic fixture",
+      "expected_behavior": "index equals length",
+      "files": {
+        "app.py": "550396c38f211ced3222d024d22eb1e1ed4fc287d1e19f4071c0a96ed688b74d",
+        "tests/test_reproduction.py": "97905657d1fbec3b4dc7c7492235fd1f56947ab65c8be8d1b494db339fa8e526",
+        "tests/test_regression.py": "2c8d9f54650e903b63976d5f66332c069c8bfcb4c6cfb8febc1422bc971d154b",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "IndexError",
+        "message": "list index out of range",
+        "frame": {
+          "path": "fixtures/repair/m4b1_visible/app.py",
+          "line": 2,
+          "function": "item"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_case",
+        "failure_marker": "IndexError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m4b1_runtime",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M4B.1 synthetic fixture",
+      "expected_behavior": "input origin is not recorded",
+      "files": {
+        "app.py": "ce86494e869b096146e3c146f9d2da6517a74a0957dd7776be7df990c580a43a",
+        "tests/test_reproduction.py": "a20d2d4cf6b069d39bf401a3f2db641ff045e62740c83b63b9f57d895379fa3f",
+        "tests/test_regression.py": "2c8d9f54650e903b63976d5f66332c069c8bfcb4c6cfb8febc1422bc971d154b",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "ValueError",
+        "message": "invalid literal for int() with base 10: 'unknown'",
+        "frame": {
+          "path": "fixtures/repair/m4b1_runtime/app.py",
+          "line": 2,
+          "function": "parse_count"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_case",
+        "failure_marker": "ValueError",
+        "reproducible": false
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m4b1_negative",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M4B.1 synthetic fixture",
+      "expected_behavior": "empty input handled; reported exception unsupported",
+      "files": {
+        "app.py": "64e97095b32621d329e4929e525fe2358abccd2fc29e10765757faee2097dd09",
+        "tests/test_reproduction.py": "c2440eab15e9c34ac29be33a0e2f2a0fc51f92bb56f3718bd24c1b09ac0f3f30",
+        "tests/test_regression.py": "2c8d9f54650e903b63976d5f66332c069c8bfcb4c6cfb8febc1422bc971d154b",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "IndexError",
+        "message": "list index out of range",
+        "frame": {
+          "path": "fixtures/repair/m4b1_negative/app.py",
+          "line": 2,
+          "function": "first"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_case",
+        "failure_marker": "IndexError",
+        "reproducible": false
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    }
+  ]
+}

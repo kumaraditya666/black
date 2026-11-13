@@ -257,11 +257,12 @@ def test_approval_is_idempotent_and_review_cannot_change_status(tmp_path):
 
 
 def test_pipeline_never_mutates_the_fixture_repository(tmp_path):
-    before = subprocess.check_output(['git', '-C', str(PROJECT_ROOT), 'status', '--porcelain', '--',
-                                      'fixtures/repair'], text=True)
+    fixture_root = PROJECT_ROOT / 'fixtures' / 'repair'
+    def contents():
+        return {p.relative_to(fixture_root).as_posix(): p.read_bytes()
+                for p in fixture_root.rglob('*') if p.is_file() and '__pycache__' not in p.parts}
+    before = contents()
     attempt_for(tmp_path, 'missing_config', [{
         'path': 'app.py', 'find': "    return config['timeout']",
         'replace': "    return config.get('timeout', 30)", 'explanation': 'Use a default.'}])
-    after = subprocess.check_output(['git', '-C', str(PROJECT_ROOT), 'status', '--porcelain', '--',
-                                     'fixtures/repair'], text=True)
-    assert before == after == ''
+    assert contents() == before

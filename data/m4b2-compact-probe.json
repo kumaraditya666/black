@@ -1,0 +1,101 @@
+{
+  "model": "qwen3.5:4b",
+  "context": 2048,
+  "results": [
+    {
+      "case": "m4b1_scale",
+      "status": "completed",
+      "valid": true,
+      "answer": {
+        "operation": "division",
+        "explanation": "The function performs a division where the denominator is calculated as (value - 1). The exception occurs when this denominator equals zero.",
+        "execution_established": false
+      },
+      "usage": {
+        "input_tokens": 116,
+        "output_tokens": 54,
+        "load_duration_ns": 3665100,
+        "eval_duration_ns": 1048679000,
+        "estimated_cost": null
+      },
+      "latency_ms": 1641,
+      "prompt_chars": 492
+    },
+    {
+      "case": "m4b1_config",
+      "status": "completed",
+      "valid": true,
+      "answer": {
+        "operation": "Dictionary lookup for key 'workers'",
+        "explanation": "The exception occurs because the dictionary passed as `config` does not contain the key 'workers'.",
+        "execution_established": true
+      },
+      "usage": {
+        "input_tokens": 108,
+        "output_tokens": 53,
+        "load_duration_ns": 9228000,
+        "eval_duration_ns": 1037054000,
+        "estimated_cost": null
+      },
+      "latency_ms": 1179,
+      "prompt_chars": 479
+    },
+    {
+      "case": "m4b1_index",
+      "status": "completed",
+      "valid": true,
+      "answer": {
+        "operation": "Accessing the element at index equal to the length of the list",
+        "explanation": "The exception occurs because `len(items)` returns the count of elements, which is an invalid index for accessing the last item (the valid indices are 0 to len-1)",
+        "execution_established": false
+      },
+      "usage": {
+        "input_tokens": 111,
+        "output_tokens": 76,
+        "load_duration_ns": 4593000,
+        "eval_duration_ns": 1453796000,
+        "estimated_cost": null
+      },
+      "latency_ms": 1571,
+      "prompt_chars": 498
+    },
+    {
+      "case": "m4b1_injected",
+      "status": "completed",
+      "valid": true,
+      "answer": {
+        "operation": "Division of 20 by the result of subtracting 2 from value",
+        "explanation": "The exception occurs when 'value' equals 2, causing division by zero",
+        "execution_established": false
+      },
+      "usage": {
+        "input_tokens": 131,
+        "output_tokens": 58,
+        "load_duration_ns": 9264900,
+        "eval_duration_ns": 1111417000,
+        "estimated_cost": null
+      },
+      "latency_ms": 1258,
+      "prompt_chars": 579
+    },
+    {
+      "case": "m4b1_caller",
+      "status": "completed",
+      "valid": true,
+      "answer": {
+        "operation": "Subtracts one from the input value and passes the result to a relay function.",
+        "explanation": "The exception occurs if the subtraction results in zero, which is then passed to `relay`.",
+        "execution_established": false
+      },
+      "usage": {
+        "input_tokens": 112,
+        "output_tokens": 61,
+        "load_duration_ns": 7689500,
+        "eval_duration_ns": 1155134000,
+        "estimated_cost": null
+      },
+      "latency_ms": 1279,
+      "prompt_chars": 490
+    }
+  ]
+}

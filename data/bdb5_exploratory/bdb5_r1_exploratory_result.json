@@ -1,0 +1,60 @@
+{
+  "case_id": "BDB5-R1",
+  "claims": [
+    {
+      "category": "OBSERVATION",
+      "text": "CI job bwhmather-verktyg-109227527 failed with errors=3, failures=2. Primary failure is test_modified_url_encoding in test_requests.py.",
+      "evidence_ids": [
+        "ci:1",
+        "test:1"
+      ],
+      "material": true,
+      "confidence": null,
+      "uncertainty": null,
+      "asserts_execution": false
+    },
+    {
+      "category": "OBSERVATION",
+      "text": "The error traceback shows a UnicodeDecodeError occurring in stdlib/urllib/parse.py at line 98 within the _decode_args function.",
+      "evidence_ids": [
+        "ci:1"
+      ],
+      "material": true,
+      "confidence": null,
+      "uncertainty": null,
+      "asserts_execution": false
+    },
+    {
+      "category": "OBSERVATION",
+      "text": "The source code excerpt from verktyg/requests.py shows the args property calling parse_qsl with encoding and errors parameters.",
+      "evidence_ids": [
+        "source:1"
+      ],
+      "material": true,
+      "confidence": null,
+      "uncertainty": null,
+      "asserts_execution": false
+    }
+  ],
+  "service_ranked": [],
+  "fault_class": null,
+  "predicted_files": [],
+  "predicted_function": null,
+  "predicted_line": null,
+  "predicted_mechanism": null,
+  "mechanism_evidence_ids": [],
+  "l1_causal_status": "NOT_ASSESSED",
+  "l2_causal_status": "NOT_ESTABLISHED",
+  "abstention": {
+    "scope": "APPLICATION_SOURCE",
+    "reason": "The evidence does not establish an application-source cause.",
+    "missing_evidence": [
+      "application stack trace"
+    ],
+    "source_not_established": false,
+    "application_source_not_established": true
+  },
+  "patch": null,
+  "test_executions": [],
+  "claimed_source_revision": null
+}

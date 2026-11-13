@@ -1,0 +1,10 @@
+{
+  "anomaly": 1.0,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "",
+  "service": "rabbitmq-exporter",
+  "summary": "The telemetry data provided consists entirely of uniform metric values (all 1.0) and a sequential list of timestamps with no variation, missing error counts, latency spikes, or queue depth anomalies. Without any deviation from the baseline in the metrics table or logs, it is impossible to identify a specific faulty service or fault class. The source cause is NOT_ESTABLISHED due to the absence of distinguishing telemetry evidence."
+}

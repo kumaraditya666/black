@@ -1,0 +1,134 @@
+{
+  "approval_hash": "9df50d7d187c934f4b9c03c5aaa0ed1208a2740932ce017b785fc845b4db8b02",
+  "approved": true,
+  "benchmark_result": false,
+  "case_id": "BDB5-T1",
+  "isolation": "model server in ollama/ollama container with read-only model-cache mount and no workspace; prompt client in separate python:3.12.12-slim container",
+  "mode": "REAL_CASE_SCORED",
+  "model_result": {
+    "confidence": "HIGH",
+    "evidence_ids": [
+      "log:1",
+      "metric:1"
+    ],
+    "fault_class": "F1",
+    "l2_reason": "The 'carts' service shows the largest relative error increase (+8.0) and is upstream of the failing 'orders' requests. The logs show generic IO errors downstream in 'orders', but the root cause lies in the 'carts' service metrics spiking while CPU/Mem remain stable, suggesting a logic or parameter handling fault within carts rather than resource exhaustion.",
+    "missing_evidence": [],
+    "rationale": "The metric deltas indicate 'carts_error' rose from 0.36 to 3.25 (relative +8.0), the largest relative upstream error change, while 'orders_error' rose only slightly (+0.65). The guidance explicitly states not to choose queue-master and notes that front-end errors are downstream. Since carts is upstream of orders and shows the highest error delta, it is the faulty service. The fault class F1 (incorrect parameter values) is selected because generic exceptions in logs often mask underlying parameter mismatches or validation failures in the upstream service, whereas F3 requires explicit evidence of a missing function call which is not present here.",
+    "service": "carts"
+  },
+  "notes": [
+    "T1 result from the isolated model-server replay.",
+    "The packet remains the approved bounded-projection context; the full-packet limitation is separate."
+  ],
+  "prepared_payload_hash": "04315a28de6ebd6eba056aabaf5c1eddf68d64892017f2d1382baa6443698086",
+  "provider_calls": 1,
+  "score": {
+    "case_id": "BDB5-T1",
+    "citations": {
+      "cited": [
+        "metric:1",
+        "log:1"
+      ],
+      "coverage": 1.0,
+      "fabricated_rate": 0.0,
+      "invalid": [],
+      "required_evidence_types": [
+        "TELEMETRY_LOG",
+        "TELEMETRY_METRIC"
+      ],
+      "valid": [
+        "metric:1",
+        "log:1"
+      ],
+      "valid_evidence_types": [
+        "TELEMETRY_LOG",
+        "TELEMETRY_METRIC"
+      ],
+      "validity": 1.0
+    },
+    "dimension_explanations": {
+      "app_abstention": "value=None",
+      "app_causal_status": "value=None",
+      "app_source_claim": "value=0.0",
+      "causal_status": "value=1.0; expected='NOT_ESTABLISHED'",
+      "citation_coverage": "value=1.0",
+      "citation_validity": "value=1.0",
+      "execution_overclaims": "value=0",
+      "fabricated_citations": "value=0.0",
+      "fail_to_pass": "value=None",
+      "false_abstention": "value=0.0",
+      "fault_accuracy": "value=1.0; expected='F1'",
+      "file_exactness": "value=None; expected=()",
+      "function_exactness": "value=None; expected=None",
+      "harness_claim": "value=0.0",
+      "harness_identification": "value=None",
+      "l1_causal_status": "value=1.0; expected='SUPPORTED'",
+      "l2_abstention": "value=1.0",
+      "l2_causal_status": "value=1.0; expected='NOT_ESTABLISHED'",
+      "line_exactness": "value=None; expected=None",
+      "mechanism": "value=None",
+      "pass_to_pass": "value=None",
+      "patch_applies": "value=None",
+      "patch_scope": "value=None",
+      "regression_safety": "value=None",
+      "reproduction_after": "value=None",
+      "reproduction_before": "value=None",
+      "service_top1": "value=1.0; expected='carts'",
+      "service_top3": "value=1.0",
+      "unsupported_claim_rate": "value=0.0"
+    },
+    "dimensions": {
+      "app_abstention": null,
+      "app_causal_status": null,
+      "app_source_claim": 0.0,
+      "causal_status": 1.0,
+      "citation_coverage": 1.0,
+      "citation_validity": 1.0,
+      "execution_overclaims": 0,
+      "fabricated_citations": 0.0,
+      "fail_to_pass": null,
+      "false_abstention": 0.0,
+      "fault_accuracy": 1.0,
+      "file_exactness": null,
+      "function_exactness": null,
+      "harness_claim": 0.0,
+      "harness_identification": null,
+      "l1_causal_status": 1.0,
+      "l2_abstention": 1.0,
+      "l2_causal_status": 1.0,
+      "line_exactness": null,
+      "mechanism": null,
+      "pass_to_pass": null,
+      "patch_applies": null,
+      "patch_scope": null,
+      "regression_safety": null,
+      "reproduction_after": null,
+      "reproduction_before": null,
+      "service_top1": 1.0,
+      "service_top3": 1.0,
+      "unsupported_claim_rate": 0.0
+    },
+    "failures": [],
+    "mode": "REAL_CASE_EVALUATION",
+    "required_dimensions": [
+      "service_top1",
+      "service_top3",
+      "fault_accuracy",
+      "citation_validity",
+      "citation_coverage",
+      "l1_causal_status",
+      "l2_causal_status",
+      "l2_abstention",
+      "unsupported_claim_rate"
+    ],
+    "result_class": "REAL_CASE_SCORE_NOT_BENCHMARK_RESULT",
+    "result_hash": "87fd202515e1db8133067b7613fca3d778e0ed73d8ac6bb82a9eb08b89050ec7",
+    "scenario": null,
+    "strict_pass": true,
+    "synthetic": false,
+    "validation_issues": []
+  },
+  "scored": true,
+  "status": "REAL_CASE_SCORED"
+}

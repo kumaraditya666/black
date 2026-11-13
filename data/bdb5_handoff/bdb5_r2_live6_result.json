@@ -1,0 +1,44 @@
+{
+  "case_id": "BDB5-R2",
+  "claims": [
+    {
+      "category": "OBSERVATION",
+      "text": "CI job 'marshallward-f90nml-83523531' failed with error in test 'test_dict_write'. The failure is an IOError: No such file or directory for 'types_dict.nml'.",
+      "evidence_ids": [],
+      "material": true,
+      "confidence": null,
+      "uncertainty": null,
+      "asserts_execution": false
+    },
+    {
+      "category": "HARNESS_CAUSE",
+      "text": "The evidence indicates a missing file 'types_dict.nml' during the test run. This suggests a fixture, setup, or environment issue (harness) rather than an application logic error, as the application code likely expects this file to exist but it is absent.",
+      "evidence_ids": [],
+      "material": true,
+      "confidence": null,
+      "uncertainty": null,
+      "asserts_execution": false
+    }
+  ],
+  "service_ranked": [],
+  "fault_class": null,
+  "predicted_files": [],
+  "predicted_function": null,
+  "predicted_line": null,
+  "predicted_mechanism": null,
+  "mechanism_evidence_ids": [],
+  "l1_causal_status": "NOT_ASSESSED",
+  "l2_causal_status": "NOT_ESTABLISHED",
+  "abstention": {
+    "scope": "APPLICATION_SOURCE",
+    "reason": "The evidence does not establish an application-source cause.",
+    "missing_evidence": [
+      "application stack trace"
+    ],
+    "source_not_established": false,
+    "application_source_not_established": true
+  },
+  "patch": null,
+  "test_executions": [],
+  "claimed_source_revision": null
+}

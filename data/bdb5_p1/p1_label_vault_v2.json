@@ -1,0 +1,64 @@
+{
+  "cases": {
+    "BDB5-P1": {
+      "rationale": "The upstream issue reports that Symbol instances gained a __dict__ after the parent mixin stopped declaring __slots__. The repair is scoped to sympy/core/_print_helpers.py. Correctness is test-verified only; the case does not establish L4 historical causation.",
+      "references": [
+        "https://github.com/sympy/sympy/issues/20567",
+        "https://github.com/sympy/sympy/pull/20590",
+        "SWE-bench Verified dataset revision 78f471bf655a3137b2e8a75af1501690ec009ec3"
+      ],
+      "truth": {
+        "case_id": "BDB5-P1",
+        "causal_level": "NA",
+        "expected_abstention": false,
+        "expected_files": [
+          "sympy/core/_print_helpers.py"
+        ],
+        "expected_l1_status": "NOT_ASSESSED",
+        "expected_l2_status": "NOT_ASSESSED",
+        "expected_patch": {
+          "allowed_files": [
+            "sympy/core/_print_helpers.py"
+          ],
+          "fail_to_pass": [
+            "test_immutable"
+          ],
+          "pass_to_pass": [
+            "test__aresame",
+            "test_structure",
+            "test_equality",
+            "test_matches_basic",
+            "test_has",
+            "test_subs",
+            "test_subs_with_unicode_symbols",
+            "test_atoms",
+            "test_free_symbols_empty",
+            "test_doit",
+            "test_S",
+            "test_xreplace",
+            "test_preorder_traversal",
+            "test_sorted_args",
+            "test_call",
+            "test_rewrite",
+            "test_literal_evalf_is_number_is_zero_is_comparable",
+            "test_as_Basic",
+            "test_atomic",
+            "test_as_dummy",
+            "test_canonical_variables"
+          ],
+          "require_regression": true,
+          "require_reproduction_after": true,
+          "require_reproduction_before": true
+        },
+        "forbidden_public_literals": [
+          "test_immutable",
+          "gold_patch",
+          "test_patch",
+          "FAIL_TO_PASS",
+          "PASS_TO_PASS"
+        ]
+      }
+    }
+  },
+  "schema_version": "bdb5-label-vault-v1"
+}

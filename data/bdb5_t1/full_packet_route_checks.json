@@ -1,0 +1,31 @@
+{
+  "verdict": "NO_ACTIVE_FREE_ROUTE_FITS",
+  "required_min_context": 1621290,
+  "free_models_at_or_above_required_context": 0,
+  "checks": [
+    {
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "context_limit": 1048576,
+      "result": "HTTP 400",
+      "detail": "1,615,146 prompt tokens exceed 1,048,576"
+    },
+    {
+      "model": "x-ai/grok-4-fast:free",
+      "context_limit_listed": 2000000,
+      "result": "HTTP 404",
+      "detail": "Grok 4 Fast is deprecated; endpoint list empty"
+    },
+    {
+      "model": "x-ai/grok-4.20",
+      "context_limit": 2000000,
+      "result": "HTTP 403",
+      "detail": "key limit $0.00/$0.00; paid endpoint: $1.25/M <=200k, $2.50/M >200k"
+    },
+    {
+      "model": "x-ai/grok-4.20-multi-agent",
+      "context_limit": 2000000,
+      "result": "HTTP 403",
+      "detail": "key limit $0.00/$0.00; paid endpoint"
+    }
+  ]
+}

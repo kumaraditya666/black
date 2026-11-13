@@ -1,0 +1,30 @@
+# Milestone 4B paired evaluation
+
+**Result: no measured improvement; retrieval was never exercised by the live model.** This is an unblinded four-case feasibility pilot, not an independently reviewed reliability benchmark. Protocol and stopping rule were recorded in [45](45_M4B_AGENT_RETRIEVAL_DESIGN.md) before live calls. Fixture author and scorer were the same person/agent; no blinded independent reviewer or matched extra-reasoning control was available. Four cases are below the proposed 18-case target. No conclusion about efficacy of actual retrieval follows from a model that always chose `finish`.
+
+## Method and integrity
+
+New fixtures, source, tests, registry, hashes and label file were frozen before model calls at Git commit `6117eda7e74f0a27677483555add08f435b7f850` (`refs/blackbox/m4b-freeze`). [Registry](../fixtures/repair/m4b-registry.json) and [labels](../fixtures/repair/m4b-ground-truth.json) are reproducible but not independently authored. The two positive test nodes failed with the recorded exception in pinned Docker; `m4b_origin` exercises and catches the invalid conversion, while `m4b_negative` is an intentionally false report with a passing test. The latter two reported incidents are synthetic; a fixture test is not historical telemetry. The audit and full model/trace records are in [data/m4b-fixture-audit.json](../data/m4b-fixture-audit.json) and [data/m4b-paired-results.json](../data/m4b-paired-results.json). Each arm used the same snapshot, event, commit, `qwen3.5:4b`, 2,048 context and final Findings schema. Orders alternated A/B then B/A; the first two cases were repeated in reversed order. A's existing reference retry was permitted; none was needed. B had one additional decision call in every run. Both conditions were run on one local machine, not independently replicated.
+
+## Primary results
+
+| Case / expected | A fixed | B retrieval | Scoring and qualification |
+|---|---|---|---|
+| `m4b_inventory`: missing required key where registered spec says default | Insufficient | Insufficient | 0/2 arms identified a diagnosable default defect; both unnecessary abstentions under the authored spec. The spec was not supplied as runtime evidence, so the model's caution about the upstream contract is understandable. |
+| `m4b_average`: `len(values)-1` yields zero for one element | Likely cause | Likely cause | Both correctly identified the immediate zero-denominator mechanism and length-one condition; neither explicitly explained the intended mean contract or independently proved the input value from telemetry. |
+| `m4b_origin`: bad integer conversion; origin not captured | Insufficient | Insufficient | Appropriate upstream abstention in both; no explicit primary immediate-mechanism hypothesis. |
+| `m4b_negative`: report not supported by fixed source | Insufficient | Insufficient | Appropriate abstention in both; passing fixture scenario does not disprove a historical report. |
+
+There were **0 improvements, 0 regressions, 0 new false-certainty outcomes** across four primary paired cases. Under the simple case rubric, both scored one immediate mechanism out of two actionable cases, and both abstained on the two ambiguity/negative controls; those denominators are too small for reliable accuracy estimates. The two repeated cases reproduced the same outcome and same final text in both arms; repeats are not independent cases. All 12 final responses were valid under the existing validator; none is proof of semantic correctness. No unsupported causal primary claim was identified beyond the qualified lack of recorded runtime input discussed above. No tool schema failures or timeouts occurred in these 12 runs.
+
+All six experimental decision calls selected `finish`; **0/6 requested an actual lookup**, 0 relevant/irrelevant source reads, and retrieval precision/recall are undefined—not 100% or 0% accuracy. In particular, the tool-decision prompt did not enumerate tool semantics in natural language, although the constrained schema named them. This is a plausible interface failure, not proof of inherent model incapacity. Do not alter this iteration's prompt based on these results. A new, separately preregistered tool-feasibility study would be needed to test that explanation.
+
+## Cost and timing
+
+Primary A: 3,929 input and 1,523 output tokens over four final calls; B: 6,047 input and 1,641 output tokens including four decision calls and four final calls. Primary end-to-end mean wall time A 8,930 ms, B 8,611 ms; the first A included a roughly 5.7-second cold model load, so this small order-sensitive sample cannot establish a speed advantage. Per-case milliseconds and exact usage are in the JSON artifact. No monetary cost is inferred for the local model. Output returned no invalid request in this particular live run; deterministic negative tests exercise rejection.
+
+## One approved proof of fix, separate from diagnosis
+
+After the paired evaluation, a fixture-level evaluation approval was recorded for the `m4b_average` B hypothesis, evidence hash and exact fixture; it was not a human production review. Existing eligibility and pinned source/hash checks accepted it. The original Docker reproduction returned **1**, the genuine Qwen-generated patch changed `sum(values) / (len(values) - 1)` to `sum(values) / len(values)`, the same reproduction returned **0**, and the registered regression returned **0**. Status: `VERIFIED_IN_TEST_ENVIRONMENT`, 13,499 ms total; full evidence [data/m4b-proof.json](../data/m4b-proof.json). The fixture worktree hashes still matched their frozen registry after the attempt, and `docker ps -a` showed no containers; no pending cleanup journal was present. This single, narrow test result does not establish a correct diagnosis, behavior on empty input, or production readiness.
+
+The predeclared gate requires at least two paired improvements as well as independent review and complete safety checks; it **does not pass**. We cannot claim retrieval helped or harmed accuracy, because it was not used.

@@ -1,0 +1,115 @@
+{
+  "revision": "b96840fef85585904c9348e213dbbec9c0ca521a",
+  "fixture_checks": [
+    {
+      "fixture": "division_by_zero",
+      "pinned": [
+        true,
+        "all fixture files match their pinned content hashes"
+      ],
+      "reproduction": {
+        "returncode": 1,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_______________________ test_average_rejects_empty_input _______________________\n\n    def test_average_rejects_empty_input():\n        with pytest.raises(ValueError, match='empty'):\n>           average([])\n\ntests/test_reproduction.py:8: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nvalues = []\n\n    def average(values):\n>       return sum(values) / len(values)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^\nE       ZeroDivisionError: division by zero\n\napp.py:5: ZeroDivisionError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_average_rejects_empty_input - ZeroDiv...\n1 failed in 0.18s\n"
+      },
+      "regression": {
+        "returncode": 1,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": "..F                                                                      [100%]\n=================================== FAILURES ===================================\n_______________________ test_average_still_rejects_empty _______________________\n\n    def test_average_still_rejects_empty():\n        with pytest.raises(ValueError):\n>           average([])\n\ntests/test_regression.py:16: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nvalues = []\n\n    def average(values):\n>       return sum(values) / len(values)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^\nE       ZeroDivisionError: division by zero\n\napp.py:5: ZeroDivisionError\n=========================== short test summary info ============================\nFAILED tests/test_regression.py::test_average_still_rejects_empty - ZeroDivis...\n1 failed, 2 passed in 0.06s\n"
+      }
+    },
+    {
+      "fixture": "argument_validation",
+      "pinned": [
+        true,
+        "all fixture files match their pinned content hashes"
+      ],
+      "reproduction": {
+        "returncode": 1,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n__________________ test_none_is_rejected_as_invalid_argument ___________________\n\n    def test_none_is_rejected_as_invalid_argument():\n        with pytest.raises(ValueError):\n>           parse_port(None)\n\ntests/test_reproduction.py:8: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nvalue = None\n\n    def parse_port(value):\n        try:\n>           return int(value)\n                   ^^^^^^^^^^\nE           TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'\n\napp.py:6: TypeError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_none_is_rejected_as_invalid_argument\n1 failed in 0.06s\n"
+      },
+      "regression": {
+        "returncode": 1,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": "..F                                                                      [100%]\n=================================== FAILURES ===================================\n____________________________ test_none_is_rejected _____________________________\n\n    def test_none_is_rejected():\n        with pytest.raises(ValueError):\n>           parse_port(None)\n\ntests/test_regression.py:17: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nvalue = None\n\n    def parse_port(value):\n        try:\n>           return int(value)\n                   ^^^^^^^^^^\nE           TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'\n\napp.py:6: TypeError\n=========================== short test summary info ============================\nFAILED tests/test_regression.py::test_none_is_rejected - TypeError: int() arg...\n1 failed, 2 passed in 0.06s\n"
+      }
+    },
+    {
+      "fixture": "off_by_one",
+      "pinned": [
+        true,
+        "all fixture files match their pinned content hashes"
+      ],
+      "reproduction": {
+        "returncode": 1,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_____________________ test_absent_target_returns_minus_one _____________________\n\n    def test_absent_target_returns_minus_one():\n>       assert find_index([1, 2, 3], 4) == -1\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_reproduction.py:5: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nitems = [1, 2, 3], target = 4\n\n    def find_index(items, target):\n        for index in range(len(items) + 1):\n>           if items[index] == target:\n               ^^^^^^^^^^^^\nE           IndexError: list index out of range\n\napp.py:6: IndexError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_absent_target_returns_minus_one - Ind...\n1 failed in 0.06s\n"
+      },
+      "regression": {
+        "returncode": 1,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": "..F                                                                      [100%]\n=================================== FAILURES ===================================\n_________________________ test_empty_list_has_no_match _________________________\n\n    def test_empty_list_has_no_match():\n>       assert find_index([], 1) == -1\n               ^^^^^^^^^^^^^^^^^\n\ntests/test_regression.py:13: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nitems = [], target = 1\n\n    def find_index(items, target):\n        for index in range(len(items) + 1):\n>           if items[index] == target:\n               ^^^^^^^^^^^^\nE           IndexError: list index out of range\n\napp.py:6: IndexError\n=========================== short test summary info ============================\nFAILED tests/test_regression.py::test_empty_list_has_no_match - IndexError: l...\n1 failed, 2 passed in 0.07s\n"
+      }
+    },
+    {
+      "fixture": "missing_config",
+      "pinned": [
+        true,
+        "all fixture files match their pinned content hashes"
+      ],
+      "reproduction": {
+        "returncode": 1,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n______________________ test_missing_timeout_uses_default _______________________\n\n    def test_missing_timeout_uses_default():\n>       assert request_timeout({}) == 30\n               ^^^^^^^^^^^^^^^^^^^\n\ntests/test_reproduction.py:5: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nconfig = {}\n\n    def request_timeout(config):\n>       return config['timeout']\n               ^^^^^^^^^^^^^^^^^\nE       KeyError: 'timeout'\n\napp.py:5: KeyError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_missing_timeout_uses_default - KeyErr...\n1 failed in 0.06s\n"
+      },
+      "regression": {
+        "returncode": 0,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": "..                                                                       [100%]\n2 passed in 0.05s\n"
+      }
+    },
+    {
+      "fixture": "unreproducible",
+      "pinned": [
+        true,
+        "all fixture files match their pinned content hashes"
+      ],
+      "reproduction": {
+        "returncode": 0,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": ".                                                                        [100%]\n1 passed in 0.04s\n"
+      },
+      "regression": {
+        "returncode": 0,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": ".                                                                        [100%]\n1 passed in 0.06s\n"
+      }
+    }
+  ],
+  "probe": {
+    "rc": 0,
+    "stdout": "{\"uid\": 65534, \"gid\": 65534, \"status\": [\"CapEff:\\t0000000000000000\", \"NoNewPrivs:\\t1\", \"Seccomp:\\t2\"], \"host_canary_present\": false, \"docker_socket_present\": false, \"root_write\": \"OSError:30\", \"tmp_write\": \"allowed\", \"external_connection\": \"OSError:101\", \"memory.max\": \"268435456\", \"pids.max\": \"64\", \"cpu.max\": \"50000 100000\"}\n",
+    "stderr": ""
+  }
+}

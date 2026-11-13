@@ -1,0 +1,4768 @@
+{
+  "revision": "6117eda7e74f0a27677483555add08f435b7f850",
+  "model": "qwen3.5:4b",
+  "rows": [
+    {
+      "case": "m4b_inventory",
+      "arm": "A",
+      "repeat": false,
+      "run": {
+        "investigation": {
+          "id": "052f1f2b-b4c6-422d-9b42-ef30bdf688df",
+          "incident_id": 1,
+          "provider": "ollama",
+          "model": "qwen3.5:4b",
+          "evidence_hash": "270ddcb160768095d07ccae8cd4f4236865d52964a0707ace8be925950e6487c",
+          "status": "completed",
+          "created_at": "2026-11-05T18:29:19.220628+00:00",
+          "updated_at": "2026-11-05T18:29:32.174752+00:00",
+          "evidence": {
+            "evidence": [
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "event_id": "20c7428d-d958-47e2-8409-69433a2f7dbb",
+                "exception_type": "KeyError",
+                "id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                "message": "'limit'",
+                "occurred_at": "2026-11-05T18:29:18.566284Z",
+                "type": "event"
+              },
+              {
+                "count": 1,
+                "event_ids": [
+                  "20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "event_ids_truncated": false,
+                "id": "occurrences",
+                "type": "occurrences"
+              },
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "context": [
+                  {
+                    "line": 1,
+                    "text": "def limit(config):"
+                  },
+                  {
+                    "line": 2,
+                    "text": "    return config[\"limit\"]"
+                  }
+                ],
+                "function": "limit",
+                "id": "frame:0",
+                "line": 2,
+                "path": "fixtures/repair/m4b_inventory/limits.py",
+                "source_line": "    return config[\"limit\"]",
+                "status": "resolved",
+                "type": "stack_frame"
+              },
+              {
+                "call_line": 4,
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "end_line": 4,
+                "function": "select",
+                "id": "code:0",
+                "line": 3,
+                "notice": "Static relationship; execution and binding are unverified.",
+                "path": "fixtures/repair/m4b_inventory/app.py",
+                "relation": "caller",
+                "source": "def select(items, config):\n    return items[:limit(config)]",
+                "type": "code_context"
+              },
+              {
+                "id": "missing_evidence",
+                "items": [
+                  "Deployment information was not captured by the event schema.",
+                  "Static caller matches are incomplete and do not prove execution."
+                ],
+                "type": "missing_evidence"
+              }
+            ],
+            "incident_id": 1,
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution."
+            ],
+            "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+          },
+          "findings": {
+            "outcome": "INSUFFICIENT_EVIDENCE",
+            "observed_failure": {
+              "text": "KeyError: 'limit'",
+              "evidence_ids": [
+                "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+              ]
+            },
+            "observed_facts": [],
+            "hypotheses": [],
+            "alternatives": [],
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution."
+            ],
+            "verification_steps": [
+              "Capture deployment configuration at runtime to verify config['limit'] existence.",
+              "Observe actual execution of select(items, config) rather than static code relationships.",
+              "Check if 'limit' key is missing from the passed config object during runtime."
+            ],
+            "atomic_claims": [
+              {
+                "category": "stack_order",
+                "value": "limit@fixtures/repair/m4b_inventory/limits.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "exception_type",
+                "value": "KeyError",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "exception_message",
+                "value": "'limit'",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "commit",
+                "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "frame_order",
+                "value": "position 1 of 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_function",
+                "value": "limit",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Function name and order are reported by the client.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_location",
+                "value": "fixtures/repair/m4b_inventory/limits.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Reported stack location; source resolution is separate.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "source_statement",
+                "value": "    return config[\"limit\"]",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Line read from the recorded Git revision; does not prove execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              }
+            ],
+            "reasoning_levels": {
+              "observed_failure": {
+                "status": "RECORDED",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "exception_type": "KeyError",
+                "notice": "Client-reported; runtime execution is not verified."
+              },
+              "immediate_mechanism": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+              },
+              "upstream_root_cause": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "A model hypothesis and citations do not independently verify upstream causation."
+              },
+              "claims": [
+                {
+                  "category": "EXCEPTION_TYPE",
+                  "value": "KeyError",
+                  "supporting_evidence_ids": [
+                    "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Client report does not establish execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_REVISION",
+                  "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                  "supporting_evidence_ids": [
+                    "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Revision existence does not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "RECORDED_STACK_FRAME",
+                  "value": "limit",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_inventory/limits.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Frame was supplied by the event; execution is not independently established."
+                  ]
+                },
+                {
+                  "category": "SOURCE_LINE",
+                  "value": "    return config[\"limit\"]",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_inventory/limits.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_EXCERPT",
+                  "value": "def select(items, config):\n    return items[:limit(config)]",
+                  "supporting_evidence_ids": [
+                    "code:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_inventory/app.py",
+                      "line": 3,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                }
+              ]
+            },
+            "hypothesis_review": {
+              "steps": [
+                "inspect_recorded_evidence",
+                "check_pinned_source_identity"
+              ],
+              "hypotheses": [],
+              "omitted_hypotheses": 0,
+              "missing_evidence": [
+                "Deployment information was not captured by the event schema.",
+                "Static caller matches are incomplete and do not prove execution."
+              ],
+              "proposed_verification_experiments": [
+                "Capture deployment configuration at runtime to verify config['limit'] existence.",
+                "Observe actual execution of select(items, config) rather than static code relationships.",
+                "Check if 'limit' key is missing from the passed config object during runtime."
+              ],
+              "notice": "Suggestions are untrusted text; no commands are executed."
+            },
+            "reference_retry": {
+              "attempted": false,
+              "reason": null
+            },
+            "diagnosis_source": "MODEL",
+            "model_response_valid": true,
+            "dropped_observation_count": 0
+          },
+          "error": null,
+          "latency_ms": 12950,
+          "usage": {
+            "input_tokens": 1057,
+            "output_tokens": 339,
+            "load_duration_ns": 5684842800,
+            "eval_duration_ns": 6295636000,
+            "estimated_cost": null
+          },
+          "outcome": "INSUFFICIENT_EVIDENCE"
+        },
+        "status": "completed",
+        "wall_ms": 12959
+      }
+    },
+    {
+      "case": "m4b_inventory",
+      "arm": "B",
+      "repeat": false,
+      "run": {
+        "status": "COMPLETED",
+        "investigation": {
+          "id": "d03c4b69-523c-4226-8972-0fb5d20f61ef",
+          "incident_id": 1,
+          "provider": "ollama",
+          "model": "qwen3.5:4b",
+          "evidence_hash": "270ddcb160768095d07ccae8cd4f4236865d52964a0707ace8be925950e6487c",
+          "status": "completed",
+          "created_at": "2026-11-05T18:29:33.625400+00:00",
+          "updated_at": "2026-11-05T18:29:40.514341+00:00",
+          "evidence": {
+            "evidence": [
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "event_id": "20c7428d-d958-47e2-8409-69433a2f7dbb",
+                "exception_type": "KeyError",
+                "id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                "message": "'limit'",
+                "occurred_at": "2026-11-05T18:29:18.566284Z",
+                "type": "event"
+              },
+              {
+                "count": 1,
+                "event_ids": [
+                  "20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "event_ids_truncated": false,
+                "id": "occurrences",
+                "type": "occurrences"
+              },
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "context": [
+                  {
+                    "line": 1,
+                    "text": "def limit(config):"
+                  },
+                  {
+                    "line": 2,
+                    "text": "    return config[\"limit\"]"
+                  }
+                ],
+                "function": "limit",
+                "id": "frame:0",
+                "line": 2,
+                "path": "fixtures/repair/m4b_inventory/limits.py",
+                "source_line": "    return config[\"limit\"]",
+                "status": "resolved",
+                "type": "stack_frame"
+              },
+              {
+                "call_line": 4,
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "end_line": 4,
+                "function": "select",
+                "id": "code:0",
+                "line": 3,
+                "notice": "Static relationship; execution and binding are unverified.",
+                "path": "fixtures/repair/m4b_inventory/app.py",
+                "relation": "caller",
+                "source": "def select(items, config):\n    return items[:limit(config)]",
+                "type": "code_context"
+              },
+              {
+                "id": "missing_evidence",
+                "items": [
+                  "Deployment information was not captured by the event schema.",
+                  "Static caller matches are incomplete and do not prove execution."
+                ],
+                "type": "missing_evidence"
+              }
+            ],
+            "incident_id": 1,
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution."
+            ],
+            "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+          },
+          "findings": {
+            "outcome": "INSUFFICIENT_EVIDENCE",
+            "observed_failure": {
+              "text": "KeyError: 'limit'",
+              "evidence_ids": [
+                "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+              ]
+            },
+            "observed_facts": [],
+            "hypotheses": [],
+            "alternatives": [],
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution."
+            ],
+            "verification_steps": [
+              "Capture deployment configuration at runtime to verify config['limit'] existence.",
+              "Observe actual execution of select(items, config) rather than static code relationships.",
+              "Check if 'limit' key is missing from the passed config object during runtime."
+            ],
+            "atomic_claims": [
+              {
+                "category": "stack_order",
+                "value": "limit@fixtures/repair/m4b_inventory/limits.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "exception_type",
+                "value": "KeyError",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "exception_message",
+                "value": "'limit'",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "commit",
+                "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "frame_order",
+                "value": "position 1 of 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_function",
+                "value": "limit",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Function name and order are reported by the client.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_location",
+                "value": "fixtures/repair/m4b_inventory/limits.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Reported stack location; source resolution is separate.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "source_statement",
+                "value": "    return config[\"limit\"]",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Line read from the recorded Git revision; does not prove execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              }
+            ],
+            "reasoning_levels": {
+              "observed_failure": {
+                "status": "RECORDED",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "exception_type": "KeyError",
+                "notice": "Client-reported; runtime execution is not verified."
+              },
+              "immediate_mechanism": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+              },
+              "upstream_root_cause": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "A model hypothesis and citations do not independently verify upstream causation."
+              },
+              "claims": [
+                {
+                  "category": "EXCEPTION_TYPE",
+                  "value": "KeyError",
+                  "supporting_evidence_ids": [
+                    "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Client report does not establish execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_REVISION",
+                  "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                  "supporting_evidence_ids": [
+                    "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Revision existence does not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "RECORDED_STACK_FRAME",
+                  "value": "limit",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_inventory/limits.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Frame was supplied by the event; execution is not independently established."
+                  ]
+                },
+                {
+                  "category": "SOURCE_LINE",
+                  "value": "    return config[\"limit\"]",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_inventory/limits.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_EXCERPT",
+                  "value": "def select(items, config):\n    return items[:limit(config)]",
+                  "supporting_evidence_ids": [
+                    "code:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_inventory/app.py",
+                      "line": 3,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                }
+              ]
+            },
+            "hypothesis_review": {
+              "steps": [
+                "inspect_recorded_evidence",
+                "check_pinned_source_identity"
+              ],
+              "hypotheses": [],
+              "omitted_hypotheses": 0,
+              "missing_evidence": [
+                "Deployment information was not captured by the event schema.",
+                "Static caller matches are incomplete and do not prove execution."
+              ],
+              "proposed_verification_experiments": [
+                "Capture deployment configuration at runtime to verify config['limit'] existence.",
+                "Observe actual execution of select(items, config) rather than static code relationships.",
+                "Check if 'limit' key is missing from the passed config object during runtime."
+              ],
+              "notice": "Suggestions are untrusted text; no commands are executed."
+            },
+            "reference_retry": {
+              "attempted": false,
+              "reason": null
+            },
+            "diagnosis_source": "MODEL",
+            "model_response_valid": true,
+            "dropped_observation_count": 0
+          },
+          "error": null,
+          "latency_ms": 6885,
+          "usage": {
+            "input_tokens": 1057,
+            "output_tokens": 339,
+            "load_duration_ns": 3100300,
+            "eval_duration_ns": 6328839000,
+            "estimated_cost": null
+          },
+          "outcome": "INSUFFICIENT_EVIDENCE"
+        },
+        "trace": [
+          {
+            "request_number": 1,
+            "request": {
+              "action": "finish",
+              "reason": "No permitted observations or fixes available. The provided snapshot contains unverified static code relationships and missing deployment evidence, which prevents inferring the root"
+            },
+            "status": "FINISH"
+          }
+        ],
+        "decision_usage": [
+          {
+            "input_tokens": 605,
+            "output_tokens": 38,
+            "load_duration_ns": 11869200,
+            "eval_duration_ns": 922271000,
+            "estimated_cost": null
+          }
+        ],
+        "wall_ms": 8341
+      }
+    },
+    {
+      "case": "m4b_inventory",
+      "arm": "B",
+      "repeat": true,
+      "run": {
+        "status": "COMPLETED",
+        "investigation": {
+          "id": "32f9b1bc-99bb-4a3e-8107-67a624ce7922",
+          "incident_id": 1,
+          "provider": "ollama",
+          "model": "qwen3.5:4b",
+          "evidence_hash": "270ddcb160768095d07ccae8cd4f4236865d52964a0707ace8be925950e6487c",
+          "status": "completed",
+          "created_at": "2026-11-05T18:29:41.795041+00:00",
+          "updated_at": "2026-11-05T18:29:48.665370+00:00",
+          "evidence": {
+            "evidence": [
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "event_id": "20c7428d-d958-47e2-8409-69433a2f7dbb",
+                "exception_type": "KeyError",
+                "id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                "message": "'limit'",
+                "occurred_at": "2026-11-05T18:29:18.566284Z",
+                "type": "event"
+              },
+              {
+                "count": 1,
+                "event_ids": [
+                  "20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "event_ids_truncated": false,
+                "id": "occurrences",
+                "type": "occurrences"
+              },
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "context": [
+                  {
+                    "line": 1,
+                    "text": "def limit(config):"
+                  },
+                  {
+                    "line": 2,
+                    "text": "    return config[\"limit\"]"
+                  }
+                ],
+                "function": "limit",
+                "id": "frame:0",
+                "line": 2,
+                "path": "fixtures/repair/m4b_inventory/limits.py",
+                "source_line": "    return config[\"limit\"]",
+                "status": "resolved",
+                "type": "stack_frame"
+              },
+              {
+                "call_line": 4,
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "end_line": 4,
+                "function": "select",
+                "id": "code:0",
+                "line": 3,
+                "notice": "Static relationship; execution and binding are unverified.",
+                "path": "fixtures/repair/m4b_inventory/app.py",
+                "relation": "caller",
+                "source": "def select(items, config):\n    return items[:limit(config)]",
+                "type": "code_context"
+              },
+              {
+                "id": "missing_evidence",
+                "items": [
+                  "Deployment information was not captured by the event schema.",
+                  "Static caller matches are incomplete and do not prove execution."
+                ],
+                "type": "missing_evidence"
+              }
+            ],
+            "incident_id": 1,
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution."
+            ],
+            "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+          },
+          "findings": {
+            "outcome": "INSUFFICIENT_EVIDENCE",
+            "observed_failure": {
+              "text": "KeyError: 'limit'",
+              "evidence_ids": [
+                "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+              ]
+            },
+            "observed_facts": [],
+            "hypotheses": [],
+            "alternatives": [],
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution."
+            ],
+            "verification_steps": [
+              "Capture deployment configuration at runtime to verify config['limit'] existence.",
+              "Observe actual execution of select(items, config) rather than static code relationships.",
+              "Check if 'limit' key is missing from the passed config object during runtime."
+            ],
+            "atomic_claims": [
+              {
+                "category": "stack_order",
+                "value": "limit@fixtures/repair/m4b_inventory/limits.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "exception_type",
+                "value": "KeyError",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "exception_message",
+                "value": "'limit'",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "commit",
+                "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "frame_order",
+                "value": "position 1 of 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_function",
+                "value": "limit",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Function name and order are reported by the client.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_location",
+                "value": "fixtures/repair/m4b_inventory/limits.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Reported stack location; source resolution is separate.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "source_statement",
+                "value": "    return config[\"limit\"]",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Line read from the recorded Git revision; does not prove execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              }
+            ],
+            "reasoning_levels": {
+              "observed_failure": {
+                "status": "RECORDED",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "exception_type": "KeyError",
+                "notice": "Client-reported; runtime execution is not verified."
+              },
+              "immediate_mechanism": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+              },
+              "upstream_root_cause": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "A model hypothesis and citations do not independently verify upstream causation."
+              },
+              "claims": [
+                {
+                  "category": "EXCEPTION_TYPE",
+                  "value": "KeyError",
+                  "supporting_evidence_ids": [
+                    "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Client report does not establish execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_REVISION",
+                  "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                  "supporting_evidence_ids": [
+                    "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Revision existence does not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "RECORDED_STACK_FRAME",
+                  "value": "limit",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_inventory/limits.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Frame was supplied by the event; execution is not independently established."
+                  ]
+                },
+                {
+                  "category": "SOURCE_LINE",
+                  "value": "    return config[\"limit\"]",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_inventory/limits.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_EXCERPT",
+                  "value": "def select(items, config):\n    return items[:limit(config)]",
+                  "supporting_evidence_ids": [
+                    "code:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_inventory/app.py",
+                      "line": 3,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                }
+              ]
+            },
+            "hypothesis_review": {
+              "steps": [
+                "inspect_recorded_evidence",
+                "check_pinned_source_identity"
+              ],
+              "hypotheses": [],
+              "omitted_hypotheses": 0,
+              "missing_evidence": [
+                "Deployment information was not captured by the event schema.",
+                "Static caller matches are incomplete and do not prove execution."
+              ],
+              "proposed_verification_experiments": [
+                "Capture deployment configuration at runtime to verify config['limit'] existence.",
+                "Observe actual execution of select(items, config) rather than static code relationships.",
+                "Check if 'limit' key is missing from the passed config object during runtime."
+              ],
+              "notice": "Suggestions are untrusted text; no commands are executed."
+            },
+            "reference_retry": {
+              "attempted": false,
+              "reason": null
+            },
+            "diagnosis_source": "MODEL",
+            "model_response_valid": true,
+            "dropped_observation_count": 0
+          },
+          "error": null,
+          "latency_ms": 6867,
+          "usage": {
+            "input_tokens": 1057,
+            "output_tokens": 339,
+            "load_duration_ns": 9451200,
+            "eval_duration_ns": 6318900000,
+            "estimated_cost": null
+          },
+          "outcome": "INSUFFICIENT_EVIDENCE"
+        },
+        "trace": [
+          {
+            "request_number": 1,
+            "request": {
+              "action": "finish",
+              "reason": "No permitted observations or fixes available. The provided snapshot contains unverified static code relationships and missing deployment evidence, which prevents inferring the root"
+            },
+            "status": "FINISH"
+          }
+        ],
+        "decision_usage": [
+          {
+            "input_tokens": 605,
+            "output_tokens": 38,
+            "load_duration_ns": 8070600,
+            "eval_duration_ns": 934486000,
+            "estimated_cost": null
+          }
+        ],
+        "wall_ms": 8147
+      }
+    },
+    {
+      "case": "m4b_inventory",
+      "arm": "A",
+      "repeat": true,
+      "run": {
+        "investigation": {
+          "id": "412b5b34-d893-4ef4-b4f0-ecf46fbab430",
+          "incident_id": 1,
+          "provider": "ollama",
+          "model": "qwen3.5:4b",
+          "evidence_hash": "270ddcb160768095d07ccae8cd4f4236865d52964a0707ace8be925950e6487c",
+          "status": "completed",
+          "created_at": "2026-11-05T18:29:48.670994+00:00",
+          "updated_at": "2026-11-05T18:29:55.355344+00:00",
+          "evidence": {
+            "evidence": [
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "event_id": "20c7428d-d958-47e2-8409-69433a2f7dbb",
+                "exception_type": "KeyError",
+                "id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                "message": "'limit'",
+                "occurred_at": "2026-11-05T18:29:18.566284Z",
+                "type": "event"
+              },
+              {
+                "count": 1,
+                "event_ids": [
+                  "20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "event_ids_truncated": false,
+                "id": "occurrences",
+                "type": "occurrences"
+              },
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "context": [
+                  {
+                    "line": 1,
+                    "text": "def limit(config):"
+                  },
+                  {
+                    "line": 2,
+                    "text": "    return config[\"limit\"]"
+                  }
+                ],
+                "function": "limit",
+                "id": "frame:0",
+                "line": 2,
+                "path": "fixtures/repair/m4b_inventory/limits.py",
+                "source_line": "    return config[\"limit\"]",
+                "status": "resolved",
+                "type": "stack_frame"
+              },
+              {
+                "call_line": 4,
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "end_line": 4,
+                "function": "select",
+                "id": "code:0",
+                "line": 3,
+                "notice": "Static relationship; execution and binding are unverified.",
+                "path": "fixtures/repair/m4b_inventory/app.py",
+                "relation": "caller",
+                "source": "def select(items, config):\n    return items[:limit(config)]",
+                "type": "code_context"
+              },
+              {
+                "id": "missing_evidence",
+                "items": [
+                  "Deployment information was not captured by the event schema.",
+                  "Static caller matches are incomplete and do not prove execution."
+                ],
+                "type": "missing_evidence"
+              }
+            ],
+            "incident_id": 1,
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution."
+            ],
+            "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+          },
+          "findings": {
+            "outcome": "INSUFFICIENT_EVIDENCE",
+            "observed_failure": {
+              "text": "KeyError: 'limit'",
+              "evidence_ids": [
+                "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+              ]
+            },
+            "observed_facts": [],
+            "hypotheses": [],
+            "alternatives": [],
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution."
+            ],
+            "verification_steps": [
+              "Capture deployment configuration at runtime to verify config['limit'] existence.",
+              "Observe actual execution of select(items, config) rather than static code relationships.",
+              "Check if 'limit' key is missing from the passed config object during runtime."
+            ],
+            "atomic_claims": [
+              {
+                "category": "stack_order",
+                "value": "limit@fixtures/repair/m4b_inventory/limits.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "exception_type",
+                "value": "KeyError",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "exception_message",
+                "value": "'limit'",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "commit",
+                "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:20c7428d-d958-47e2-8409-69433a2f7dbb",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "frame_order",
+                "value": "position 1 of 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_function",
+                "value": "limit",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Function name and order are reported by the client.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_location",
+                "value": "fixtures/repair/m4b_inventory/limits.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Reported stack location; source resolution is separate.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "source_statement",
+                "value": "    return config[\"limit\"]",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Line read from the recorded Git revision; does not prove execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              }
+            ],
+            "reasoning_levels": {
+              "observed_failure": {
+                "status": "RECORDED",
+                "evidence_ids": [
+                  "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                ],
+                "exception_type": "KeyError",
+                "notice": "Client-reported; runtime execution is not verified."
+              },
+              "immediate_mechanism": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+              },
+              "upstream_root_cause": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "A model hypothesis and citations do not independently verify upstream causation."
+              },
+              "claims": [
+                {
+                  "category": "EXCEPTION_TYPE",
+                  "value": "KeyError",
+                  "supporting_evidence_ids": [
+                    "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Client report does not establish execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_REVISION",
+                  "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                  "supporting_evidence_ids": [
+                    "event:20c7428d-d958-47e2-8409-69433a2f7dbb"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Revision existence does not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "RECORDED_STACK_FRAME",
+                  "value": "limit",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_inventory/limits.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Frame was supplied by the event; execution is not independently established."
+                  ]
+                },
+                {
+                  "category": "SOURCE_LINE",
+                  "value": "    return config[\"limit\"]",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_inventory/limits.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_EXCERPT",
+                  "value": "def select(items, config):\n    return items[:limit(config)]",
+                  "supporting_evidence_ids": [
+                    "code:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_inventory/app.py",
+                      "line": 3,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                }
+              ]
+            },
+            "hypothesis_review": {
+              "steps": [
+                "inspect_recorded_evidence",
+                "check_pinned_source_identity"
+              ],
+              "hypotheses": [],
+              "omitted_hypotheses": 0,
+              "missing_evidence": [
+                "Deployment information was not captured by the event schema.",
+                "Static caller matches are incomplete and do not prove execution."
+              ],
+              "proposed_verification_experiments": [
+                "Capture deployment configuration at runtime to verify config['limit'] existence.",
+                "Observe actual execution of select(items, config) rather than static code relationships.",
+                "Check if 'limit' key is missing from the passed config object during runtime."
+              ],
+              "notice": "Suggestions are untrusted text; no commands are executed."
+            },
+            "reference_retry": {
+              "attempted": false,
+              "reason": null
+            },
+            "diagnosis_source": "MODEL",
+            "model_response_valid": true,
+            "dropped_observation_count": 0
+          },
+          "error": null,
+          "latency_ms": 6681,
+          "usage": {
+            "input_tokens": 1057,
+            "output_tokens": 339,
+            "load_duration_ns": 11600700,
+            "eval_duration_ns": 6252195000,
+            "estimated_cost": null
+          },
+          "outcome": "INSUFFICIENT_EVIDENCE"
+        },
+        "status": "completed",
+        "wall_ms": 6688
+      }
+    },
+    {
+      "case": "m4b_average",
+      "arm": "B",
+      "repeat": false,
+      "run": {
+        "status": "COMPLETED",
+        "investigation": {
+          "id": "e61cb650-b61c-44d6-a91d-79549729130e",
+          "incident_id": 2,
+          "provider": "ollama",
+          "model": "qwen3.5:4b",
+          "evidence_hash": "7e5c97807dde6f3e9296c2692944de1585e2c6e623a93c9c4694ffaef0d73823",
+          "status": "completed",
+          "created_at": "2026-11-05T18:29:56.212217+00:00",
+          "updated_at": "2026-11-05T18:30:04.705483+00:00",
+          "evidence": {
+            "evidence": [
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "event_id": "3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                "exception_type": "ZeroDivisionError",
+                "id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                "message": "division by zero",
+                "occurred_at": "2026-11-05T18:29:18.785539Z",
+                "type": "event"
+              },
+              {
+                "count": 1,
+                "event_ids": [
+                  "3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "event_ids_truncated": false,
+                "id": "occurrences",
+                "type": "occurrences"
+              },
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "context": [
+                  {
+                    "line": 1,
+                    "text": "def average(values):"
+                  },
+                  {
+                    "line": 2,
+                    "text": "    return sum(values) / (len(values) - 1)"
+                  }
+                ],
+                "function": "average",
+                "id": "frame:0",
+                "line": 2,
+                "path": "fixtures/repair/m4b_average/app.py",
+                "source_line": "    return sum(values) / (len(values) - 1)",
+                "status": "resolved",
+                "type": "stack_frame"
+              },
+              {
+                "id": "missing_evidence",
+                "items": [
+                  "Deployment information was not captured by the event schema.",
+                  "Static caller matches are incomplete and do not prove execution.",
+                  "Unresolved or dynamic calls: len, sum"
+                ],
+                "type": "missing_evidence"
+              }
+            ],
+            "incident_id": 2,
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution.",
+              "Unresolved or dynamic calls: len, sum"
+            ],
+            "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+          },
+          "findings": {
+            "outcome": "LIKELY_CAUSE",
+            "observed_failure": {
+              "text": "ZeroDivisionError: division by zero",
+              "evidence_ids": [
+                "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+              ]
+            },
+            "observed_facts": [],
+            "hypotheses": [
+              {
+                "explanation": "Division by zero occurred because len(values) equals 1, making the denominator zero.",
+                "supporting_evidence": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                  "frame:0"
+                ],
+                "contradicting_evidence": [],
+                "verification_status": "HYPOTHESIS_REQUIRES_REVIEW",
+                "limitations": "Evidence ID checks do not establish semantic support or causation."
+              }
+            ],
+            "alternatives": [],
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution.",
+              "Unresolved or dynamic calls: len, sum"
+            ],
+            "verification_steps": [
+              "Check input values to confirm count is exactly 1.",
+              "Review caller stack trace for the actual invocation of average.",
+              "Inspect deployment logs for data ingestion timing."
+            ],
+            "atomic_claims": [
+              {
+                "category": "stack_order",
+                "value": "average@fixtures/repair/m4b_average/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "exception_type",
+                "value": "ZeroDivisionError",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "exception_message",
+                "value": "division by zero",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "commit",
+                "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "frame_order",
+                "value": "position 1 of 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_function",
+                "value": "average",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Function name and order are reported by the client.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_location",
+                "value": "fixtures/repair/m4b_average/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Reported stack location; source resolution is separate.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "source_statement",
+                "value": "    return sum(values) / (len(values) - 1)",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Line read from the recorded Git revision; does not prove execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "division_denominator",
+                "value": "len(values) - 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Single-line AST division operand; not runtime value or causality.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              }
+            ],
+            "reasoning_levels": {
+              "observed_failure": {
+                "status": "RECORDED",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "exception_type": "ZeroDivisionError",
+                "notice": "Client-reported; runtime execution is not verified."
+              },
+              "immediate_mechanism": {
+                "status": "HYPOTHESIS_REQUIRES_REVIEW",
+                "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+              },
+              "upstream_root_cause": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "A model hypothesis and citations do not independently verify upstream causation."
+              },
+              "claims": [
+                {
+                  "category": "EXCEPTION_TYPE",
+                  "value": "ZeroDivisionError",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Client report does not establish execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_REVISION",
+                  "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Revision existence does not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "RECORDED_STACK_FRAME",
+                  "value": "average",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_average/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Frame was supplied by the event; execution is not independently established."
+                  ]
+                },
+                {
+                  "category": "SOURCE_LINE",
+                  "value": "    return sum(values) / (len(values) - 1)",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_average/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "CAUSAL_HYPOTHESIS",
+                  "value": "Division by zero occurred because len(values) equals 1, making the denominator zero.",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_average/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": false,
+                  "verification_outcome": "UNVERIFIABLE",
+                  "unsupported_assumptions": [
+                    "Citation existence does not verify natural-language mechanism or upstream cause."
+                  ]
+                }
+              ]
+            },
+            "hypothesis_review": {
+              "steps": [
+                "inspect_recorded_evidence",
+                "check_pinned_source_identity"
+              ],
+              "hypotheses": [
+                {
+                  "claim": "Division by zero occurred because len(values) equals 1, making the denominator zero.",
+                  "claim_type": "UNCLASSIFIED_CAUSAL_HYPOTHESIS",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "frame:0"
+                  ],
+                  "source_checks": [
+                    {
+                      "evidence_id": "frame:0",
+                      "source_status": "VERIFIED_SOURCE"
+                    }
+                  ],
+                  "decision": "QUALIFIED_REQUIRES_REVIEW",
+                  "limitation": "Source identity and citation presence do not prove causality."
+                }
+              ],
+              "omitted_hypotheses": 0,
+              "missing_evidence": [
+                "Deployment information was not captured by the event schema.",
+                "Static caller matches are incomplete and do not prove execution.",
+                "Unresolved or dynamic calls: len, sum"
+              ],
+              "proposed_verification_experiments": [
+                "Check input values to confirm count is exactly 1.",
+                "Review caller stack trace for the actual invocation of average.",
+                "Inspect deployment logs for data ingestion timing."
+              ],
+              "notice": "Suggestions are untrusted text; no commands are executed."
+            },
+            "reference_retry": {
+              "attempted": false,
+              "reason": null
+            },
+            "diagnosis_source": "MODEL",
+            "model_response_valid": true,
+            "dropped_observation_count": 0
+          },
+          "error": null,
+          "latency_ms": 8488,
+          "usage": {
+            "input_tokens": 964,
+            "output_tokens": 438,
+            "load_duration_ns": 4316800,
+            "eval_duration_ns": 7971400000,
+            "estimated_cost": null
+          },
+          "outcome": "LIKELY_CAUSE"
+        },
+        "trace": [
+          {
+            "request_number": 1,
+            "request": {
+              "action": "finish",
+              "reason": "No permitted observations available to analyze the provided untrusted snapshot."
+            },
+            "status": "FINISH"
+          }
+        ],
+        "decision_usage": [
+          {
+            "input_tokens": 511,
+            "output_tokens": 21,
+            "load_duration_ns": 3533000,
+            "eval_duration_ns": 434901000,
+            "estimated_cost": null
+          }
+        ],
+        "wall_ms": 9350
+      }
+    },
+    {
+      "case": "m4b_average",
+      "arm": "A",
+      "repeat": false,
+      "run": {
+        "investigation": {
+          "id": "b7195746-b5d0-4def-9a2d-c4807468cb54",
+          "incident_id": 2,
+          "provider": "ollama",
+          "model": "qwen3.5:4b",
+          "evidence_hash": "7e5c97807dde6f3e9296c2692944de1585e2c6e623a93c9c4694ffaef0d73823",
+          "status": "completed",
+          "created_at": "2026-11-05T18:30:04.711109+00:00",
+          "updated_at": "2026-11-05T18:30:13.030284+00:00",
+          "evidence": {
+            "evidence": [
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "event_id": "3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                "exception_type": "ZeroDivisionError",
+                "id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                "message": "division by zero",
+                "occurred_at": "2026-11-05T18:29:18.785539Z",
+                "type": "event"
+              },
+              {
+                "count": 1,
+                "event_ids": [
+                  "3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "event_ids_truncated": false,
+                "id": "occurrences",
+                "type": "occurrences"
+              },
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "context": [
+                  {
+                    "line": 1,
+                    "text": "def average(values):"
+                  },
+                  {
+                    "line": 2,
+                    "text": "    return sum(values) / (len(values) - 1)"
+                  }
+                ],
+                "function": "average",
+                "id": "frame:0",
+                "line": 2,
+                "path": "fixtures/repair/m4b_average/app.py",
+                "source_line": "    return sum(values) / (len(values) - 1)",
+                "status": "resolved",
+                "type": "stack_frame"
+              },
+              {
+                "id": "missing_evidence",
+                "items": [
+                  "Deployment information was not captured by the event schema.",
+                  "Static caller matches are incomplete and do not prove execution.",
+                  "Unresolved or dynamic calls: len, sum"
+                ],
+                "type": "missing_evidence"
+              }
+            ],
+            "incident_id": 2,
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution.",
+              "Unresolved or dynamic calls: len, sum"
+            ],
+            "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+          },
+          "findings": {
+            "outcome": "LIKELY_CAUSE",
+            "observed_failure": {
+              "text": "ZeroDivisionError: division by zero",
+              "evidence_ids": [
+                "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+              ]
+            },
+            "observed_facts": [],
+            "hypotheses": [
+              {
+                "explanation": "Division by zero occurred because len(values) equals 1, making the denominator zero.",
+                "supporting_evidence": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                  "frame:0"
+                ],
+                "contradicting_evidence": [],
+                "verification_status": "HYPOTHESIS_REQUIRES_REVIEW",
+                "limitations": "Evidence ID checks do not establish semantic support or causation."
+              }
+            ],
+            "alternatives": [],
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution.",
+              "Unresolved or dynamic calls: len, sum"
+            ],
+            "verification_steps": [
+              "Check input values to confirm count is exactly 1.",
+              "Review caller stack trace for the actual invocation of average.",
+              "Inspect deployment logs for data ingestion timing."
+            ],
+            "atomic_claims": [
+              {
+                "category": "stack_order",
+                "value": "average@fixtures/repair/m4b_average/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "exception_type",
+                "value": "ZeroDivisionError",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "exception_message",
+                "value": "division by zero",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "commit",
+                "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "frame_order",
+                "value": "position 1 of 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_function",
+                "value": "average",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Function name and order are reported by the client.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_location",
+                "value": "fixtures/repair/m4b_average/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Reported stack location; source resolution is separate.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "source_statement",
+                "value": "    return sum(values) / (len(values) - 1)",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Line read from the recorded Git revision; does not prove execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "division_denominator",
+                "value": "len(values) - 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Single-line AST division operand; not runtime value or causality.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              }
+            ],
+            "reasoning_levels": {
+              "observed_failure": {
+                "status": "RECORDED",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "exception_type": "ZeroDivisionError",
+                "notice": "Client-reported; runtime execution is not verified."
+              },
+              "immediate_mechanism": {
+                "status": "HYPOTHESIS_REQUIRES_REVIEW",
+                "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+              },
+              "upstream_root_cause": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "A model hypothesis and citations do not independently verify upstream causation."
+              },
+              "claims": [
+                {
+                  "category": "EXCEPTION_TYPE",
+                  "value": "ZeroDivisionError",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Client report does not establish execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_REVISION",
+                  "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Revision existence does not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "RECORDED_STACK_FRAME",
+                  "value": "average",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_average/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Frame was supplied by the event; execution is not independently established."
+                  ]
+                },
+                {
+                  "category": "SOURCE_LINE",
+                  "value": "    return sum(values) / (len(values) - 1)",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_average/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "CAUSAL_HYPOTHESIS",
+                  "value": "Division by zero occurred because len(values) equals 1, making the denominator zero.",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_average/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": false,
+                  "verification_outcome": "UNVERIFIABLE",
+                  "unsupported_assumptions": [
+                    "Citation existence does not verify natural-language mechanism or upstream cause."
+                  ]
+                }
+              ]
+            },
+            "hypothesis_review": {
+              "steps": [
+                "inspect_recorded_evidence",
+                "check_pinned_source_identity"
+              ],
+              "hypotheses": [
+                {
+                  "claim": "Division by zero occurred because len(values) equals 1, making the denominator zero.",
+                  "claim_type": "UNCLASSIFIED_CAUSAL_HYPOTHESIS",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "frame:0"
+                  ],
+                  "source_checks": [
+                    {
+                      "evidence_id": "frame:0",
+                      "source_status": "VERIFIED_SOURCE"
+                    }
+                  ],
+                  "decision": "QUALIFIED_REQUIRES_REVIEW",
+                  "limitation": "Source identity and citation presence do not prove causality."
+                }
+              ],
+              "omitted_hypotheses": 0,
+              "missing_evidence": [
+                "Deployment information was not captured by the event schema.",
+                "Static caller matches are incomplete and do not prove execution.",
+                "Unresolved or dynamic calls: len, sum"
+              ],
+              "proposed_verification_experiments": [
+                "Check input values to confirm count is exactly 1.",
+                "Review caller stack trace for the actual invocation of average.",
+                "Inspect deployment logs for data ingestion timing."
+              ],
+              "notice": "Suggestions are untrusted text; no commands are executed."
+            },
+            "reference_retry": {
+              "attempted": false,
+              "reason": null
+            },
+            "diagnosis_source": "MODEL",
+            "model_response_valid": true,
+            "dropped_observation_count": 0
+          },
+          "error": null,
+          "latency_ms": 8314,
+          "usage": {
+            "input_tokens": 964,
+            "output_tokens": 438,
+            "load_duration_ns": 7560900,
+            "eval_duration_ns": 7998344000,
+            "estimated_cost": null
+          },
+          "outcome": "LIKELY_CAUSE"
+        },
+        "status": "completed",
+        "wall_ms": 8323
+      }
+    },
+    {
+      "case": "m4b_average",
+      "arm": "A",
+      "repeat": true,
+      "run": {
+        "investigation": {
+          "id": "8b2e567d-6c73-4bda-9e71-831ea38307e0",
+          "incident_id": 2,
+          "provider": "ollama",
+          "model": "qwen3.5:4b",
+          "evidence_hash": "7e5c97807dde6f3e9296c2692944de1585e2c6e623a93c9c4694ffaef0d73823",
+          "status": "completed",
+          "created_at": "2026-11-05T18:30:13.035527+00:00",
+          "updated_at": "2026-11-05T18:30:21.420724+00:00",
+          "evidence": {
+            "evidence": [
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "event_id": "3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                "exception_type": "ZeroDivisionError",
+                "id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                "message": "division by zero",
+                "occurred_at": "2026-11-05T18:29:18.785539Z",
+                "type": "event"
+              },
+              {
+                "count": 1,
+                "event_ids": [
+                  "3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "event_ids_truncated": false,
+                "id": "occurrences",
+                "type": "occurrences"
+              },
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "context": [
+                  {
+                    "line": 1,
+                    "text": "def average(values):"
+                  },
+                  {
+                    "line": 2,
+                    "text": "    return sum(values) / (len(values) - 1)"
+                  }
+                ],
+                "function": "average",
+                "id": "frame:0",
+                "line": 2,
+                "path": "fixtures/repair/m4b_average/app.py",
+                "source_line": "    return sum(values) / (len(values) - 1)",
+                "status": "resolved",
+                "type": "stack_frame"
+              },
+              {
+                "id": "missing_evidence",
+                "items": [
+                  "Deployment information was not captured by the event schema.",
+                  "Static caller matches are incomplete and do not prove execution.",
+                  "Unresolved or dynamic calls: len, sum"
+                ],
+                "type": "missing_evidence"
+              }
+            ],
+            "incident_id": 2,
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution.",
+              "Unresolved or dynamic calls: len, sum"
+            ],
+            "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+          },
+          "findings": {
+            "outcome": "LIKELY_CAUSE",
+            "observed_failure": {
+              "text": "ZeroDivisionError: division by zero",
+              "evidence_ids": [
+                "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+              ]
+            },
+            "observed_facts": [],
+            "hypotheses": [
+              {
+                "explanation": "Division by zero occurred because len(values) equals 1, making the denominator zero.",
+                "supporting_evidence": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                  "frame:0"
+                ],
+                "contradicting_evidence": [],
+                "verification_status": "HYPOTHESIS_REQUIRES_REVIEW",
+                "limitations": "Evidence ID checks do not establish semantic support or causation."
+              }
+            ],
+            "alternatives": [],
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution.",
+              "Unresolved or dynamic calls: len, sum"
+            ],
+            "verification_steps": [
+              "Check input values to confirm count is exactly 1.",
+              "Review caller stack trace for the actual invocation of average.",
+              "Inspect deployment logs for data ingestion timing."
+            ],
+            "atomic_claims": [
+              {
+                "category": "stack_order",
+                "value": "average@fixtures/repair/m4b_average/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "exception_type",
+                "value": "ZeroDivisionError",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "exception_message",
+                "value": "division by zero",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "commit",
+                "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "frame_order",
+                "value": "position 1 of 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_function",
+                "value": "average",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Function name and order are reported by the client.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_location",
+                "value": "fixtures/repair/m4b_average/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Reported stack location; source resolution is separate.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "source_statement",
+                "value": "    return sum(values) / (len(values) - 1)",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Line read from the recorded Git revision; does not prove execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "division_denominator",
+                "value": "len(values) - 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Single-line AST division operand; not runtime value or causality.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              }
+            ],
+            "reasoning_levels": {
+              "observed_failure": {
+                "status": "RECORDED",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "exception_type": "ZeroDivisionError",
+                "notice": "Client-reported; runtime execution is not verified."
+              },
+              "immediate_mechanism": {
+                "status": "HYPOTHESIS_REQUIRES_REVIEW",
+                "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+              },
+              "upstream_root_cause": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "A model hypothesis and citations do not independently verify upstream causation."
+              },
+              "claims": [
+                {
+                  "category": "EXCEPTION_TYPE",
+                  "value": "ZeroDivisionError",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Client report does not establish execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_REVISION",
+                  "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Revision existence does not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "RECORDED_STACK_FRAME",
+                  "value": "average",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_average/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Frame was supplied by the event; execution is not independently established."
+                  ]
+                },
+                {
+                  "category": "SOURCE_LINE",
+                  "value": "    return sum(values) / (len(values) - 1)",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_average/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "CAUSAL_HYPOTHESIS",
+                  "value": "Division by zero occurred because len(values) equals 1, making the denominator zero.",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_average/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": false,
+                  "verification_outcome": "UNVERIFIABLE",
+                  "unsupported_assumptions": [
+                    "Citation existence does not verify natural-language mechanism or upstream cause."
+                  ]
+                }
+              ]
+            },
+            "hypothesis_review": {
+              "steps": [
+                "inspect_recorded_evidence",
+                "check_pinned_source_identity"
+              ],
+              "hypotheses": [
+                {
+                  "claim": "Division by zero occurred because len(values) equals 1, making the denominator zero.",
+                  "claim_type": "UNCLASSIFIED_CAUSAL_HYPOTHESIS",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "frame:0"
+                  ],
+                  "source_checks": [
+                    {
+                      "evidence_id": "frame:0",
+                      "source_status": "VERIFIED_SOURCE"
+                    }
+                  ],
+                  "decision": "QUALIFIED_REQUIRES_REVIEW",
+                  "limitation": "Source identity and citation presence do not prove causality."
+                }
+              ],
+              "omitted_hypotheses": 0,
+              "missing_evidence": [
+                "Deployment information was not captured by the event schema.",
+                "Static caller matches are incomplete and do not prove execution.",
+                "Unresolved or dynamic calls: len, sum"
+              ],
+              "proposed_verification_experiments": [
+                "Check input values to confirm count is exactly 1.",
+                "Review caller stack trace for the actual invocation of average.",
+                "Inspect deployment logs for data ingestion timing."
+              ],
+              "notice": "Suggestions are untrusted text; no commands are executed."
+            },
+            "reference_retry": {
+              "attempted": false,
+              "reason": null
+            },
+            "diagnosis_source": "MODEL",
+            "model_response_valid": true,
+            "dropped_observation_count": 0
+          },
+          "error": null,
+          "latency_ms": 8381,
+          "usage": {
+            "input_tokens": 964,
+            "output_tokens": 438,
+            "load_duration_ns": 8536900,
+            "eval_duration_ns": 8059477000,
+            "estimated_cost": null
+          },
+          "outcome": "LIKELY_CAUSE"
+        },
+        "status": "completed",
+        "wall_ms": 8390
+      }
+    },
+    {
+      "case": "m4b_average",
+      "arm": "B",
+      "repeat": true,
+      "run": {
+        "status": "COMPLETED",
+        "investigation": {
+          "id": "e1fb4682-a8c0-4740-9251-1476a1a923f9",
+          "incident_id": 2,
+          "provider": "ollama",
+          "model": "qwen3.5:4b",
+          "evidence_hash": "7e5c97807dde6f3e9296c2692944de1585e2c6e623a93c9c4694ffaef0d73823",
+          "status": "completed",
+          "created_at": "2026-11-05T18:30:22.143552+00:00",
+          "updated_at": "2026-11-05T18:30:30.466966+00:00",
+          "evidence": {
+            "evidence": [
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "event_id": "3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                "exception_type": "ZeroDivisionError",
+                "id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                "message": "division by zero",
+                "occurred_at": "2026-11-05T18:29:18.785539Z",
+                "type": "event"
+              },
+              {
+                "count": 1,
+                "event_ids": [
+                  "3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "event_ids_truncated": false,
+                "id": "occurrences",
+                "type": "occurrences"
+              },
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "context": [
+                  {
+                    "line": 1,
+                    "text": "def average(values):"
+                  },
+                  {
+                    "line": 2,
+                    "text": "    return sum(values) / (len(values) - 1)"
+                  }
+                ],
+                "function": "average",
+                "id": "frame:0",
+                "line": 2,
+                "path": "fixtures/repair/m4b_average/app.py",
+                "source_line": "    return sum(values) / (len(values) - 1)",
+                "status": "resolved",
+                "type": "stack_frame"
+              },
+              {
+                "id": "missing_evidence",
+                "items": [
+                  "Deployment information was not captured by the event schema.",
+                  "Static caller matches are incomplete and do not prove execution.",
+                  "Unresolved or dynamic calls: len, sum"
+                ],
+                "type": "missing_evidence"
+              }
+            ],
+            "incident_id": 2,
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution.",
+              "Unresolved or dynamic calls: len, sum"
+            ],
+            "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+          },
+          "findings": {
+            "outcome": "LIKELY_CAUSE",
+            "observed_failure": {
+              "text": "ZeroDivisionError: division by zero",
+              "evidence_ids": [
+                "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+              ]
+            },
+            "observed_facts": [],
+            "hypotheses": [
+              {
+                "explanation": "Division by zero occurred because len(values) equals 1, making the denominator zero.",
+                "supporting_evidence": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                  "frame:0"
+                ],
+                "contradicting_evidence": [],
+                "verification_status": "HYPOTHESIS_REQUIRES_REVIEW",
+                "limitations": "Evidence ID checks do not establish semantic support or causation."
+              }
+            ],
+            "alternatives": [],
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution.",
+              "Unresolved or dynamic calls: len, sum"
+            ],
+            "verification_steps": [
+              "Check input values to confirm count is exactly 1.",
+              "Review caller stack trace for the actual invocation of average.",
+              "Inspect deployment logs for data ingestion timing."
+            ],
+            "atomic_claims": [
+              {
+                "category": "stack_order",
+                "value": "average@fixtures/repair/m4b_average/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "exception_type",
+                "value": "ZeroDivisionError",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "exception_message",
+                "value": "division by zero",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "commit",
+                "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "frame_order",
+                "value": "position 1 of 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_function",
+                "value": "average",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Function name and order are reported by the client.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_location",
+                "value": "fixtures/repair/m4b_average/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Reported stack location; source resolution is separate.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "source_statement",
+                "value": "    return sum(values) / (len(values) - 1)",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Line read from the recorded Git revision; does not prove execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "division_denominator",
+                "value": "len(values) - 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Single-line AST division operand; not runtime value or causality.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              }
+            ],
+            "reasoning_levels": {
+              "observed_failure": {
+                "status": "RECORDED",
+                "evidence_ids": [
+                  "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                ],
+                "exception_type": "ZeroDivisionError",
+                "notice": "Client-reported; runtime execution is not verified."
+              },
+              "immediate_mechanism": {
+                "status": "HYPOTHESIS_REQUIRES_REVIEW",
+                "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+              },
+              "upstream_root_cause": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "A model hypothesis and citations do not independently verify upstream causation."
+              },
+              "claims": [
+                {
+                  "category": "EXCEPTION_TYPE",
+                  "value": "ZeroDivisionError",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Client report does not establish execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_REVISION",
+                  "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Revision existence does not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "RECORDED_STACK_FRAME",
+                  "value": "average",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_average/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Frame was supplied by the event; execution is not independently established."
+                  ]
+                },
+                {
+                  "category": "SOURCE_LINE",
+                  "value": "    return sum(values) / (len(values) - 1)",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_average/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "CAUSAL_HYPOTHESIS",
+                  "value": "Division by zero occurred because len(values) equals 1, making the denominator zero.",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_average/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": false,
+                  "verification_outcome": "UNVERIFIABLE",
+                  "unsupported_assumptions": [
+                    "Citation existence does not verify natural-language mechanism or upstream cause."
+                  ]
+                }
+              ]
+            },
+            "hypothesis_review": {
+              "steps": [
+                "inspect_recorded_evidence",
+                "check_pinned_source_identity"
+              ],
+              "hypotheses": [
+                {
+                  "claim": "Division by zero occurred because len(values) equals 1, making the denominator zero.",
+                  "claim_type": "UNCLASSIFIED_CAUSAL_HYPOTHESIS",
+                  "supporting_evidence_ids": [
+                    "event:3af310ce-d556-4fa4-8b27-62f7aea9888b",
+                    "frame:0"
+                  ],
+                  "source_checks": [
+                    {
+                      "evidence_id": "frame:0",
+                      "source_status": "VERIFIED_SOURCE"
+                    }
+                  ],
+                  "decision": "QUALIFIED_REQUIRES_REVIEW",
+                  "limitation": "Source identity and citation presence do not prove causality."
+                }
+              ],
+              "omitted_hypotheses": 0,
+              "missing_evidence": [
+                "Deployment information was not captured by the event schema.",
+                "Static caller matches are incomplete and do not prove execution.",
+                "Unresolved or dynamic calls: len, sum"
+              ],
+              "proposed_verification_experiments": [
+                "Check input values to confirm count is exactly 1.",
+                "Review caller stack trace for the actual invocation of average.",
+                "Inspect deployment logs for data ingestion timing."
+              ],
+              "notice": "Suggestions are untrusted text; no commands are executed."
+            },
+            "reference_retry": {
+              "attempted": false,
+              "reason": null
+            },
+            "diagnosis_source": "MODEL",
+            "model_response_valid": true,
+            "dropped_observation_count": 0
+          },
+          "error": null,
+          "latency_ms": 8315,
+          "usage": {
+            "input_tokens": 964,
+            "output_tokens": 438,
+            "load_duration_ns": 3005500,
+            "eval_duration_ns": 7964810000,
+            "estimated_cost": null
+          },
+          "outcome": "LIKELY_CAUSE"
+        },
+        "trace": [
+          {
+            "request_number": 1,
+            "request": {
+              "action": "finish",
+              "reason": "No permitted observations available to analyze the provided untrusted snapshot."
+            },
+            "status": "FINISH"
+          }
+        ],
+        "decision_usage": [
+          {
+            "input_tokens": 511,
+            "output_tokens": 21,
+            "load_duration_ns": 5423100,
+            "eval_duration_ns": 425766000,
+            "estimated_cost": null
+          }
+        ],
+        "wall_ms": 9050
+      }
+    },
+    {
+      "case": "m4b_origin",
+      "arm": "A",
+      "repeat": false,
+      "run": {
+        "investigation": {
+          "id": "2a530b12-7f58-4d5e-add0-0d5389e044a2",
+          "incident_id": 3,
+          "provider": "ollama",
+          "model": "qwen3.5:4b",
+          "evidence_hash": "e440c1671267108696c00c60ef28dfb179776383d49d4d86b715ef0030c3f349",
+          "status": "completed",
+          "created_at": "2026-11-05T18:30:30.480761+00:00",
+          "updated_at": "2026-11-05T18:30:37.833608+00:00",
+          "evidence": {
+            "evidence": [
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "event_id": "d967dd55-9704-46d8-9c58-109117af33c1",
+                "exception_type": "ValueError",
+                "id": "event:d967dd55-9704-46d8-9c58-109117af33c1",
+                "message": "invalid literal for int() with base 10: 'unknown'",
+                "occurred_at": "2026-11-05T18:29:18.922638Z",
+                "type": "event"
+              },
+              {
+                "count": 1,
+                "event_ids": [
+                  "d967dd55-9704-46d8-9c58-109117af33c1"
+                ],
+                "event_ids_truncated": false,
+                "id": "occurrences",
+                "type": "occurrences"
+              },
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "context": [
+                  {
+                    "line": 1,
+                    "text": "def parse_count(raw):"
+                  },
+                  {
+                    "line": 2,
+                    "text": "    return int(raw)"
+                  }
+                ],
+                "function": "parse_count",
+                "id": "frame:0",
+                "line": 2,
+                "path": "fixtures/repair/m4b_origin/app.py",
+                "source_line": "    return int(raw)",
+                "status": "resolved",
+                "type": "stack_frame"
+              },
+              {
+                "id": "missing_evidence",
+                "items": [
+                  "Deployment information was not captured by the event schema.",
+                  "Static caller matches are incomplete and do not prove execution.",
+                  "Unresolved or dynamic calls: int"
+                ],
+                "type": "missing_evidence"
+              }
+            ],
+            "incident_id": 3,
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution.",
+              "Unresolved or dynamic calls: int"
+            ],
+            "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+          },
+          "findings": {
+            "outcome": "INSUFFICIENT_EVIDENCE",
+            "observed_failure": {
+              "text": "ValueError: invalid literal for int() with base 10: 'unknown'",
+              "evidence_ids": [
+                "event:d967dd55-9704-46d8-9c58-109117af33c1"
+              ]
+            },
+            "observed_facts": [],
+            "hypotheses": [],
+            "alternatives": [],
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution.",
+              "Unresolved or dynamic calls: int"
+            ],
+            "verification_steps": [
+              "Retrieve deployment logs to identify the service running at failure time.",
+              "Capture runtime stack traces including static callers for parse_count.",
+              "Verify input data source before conversion in parse_count."
+            ],
+            "atomic_claims": [
+              {
+                "category": "stack_order",
+                "value": "parse_count@fixtures/repair/m4b_origin/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "exception_type",
+                "value": "ValueError",
+                "evidence_ids": [
+                  "event:d967dd55-9704-46d8-9c58-109117af33c1"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:d967dd55-9704-46d8-9c58-109117af33c1",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "exception_message",
+                "value": "invalid literal for int() with base 10: 'unknown'",
+                "evidence_ids": [
+                  "event:d967dd55-9704-46d8-9c58-109117af33c1"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:d967dd55-9704-46d8-9c58-109117af33c1",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "commit",
+                "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                "evidence_ids": [
+                  "event:d967dd55-9704-46d8-9c58-109117af33c1"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:d967dd55-9704-46d8-9c58-109117af33c1",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "frame_order",
+                "value": "position 1 of 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_function",
+                "value": "parse_count",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Function name and order are reported by the client.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_location",
+                "value": "fixtures/repair/m4b_origin/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Reported stack location; source resolution is separate.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "source_statement",
+                "value": "    return int(raw)",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Line read from the recorded Git revision; does not prove execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              }
+            ],
+            "reasoning_levels": {
+              "observed_failure": {
+                "status": "RECORDED",
+                "evidence_ids": [
+                  "event:d967dd55-9704-46d8-9c58-109117af33c1"
+                ],
+                "exception_type": "ValueError",
+                "notice": "Client-reported; runtime execution is not verified."
+              },
+              "immediate_mechanism": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+              },
+              "upstream_root_cause": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "A model hypothesis and citations do not independently verify upstream causation."
+              },
+              "claims": [
+                {
+                  "category": "EXCEPTION_TYPE",
+                  "value": "ValueError",
+                  "supporting_evidence_ids": [
+                    "event:d967dd55-9704-46d8-9c58-109117af33c1"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Client report does not establish execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_REVISION",
+                  "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                  "supporting_evidence_ids": [
+                    "event:d967dd55-9704-46d8-9c58-109117af33c1"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Revision existence does not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "RECORDED_STACK_FRAME",
+                  "value": "parse_count",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_origin/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Frame was supplied by the event; execution is not independently established."
+                  ]
+                },
+                {
+                  "category": "SOURCE_LINE",
+                  "value": "    return int(raw)",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_origin/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                }
+              ]
+            },
+            "hypothesis_review": {
+              "steps": [
+                "inspect_recorded_evidence",
+                "check_pinned_source_identity"
+              ],
+              "hypotheses": [],
+              "omitted_hypotheses": 0,
+              "missing_evidence": [
+                "Deployment information was not captured by the event schema.",
+                "Static caller matches are incomplete and do not prove execution.",
+                "Unresolved or dynamic calls: int"
+              ],
+              "proposed_verification_experiments": [
+                "Retrieve deployment logs to identify the service running at failure time.",
+                "Capture runtime stack traces including static callers for parse_count.",
+                "Verify input data source before conversion in parse_count."
+              ],
+              "notice": "Suggestions are untrusted text; no commands are executed."
+            },
+            "reference_retry": {
+              "attempted": false,
+              "reason": null
+            },
+            "diagnosis_source": "MODEL",
+            "model_response_valid": true,
+            "dropped_observation_count": 1
+          },
+          "error": null,
+          "latency_ms": 7348,
+          "usage": {
+            "input_tokens": 965,
+            "output_tokens": 376,
+            "load_duration_ns": 10706300,
+            "eval_duration_ns": 6855881000,
+            "estimated_cost": null
+          },
+          "outcome": "INSUFFICIENT_EVIDENCE"
+        },
+        "status": "completed",
+        "wall_ms": 7357
+      }
+    },
+    {
+      "case": "m4b_origin",
+      "arm": "B",
+      "repeat": false,
+      "run": {
+        "status": "COMPLETED",
+        "investigation": {
+          "id": "43e8ea06-bff9-4dfc-9d3c-3d1226843dc6",
+          "incident_id": 3,
+          "provider": "ollama",
+          "model": "qwen3.5:4b",
+          "evidence_hash": "e440c1671267108696c00c60ef28dfb179776383d49d4d86b715ef0030c3f349",
+          "status": "completed",
+          "created_at": "2026-11-05T18:30:38.680044+00:00",
+          "updated_at": "2026-11-05T18:30:46.072311+00:00",
+          "evidence": {
+            "evidence": [
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "event_id": "d967dd55-9704-46d8-9c58-109117af33c1",
+                "exception_type": "ValueError",
+                "id": "event:d967dd55-9704-46d8-9c58-109117af33c1",
+                "message": "invalid literal for int() with base 10: 'unknown'",
+                "occurred_at": "2026-11-05T18:29:18.922638Z",
+                "type": "event"
+              },
+              {
+                "count": 1,
+                "event_ids": [
+                  "d967dd55-9704-46d8-9c58-109117af33c1"
+                ],
+                "event_ids_truncated": false,
+                "id": "occurrences",
+                "type": "occurrences"
+              },
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "context": [
+                  {
+                    "line": 1,
+                    "text": "def parse_count(raw):"
+                  },
+                  {
+                    "line": 2,
+                    "text": "    return int(raw)"
+                  }
+                ],
+                "function": "parse_count",
+                "id": "frame:0",
+                "line": 2,
+                "path": "fixtures/repair/m4b_origin/app.py",
+                "source_line": "    return int(raw)",
+                "status": "resolved",
+                "type": "stack_frame"
+              },
+              {
+                "id": "missing_evidence",
+                "items": [
+                  "Deployment information was not captured by the event schema.",
+                  "Static caller matches are incomplete and do not prove execution.",
+                  "Unresolved or dynamic calls: int"
+                ],
+                "type": "missing_evidence"
+              }
+            ],
+            "incident_id": 3,
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution.",
+              "Unresolved or dynamic calls: int"
+            ],
+            "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+          },
+          "findings": {
+            "outcome": "INSUFFICIENT_EVIDENCE",
+            "observed_failure": {
+              "text": "ValueError: invalid literal for int() with base 10: 'unknown'",
+              "evidence_ids": [
+                "event:d967dd55-9704-46d8-9c58-109117af33c1"
+              ]
+            },
+            "observed_facts": [],
+            "hypotheses": [],
+            "alternatives": [],
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution.",
+              "Unresolved or dynamic calls: int"
+            ],
+            "verification_steps": [
+              "Retrieve deployment logs to identify the service running at failure time.",
+              "Capture runtime stack traces including static callers for parse_count.",
+              "Verify input data source before conversion in parse_count."
+            ],
+            "atomic_claims": [
+              {
+                "category": "stack_order",
+                "value": "parse_count@fixtures/repair/m4b_origin/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "exception_type",
+                "value": "ValueError",
+                "evidence_ids": [
+                  "event:d967dd55-9704-46d8-9c58-109117af33c1"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:d967dd55-9704-46d8-9c58-109117af33c1",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "exception_message",
+                "value": "invalid literal for int() with base 10: 'unknown'",
+                "evidence_ids": [
+                  "event:d967dd55-9704-46d8-9c58-109117af33c1"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:d967dd55-9704-46d8-9c58-109117af33c1",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "commit",
+                "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                "evidence_ids": [
+                  "event:d967dd55-9704-46d8-9c58-109117af33c1"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:d967dd55-9704-46d8-9c58-109117af33c1",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "frame_order",
+                "value": "position 1 of 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_function",
+                "value": "parse_count",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Function name and order are reported by the client.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_location",
+                "value": "fixtures/repair/m4b_origin/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Reported stack location; source resolution is separate.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "source_statement",
+                "value": "    return int(raw)",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Line read from the recorded Git revision; does not prove execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              }
+            ],
+            "reasoning_levels": {
+              "observed_failure": {
+                "status": "RECORDED",
+                "evidence_ids": [
+                  "event:d967dd55-9704-46d8-9c58-109117af33c1"
+                ],
+                "exception_type": "ValueError",
+                "notice": "Client-reported; runtime execution is not verified."
+              },
+              "immediate_mechanism": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+              },
+              "upstream_root_cause": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "A model hypothesis and citations do not independently verify upstream causation."
+              },
+              "claims": [
+                {
+                  "category": "EXCEPTION_TYPE",
+                  "value": "ValueError",
+                  "supporting_evidence_ids": [
+                    "event:d967dd55-9704-46d8-9c58-109117af33c1"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Client report does not establish execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_REVISION",
+                  "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                  "supporting_evidence_ids": [
+                    "event:d967dd55-9704-46d8-9c58-109117af33c1"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Revision existence does not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "RECORDED_STACK_FRAME",
+                  "value": "parse_count",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_origin/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Frame was supplied by the event; execution is not independently established."
+                  ]
+                },
+                {
+                  "category": "SOURCE_LINE",
+                  "value": "    return int(raw)",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_origin/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                }
+              ]
+            },
+            "hypothesis_review": {
+              "steps": [
+                "inspect_recorded_evidence",
+                "check_pinned_source_identity"
+              ],
+              "hypotheses": [],
+              "omitted_hypotheses": 0,
+              "missing_evidence": [
+                "Deployment information was not captured by the event schema.",
+                "Static caller matches are incomplete and do not prove execution.",
+                "Unresolved or dynamic calls: int"
+              ],
+              "proposed_verification_experiments": [
+                "Retrieve deployment logs to identify the service running at failure time.",
+                "Capture runtime stack traces including static callers for parse_count.",
+                "Verify input data source before conversion in parse_count."
+              ],
+              "notice": "Suggestions are untrusted text; no commands are executed."
+            },
+            "reference_retry": {
+              "attempted": false,
+              "reason": null
+            },
+            "diagnosis_source": "MODEL",
+            "model_response_valid": true,
+            "dropped_observation_count": 1
+          },
+          "error": null,
+          "latency_ms": 7386,
+          "usage": {
+            "input_tokens": 965,
+            "output_tokens": 376,
+            "load_duration_ns": 20005200,
+            "eval_duration_ns": 6843145000,
+            "estimated_cost": null
+          },
+          "outcome": "INSUFFICIENT_EVIDENCE"
+        },
+        "trace": [
+          {
+            "request_number": 1,
+            "request": {
+              "action": "finish",
+              "reason": "No permitted observations available to analyze the untrusted snapshot data."
+            },
+            "status": "FINISH"
+          }
+        ],
+        "decision_usage": [
+          {
+            "input_tokens": 512,
+            "output_tokens": 21,
+            "load_duration_ns": 3650800,
+            "eval_duration_ns": 422047000,
+            "estimated_cost": null
+          }
+        ],
+        "wall_ms": 8236
+      }
+    },
+    {
+      "case": "m4b_negative",
+      "arm": "B",
+      "repeat": false,
+      "run": {
+        "status": "COMPLETED",
+        "investigation": {
+          "id": "4fea18c7-f2b4-4cd6-a85f-1db93c3984f7",
+          "incident_id": 4,
+          "provider": "ollama",
+          "model": "qwen3.5:4b",
+          "evidence_hash": "cf3fddd403a45171b6ace294b8446903c38480a92adf7b594557c8296d7818e7",
+          "status": "completed",
+          "created_at": "2026-11-05T18:30:47.326633+00:00",
+          "updated_at": "2026-11-05T18:30:54.588367+00:00",
+          "evidence": {
+            "evidence": [
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "event_id": "dceccc64-f49a-4083-b4c2-9da43c63221d",
+                "exception_type": "IndexError",
+                "id": "event:dceccc64-f49a-4083-b4c2-9da43c63221d",
+                "message": "list index out of range",
+                "occurred_at": "2026-11-05T18:29:19.064923Z",
+                "type": "event"
+              },
+              {
+                "count": 1,
+                "event_ids": [
+                  "dceccc64-f49a-4083-b4c2-9da43c63221d"
+                ],
+                "event_ids_truncated": false,
+                "id": "occurrences",
+                "type": "occurrences"
+              },
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "context": [
+                  {
+                    "line": 1,
+                    "text": "def first_or_none(items):"
+                  },
+                  {
+                    "line": 2,
+                    "text": "    return items[0] if items else None"
+                  }
+                ],
+                "function": "first_or_none",
+                "id": "frame:0",
+                "line": 2,
+                "path": "fixtures/repair/m4b_negative/app.py",
+                "source_line": "    return items[0] if items else None",
+                "status": "resolved",
+                "type": "stack_frame"
+              },
+              {
+                "id": "missing_evidence",
+                "items": [
+                  "Deployment information was not captured by the event schema.",
+                  "Static caller matches are incomplete and do not prove execution."
+                ],
+                "type": "missing_evidence"
+              }
+            ],
+            "incident_id": 4,
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution."
+            ],
+            "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+          },
+          "findings": {
+            "outcome": "INSUFFICIENT_EVIDENCE",
+            "observed_failure": {
+              "text": "IndexError: list index out of range",
+              "evidence_ids": [
+                "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+              ]
+            },
+            "observed_facts": [],
+            "hypotheses": [],
+            "alternatives": [],
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution."
+            ],
+            "verification_steps": [
+              "Retrieve deployment logs to identify the service state at failure time.",
+              "Capture runtime stack traces including caller frames for first_or_none.",
+              "Verify list length validation logic in the calling context."
+            ],
+            "atomic_claims": [
+              {
+                "category": "stack_order",
+                "value": "first_or_none@fixtures/repair/m4b_negative/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "exception_type",
+                "value": "IndexError",
+                "evidence_ids": [
+                  "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:dceccc64-f49a-4083-b4c2-9da43c63221d",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "exception_message",
+                "value": "list index out of range",
+                "evidence_ids": [
+                  "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:dceccc64-f49a-4083-b4c2-9da43c63221d",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "commit",
+                "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                "evidence_ids": [
+                  "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:dceccc64-f49a-4083-b4c2-9da43c63221d",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "frame_order",
+                "value": "position 1 of 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_function",
+                "value": "first_or_none",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Function name and order are reported by the client.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_location",
+                "value": "fixtures/repair/m4b_negative/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Reported stack location; source resolution is separate.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "source_statement",
+                "value": "    return items[0] if items else None",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Line read from the recorded Git revision; does not prove execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              }
+            ],
+            "reasoning_levels": {
+              "observed_failure": {
+                "status": "RECORDED",
+                "evidence_ids": [
+                  "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+                ],
+                "exception_type": "IndexError",
+                "notice": "Client-reported; runtime execution is not verified."
+              },
+              "immediate_mechanism": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+              },
+              "upstream_root_cause": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "A model hypothesis and citations do not independently verify upstream causation."
+              },
+              "claims": [
+                {
+                  "category": "EXCEPTION_TYPE",
+                  "value": "IndexError",
+                  "supporting_evidence_ids": [
+                    "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Client report does not establish execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_REVISION",
+                  "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                  "supporting_evidence_ids": [
+                    "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Revision existence does not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "RECORDED_STACK_FRAME",
+                  "value": "first_or_none",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_negative/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Frame was supplied by the event; execution is not independently established."
+                  ]
+                },
+                {
+                  "category": "SOURCE_LINE",
+                  "value": "    return items[0] if items else None",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_negative/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                }
+              ]
+            },
+            "hypothesis_review": {
+              "steps": [
+                "inspect_recorded_evidence",
+                "check_pinned_source_identity"
+              ],
+              "hypotheses": [],
+              "omitted_hypotheses": 0,
+              "missing_evidence": [
+                "Deployment information was not captured by the event schema.",
+                "Static caller matches are incomplete and do not prove execution."
+              ],
+              "proposed_verification_experiments": [
+                "Retrieve deployment logs to identify the service state at failure time.",
+                "Capture runtime stack traces including caller frames for first_or_none.",
+                "Verify list length validation logic in the calling context."
+              ],
+              "notice": "Suggestions are untrusted text; no commands are executed."
+            },
+            "reference_retry": {
+              "attempted": false,
+              "reason": null
+            },
+            "diagnosis_source": "MODEL",
+            "model_response_valid": true,
+            "dropped_observation_count": 1
+          },
+          "error": null,
+          "latency_ms": 7258,
+          "usage": {
+            "input_tokens": 943,
+            "output_tokens": 370,
+            "load_duration_ns": 7378800,
+            "eval_duration_ns": 6750208000,
+            "estimated_cost": null
+          },
+          "outcome": "INSUFFICIENT_EVIDENCE"
+        },
+        "trace": [
+          {
+            "request_number": 1,
+            "request": {
+              "action": "finish",
+              "reason": "No permitted observations or fixes available. The provided snapshot indicates an untrusted source with missing evidence regarding deployment information and static caller matches,且"
+            },
+            "status": "FINISH"
+          }
+        ],
+        "decision_usage": [
+          {
+            "input_tokens": 490,
+            "output_tokens": 38,
+            "load_duration_ns": 36694000,
+            "eval_duration_ns": 822927000,
+            "estimated_cost": null
+          }
+        ],
+        "wall_ms": 8515
+      }
+    },
+    {
+      "case": "m4b_negative",
+      "arm": "A",
+      "repeat": false,
+      "run": {
+        "investigation": {
+          "id": "4f47d87f-e331-4ffb-ab98-bc6d2853de34",
+          "incident_id": 4,
+          "provider": "ollama",
+          "model": "qwen3.5:4b",
+          "evidence_hash": "cf3fddd403a45171b6ace294b8446903c38480a92adf7b594557c8296d7818e7",
+          "status": "completed",
+          "created_at": "2026-11-05T18:30:54.594153+00:00",
+          "updated_at": "2026-11-05T18:31:01.669566+00:00",
+          "evidence": {
+            "evidence": [
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "event_id": "dceccc64-f49a-4083-b4c2-9da43c63221d",
+                "exception_type": "IndexError",
+                "id": "event:dceccc64-f49a-4083-b4c2-9da43c63221d",
+                "message": "list index out of range",
+                "occurred_at": "2026-11-05T18:29:19.064923Z",
+                "type": "event"
+              },
+              {
+                "count": 1,
+                "event_ids": [
+                  "dceccc64-f49a-4083-b4c2-9da43c63221d"
+                ],
+                "event_ids_truncated": false,
+                "id": "occurrences",
+                "type": "occurrences"
+              },
+              {
+                "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                "context": [
+                  {
+                    "line": 1,
+                    "text": "def first_or_none(items):"
+                  },
+                  {
+                    "line": 2,
+                    "text": "    return items[0] if items else None"
+                  }
+                ],
+                "function": "first_or_none",
+                "id": "frame:0",
+                "line": 2,
+                "path": "fixtures/repair/m4b_negative/app.py",
+                "source_line": "    return items[0] if items else None",
+                "status": "resolved",
+                "type": "stack_frame"
+              },
+              {
+                "id": "missing_evidence",
+                "items": [
+                  "Deployment information was not captured by the event schema.",
+                  "Static caller matches are incomplete and do not prove execution."
+                ],
+                "type": "missing_evidence"
+              }
+            ],
+            "incident_id": 4,
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution."
+            ],
+            "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+          },
+          "findings": {
+            "outcome": "INSUFFICIENT_EVIDENCE",
+            "observed_failure": {
+              "text": "IndexError: list index out of range",
+              "evidence_ids": [
+                "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+              ]
+            },
+            "observed_facts": [],
+            "hypotheses": [],
+            "alternatives": [],
+            "missing_evidence": [
+              "Deployment information was not captured by the event schema.",
+              "Static caller matches are incomplete and do not prove execution."
+            ],
+            "verification_steps": [
+              "Retrieve deployment logs to identify the service state at failure time.",
+              "Capture runtime stack traces including caller frames for first_or_none.",
+              "Verify list length validation logic in the calling context."
+            ],
+            "atomic_claims": [
+              {
+                "category": "stack_order",
+                "value": "first_or_none@fixtures/repair/m4b_negative/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "exception_type",
+                "value": "IndexError",
+                "evidence_ids": [
+                  "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:dceccc64-f49a-4083-b4c2-9da43c63221d",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "exception_message",
+                "value": "list index out of range",
+                "evidence_ids": [
+                  "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:dceccc64-f49a-4083-b4c2-9da43c63221d",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "commit",
+                "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                "evidence_ids": [
+                  "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Client-reported event data; not independently verified execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "event:dceccc64-f49a-4083-b4c2-9da43c63221d",
+                    "type": "event",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": null
+                  }
+                ]
+              },
+              {
+                "category": "frame_order",
+                "value": "position 1 of 1",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_function",
+                "value": "first_or_none",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Function name and order are reported by the client.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "frame_location",
+                "value": "fixtures/repair/m4b_negative/app.py:2",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "RECORDED",
+                "limitations": "Reported stack location; source resolution is separate.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              },
+              {
+                "category": "source_statement",
+                "value": "    return items[0] if items else None",
+                "evidence_ids": [
+                  "frame:0"
+                ],
+                "verification_status": "VERIFIED_SOURCE",
+                "limitations": "Line read from the recorded Git revision; does not prove execution.",
+                "provenance": [
+                  {
+                    "evidence_id": "frame:0",
+                    "type": "stack_frame",
+                    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+                    "status": "resolved"
+                  }
+                ]
+              }
+            ],
+            "reasoning_levels": {
+              "observed_failure": {
+                "status": "RECORDED",
+                "evidence_ids": [
+                  "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+                ],
+                "exception_type": "IndexError",
+                "notice": "Client-reported; runtime execution is not verified."
+              },
+              "immediate_mechanism": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+              },
+              "upstream_root_cause": {
+                "status": "INSUFFICIENT_EVIDENCE",
+                "notice": "A model hypothesis and citations do not independently verify upstream causation."
+              },
+              "claims": [
+                {
+                  "category": "EXCEPTION_TYPE",
+                  "value": "IndexError",
+                  "supporting_evidence_ids": [
+                    "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Client report does not establish execution."
+                  ]
+                },
+                {
+                  "category": "SOURCE_REVISION",
+                  "value": "6117eda7e74f0a27677483555add08f435b7f850",
+                  "supporting_evidence_ids": [
+                    "event:dceccc64-f49a-4083-b4c2-9da43c63221d"
+                  ],
+                  "source_locations": [],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Revision existence does not establish runtime execution."
+                  ]
+                },
+                {
+                  "category": "RECORDED_STACK_FRAME",
+                  "value": "first_or_none",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_negative/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "RECORDED",
+                  "unsupported_assumptions": [
+                    "Frame was supplied by the event; execution is not independently established."
+                  ]
+                },
+                {
+                  "category": "SOURCE_LINE",
+                  "value": "    return items[0] if items else None",
+                  "supporting_evidence_ids": [
+                    "frame:0"
+                  ],
+                  "source_locations": [
+                    {
+                      "path": "fixtures/repair/m4b_negative/app.py",
+                      "line": 2,
+                      "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+                    }
+                  ],
+                  "mechanically_verifiable": true,
+                  "verification_outcome": "VERIFIED_SOURCE",
+                  "unsupported_assumptions": [
+                    "Source and static relationships do not establish runtime execution."
+                  ]
+                }
+              ]
+            },
+            "hypothesis_review": {
+              "steps": [
+                "inspect_recorded_evidence",
+                "check_pinned_source_identity"
+              ],
+              "hypotheses": [],
+              "omitted_hypotheses": 0,
+              "missing_evidence": [
+                "Deployment information was not captured by the event schema.",
+                "Static caller matches are incomplete and do not prove execution."
+              ],
+              "proposed_verification_experiments": [
+                "Retrieve deployment logs to identify the service state at failure time.",
+                "Capture runtime stack traces including caller frames for first_or_none.",
+                "Verify list length validation logic in the calling context."
+              ],
+              "notice": "Suggestions are untrusted text; no commands are executed."
+            },
+            "reference_retry": {
+              "attempted": false,
+              "reason": null
+            },
+            "diagnosis_source": "MODEL",
+            "model_response_valid": true,
+            "dropped_observation_count": 1
+          },
+          "error": null,
+          "latency_ms": 7071,
+          "usage": {
+            "input_tokens": 943,
+            "output_tokens": 370,
+            "load_duration_ns": 3507400,
+            "eval_duration_ns": 6774761000,
+            "estimated_cost": null
+          },
+          "outcome": "INSUFFICIENT_EVIDENCE"
+        },
+        "status": "completed",
+        "wall_ms": 7080
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "outcome": "LIKELY_CAUSE",
+  "hypotheses": [
+    {
+      "reference_count": 2,
+      "unknown_count": 0,
+      "has_event": true,
+      "has_frame": true
+    }
+  ],
+  "valid": true,
+  "reason": "accepted",
+  "usage": {
+    "input_tokens": 961,
+    "output_tokens": 461,
+    "load_duration_ns": 5211856700,
+    "eval_duration_ns": 8525643000,
+    "estimated_cost": null
+  },
+  "note": "Only structure captured; raw response intentionally not stored."
+}

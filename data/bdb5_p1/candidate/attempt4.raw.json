@@ -1,0 +1,5 @@
+{
+  "find": "class Printable:",
+  "replace": "class Printable:\n    __slots__ = ()",
+  "summary": "Added `__slots__ = ()` to the `Printable` class in sympy/core/_print_helpers.py to prevent accidental inheritance of `__dict__` from parent classes, ensuring Symbol instances do not have a `__dict__` attribute unless explicitly defined."
+}

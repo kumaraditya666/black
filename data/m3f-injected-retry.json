@@ -1,0 +1,381 @@
+{
+  "injected_fault": "first response event reference removed by test harness",
+  "provider_calls": 2,
+  "investigation": {
+    "id": "259dcfbf-ae2e-4f8c-8280-271143307095",
+    "incident_id": 6,
+    "provider": "ollama",
+    "model": "qwen3.5:4b",
+    "evidence_hash": "2958442cf02317238e50d57b6f19a387e3d72481ec0dfa7195cfa4b3e936edca",
+    "status": "completed",
+    "created_at": "2026-11-05T17:56:34.623682+00:00",
+    "updated_at": "2026-11-05T17:56:50.595522+00:00",
+    "evidence": {
+      "evidence": [
+        {
+          "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+          "event_id": "739edee6-01f9-4c21-924d-0799df83bfad",
+          "exception_type": "KeyError",
+          "id": "event:739edee6-01f9-4c21-924d-0799df83bfad",
+          "message": "'max_items'",
+          "occurred_at": "2026-11-05T17:50:18.621923Z",
+          "type": "event"
+        },
+        {
+          "count": 1,
+          "event_ids": [
+            "739edee6-01f9-4c21-924d-0799df83bfad"
+          ],
+          "event_ids_truncated": false,
+          "id": "occurrences",
+          "type": "occurrences"
+        },
+        {
+          "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+          "context": [
+            {
+              "line": 1,
+              "text": "def item_limit(config):"
+            },
+            {
+              "line": 2,
+              "text": "    return config['max_items']"
+            }
+          ],
+          "function": "item_limit",
+          "id": "frame:0",
+          "line": 2,
+          "path": "fixtures/repair/m3f_feed_multi/settings.py",
+          "source_line": "    return config['max_items']",
+          "status": "resolved",
+          "type": "stack_frame"
+        },
+        {
+          "call_line": 4,
+          "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+          "end_line": 4,
+          "function": "take",
+          "id": "code:0",
+          "line": 3,
+          "notice": "Static relationship; execution and binding are unverified.",
+          "path": "fixtures/repair/m3f_feed_multi/app.py",
+          "relation": "caller",
+          "source": "def take(items, config):\n    return items[:item_limit(config)]",
+          "type": "code_context"
+        },
+        {
+          "id": "missing_evidence",
+          "items": [
+            "Deployment information was not captured by the event schema.",
+            "Static caller matches are incomplete and do not prove execution."
+          ],
+          "type": "missing_evidence"
+        }
+      ],
+      "incident_id": 6,
+      "missing_evidence": [
+        "Deployment information was not captured by the event schema.",
+        "Static caller matches are incomplete and do not prove execution."
+      ],
+      "notice": "Untrusted input; retrieved facts and suggested hypotheses are not proof of cause."
+    },
+    "findings": {
+      "outcome": "INSUFFICIENT_EVIDENCE",
+      "observed_failure": {
+        "text": "KeyError: 'max_items'",
+        "evidence_ids": [
+          "event:739edee6-01f9-4c21-924d-0799df83bfad"
+        ]
+      },
+      "observed_facts": [],
+      "hypotheses": [],
+      "alternatives": [],
+      "missing_evidence": [
+        "Deployment information was not captured by the event schema.",
+        "Static caller matches are incomplete and do not prove execution."
+      ],
+      "verification_steps": [
+        "Capture deployment configuration at runtime to verify 'max_items' presence.",
+        "Trace actual call stack execution rather than relying on static relationships.",
+        "Request logs showing the specific config object passed to item_limit."
+      ],
+      "atomic_claims": [
+        {
+          "category": "stack_order",
+          "value": "item_limit@fixtures/repair/m3f_feed_multi/settings.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Recorded stack order as supplied, outermost retained frame first; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "exception_type",
+          "value": "KeyError",
+          "evidence_ids": [
+            "event:739edee6-01f9-4c21-924d-0799df83bfad"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:739edee6-01f9-4c21-924d-0799df83bfad",
+              "type": "event",
+              "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "exception_message",
+          "value": "'max_items'",
+          "evidence_ids": [
+            "event:739edee6-01f9-4c21-924d-0799df83bfad"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:739edee6-01f9-4c21-924d-0799df83bfad",
+              "type": "event",
+              "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "commit",
+          "value": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+          "evidence_ids": [
+            "event:739edee6-01f9-4c21-924d-0799df83bfad"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Client-reported event data; not independently verified execution.",
+          "provenance": [
+            {
+              "evidence_id": "event:739edee6-01f9-4c21-924d-0799df83bfad",
+              "type": "event",
+              "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+              "status": null
+            }
+          ]
+        },
+        {
+          "category": "frame_order",
+          "value": "position 1 of 1",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Order within the retained client-reported stack; earlier frames may be omitted.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_function",
+          "value": "item_limit",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Function name and order are reported by the client.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "frame_location",
+          "value": "fixtures/repair/m3f_feed_multi/settings.py:2",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "RECORDED",
+          "limitations": "Reported stack location; source resolution is separate.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+              "status": "resolved"
+            }
+          ]
+        },
+        {
+          "category": "source_statement",
+          "value": "    return config['max_items']",
+          "evidence_ids": [
+            "frame:0"
+          ],
+          "verification_status": "VERIFIED_SOURCE",
+          "limitations": "Line read from the recorded Git revision; does not prove execution.",
+          "provenance": [
+            {
+              "evidence_id": "frame:0",
+              "type": "stack_frame",
+              "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+              "status": "resolved"
+            }
+          ]
+        }
+      ],
+      "reasoning_levels": {
+        "observed_failure": {
+          "status": "RECORDED",
+          "evidence_ids": [
+            "event:739edee6-01f9-4c21-924d-0799df83bfad"
+          ],
+          "exception_type": "KeyError",
+          "notice": "Client-reported; runtime execution is not verified."
+        },
+        "immediate_mechanism": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "Model hypotheses are not reliably classified as immediate mechanisms; no free-text mechanism is mechanically established."
+        },
+        "upstream_root_cause": {
+          "status": "INSUFFICIENT_EVIDENCE",
+          "notice": "A model hypothesis and citations do not independently verify upstream causation."
+        },
+        "claims": [
+          {
+            "category": "EXCEPTION_TYPE",
+            "value": "KeyError",
+            "supporting_evidence_ids": [
+              "event:739edee6-01f9-4c21-924d-0799df83bfad"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Client report does not establish execution."
+            ]
+          },
+          {
+            "category": "SOURCE_REVISION",
+            "value": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec",
+            "supporting_evidence_ids": [
+              "event:739edee6-01f9-4c21-924d-0799df83bfad"
+            ],
+            "source_locations": [],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Revision existence does not establish runtime execution."
+            ]
+          },
+          {
+            "category": "RECORDED_STACK_FRAME",
+            "value": "item_limit",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3f_feed_multi/settings.py",
+                "line": 2,
+                "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "RECORDED",
+            "unsupported_assumptions": [
+              "Frame was supplied by the event; execution is not independently established."
+            ]
+          },
+          {
+            "category": "SOURCE_LINE",
+            "value": "    return config['max_items']",
+            "supporting_evidence_ids": [
+              "frame:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3f_feed_multi/settings.py",
+                "line": 2,
+                "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          },
+          {
+            "category": "SOURCE_EXCERPT",
+            "value": "def take(items, config):\n    return items[:item_limit(config)]",
+            "supporting_evidence_ids": [
+              "code:0"
+            ],
+            "source_locations": [
+              {
+                "path": "fixtures/repair/m3f_feed_multi/app.py",
+                "line": 3,
+                "commit": "ee674ffb46dc83c5d78585ac23cd86217bcc2dec"
+              }
+            ],
+            "mechanically_verifiable": true,
+            "verification_outcome": "VERIFIED_SOURCE",
+            "unsupported_assumptions": [
+              "Source and static relationships do not establish runtime execution."
+            ]
+          }
+        ]
+      },
+      "hypothesis_review": {
+        "steps": [
+          "inspect_recorded_evidence",
+          "check_pinned_source_identity"
+        ],
+        "hypotheses": [],
+        "omitted_hypotheses": 0,
+        "missing_evidence": [
+          "Deployment information was not captured by the event schema.",
+          "Static caller matches are incomplete and do not prove execution."
+        ],
+        "proposed_verification_experiments": [
+          "Capture deployment configuration at runtime to verify 'max_items' presence.",
+          "Trace actual call stack execution rather than relying on static relationships.",
+          "Request logs showing the specific config object passed to item_limit."
+        ],
+        "notice": "Suggestions are untrusted text; no commands are executed."
+      },
+      "reference_retry": {
+        "attempted": true,
+        "reason": "MISSING_REQUIRED_REFERENCE"
+      },
+      "diagnosis_source": "MODEL",
+      "model_response_valid": true,
+      "dropped_observation_count": 0
+    },
+    "error": null,
+    "latency_ms": 15969,
+    "usage": {
+      "input_tokens": 2115,
+      "output_tokens": 805,
+      "load_duration_ns": 17647400,
+      "eval_duration_ns": 14920533000,
+      "request_count": 2,
+      "estimated_cost": null
+    },
+    "outcome": "INSUFFICIENT_EVIDENCE"
+  }
+}

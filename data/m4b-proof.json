@@ -1,0 +1,213 @@
+{
+  "approval": {
+    "id": "84b120bc-3e6a-47f0-9d3e-7f9130f080fb",
+    "investigation_id": "e61cb650-b61c-44d6-a91d-79549729130e",
+    "hypothesis_index": 0,
+    "hypothesis_sha256": "abaa822030948edbc069ce6599fac2d94da5c9c658083e359c7ba8dd3d408881",
+    "evidence_hash": "7e5c97807dde6f3e9296c2692944de1585e2c6e623a93c9c4694ffaef0d73823",
+    "reviewer": "m4b-fixture-evaluation",
+    "note": "Explicit benchmark approval for this one trusted fixture only.",
+    "created_at": "2026-11-05T18:31:29.178892+00:00"
+  },
+  "attempt": {
+    "id": "a80854f9-0958-4689-bc8a-807af06dcfa3",
+    "incident_id": 2,
+    "investigation_id": "e61cb650-b61c-44d6-a91d-79549729130e",
+    "fixture": "m4b_average",
+    "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+    "status": "VERIFIED_IN_TEST_ENVIRONMENT",
+    "approval_id": "84b120bc-3e6a-47f0-9d3e-7f9130f080fb",
+    "proposal": {
+      "summary": "Fix ZeroDivisionError in average() when values list has length 1 by removing the erroneous '-1' from the denominator.",
+      "changes": [
+        {
+          "path": "app.py",
+          "find": "def average(values):\n    return sum(values) / (len(values) - 1)",
+          "replace": "def average(values):\n    return sum(values) / len(values)",
+          "explanation": "The original code subtracts 1 from the count of values before division, causing division by zero when only one value exists. The mean should divide by the actual count of values."
+        }
+      ],
+      "risks": [
+        "This change alters the mathematical formula used in the function; however, the hypothesis explicitly identifies this as the cause of the recorded exception.",
+        "No other files are modified, and no test code is changed per constraints."
+      ]
+    },
+    "validation": {
+      "eligibility": {
+        "eligible": true,
+        "reasons": [],
+        "checks": [
+          {
+            "code": "investigation_exists",
+            "ok": true,
+            "detail": "investigation record exists"
+          },
+          {
+            "code": "investigation_completed",
+            "ok": true,
+            "detail": "investigation status is completed"
+          },
+          {
+            "code": "outcome_likely_cause",
+            "ok": true,
+            "detail": "investigation outcome is LIKELY_CAUSE"
+          },
+          {
+            "code": "fixture_known",
+            "ok": true,
+            "detail": "fixture m4b_average is registered"
+          },
+          {
+            "code": "repository_trusted",
+            "ok": true,
+            "detail": "trusted local fixture repository approved for Milestone 3A"
+          },
+          {
+            "code": "evidence_references_valid",
+            "ok": true,
+            "detail": "all references resolve"
+          },
+          {
+            "code": "recorded_revision",
+            "ok": true,
+            "detail": "revision 6117eda7e74f0a27677483555add08f435b7f850 is present in the repository"
+          },
+          {
+            "code": "source_pinned",
+            "ok": true,
+            "detail": "all fixture files match their pinned content hashes"
+          },
+          {
+            "code": "resolved_source_frame",
+            "ok": true,
+            "detail": "a cited source frame is resolved at the recorded revision"
+          },
+          {
+            "code": "frame_in_approved_file",
+            "ok": true,
+            "detail": "cited frame fixtures/repair/m4b_average/app.py is in the allowed patch files"
+          },
+          {
+            "code": "frame_matches_fixture",
+            "ok": true,
+            "detail": "cited frame matches the registered fixture failure location"
+          },
+          {
+            "code": "human_approval",
+            "ok": true,
+            "detail": "a human review record matches this hypothesis and evidence snapshot"
+          }
+        ],
+        "investigation_id": "e61cb650-b61c-44d6-a91d-79549729130e",
+        "fixture": "m4b_average",
+        "hypothesis_index": 0,
+        "hypothesis_sha256": "abaa822030948edbc069ce6599fac2d94da5c9c658083e359c7ba8dd3d408881",
+        "approval_id": "84b120bc-3e6a-47f0-9d3e-7f9130f080fb",
+        "frame": {
+          "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+          "context": [
+            {
+              "line": 1,
+              "text": "def average(values):"
+            },
+            {
+              "line": 2,
+              "text": "    return sum(values) / (len(values) - 1)"
+            }
+          ],
+          "function": "average",
+          "id": "frame:0",
+          "line": 2,
+          "path": "fixtures/repair/m4b_average/app.py",
+          "source_line": "    return sum(values) / (len(values) - 1)",
+          "status": "resolved",
+          "type": "stack_frame"
+        },
+        "commit": "6117eda7e74f0a27677483555add08f435b7f850"
+      },
+      "applied": true,
+      "changed_files": [
+        "app.py"
+      ],
+      "semantic_execution": {
+        "status": "FAILURE_REPRODUCED_IN_TEST",
+        "notice": "Persisted test results are not independent attestation or proof about a past incident.",
+        "checks": {
+          "reproduction_before": {
+            "evidence_id": "repair:a80854f9-0958-4689-bc8a-807af06dcfa3:reproduction_before",
+            "test_node": "tests/test_reproduction.py::test_single",
+            "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+            "mechanically_verifiable": true,
+            "verification_outcome": "TEST_FAILED",
+            "returncode": 1
+          },
+          "reproduction_after": {
+            "evidence_id": "repair:a80854f9-0958-4689-bc8a-807af06dcfa3:reproduction_after",
+            "test_node": "tests/test_reproduction.py::test_single",
+            "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+            "mechanically_verifiable": true,
+            "verification_outcome": "TEST_PASSED",
+            "returncode": 0
+          },
+          "regression": {
+            "evidence_id": "repair:a80854f9-0958-4689-bc8a-807af06dcfa3:regression",
+            "test_node": "tests/test_regression.py",
+            "commit": "6117eda7e74f0a27677483555add08f435b7f850",
+            "mechanically_verifiable": true,
+            "verification_outcome": "TEST_PASSED",
+            "returncode": 0
+          }
+        }
+      }
+    },
+    "diff": "--- a/app.py\n+++ b/app.py\n@@ -1,2 +1,2 @@\n def average(values):\n-    return sum(values) / (len(values) - 1)\n+    return sum(values) / len(values)\n",
+    "reproduction_before": {
+      "returncode": 1,
+      "timed_out": false,
+      "environment_error": false,
+      "isolation": "docker",
+      "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_________________________________ test_single __________________________________\n\n    def test_single():\n>       assert average([4]) == 4\n               ^^^^^^^^^^^^\n\ntests/test_reproduction.py:4: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nvalues = [4]\n\n    def average(values):\n>       return sum(values) / (len(values) - 1)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       ZeroDivisionError: division by zero\n\napp.py:2: ZeroDivisionError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_single - ZeroDivisionError: division ...\n1 failed in 0.08s\n",
+      "security_blocked": false
+    },
+    "reproduction_after": {
+      "returncode": 0,
+      "timed_out": false,
+      "environment_error": false,
+      "isolation": "docker",
+      "output": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "security_blocked": false
+    },
+    "regression": {
+      "returncode": 0,
+      "timed_out": false,
+      "environment_error": false,
+      "isolation": "docker",
+      "output": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "security_blocked": false
+    },
+    "isolation": {
+      "mode": "docker",
+      "detail": "container isolation requested"
+    },
+    "error": null,
+    "timings": {
+      "materialize_ms": 93,
+      "reproduce_before_ms": 2949,
+      "generation_ms": 4682,
+      "apply_ms": 130,
+      "reproduce_after_ms": 2740,
+      "regression_ms": 2749,
+      "total_ms": 13499
+    },
+    "usage": {
+      "input_tokens": 1320,
+      "output_tokens": 204,
+      "load_duration_ns": 3365800,
+      "eval_duration_ns": 3730967000,
+      "estimated_cost": null
+    },
+    "review": null,
+    "created_at": "2026-11-05T18:31:29.182564+00:00",
+    "updated_at": "2026-11-05T18:31:42.682191+00:00"
+  }
+}

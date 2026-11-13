@@ -1,0 +1,10 @@
+{
+  "anomaly": 8.0,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "pre",
+  "service": "front-end",
+  "summary": "The telemetry data shows a consistent and significant drop in the metric value for the 'front-end' service compared to other services. The values for 'front-end' are consistently lower (e.g., 8.0, 24.8) than those of other services (e.g., 25.467, 26.0). This suggests a potential issue with the 'front-end' service, possibly related to resource constraints or performance degradation. The fault class is likely F1: Resource Exhaustion, as the lower values could indicate insufficient resources allocated to the 'front-end' service."
+}

@@ -1,0 +1,37 @@
+{
+  "labels": [
+    {
+      "case": "m4b_inventory",
+      "expected": "item limit should default to 10",
+      "diagnosable": true,
+      "required_source": "fixtures/repair/m4b_inventory/limits.py",
+      "mechanism": "missing key",
+      "upstream": "item limit should default to 10"
+    },
+    {
+      "case": "m4b_average",
+      "expected": "mean divides by the number of values",
+      "diagnosable": true,
+      "required_source": "fixtures/repair/m4b_average/app.py",
+      "mechanism": "subtracting one from length",
+      "upstream": "mean divides by the number of values"
+    },
+    {
+      "case": "m4b_origin",
+      "expected": "source of malformed input is not recorded",
+      "diagnosable": false,
+      "required_source": "fixtures/repair/m4b_origin/app.py",
+      "mechanism": "invalid integer conversion",
+      "upstream": "unknown"
+    },
+    {
+      "case": "m4b_negative",
+      "expected": "empty inputs return None; reported IndexError is unsupported",
+      "diagnosable": false,
+      "required_source": "fixtures/repair/m4b_negative/app.py",
+      "mechanism": "unreproduced report",
+      "upstream": "unknown"
+    }
+  ],
+  "author_scorer": "same operator, unblinded"
+}

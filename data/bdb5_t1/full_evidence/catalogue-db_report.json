@@ -1,0 +1,8 @@
+{
+  "anomaly": 0.0,
+  "evidence_ids": [],
+  "likely_upstream": false,
+  "pre_post": "none",
+  "service": "catalogue-db",
+  "summary": "The telemetry data shows no anomalies; all metrics are at baseline (4.0). No logs or evidence indicate a fault. The source cause is NOT_ESTABLISHED due to lack of anomalous signals."
+}

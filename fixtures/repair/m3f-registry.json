@@ -1,0 +1,165 @@
+{
+  "fixtures": [
+    {
+      "name": "m3f_feed_multi",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M3F trusted fixture",
+      "expected_behavior": "missing max_items defaults to 10 while explicit values work",
+      "files": {
+        "app.py": "6a22963f98c5a018b7cdca7b40285ffc620776cd2ef78738426ea76f3b0d8484",
+        "settings.py": "3eefe17b02232db1ba64549000d7c5bb74f5eb2672b6b577527aa1f704cfd322",
+        "tests/test_reproduction.py": "86c55eacb8abbca5528ba1dbc932f58ae37efc9eb93d6e1ae715972f7b544022",
+        "tests/test_regression.py": "3ec57a7bb72b69e544a5da0169aeaaa370a8c453863d553adffa3ded7cc0c2bb",
+        "conftest.py": "a4d1dec569e641466808daf0157969fd8494913f3ceca707d47cacb6ade24862"
+      },
+      "allowed_files": [
+        "settings.py"
+      ],
+      "event": {
+        "exception_type": "KeyError",
+        "message": "'max_items'",
+        "frame": {
+          "path": "fixtures/repair/m3f_feed_multi/settings.py",
+          "line": 2,
+          "function": "item_limit"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_default_limit",
+        "failure_marker": "KeyError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m3f_checksum",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M3F trusted fixture",
+      "expected_behavior": "sum each list item without indexing beyond the end",
+      "files": {
+        "app.py": "fd07143e2400689e74bfde71d660dfcd0e789a4829d9d1783cb31d5a8881a062",
+        "tests/test_reproduction.py": "522fb856d50300b93fe978a0e034fefe64236067b604fed919fbdb42406ce9bc",
+        "tests/test_regression.py": "ef696ca25a9e6d4137ffc8ac9c4ff8b94c26b32892feb2e6e24a2f9b5b743dfd",
+        "conftest.py": "a4d1dec569e641466808daf0157969fd8494913f3ceca707d47cacb6ade24862"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "IndexError",
+        "message": "list index out of range",
+        "frame": {
+          "path": "fixtures/repair/m3f_checksum/app.py",
+          "line": 4,
+          "function": "checksum"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_checksum",
+        "failure_marker": "IndexError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m3f_misleading",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M3F trusted fixture",
+      "expected_behavior": "return the item count, including zero for an empty batch",
+      "files": {
+        "app.py": "631b7461c41f809e44dd7c3d92b60bb3664dbd6191197bce68fb748e7ac561e0",
+        "tests/test_reproduction.py": "6b408fc90db29b780caeeda16c5a08e033bb57788df2e776bcc857feb7ed2a7f",
+        "tests/test_regression.py": "a578a6966c7cd6823d60965af13289702aa8fa8c2fca8f2946728c68cd7454d4",
+        "conftest.py": "a4d1dec569e641466808daf0157969fd8494913f3ceca707d47cacb6ade24862"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "ValueError",
+        "message": "remote service unavailable",
+        "frame": {
+          "path": "fixtures/repair/m3f_misleading/app.py",
+          "line": 3,
+          "function": "require_entries"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_empty_batch",
+        "failure_marker": "ValueError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m3f_origin",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M3F trusted fixture",
+      "expected_behavior": "upstream origin is not captured; do not infer it",
+      "files": {
+        "app.py": "ae708f8ba9072ca3f3b3fcc1bbe98be9f47d0aea8b42ed129d7300ffe89d4c41",
+        "tests/test_reproduction.py": "16c0810f365f6fee7a844bcdbfb2a8c781c59e8994efc2f992d0e65d2e09b21d",
+        "tests/test_regression.py": "60b1f2c902523d059868dbb2440751288e82ad8ce97c64d7faa570aded8b8be3",
+        "conftest.py": "a4d1dec569e641466808daf0157969fd8494913f3ceca707d47cacb6ade24862"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "ValueError",
+        "message": "invalid literal for int() with base 10: 'n/a'",
+        "frame": {
+          "path": "fixtures/repair/m3f_origin/app.py",
+          "line": 2,
+          "function": "read_score"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_unknown_score",
+        "failure_marker": "ValueError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m3f_absent",
+      "approved_for_m3a": true,
+      "description": "Locally reviewed M3F trusted fixture",
+      "expected_behavior": "return None for an empty sequence",
+      "files": {
+        "app.py": "269b9361ec03329115720aa92d3f0e901e834eaedbf5144b0a6029bf45364cdb",
+        "tests/test_reproduction.py": "4548a37b6ddea8647339d8c5f988932cb58061c950ad7fd0d4fbfa7a989196c3",
+        "tests/test_regression.py": "7fd4cf93becb8eb455db2cb2b23880e240ddf1a2c5b57b7d305ae1bcdbbf2f8c",
+        "conftest.py": "a4d1dec569e641466808daf0157969fd8494913f3ceca707d47cacb6ade24862"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "IndexError",
+        "message": "list index out of range",
+        "frame": {
+          "path": "fixtures/repair/m3f_absent/app.py",
+          "line": 2,
+          "function": "last_or_none"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_empty",
+        "failure_marker": "IndexError",
+        "reproducible": false
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    }
+  ]
+}

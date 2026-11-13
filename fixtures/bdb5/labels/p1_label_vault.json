@@ -1,0 +1,42 @@
+{
+  "schema_version": "bdb5-label-vault-v1",
+  "cases": {
+    "BDB5-P1": {
+      "truth": {
+        "case_id": "BDB5-P1",
+        "expected_files": [
+          "sympy/core/_print_helpers.py"
+        ],
+        "expected_patch": {
+          "allowed_files": [
+            "sympy/core/_print_helpers.py"
+          ],
+          "fail_to_pass": [
+            "test_immutable"
+          ],
+          "pass_to_pass": [],
+          "require_reproduction_before": true,
+          "require_reproduction_after": true,
+          "require_regression": true
+        },
+        "causal_level": "NA",
+        "expected_l1_status": "NOT_ASSESSED",
+        "expected_l2_status": "NOT_ASSESSED",
+        "expected_abstention": false,
+        "forbidden_public_literals": [
+          "test_immutable",
+          "gold_patch",
+          "test_patch",
+          "FAIL_TO_PASS",
+          "PASS_TO_PASS"
+        ]
+      },
+      "rationale": "The upstream issue reports that Symbol instances gained a __dict__ after the parent mixin stopped declaring __slots__. The repair is scoped to sympy/core/_print_helpers.py. Correctness is test-verified only; the case does not establish L4 historical causation.",
+      "references": [
+        "https://github.com/sympy/sympy/issues/20567",
+        "https://github.com/sympy/sympy/pull/20590",
+        "SWE-bench Verified dataset revision 78f471bf655a3137b2e8a75af1501690ec009ec3"
+      ]
+    }
+  }
+}

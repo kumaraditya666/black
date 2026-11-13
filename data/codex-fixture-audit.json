@@ -1,0 +1,72 @@
+[
+  {
+    "fixture": "division_by_zero",
+    "revision": "b96840fef85585904c9348e213dbbec9c0ca521a",
+    "expected_reproducible": true,
+    "marker": "ZeroDivisionError",
+    "marker_present": true,
+    "result": {
+      "returncode": 1,
+      "timed_out": false,
+      "environment_error": false,
+      "isolation": "process",
+      "output": "F                                                                        [100%]\n================================== FAILURES ===================================\n______________________ test_average_rejects_empty_input _______________________\n\n    def test_average_rejects_empty_input():\n        with pytest.raises(ValueError, match='empty'):\n>           average([])\n\ntests\\test_reproduction.py:8: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nvalues = []\n\n    def average(values):\n>       return sum(values) / len(values)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^\nE       ZeroDivisionError: division by zero\n\napp.py:5: ZeroDivisionError\n=========================== short test summary info ===========================\nFAILED tests/test_reproduction.py::test_average_rejects_empty_input - ZeroDiv...\n1 failed in 0.04s\n"
+    }
+  },
+  {
+    "fixture": "argument_validation",
+    "revision": "b96840fef85585904c9348e213dbbec9c0ca521a",
+    "expected_reproducible": true,
+    "marker": "TypeError",
+    "marker_present": true,
+    "result": {
+      "returncode": 1,
+      "timed_out": false,
+      "environment_error": false,
+      "isolation": "process",
+      "output": "F                                                                        [100%]\n================================== FAILURES ===================================\n__________________ test_none_is_rejected_as_invalid_argument __________________\n\n    def test_none_is_rejected_as_invalid_argument():\n        with pytest.raises(ValueError):\n>           parse_port(None)\n\ntests\\test_reproduction.py:8: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nvalue = None\n\n    def parse_port(value):\n        try:\n>           return int(value)\n                   ^^^^^^^^^^\nE           TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'\n\napp.py:6: TypeError\n=========================== short test summary info ===========================\nFAILED tests/test_reproduction.py::test_none_is_rejected_as_invalid_argument\n1 failed in 0.04s\n"
+    }
+  },
+  {
+    "fixture": "off_by_one",
+    "revision": "b96840fef85585904c9348e213dbbec9c0ca521a",
+    "expected_reproducible": true,
+    "marker": "IndexError",
+    "marker_present": true,
+    "result": {
+      "returncode": 1,
+      "timed_out": false,
+      "environment_error": false,
+      "isolation": "process",
+      "output": "F                                                                        [100%]\n================================== FAILURES ===================================\n____________________ test_absent_target_returns_minus_one _____________________\n\n    def test_absent_target_returns_minus_one():\n>       assert find_index([1, 2, 3], 4) == -1\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests\\test_reproduction.py:5: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nitems = [1, 2, 3], target = 4\n\n    def find_index(items, target):\n        for index in range(len(items) + 1):\n>           if items[index] == target:\n               ^^^^^^^^^^^^\nE           IndexError: list index out of range\n\napp.py:6: IndexError\n=========================== short test summary info ===========================\nFAILED tests/test_reproduction.py::test_absent_target_returns_minus_one - Ind...\n1 failed in 0.04s\n"
+    }
+  },
+  {
+    "fixture": "missing_config",
+    "revision": "b96840fef85585904c9348e213dbbec9c0ca521a",
+    "expected_reproducible": true,
+    "marker": "KeyError",
+    "marker_present": true,
+    "result": {
+      "returncode": 1,
+      "timed_out": false,
+      "environment_error": false,
+      "isolation": "process",
+      "output": "F                                                                        [100%]\n================================== FAILURES ===================================\n______________________ test_missing_timeout_uses_default ______________________\n\n    def test_missing_timeout_uses_default():\n>       assert request_timeout({}) == 30\n               ^^^^^^^^^^^^^^^^^^^\n\ntests\\test_reproduction.py:5: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nconfig = {}\n\n    def request_timeout(config):\n>       return config['timeout']\n               ^^^^^^^^^^^^^^^^^\nE       KeyError: 'timeout'\n\napp.py:5: KeyError\n=========================== short test summary info ===========================\nFAILED tests/test_reproduction.py::test_missing_timeout_uses_default - KeyErr...\n1 failed in 0.04s\n"
+    }
+  },
+  {
+    "fixture": "unreproducible",
+    "revision": "b96840fef85585904c9348e213dbbec9c0ca521a",
+    "expected_reproducible": false,
+    "marker": "ZeroDivisionError",
+    "marker_present": false,
+    "result": {
+      "returncode": 0,
+      "timed_out": false,
+      "environment_error": false,
+      "isolation": "process",
+      "output": ".                                                                        [100%]\n1 passed in 0.01s\n"
+    }
+  }
+]

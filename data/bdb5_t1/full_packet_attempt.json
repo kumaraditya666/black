@@ -1,0 +1,18 @@
+{
+  "case_id": "BDB5-T1",
+  "context_mode": "FULL_PACKET",
+  "http_status": 400,
+  "log": "data/bdb5_t1/full_packet_out/client.log",
+  "minimum_context_with_output_reserve": 1621290,
+  "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "model_context_limit": 1048576,
+  "overflow_tokens": 566570,
+  "projection_used": false,
+  "provider": "Nvidia via OpenRouter",
+  "provider_calls": 1,
+  "provider_error": "This model's maximum context length is 1048576 tokens. However, your messages resulted in 1615146 tokens.",
+  "provider_reported_prompt_tokens": 1615146,
+  "score_written": false,
+  "status": "FULL_PACKET_REJECTED_CONTEXT",
+  "truncated": false
+}

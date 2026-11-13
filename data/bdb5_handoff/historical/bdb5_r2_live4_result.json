@@ -1,0 +1,48 @@
+{
+  "case_id": "BDB5-R2",
+  "claims": [
+    {
+      "category": "OBSERVATION",
+      "text": "CI job marshallward-f90nml-83523531 failed with exit code 1. Primary test failure: test_dict_write (ERROR). Error details: IOError: [Errno 2] No such file or directory: 'types_dict.nml'.",
+      "evidence_ids": [
+        "ci:1",
+        "test:1"
+      ],
+      "material": true,
+      "confidence": null,
+      "uncertainty": null,
+      "asserts_execution": false
+    }
+  ],
+  "service_ranked": [],
+  "fault_class": null,
+  "predicted_files": [],
+  "predicted_function": null,
+  "predicted_line": null,
+  "predicted_mechanism": null,
+  "mechanism_evidence_ids": [],
+  "l1_causal_status": "NOT_ASSESSED",
+  "l2_causal_status": "NOT_ESTABLISHED",
+  "abstention": {
+    "scope": "APPLICATION_SOURCE",
+    "reason": "The evidence does not establish an application-source cause.",
+    "missing_evidence": [
+      "application stack trace",
+      "source code modification evidence"
+    ],
+    "source_not_established": false,
+    "application_source_not_established": true
+  },
+  "patch": null,
+  "test_executions": [
+    {
+      "role": "REPRODUCTION_BEFORE",
+      "name": "test_dict_write",
+      "outcome": "FAIL",
+      "artifact_sha256": null,
+      "command": null,
+      "failure_signature_matched": null
+    }
+  ],
+  "claimed_source_revision": null
+}

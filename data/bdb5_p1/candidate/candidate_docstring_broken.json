@@ -1,0 +1,20 @@
+{
+  "attempt": 4,
+  "changed_files": [
+    "sympy/core/_print_helpers.py"
+  ],
+  "find": "class Printable:",
+  "gold_patch_in_prompt": false,
+  "hidden_tests_in_prompt": false,
+  "model": "qwen3.5:9b-q4_K_M",
+  "model_calls": 4,
+  "patch_chars": 205,
+  "replace": "class Printable:\n    __slots__ = ()",
+  "request_hash": "3f498e8f1cf8a3f96dbf4e25231be9a667f016efa0b681f82833b3919b4eec7c",
+  "response_hash": "8630532ab351322ddd2b057dae07b3211cf7675421e92e47edd148afd1e909c4",
+  "summary": "Added `__slots__ = ()` to the `Printable` class in sympy/core/_print_helpers.py to prevent accidental inheritance of `__dict__` from parent classes, ensuring Symbol instances do not have a `__dict__` attribute unless explicitly defined.",
+  "usage": {
+    "eval_count": 90,
+    "prompt_eval_count": 771
+  }
+}

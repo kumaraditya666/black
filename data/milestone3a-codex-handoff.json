@@ -1,0 +1,766 @@
+{
+  "milestone": "3A",
+  "created_at": "2026-11-05T15:23:16.417487+00:00",
+  "model": "qwen3.5:4b",
+  "provider": "ollama",
+  "revision": "b96840fef85585904c9348e213dbbec9c0ca521a",
+  "isolation": {
+    "mode": "process",
+    "detail": "Process-jail mode: no OS-level network or filesystem confinement. Only pinned trusted M3A fixtures are executable; general-purpose repair execution is blocked."
+  },
+  "context_length": 2048,
+  "approval_mode": "fixture-level benchmark; not a production review",
+  "database": "C:\\Users\\Adi\\Documents\\ChatGPT\\black\\data\\m3a-evaluation-20261105T152215Z.db",
+  "summary": {
+    "cases": 5,
+    "eligible": 3,
+    "attempted": 3,
+    "verified": 2,
+    "patch_failed": 0,
+    "patch_rejected": 0,
+    "unverified": 1,
+    "environment_failed": 0,
+    "generation_failed": 0,
+    "reproduction_confirmed": 2,
+    "reproduction_passed_after": 2,
+    "regression_passed": 2,
+    "total_ms_median": 13781,
+    "model_generation_ms": [
+      2423,
+      2600
+    ]
+  },
+  "cases": [
+    {
+      "case": "division_by_zero",
+      "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+      "fixture_description": "Averaging an empty collection divides by zero instead of rejecting it.",
+      "investigation": {
+        "id": "f7e1bf95-6011-4556-a933-1ae8010a5288",
+        "status": "completed",
+        "outcome": "INSUFFICIENT_EVIDENCE",
+        "error": null,
+        "latency_ms": 15314,
+        "usage": {
+          "input_tokens": 908,
+          "output_tokens": 365,
+          "load_duration_ns": 7997193600,
+          "eval_duration_ns": 6638339000,
+          "estimated_cost": null
+        }
+      },
+      "investigation_ms": 15394,
+      "approval": {
+        "recorded": false,
+        "reviewer": null,
+        "mode": null
+      },
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          {
+            "code": "outcome_likely_cause",
+            "detail": "investigation outcome is INSUFFICIENT_EVIDENCE"
+          },
+          {
+            "code": "approved_hypothesis",
+            "detail": "investigation has no hypothesis to approve"
+          }
+        ],
+        "checks": [
+          {
+            "code": "investigation_exists",
+            "ok": true,
+            "detail": "investigation record exists"
+          },
+          {
+            "code": "investigation_completed",
+            "ok": true,
+            "detail": "investigation status is completed"
+          },
+          {
+            "code": "outcome_likely_cause",
+            "ok": false,
+            "detail": "investigation outcome is INSUFFICIENT_EVIDENCE"
+          },
+          {
+            "code": "fixture_known",
+            "ok": true,
+            "detail": "fixture division_by_zero is registered"
+          },
+          {
+            "code": "repository_trusted",
+            "ok": true,
+            "detail": "trusted local fixture repository approved for Milestone 3A"
+          },
+          {
+            "code": "evidence_references_valid",
+            "ok": true,
+            "detail": "all references resolve"
+          },
+          {
+            "code": "recorded_revision",
+            "ok": true,
+            "detail": "revision b96840fef85585904c9348e213dbbec9c0ca521a is present in the repository"
+          },
+          {
+            "code": "source_pinned",
+            "ok": true,
+            "detail": "all fixture files match their pinned content hashes"
+          },
+          {
+            "code": "approved_hypothesis",
+            "ok": false,
+            "detail": "investigation has no hypothesis to approve"
+          }
+        ],
+        "investigation_id": "f7e1bf95-6011-4556-a933-1ae8010a5288",
+        "fixture": "division_by_zero",
+        "hypothesis_index": null,
+        "hypothesis_sha256": null,
+        "approval_id": null,
+        "frame": null,
+        "commit": "b96840fef85585904c9348e213dbbec9c0ca521a"
+      },
+      "total_ms": 15736
+    },
+    {
+      "case": "argument_validation",
+      "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+      "fixture_description": "parse_port lets a non-numeric argument raise TypeError instead of ValueError.",
+      "investigation": {
+        "id": "1a04c626-96d9-4668-a35b-9a2fb6bff9ba",
+        "status": "completed",
+        "outcome": "LIKELY_CAUSE",
+        "error": null,
+        "latency_ms": 9421,
+        "usage": {
+          "input_tokens": 951,
+          "output_tokens": 499,
+          "load_duration_ns": 7454000,
+          "eval_duration_ns": 9114925000,
+          "estimated_cost": null
+        }
+      },
+      "investigation_ms": 9511,
+      "approval": {
+        "recorded": true,
+        "reviewer": "m3a-benchmark",
+        "mode": "fixture-level benchmark"
+      },
+      "eligibility": {
+        "eligible": true,
+        "reasons": [],
+        "checks": [
+          {
+            "code": "investigation_exists",
+            "ok": true,
+            "detail": "investigation record exists"
+          },
+          {
+            "code": "investigation_completed",
+            "ok": true,
+            "detail": "investigation status is completed"
+          },
+          {
+            "code": "outcome_likely_cause",
+            "ok": true,
+            "detail": "investigation outcome is LIKELY_CAUSE"
+          },
+          {
+            "code": "fixture_known",
+            "ok": true,
+            "detail": "fixture argument_validation is registered"
+          },
+          {
+            "code": "repository_trusted",
+            "ok": true,
+            "detail": "trusted local fixture repository approved for Milestone 3A"
+          },
+          {
+            "code": "evidence_references_valid",
+            "ok": true,
+            "detail": "all references resolve"
+          },
+          {
+            "code": "recorded_revision",
+            "ok": true,
+            "detail": "revision b96840fef85585904c9348e213dbbec9c0ca521a is present in the repository"
+          },
+          {
+            "code": "source_pinned",
+            "ok": true,
+            "detail": "all fixture files match their pinned content hashes"
+          },
+          {
+            "code": "resolved_source_frame",
+            "ok": true,
+            "detail": "a cited source frame is resolved at the recorded revision"
+          },
+          {
+            "code": "frame_in_approved_file",
+            "ok": true,
+            "detail": "cited frame fixtures/repair/argument_validation/app.py is in the allowed patch files"
+          },
+          {
+            "code": "frame_matches_fixture",
+            "ok": true,
+            "detail": "cited frame matches the registered fixture failure location"
+          },
+          {
+            "code": "human_approval",
+            "ok": true,
+            "detail": "a human review record matches this hypothesis and evidence snapshot"
+          }
+        ],
+        "investigation_id": "1a04c626-96d9-4668-a35b-9a2fb6bff9ba",
+        "fixture": "argument_validation",
+        "hypothesis_index": 0,
+        "hypothesis_sha256": "b2c5ab8745f6cbbc111f88a964f7ef969a44b5bc50e5b1a37b93cfce388ed170",
+        "approval_id": "2303ccd0-6d95-4ef2-b768-3728ed7383f8",
+        "frame": {
+          "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+          "context": [
+            {
+              "line": 4,
+              "text": "def parse_port(value):"
+            },
+            {
+              "line": 5,
+              "text": "    try:"
+            },
+            {
+              "line": 6,
+              "text": "        return int(value)"
+            },
+            {
+              "line": 7,
+              "text": "    except ValueError:"
+            },
+            {
+              "line": 8,
+              "text": "        raise ValueError('port must be numeric')"
+            }
+          ],
+          "function": "parse_port",
+          "id": "frame:0",
+          "line": 6,
+          "path": "fixtures/repair/argument_validation/app.py",
+          "source_line": "        return int(value)",
+          "status": "resolved",
+          "type": "stack_frame"
+        },
+        "commit": "b96840fef85585904c9348e213dbbec9c0ca521a"
+      },
+      "repair_ms": 4437,
+      "attempt": {
+        "id": "a9c6fad5-d381-45fc-83cc-1cc657190841",
+        "status": "VERIFIED_IN_TEST_ENVIRONMENT",
+        "error": null,
+        "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+        "diff": "--- a/app.py\n+++ b/app.py\n@@ -4,5 +4,5 @@\n def parse_port(value):\n     try:\n         return int(value)\n-    except ValueError:\n+    except (ValueError, TypeError):\n         raise ValueError('port must be numeric')\n",
+        "proposal": {
+          "summary": "Fix TypeError to ValueError in parse_port by catching TypeError alongside ValueError when converting input to int.",
+          "changes": [
+            {
+              "path": "app.py",
+              "find": "    try:\n        return int(value)\n    except ValueError:",
+              "replace": "    try:\n        return int(value)\n    except (ValueError, TypeError):",
+              "explanation": "Catches TypeError (raised when value is None) and re-raises it as ValueError with the expected message."
+            }
+          ],
+          "risks": []
+        },
+        "timings": {
+          "materialize_ms": 102,
+          "reproduce_before_ms": 381,
+          "generation_ms": 3009,
+          "apply_ms": 88,
+          "reproduce_after_ms": 346,
+          "regression_ms": 355,
+          "total_ms": 4432
+        },
+        "usage": {
+          "input_tokens": 1372,
+          "output_tokens": 133,
+          "load_duration_ns": 9936200,
+          "eval_duration_ns": 2423481000,
+          "estimated_cost": null
+        },
+        "reproduction_before": {
+          "returncode": 1,
+          "timed_out": false,
+          "environment_error": false,
+          "isolation": "process",
+          "output": "F                                                                        [100%]\n================================== FAILURES ===================================\n__________________ test_none_is_rejected_as_invalid_argument __________________\n\n    def test_none_is_rejected_as_invalid_argument():\n        with pytest.raises(ValueError):\n>           parse_port(None)\n\ntests\\test_reproduction.py:8: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nvalue = None\n\n    def parse_port(value):\n        try:\n>           return int(value)\n                   ^^^^^^^^^^\nE           TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'\n\napp.py:6: TypeError\n=========================== short test summary info ===========================\nFAILED tests/test_reproduction.py::test_none_is_rejected_as_invalid_argument\n1 failed in 0.04s\n"
+        },
+        "reproduction_after": {
+          "returncode": 0,
+          "timed_out": false,
+          "environment_error": false,
+          "isolation": "process",
+          "output": ".                                                                        [100%]\n1 passed in 0.01s\n"
+        },
+        "regression": {
+          "returncode": 0,
+          "timed_out": false,
+          "environment_error": false,
+          "isolation": "process",
+          "output": "...                                                                      [100%]\n3 passed in 0.01s\n"
+        },
+        "isolation": {
+          "mode": "process",
+          "detail": "Process-jail mode: no OS-level network or filesystem confinement. Only pinned trusted M3A fixtures are executable; general-purpose repair execution is blocked."
+        }
+      },
+      "reproduction_before_failed": true,
+      "reproduction_after_passed": true,
+      "regression_passed": true,
+      "patch_generated": true,
+      "patch_rejected": false,
+      "total_ms": 14088
+    },
+    {
+      "case": "off_by_one",
+      "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+      "fixture_description": "find_index scans one element past the list and raises IndexError.",
+      "investigation": {
+        "id": "493b2f03-cf32-479a-b2d1-fc2c1b462104",
+        "status": "completed",
+        "outcome": "LIKELY_CAUSE",
+        "error": null,
+        "latency_ms": 8951,
+        "usage": {
+          "input_tokens": 959,
+          "output_tokens": 469,
+          "load_duration_ns": 4594000,
+          "eval_duration_ns": 8602259000,
+          "estimated_cost": null
+        }
+      },
+      "investigation_ms": 9023,
+      "approval": {
+        "recorded": true,
+        "reviewer": "m3a-benchmark",
+        "mode": "fixture-level benchmark"
+      },
+      "eligibility": {
+        "eligible": true,
+        "reasons": [],
+        "checks": [
+          {
+            "code": "investigation_exists",
+            "ok": true,
+            "detail": "investigation record exists"
+          },
+          {
+            "code": "investigation_completed",
+            "ok": true,
+            "detail": "investigation status is completed"
+          },
+          {
+            "code": "outcome_likely_cause",
+            "ok": true,
+            "detail": "investigation outcome is LIKELY_CAUSE"
+          },
+          {
+            "code": "fixture_known",
+            "ok": true,
+            "detail": "fixture off_by_one is registered"
+          },
+          {
+            "code": "repository_trusted",
+            "ok": true,
+            "detail": "trusted local fixture repository approved for Milestone 3A"
+          },
+          {
+            "code": "evidence_references_valid",
+            "ok": true,
+            "detail": "all references resolve"
+          },
+          {
+            "code": "recorded_revision",
+            "ok": true,
+            "detail": "revision b96840fef85585904c9348e213dbbec9c0ca521a is present in the repository"
+          },
+          {
+            "code": "source_pinned",
+            "ok": true,
+            "detail": "all fixture files match their pinned content hashes"
+          },
+          {
+            "code": "resolved_source_frame",
+            "ok": true,
+            "detail": "a cited source frame is resolved at the recorded revision"
+          },
+          {
+            "code": "frame_in_approved_file",
+            "ok": true,
+            "detail": "cited frame fixtures/repair/off_by_one/app.py is in the allowed patch files"
+          },
+          {
+            "code": "frame_matches_fixture",
+            "ok": true,
+            "detail": "cited frame matches the registered fixture failure location"
+          },
+          {
+            "code": "human_approval",
+            "ok": true,
+            "detail": "a human review record matches this hypothesis and evidence snapshot"
+          }
+        ],
+        "investigation_id": "493b2f03-cf32-479a-b2d1-fc2c1b462104",
+        "fixture": "off_by_one",
+        "hypothesis_index": 0,
+        "hypothesis_sha256": "5ca9476aae21f1d2107661a307e56d32655ac66f249a6b7c3564dee4ec6a515b",
+        "approval_id": "06729b6f-4660-44a3-9196-fe33c1e5859d",
+        "frame": {
+          "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+          "context": [
+            {
+              "line": 4,
+              "text": "def find_index(items, target):"
+            },
+            {
+              "line": 5,
+              "text": "    for index in range(len(items) + 1):"
+            },
+            {
+              "line": 6,
+              "text": "        if items[index] == target:"
+            },
+            {
+              "line": 7,
+              "text": "            return index"
+            },
+            {
+              "line": 8,
+              "text": "    return -1"
+            }
+          ],
+          "function": "find_index",
+          "id": "frame:0",
+          "line": 6,
+          "path": "fixtures/repair/off_by_one/app.py",
+          "source_line": "        if items[index] == target:",
+          "status": "resolved",
+          "type": "stack_frame"
+        },
+        "commit": "b96840fef85585904c9348e213dbbec9c0ca521a"
+      },
+      "repair_ms": 4604,
+      "attempt": {
+        "id": "c995a311-61c3-4f9b-ac75-13cfba8893b6",
+        "status": "VERIFIED_IN_TEST_ENVIRONMENT",
+        "error": null,
+        "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+        "diff": "--- a/app.py\n+++ b/app.py\n@@ -2,7 +2,7 @@\n \n \n def find_index(items, target):\n-    for index in range(len(items) + 1):\n+    for index in range(len(items)):\n         if items[index] == target:\n             return index\n     return -1\n",
+        "proposal": {
+          "summary": "Fixes an off-by-one error in the find_index function where range(len(items) + 1) causes an IndexError when scanning past the list bounds.",
+          "changes": [
+            {
+              "path": "app.py",
+              "find": "    for index in range(len(items) + 1):",
+              "replace": "    for index in range(len(items)):",
+              "explanation": "Removes the erroneous +1 from the range calculation to prevent accessing items beyond the list length, which was causing IndexError when the target is absent."
+            }
+          ],
+          "risks": []
+        },
+        "timings": {
+          "materialize_ms": 105,
+          "reproduce_before_ms": 376,
+          "generation_ms": 3197,
+          "apply_ms": 98,
+          "reproduce_after_ms": 359,
+          "regression_ms": 334,
+          "total_ms": 4599
+        },
+        "usage": {
+          "input_tokens": 1380,
+          "output_tokens": 142,
+          "load_duration_ns": 7893200,
+          "eval_duration_ns": 2599720000,
+          "estimated_cost": null
+        },
+        "reproduction_before": {
+          "returncode": 1,
+          "timed_out": false,
+          "environment_error": false,
+          "isolation": "process",
+          "output": "F                                                                        [100%]\n================================== FAILURES ===================================\n____________________ test_absent_target_returns_minus_one _____________________\n\n    def test_absent_target_returns_minus_one():\n>       assert find_index([1, 2, 3], 4) == -1\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests\\test_reproduction.py:5: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nitems = [1, 2, 3], target = 4\n\n    def find_index(items, target):\n        for index in range(len(items) + 1):\n>           if items[index] == target:\n               ^^^^^^^^^^^^\nE           IndexError: list index out of range\n\napp.py:6: IndexError\n=========================== short test summary info ===========================\nFAILED tests/test_reproduction.py::test_absent_target_returns_minus_one - Ind...\n1 failed in 0.04s\n"
+        },
+        "reproduction_after": {
+          "returncode": 0,
+          "timed_out": false,
+          "environment_error": false,
+          "isolation": "process",
+          "output": ".                                                                        [100%]\n1 passed in 0.01s\n"
+        },
+        "regression": {
+          "returncode": 0,
+          "timed_out": false,
+          "environment_error": false,
+          "isolation": "process",
+          "output": "...                                                                      [100%]\n3 passed in 0.01s\n"
+        },
+        "isolation": {
+          "mode": "process",
+          "detail": "Process-jail mode: no OS-level network or filesystem confinement. Only pinned trusted M3A fixtures are executable; general-purpose repair execution is blocked."
+        }
+      },
+      "reproduction_before_failed": true,
+      "reproduction_after_passed": true,
+      "regression_passed": true,
+      "patch_generated": true,
+      "patch_rejected": false,
+      "total_ms": 13781
+    },
+    {
+      "case": "missing_config",
+      "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+      "fixture_description": "A configuration without a timeout key raises KeyError.",
+      "investigation": {
+        "id": "11797232-a2be-43e7-b486-f8664f9c5e94",
+        "status": "completed",
+        "outcome": "INSUFFICIENT_EVIDENCE",
+        "error": null,
+        "latency_ms": 6682,
+        "usage": {
+          "input_tokens": 892,
+          "output_tokens": 338,
+          "load_duration_ns": 4294600,
+          "eval_duration_ns": 6348203000,
+          "estimated_cost": null
+        }
+      },
+      "investigation_ms": 6755,
+      "approval": {
+        "recorded": false,
+        "reviewer": null,
+        "mode": null
+      },
+      "eligibility": {
+        "eligible": false,
+        "reasons": [
+          {
+            "code": "outcome_likely_cause",
+            "detail": "investigation outcome is INSUFFICIENT_EVIDENCE"
+          },
+          {
+            "code": "approved_hypothesis",
+            "detail": "investigation has no hypothesis to approve"
+          }
+        ],
+        "checks": [
+          {
+            "code": "investigation_exists",
+            "ok": true,
+            "detail": "investigation record exists"
+          },
+          {
+            "code": "investigation_completed",
+            "ok": true,
+            "detail": "investigation status is completed"
+          },
+          {
+            "code": "outcome_likely_cause",
+            "ok": false,
+            "detail": "investigation outcome is INSUFFICIENT_EVIDENCE"
+          },
+          {
+            "code": "fixture_known",
+            "ok": true,
+            "detail": "fixture missing_config is registered"
+          },
+          {
+            "code": "repository_trusted",
+            "ok": true,
+            "detail": "trusted local fixture repository approved for Milestone 3A"
+          },
+          {
+            "code": "evidence_references_valid",
+            "ok": true,
+            "detail": "all references resolve"
+          },
+          {
+            "code": "recorded_revision",
+            "ok": true,
+            "detail": "revision b96840fef85585904c9348e213dbbec9c0ca521a is present in the repository"
+          },
+          {
+            "code": "source_pinned",
+            "ok": true,
+            "detail": "all fixture files match their pinned content hashes"
+          },
+          {
+            "code": "approved_hypothesis",
+            "ok": false,
+            "detail": "investigation has no hypothesis to approve"
+          }
+        ],
+        "investigation_id": "11797232-a2be-43e7-b486-f8664f9c5e94",
+        "fixture": "missing_config",
+        "hypothesis_index": null,
+        "hypothesis_sha256": null,
+        "approval_id": null,
+        "frame": null,
+        "commit": "b96840fef85585904c9348e213dbbec9c0ca521a"
+      },
+      "total_ms": 6922
+    },
+    {
+      "case": "unreproducible",
+      "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+      "fixture_description": "The reported failure is not present at the pinned revision.",
+      "investigation": {
+        "id": "597e4cc1-f2be-4a2a-9143-fd0e2ee979d5",
+        "status": "completed",
+        "outcome": "LIKELY_CAUSE",
+        "error": null,
+        "latency_ms": 8445,
+        "usage": {
+          "input_tokens": 934,
+          "output_tokens": 445,
+          "load_duration_ns": 7710900,
+          "eval_duration_ns": 8134956000,
+          "estimated_cost": null
+        }
+      },
+      "investigation_ms": 8531,
+      "approval": {
+        "recorded": true,
+        "reviewer": "m3a-benchmark",
+        "mode": "fixture-level benchmark"
+      },
+      "eligibility": {
+        "eligible": true,
+        "reasons": [],
+        "checks": [
+          {
+            "code": "investigation_exists",
+            "ok": true,
+            "detail": "investigation record exists"
+          },
+          {
+            "code": "investigation_completed",
+            "ok": true,
+            "detail": "investigation status is completed"
+          },
+          {
+            "code": "outcome_likely_cause",
+            "ok": true,
+            "detail": "investigation outcome is LIKELY_CAUSE"
+          },
+          {
+            "code": "fixture_known",
+            "ok": true,
+            "detail": "fixture unreproducible is registered"
+          },
+          {
+            "code": "repository_trusted",
+            "ok": true,
+            "detail": "trusted local fixture repository approved for Milestone 3A"
+          },
+          {
+            "code": "evidence_references_valid",
+            "ok": true,
+            "detail": "all references resolve"
+          },
+          {
+            "code": "recorded_revision",
+            "ok": true,
+            "detail": "revision b96840fef85585904c9348e213dbbec9c0ca521a is present in the repository"
+          },
+          {
+            "code": "source_pinned",
+            "ok": true,
+            "detail": "all fixture files match their pinned content hashes"
+          },
+          {
+            "code": "resolved_source_frame",
+            "ok": true,
+            "detail": "a cited source frame is resolved at the recorded revision"
+          },
+          {
+            "code": "frame_in_approved_file",
+            "ok": true,
+            "detail": "cited frame fixtures/repair/unreproducible/app.py is in the allowed patch files"
+          },
+          {
+            "code": "frame_matches_fixture",
+            "ok": true,
+            "detail": "cited frame matches the registered fixture failure location"
+          },
+          {
+            "code": "human_approval",
+            "ok": true,
+            "detail": "a human review record matches this hypothesis and evidence snapshot"
+          }
+        ],
+        "investigation_id": "597e4cc1-f2be-4a2a-9143-fd0e2ee979d5",
+        "fixture": "unreproducible",
+        "hypothesis_index": 0,
+        "hypothesis_sha256": "e3cbb4c089835e10f384209279c129566a65b6fefc402592d713cde0d7b6eab7",
+        "approval_id": "17f40e26-aff3-44f4-b63c-4ef99ff82902",
+        "frame": {
+          "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+          "context": [
+            {
+              "line": 5,
+              "text": "    if not values:"
+            },
+            {
+              "line": 6,
+              "text": "        raise ValueError('average of an empty collection')"
+            },
+            {
+              "line": 7,
+              "text": "    return sum(values) / len(values)"
+            }
+          ],
+          "function": "average",
+          "id": "frame:0",
+          "line": 7,
+          "path": "fixtures/repair/unreproducible/app.py",
+          "source_line": "    return sum(values) / len(values)",
+          "status": "resolved",
+          "type": "stack_frame"
+        },
+        "commit": "b96840fef85585904c9348e213dbbec9c0ca521a"
+      },
+      "repair_ms": 614,
+      "attempt": {
+        "id": "42388c1c-b707-4f19-aa3d-2669b892f414",
+        "status": "UNVERIFIED",
+        "error": "the reproduction test already passes at the recorded revision; bug not reproduced",
+        "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+        "diff": null,
+        "proposal": null,
+        "timings": {
+          "materialize_ms": 98,
+          "reproduce_before_ms": 366,
+          "total_ms": 610
+        },
+        "usage": null,
+        "reproduction_before": {
+          "returncode": 0,
+          "timed_out": false,
+          "environment_error": false,
+          "isolation": "process",
+          "output": ".                                                                        [100%]\n1 passed in 0.01s\n"
+        },
+        "reproduction_after": null,
+        "regression": null,
+        "isolation": {
+          "mode": "process",
+          "detail": "Process-jail mode: no OS-level network or filesystem confinement. Only pinned trusted M3A fixtures are executable; general-purpose repair execution is blocked."
+        }
+      },
+      "reproduction_before_failed": false,
+      "patch_generated": false,
+      "patch_rejected": false,
+      "total_ms": 9298
+    }
+  ]
+}

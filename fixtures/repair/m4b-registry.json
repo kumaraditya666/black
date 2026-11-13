@@ -1,0 +1,133 @@
+{
+  "fixtures": [
+    {
+      "name": "m4b_inventory",
+      "approved_for_m3a": true,
+      "description": "Locally authored M4B trusted evaluation fixture",
+      "expected_behavior": "item limit should default to 10",
+      "files": {
+        "app.py": "8d308556ec426eff61779d2734b4fe75b6c275cee3b6c5f8fdf8368c433cc17e",
+        "limits.py": "d935cac634d547602b74a3e457760556825528763f107de4ea3ef03ba31bbd3a",
+        "tests/test_reproduction.py": "46103df099238834f4b2e8143254d769e7f484d7a23932dd3ecbed717836476f",
+        "tests/test_regression.py": "173b52fb52583c3760ffc0e75fcdc3e80056e8666a391e380014b393e95f4a80",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "limits.py"
+      ],
+      "event": {
+        "exception_type": "KeyError",
+        "message": "'limit'",
+        "frame": {
+          "path": "fixtures/repair/m4b_inventory/limits.py",
+          "line": 2,
+          "function": "limit"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_default",
+        "failure_marker": "KeyError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m4b_average",
+      "approved_for_m3a": true,
+      "description": "Locally authored M4B trusted evaluation fixture",
+      "expected_behavior": "mean divides by the number of values",
+      "files": {
+        "app.py": "d28487f8eb4298c1805dbc65d8267ca19c88048df49f6945668d9c9a2532f902",
+        "tests/test_reproduction.py": "0dae5eb51acb051ce146438076247ef4d1f6ade50df89d71167c31b93395138f",
+        "tests/test_regression.py": "220667e7b963abeef2d4dc3ed5f81ade413f002f8e10070a8b19cc89e47c8418",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "ZeroDivisionError",
+        "message": "division by zero",
+        "frame": {
+          "path": "fixtures/repair/m4b_average/app.py",
+          "line": 2,
+          "function": "average"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_single",
+        "failure_marker": "ZeroDivisionError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m4b_origin",
+      "approved_for_m3a": true,
+      "description": "Locally authored M4B trusted evaluation fixture",
+      "expected_behavior": "source of malformed input is not recorded",
+      "files": {
+        "app.py": "ce86494e869b096146e3c146f9d2da6517a74a0957dd7776be7df990c580a43a",
+        "tests/test_reproduction.py": "3763a29089c46529747fc1fc55dbbbe04517007060e0c4b1dbc47bede19e53e2",
+        "tests/test_regression.py": "981d22246edf2bd3f9c3cf90e384710ec60ee63ca9d904bc454229fa4da9c7a7",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "ValueError",
+        "message": "invalid literal for int() with base 10: 'unknown'",
+        "frame": {
+          "path": "fixtures/repair/m4b_origin/app.py",
+          "line": 2,
+          "function": "parse_count"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_bad_input",
+        "failure_marker": "ValueError",
+        "reproducible": false
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m4b_negative",
+      "approved_for_m3a": true,
+      "description": "Locally authored M4B trusted evaluation fixture",
+      "expected_behavior": "empty inputs return None; reported IndexError is unsupported",
+      "files": {
+        "app.py": "e08b232d3fa7751e6d80b4f24cb0090963bb9c97345e528300875ecedf6b4608",
+        "tests/test_reproduction.py": "8ddd530ef7b13d6df68f3498ab8c4b057f3c01a724b21c67f61cd61455e44152",
+        "tests/test_regression.py": "b50b6afa9d136a0566dff55bfb55a7dac95ddff249c541006c732910b0bf6bf6",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "IndexError",
+        "message": "list index out of range",
+        "frame": {
+          "path": "fixtures/repair/m4b_negative/app.py",
+          "line": 2,
+          "function": "first_or_none"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_empty",
+        "failure_marker": "IndexError",
+        "reproducible": false
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    }
+  ]
+}

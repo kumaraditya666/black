@@ -1,0 +1,37 @@
+{
+  "revision": "6117eda7e74f0a27677483555add08f435b7f850",
+  "cases": {
+    "m4b_inventory": {
+      "returncode": 1,
+      "timed_out": false,
+      "environment_error": false,
+      "isolation": "docker",
+      "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_________________________________ test_default _________________________________\n\n    def test_default():\n>       assert select([1, 2], {}) == [1, 2]\n               ^^^^^^^^^^^^^^^^^^\n\ntests/test_reproduction.py:4: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \napp.py:4: in select\n    return items[:limit(config)]\n                  ^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nconfig = {}\n\n    def limit(config):\n>       return config[\"limit\"]\n               ^^^^^^^^^^^^^^^\nE       KeyError: 'limit'\n\nlimits.py:2: KeyError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_default - KeyError: 'limit'\n1 failed in 0.07s\n",
+      "security_blocked": false
+    },
+    "m4b_average": {
+      "returncode": 1,
+      "timed_out": false,
+      "environment_error": false,
+      "isolation": "docker",
+      "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_________________________________ test_single __________________________________\n\n    def test_single():\n>       assert average([4]) == 4\n               ^^^^^^^^^^^^\n\ntests/test_reproduction.py:4: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nvalues = [4]\n\n    def average(values):\n>       return sum(values) / (len(values) - 1)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       ZeroDivisionError: division by zero\n\napp.py:2: ZeroDivisionError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_single - ZeroDivisionError: division ...\n1 failed in 0.07s\n",
+      "security_blocked": false
+    },
+    "m4b_origin": {
+      "returncode": 0,
+      "timed_out": false,
+      "environment_error": false,
+      "isolation": "docker",
+      "output": ".                                                                        [100%]\n1 passed in 0.06s\n",
+      "security_blocked": false
+    },
+    "m4b_negative": {
+      "returncode": 0,
+      "timed_out": false,
+      "environment_error": false,
+      "isolation": "docker",
+      "output": ".                                                                        [100%]\n1 passed in 0.05s\n",
+      "security_blocked": false
+    }
+  }
+}

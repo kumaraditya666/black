@@ -1,0 +1,67 @@
+{
+  "dataset": "BugSwarm",
+  "source": "BugSwarm REST API",
+  "fetched_at": "2026-11-10",
+  "note": "Raw CI logs only. No fix diff, gold patch, hidden test list or target mapping is stored here.",
+  "cases": {
+    "BDB5-R1": {
+      "job_id": 109227527,
+      "api_url": "http://www.api.bugswarm.org/v1/logs/109227527",
+      "log_file": "109227527.log",
+      "log_sha256": "a3364ac52bd4c9e5deba4963fcf4a7d4676ce400444a59ddb4593b9735c11910",
+      "repository": "https://github.com/bwhmather/verktyg",
+      "source_revision": "71dc420c22fadbae064c46b426e093bec7b86f32",
+      "image_digest": "sha256:0c915ddd2f49143477c97a24470a890d3692b57c2562b956075045447816ce86",
+      "image_compressed_size_bytes": 1911723658,
+      "image_uncompressed_size_bytes": 7653810640,
+      "image_last_updated": "2019-10-19T20:44:27.92191Z",
+      "ci_python": "3.5.0",
+      "observed_image_python": "3.4.2",
+      "image_preflight": "REPRODUCED_WITH_INTERPRETER_MISMATCH",
+      "python35_preflight": {
+        "image": "python:3.5.10",
+        "image_digest": "sha256:42a37d6b8c00b186bdfb2b620fa8023eb775b3eb3a768fd3c2e421964eee9665",
+        "python": "3.5.10",
+        "status": "REPRODUCED",
+        "test_count": 247,
+        "failures": 2,
+        "errors": 3,
+        "primary_test": "test_modified_url_encoding"
+      },
+      "python350_preflight": {
+        "source": "python.org Python-3.5.0.tgz",
+        "python": "3.5.0",
+        "compiler": "GCC 8.3.0",
+        "configure_flags": [
+          "--without-ensurepip",
+          "--without-ssl"
+        ],
+        "status": "REPRODUCED",
+        "test_count": 247,
+        "failures": 2,
+        "errors": 3,
+        "primary_test": "test_modified_url_encoding",
+        "source_sha256_requests_py": "1bbf79f3a1dc790f5585ecf0850aee53ad92db29bfbc77d0a6a49a25b4620c20"
+      }
+    },
+    "BDB5-R2": {
+      "job_id": 83523531,
+      "api_url": "http://www.api.bugswarm.org/v1/logs/83523531",
+      "log_file": "83523531.log",
+      "log_sha256": "06025a335c23376a1f8acba1eb12cb27cdda88601df7378deeddbc17ccdc6f94",
+      "repository": "https://github.com/marshallward/f90nml",
+      "source_revision": "d8d88884dea251fc1d9e63b9afcf19b81a785066",
+      "image_digest": "sha256:ff328c82ecf295da3c56148ac409c7a1021720229b2e5c393d4a6eaa2741b730",
+      "image_compressed_size_bytes": 1912283801,
+      "image_uncompressed_size_bytes": 7655460346,
+      "image_last_updated": "2019-10-19T21:10:48.607016Z",
+      "ci_python": "3.2.5",
+      "observed_image_python": "3.2.5",
+      "image_preflight": "REPRODUCED",
+      "test_count": 38,
+      "failures": 0,
+      "errors": 1,
+      "primary_test": "test_dict_write"
+    }
+  }
+}

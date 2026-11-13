@@ -1,0 +1,109 @@
+{
+  "mode": "BDB5_REVIEW_HANDOFF",
+  "created_at": "2026-11-11T00:00:00+00:00",
+  "status": "APPROVAL_DEFERRED",
+  "approval_recorded": false,
+  "scored": false,
+  "cases": [
+    "BDB5-R1",
+    "BDB5-R2",
+    "BDB5-R3"
+  ],
+  "current_result": {
+    "case_id": "BDB5-R2",
+    "model": "qwen3.5:9b-q4_K_M",
+    "provider_calls": 1,
+    "contract": "passed",
+    "runner_status": "RUN_READY_FOR_REVIEW",
+    "request_hash": "9c4a55ade43ae64e88fcb83a3dcf6533b4b098af87d18e6f9a040248d51a739d",
+    "response_hash": "0c810422207debdf2ea79e80d826f52daa3931d5434cc1401999e98cfcbb64fd",
+    "result_hash": "2658e475d5388778803a399cc188aae0ee177de75260ebf0723bf5b265166fde"
+  },
+  "exploratory_results": {
+    "BDB5-R1": {
+      "result_hash": "79d8c7ab0b9419bcd817b27587f59ce3a70606a7246142c0b262b469a6d1cbce",
+      "record": "data/bdb5_exploratory/bdb5_r1_exploratory_record.json"
+    },
+    "BDB5-R3": {
+      "result_hash": "e96496ca04f82fe280f3ec5eb1fc4c1eabb3c2988bee6ce0e373dce8d616c183",
+      "record": "data/bdb5_exploratory/bdb5_r3_exploratory_record.json"
+    }
+  },
+  "files": [
+    {
+      "path": "APPROVAL_PLAN.md",
+      "sha256": "19589f4e6894a5816a113207fcf841c7666dd0d59c95e94d1a126cf12dbda2bb",
+      "bytes": 10304
+    },
+    {
+      "path": "approvals/README.md",
+      "sha256": "f103304be6fcb2d60c0688c906b8b306ff943149b5f1a6250e503acb6bc0eaee",
+      "bytes": 246
+    },
+    {
+      "path": "bdb5_r1_prepared.json",
+      "sha256": "5b4683ab8bc9c215a22f91caf735b099e2c14bfb7f5b63e9be60722340f19ae3",
+      "bytes": 5821
+    },
+    {
+      "path": "bdb5_r2_live6_raw_response.json",
+      "sha256": "ab8f852bc57087b66f1848359265548072ccab3672b4fa420d4fbb7fa5d07239",
+      "bytes": 1358
+    },
+    {
+      "path": "bdb5_r2_live6_record.json",
+      "sha256": "847f8c1cdf682ed9b2673916520d36e201eefbec894b1a0b40112f824f6ff12b",
+      "bytes": 5054
+    },
+    {
+      "path": "bdb5_r2_live6_result.json",
+      "sha256": "9be245d6639a2498f74db0280d503dcb475faa0e082947acfe765668794bcefa",
+      "bytes": 1532
+    },
+    {
+      "path": "bdb5_r2_prepared.json",
+      "sha256": "c5b172c1274d416a20a5b713c5c1c974af87893a13f60c33c7bc78b3672868e3",
+      "bytes": 4079
+    },
+    {
+      "path": "bdb5_r3_prepared.json",
+      "sha256": "a11f92ec5ab52e697ec3127c16ea31c2f7f64526869b7d5f66188c18e2fc6cc0",
+      "bytes": 4768
+    },
+    {
+      "path": "historical/bdb5_r2_live4_raw_response.json",
+      "sha256": "f27ed2c5745e2bb88025494953939b49fbf29105dabc664628c7dbd6997ca18e",
+      "bytes": 1398
+    },
+    {
+      "path": "historical/bdb5_r2_live4_record.json",
+      "sha256": "069a91340d3c43bdda0630e7f3fe69ec8f4c3847a8dd48138650e011089a9fed",
+      "bytes": 4834
+    },
+    {
+      "path": "historical/bdb5_r2_live4_result.json",
+      "sha256": "42dce3015ae1defb6f98879641432577b0d24274b11ada4edb88c264fe404f6d",
+      "bytes": 1396
+    },
+    {
+      "path": "HOW_TO_APPROVE_SIMPLE.md",
+      "sha256": "7553c125074a99eeecdcb2158b84fdad3f0742f17cd488655b021f41174f119d",
+      "bytes": 4651
+    },
+    {
+      "path": "README.md",
+      "sha256": "1ffdb578d57c3e4305b2eb6cea7fccad5a1b68ee96e4513e4d59e1cff8d6f51c",
+      "bytes": 2282
+    },
+    {
+      "path": "REVIEW_HANDOFF.md",
+      "sha256": "d2b1309daf6e4362aa7e776061940465ef533149ca101b5c4119ca484111072c",
+      "bytes": 10803
+    },
+    {
+      "path": "REVIEWER_REQUEST.md",
+      "sha256": "b8019e2285fbcdfcdb82e0850db4f4677651ae639eb01cc67dbf1ba1e6e2dc0d",
+      "bytes": 1313
+    }
+  ]
+}

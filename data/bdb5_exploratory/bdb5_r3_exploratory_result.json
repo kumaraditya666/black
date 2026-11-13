@@ -1,0 +1,38 @@
+{
+  "case_id": "BDB5-R3",
+  "claims": [
+    {
+      "category": "OBSERVATION",
+      "text": "The issue report describes a bug where HttpResponse.content returns a memoryview object instead of bytes when initialized with a memoryview in PostgreSQL, while working correctly in SQLite. The provided source excerpt shows the make_bytes function handling bytes and str types but does not show logic to handle memoryview objects.",
+      "evidence_ids": [
+        "issue:1",
+        "source:1"
+      ],
+      "material": true,
+      "confidence": null,
+      "uncertainty": null,
+      "asserts_execution": false
+    }
+  ],
+  "service_ranked": [],
+  "fault_class": null,
+  "predicted_files": [],
+  "predicted_function": null,
+  "predicted_line": null,
+  "predicted_mechanism": null,
+  "mechanism_evidence_ids": [],
+  "l1_causal_status": "NOT_ASSESSED",
+  "l2_causal_status": "NOT_ESTABLISHED",
+  "abstention": {
+    "scope": "APPLICATION_SOURCE",
+    "reason": "The evidence does not establish an application-source cause.",
+    "missing_evidence": [
+      "application stack trace"
+    ],
+    "source_not_established": false,
+    "application_source_not_established": true
+  },
+  "patch": null,
+  "test_executions": [],
+  "claimed_source_revision": null
+}

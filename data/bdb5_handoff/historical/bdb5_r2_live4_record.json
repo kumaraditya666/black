@@ -1,0 +1,150 @@
+{
+  "mode": "EXPLORATORY_R2_LIVE_RUN_NOT_BENCHMARK",
+  "authorization": "EXPLORATORY_USER_AUTHORIZED_ONLY",
+  "independent_approval": false,
+  "approved": false,
+  "scored": false,
+  "case_id": "BDB5-R2",
+  "provider": "ollama-native",
+  "model": "qwen3.5:4b",
+  "context_length": 8192,
+  "max_output_tokens": 2048,
+  "prepared_path": "C:\\Users\\Adi\\AppData\\Local\\Temp\\bdb5_r2_prepared.json",
+  "outcome": "PROVIDER_ACCEPTED",
+  "provider_run": {
+    "mode": "REAL_CASE_PROVIDER_ENVELOPE",
+    "case_id": "BDB5-R2",
+    "status": "PROVIDER_RESULT_READY_FOR_REVIEW",
+    "provider_calls": 1,
+    "scored": false,
+    "approved": false,
+    "request_hash": "b0bf2ee143f78516caf545bdaa5f760e8dfa57da5f4950a62e16e2a5f03fe59c",
+    "response_hash": "73a7688c45020cdb14fa0622b30902603b3e702046e82000031ac5c643bd786f",
+    "usage": {
+      "input_tokens": 2410,
+      "output_tokens": 315,
+      "estimated_cost": null
+    },
+    "result_hash": "5198f8c74b3d137d5f883f22a4320dd4319480a84cc0f4c4e98666017a05a426",
+    "model_visible_only": true
+  },
+  "runner": {
+    "mode": "REAL_CASE_RUN_ENVELOPE",
+    "case_id": "BDB5-R2",
+    "status": "RUN_READY_FOR_REVIEW",
+    "approved": false,
+    "scored": false,
+    "provider_calls": 0,
+    "responder_invocations": 1,
+    "model_visible_keys": [
+      "artifact_hashes",
+      "candidate_inventory",
+      "case_id",
+      "evidence",
+      "schema_version",
+      "source_revision",
+      "task_instructions"
+    ],
+    "packet_review": {
+      "mode": "REAL_CASE_PACKET_REVIEW_ONLY",
+      "case_id": "BDB5-R2",
+      "status": "REVIEW_PASSED",
+      "approved": false,
+      "model_calls": 0,
+      "checks": {
+        "evaluator_object": true,
+        "known_case": true,
+        "manifest_case_matches": true,
+        "manifest_not_synthetic": true,
+        "manifest_present": true,
+        "manifest_readiness": true,
+        "manifest_validation_clean": true,
+        "mode": true,
+        "no_forbidden_keys": true,
+        "no_manifest_in_visible": true,
+        "no_model_calls": true,
+        "no_private_paths": true,
+        "no_top_level_manifest": true,
+        "packet_case_matches": true,
+        "packet_revision_matches": true,
+        "packet_schema": true,
+        "packet_validation_clean": true,
+        "packet_validation_present": true,
+        "payload_hash": true,
+        "preparation_validation_empty": true,
+        "prepared_not_approved": true,
+        "r2_ci_evidence": true,
+        "r2_no_source_evidence": true,
+        "r2_primary_frame": true,
+        "r2_source_status": true,
+        "r2_test_evidence": true,
+        "registry_revision": true,
+        "visible_keys": true,
+        "visible_packet_object": true
+      },
+      "issues": []
+    },
+    "validation_issues": [],
+    "result_hash": "5198f8c74b3d137d5f883f22a4320dd4319480a84cc0f4c4e98666017a05a426"
+  },
+  "result": {
+    "case_id": "BDB5-R2",
+    "claims": [
+      {
+        "category": "OBSERVATION",
+        "text": "CI job marshallward-f90nml-83523531 failed with exit code 1. Primary test failure: test_dict_write (ERROR). Error details: IOError: [Errno 2] No such file or directory: 'types_dict.nml'.",
+        "evidence_ids": [
+          "ci:1",
+          "test:1"
+        ],
+        "material": true,
+        "confidence": null,
+        "uncertainty": null,
+        "asserts_execution": false
+      }
+    ],
+    "service_ranked": [],
+    "fault_class": null,
+    "predicted_files": [],
+    "predicted_function": null,
+    "predicted_line": null,
+    "predicted_mechanism": null,
+    "mechanism_evidence_ids": [],
+    "l1_causal_status": "NOT_ASSESSED",
+    "l2_causal_status": "NOT_ESTABLISHED",
+    "abstention": {
+      "scope": "APPLICATION_SOURCE",
+      "reason": "The evidence does not establish an application-source cause.",
+      "missing_evidence": [
+        "application stack trace",
+        "source code modification evidence"
+      ],
+      "source_not_established": false,
+      "application_source_not_established": true
+    },
+    "patch": null,
+    "test_executions": [
+      {
+        "role": "REPRODUCTION_BEFORE",
+        "name": "test_dict_write",
+        "outcome": "FAIL",
+        "artifact_sha256": null,
+        "command": null,
+        "failure_signature_matched": null
+      }
+    ],
+    "claimed_source_revision": null
+  },
+  "contract": {
+    "passed": true,
+    "codes": []
+  },
+  "provider_calls": 1,
+  "ollama_done_reason": "stop",
+  "ollama_usage": {
+    "prompt_eval_count": 2410,
+    "eval_count": 315
+  },
+  "response_hash": "73a7688c45020cdb14fa0622b30902603b3e702046e82000031ac5c643bd786f",
+  "raw_response_path": "C:\\Users\\Adi\\AppData\\Local\\Temp\\bdb5_r2_live4_raw_response.json"
+}

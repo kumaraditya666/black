@@ -17,10 +17,11 @@ from pathlib import Path
 from blackbox.providers import ProviderError
 
 from .eligibility import evaluate
-from .execution import detect_isolation, run_tests
+from .execution import JOURNAL, detect_isolation, run_tests
 from .fixtures import materialize
 from .patch import PatchFormatError, PatchRejected, build_prompt, parse_proposal, validate_and_apply
 from .schema import PatchProposal
+from blackbox.semantic_verification import assess_execution
 
 
 def _now() -> str:
@@ -53,16 +54,20 @@ def run_repair(store, repo: Path, investigation_id: str, fixture_name: str, prov
         'created_at': created, 'updated_at': created,
     }
     timings: dict[str, int] = {}
+    fixture = None
     started = time.monotonic()
 
     def finish():
         timings['total_ms'] = _elapsed(started)
+        if fixture is not None and record.get('validation') is not None:
+            record['validation']['semantic_execution'] = assess_execution(record, fixture)
         record['timings'] = timings
         record['updated_at'] = _now()
         store.save_repair_attempt(record)
 
     try:
         eligibility = evaluate(store, repo, investigation_id, fixture_name, hypothesis_index)
+        fixture = eligibility.fixture
         record['incident_id'] = (eligibility.investigation or {}).get('incident_id')
         record['commit'] = eligibility.commit
         record['approval_id'] = (eligibility.approval or {}).get('id')
@@ -77,7 +82,7 @@ def run_repair(store, repo: Path, investigation_id: str, fixture_name: str, prov
         isolation = isolation or detect_isolation()
         record['isolation'] = {'mode': isolation.mode, 'detail': isolation.detail}
         if not isolation.available:
-            record['status'] = 'ENVIRONMENT_FAILED'
+            record['status'] = 'SECURITY_BLOCKED' if isolation.mode == 'docker' and JOURNAL.exists() else 'ENVIRONMENT_FAILED'
             record['error'] = f'isolation is unavailable: {isolation.detail}'
             finish()
             return store.repair_attempt(attempt_id)
@@ -99,7 +104,7 @@ def run_repair(store, repo: Path, investigation_id: str, fixture_name: str, prov
         record['reproduction_before'] = before.public()
 
         if before.timed_out or before.environment_error:
-            record['status'] = 'ENVIRONMENT_FAILED'
+            record['status'] = 'SECURITY_BLOCKED' if before.security_blocked else 'ENVIRONMENT_FAILED'
             record['error'] = 'the reproduction environment failed before a patch was attempted'
             finish()
             return store.repair_attempt(attempt_id)
@@ -171,7 +176,7 @@ def run_repair(store, repo: Path, investigation_id: str, fixture_name: str, prov
             timings['reproduce_after_ms'] = _elapsed(mark)
             record['reproduction_after'] = after.public()
             if after.timed_out or after.environment_error:
-                record['status'] = 'ENVIRONMENT_FAILED'
+                record['status'] = 'SECURITY_BLOCKED' if after.security_blocked else 'ENVIRONMENT_FAILED'
                 record['error'] = 'the reproduction environment failed after the patch was applied'
                 finish()
                 return store.repair_attempt(attempt_id)
@@ -186,7 +191,7 @@ def run_repair(store, repo: Path, investigation_id: str, fixture_name: str, prov
             timings['regression_ms'] = _elapsed(mark)
             record['regression'] = regression.public()
             if regression.timed_out or regression.environment_error:
-                record['status'] = 'ENVIRONMENT_FAILED'
+                record['status'] = 'SECURITY_BLOCKED' if regression.security_blocked else 'ENVIRONMENT_FAILED'
                 record['error'] = 'the regression environment failed'
                 finish()
                 return store.repair_attempt(attempt_id)

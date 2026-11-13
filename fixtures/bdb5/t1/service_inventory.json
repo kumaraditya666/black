@@ -1,0 +1,63 @@
+{
+  "case_id": "BDB5-T1",
+  "notes": [
+    "This is an unranked candidate list, not a target marker.",
+    "The RCAEval case does not ship a per-case deployment manifest, so this list remains a reference-plus-observed inventory rather than independent proof of case-deployment completeness.",
+    "The adapter must not add or remove service names after seeing a model result."
+  ],
+  "schema_version": "bdb5-t1-service-inventory-v1",
+  "services": [
+    "carts",
+    "carts-db",
+    "catalogue",
+    "catalogue-db",
+    "front-end",
+    "orders",
+    "orders-db",
+    "payment",
+    "queue-master",
+    "rabbitmq",
+    "rabbitmq-exporter",
+    "session-db",
+    "shipping",
+    "user",
+    "user-db"
+  ],
+  "source": {
+    "commit": "246380292ea8dcfa9bc87b570f9d9e5043502ddc",
+    "description": "Pinned Sock Shop workload manifests plus the telemetry-observed rabbitmq-exporter component.",
+    "manifest_directory": "deploy/kubernetes/manifests",
+    "method": "Extract workload metadata names from the pinned deployment/statefulset manifests; add rabbitmq-exporter because it is present in the T1 metrics columns.",
+    "repository": "https://github.com/microservices-demo/microservices-demo",
+    "telemetry_only": [
+      "rabbitmq-exporter"
+    ]
+  },
+  "status": "VERIFIED_AGAINST_PINNED_MANIFESTS_AND_METRICS",
+  "verification": {
+    "checked_at": "2026-11-13",
+    "manifest_directory": "deploy/kubernetes/manifests",
+    "manifest_services": [
+      "carts",
+      "carts-db",
+      "catalogue",
+      "catalogue-db",
+      "front-end",
+      "orders",
+      "orders-db",
+      "payment",
+      "queue-master",
+      "rabbitmq",
+      "session-db",
+      "shipping",
+      "user",
+      "user-db"
+    ],
+    "manifests_commit": "246380292ea8dcfa9bc87b570f9d9e5043502ddc",
+    "method": "Fetched and parsed the pinned deployment manifests; compared manifest metadata.name values with the inventory and the metric column prefixes.",
+    "metric_columns_covered": 15,
+    "telemetry_observed_only": [
+      "rabbitmq-exporter"
+    ]
+  }
+}

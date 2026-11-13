@@ -1,0 +1,29 @@
+{
+  "full_packet_in_prompt": false,
+  "gold_patch_in_prompt": false,
+  "hidden_tests_in_prompt": false,
+  "model": "qwen3.5:9b-q4_K_M",
+  "projection_chars": 16393,
+  "projection_path": "data\\bdb5_t1\\t1_bounded_projection.json",
+  "request_hash": "93fe58c22d16740fd175c216b50b25bfc1257a875ba579c46eb56a311b5c43d8",
+  "response_hash": "142c7a2e2ef76896476ab8088d0e59546e769701b6c24cb034dae1cbf22ec05b",
+  "result": {
+    "confidence": "HIGH",
+    "evidence_ids": [
+      "log:15",
+      "log:16"
+    ],
+    "fault_class": "F3",
+    "l2_reason": "NOT_ESTABLISHED",
+    "missing_evidence": [
+      "Evidence proving the existence of a socket file or configuration for the Unix domain socket at localhost:80, or logs showing the service attempting to bind to a different port/protocol.",
+      "Logs from the 'queue-master' service showing successful connection attempts or alternative routing mechanisms (e.g., TCP fallback) that are absent."
+    ],
+    "rationale": "The telemetry data shows a significant spike in errors for the 'queue-master' container (63 post-injection vs 52 pre-injection). The specific log evidence (log:15, log:16) from this container reports 'I/O exception ... No such file or directory' when processing requests to 'unix://localhost:80'. This indicates that the service is attempting to communicate via a Unix domain socket at a path that does not exist. This corresponds to Fault Class F3 (missing function call), interpreted here as the missing invocation of the correct communication mechanism (e.g., TCP fallback or socket creation) because the expected socket endpoint is unavailable.",
+    "service": "queue-master"
+  },
+  "usage": {
+    "eval_count": 287,
+    "prompt_eval_count": 5954
+  }
+}

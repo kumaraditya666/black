@@ -1,0 +1,204 @@
+{
+  "id": "c3e396d3-976d-46ac-ba9c-b201f4b8f4c6",
+  "incident_id": 3,
+  "investigation_id": "93027851-d746-4856-9e43-0fc1d48b17e9",
+  "fixture": "m3c_config",
+  "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+  "status": "VERIFIED_IN_TEST_ENVIRONMENT",
+  "approval_id": "36c7fb34-aa7f-4299-ba00-c206783f406c",
+  "proposal": {
+    "summary": "Fix KeyError when 'retries' key is missing in config by defaulting to 3 while preserving explicit zero and timeout behavior.",
+    "changes": [
+      {
+        "path": "app.py",
+        "find": "def connect_options(config):\n    retries = int(config['retries'])\n    return {'retries': retries, 'timeout': config.get('timeout', 5)}",
+        "replace": "def connect_options(config):\n    retries = int(config.get('retries', 3))\n    return {'retries': retries, 'timeout': config.get('timeout', 5)}",
+        "explanation": "Replace direct key access with .get() method to default 'retries' to 3 when not provided, matching the test expectation while preserving explicit zero values and timeout handling."
+      }
+    ],
+    "risks": [
+      "None - change is minimal and preserves existing behavior for configs that explicitly provide 'retries'"
+    ]
+  },
+  "validation": {
+    "eligibility": {
+      "eligible": true,
+      "reasons": [],
+      "checks": [
+        {
+          "code": "investigation_exists",
+          "ok": true,
+          "detail": "investigation record exists"
+        },
+        {
+          "code": "investigation_completed",
+          "ok": true,
+          "detail": "investigation status is completed"
+        },
+        {
+          "code": "outcome_likely_cause",
+          "ok": true,
+          "detail": "investigation outcome is LIKELY_CAUSE"
+        },
+        {
+          "code": "fixture_known",
+          "ok": true,
+          "detail": "fixture m3c_config is registered"
+        },
+        {
+          "code": "repository_trusted",
+          "ok": true,
+          "detail": "trusted local fixture repository approved for Milestone 3A"
+        },
+        {
+          "code": "evidence_references_valid",
+          "ok": true,
+          "detail": "all references resolve"
+        },
+        {
+          "code": "recorded_revision",
+          "ok": true,
+          "detail": "revision 2221398fc77cdffaad69db6ac615e6c8be661056 is present in the repository"
+        },
+        {
+          "code": "source_pinned",
+          "ok": true,
+          "detail": "all fixture files match their pinned content hashes"
+        },
+        {
+          "code": "resolved_source_frame",
+          "ok": true,
+          "detail": "a cited source frame is resolved at the recorded revision"
+        },
+        {
+          "code": "frame_in_approved_file",
+          "ok": true,
+          "detail": "cited frame fixtures/repair/m3c_config/app.py is in the allowed patch files"
+        },
+        {
+          "code": "frame_matches_fixture",
+          "ok": true,
+          "detail": "cited frame matches the registered fixture failure location"
+        },
+        {
+          "code": "human_approval",
+          "ok": true,
+          "detail": "a human review record matches this hypothesis and evidence snapshot"
+        }
+      ],
+      "investigation_id": "93027851-d746-4856-9e43-0fc1d48b17e9",
+      "fixture": "m3c_config",
+      "hypothesis_index": 0,
+      "hypothesis_sha256": "4f5c77e14bc93189755f18da27136b2e38b52431b3d3df273658aac1c0e08556",
+      "approval_id": "36c7fb34-aa7f-4299-ba00-c206783f406c",
+      "frame": {
+        "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+        "context": [
+          {
+            "line": 1,
+            "text": "def connect_options(config):"
+          },
+          {
+            "line": 2,
+            "text": "    retries = int(config['retries'])"
+          },
+          {
+            "line": 3,
+            "text": "    return {'retries': retries, 'timeout': config.get('timeout', 5)}"
+          }
+        ],
+        "function": "connect_options",
+        "id": "frame:0",
+        "line": 2,
+        "path": "fixtures/repair/m3c_config/app.py",
+        "source_line": "    retries = int(config['retries'])",
+        "status": "resolved",
+        "type": "stack_frame"
+      },
+      "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+    },
+    "applied": true,
+    "changed_files": [
+      "app.py"
+    ],
+    "semantic_execution": {
+      "status": "FAILURE_REPRODUCED_IN_TEST",
+      "notice": "Persisted test results are not independent attestation or proof about a past incident.",
+      "checks": {
+        "reproduction_before": {
+          "evidence_id": "repair:c3e396d3-976d-46ac-ba9c-b201f4b8f4c6:reproduction_before",
+          "test_node": "tests/test_reproduction.py::test_default_retries",
+          "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "mechanically_verifiable": true,
+          "verification_outcome": "TEST_FAILED",
+          "returncode": 1
+        },
+        "reproduction_after": {
+          "evidence_id": "repair:c3e396d3-976d-46ac-ba9c-b201f4b8f4c6:reproduction_after",
+          "test_node": "tests/test_reproduction.py::test_default_retries",
+          "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "mechanically_verifiable": true,
+          "verification_outcome": "TEST_PASSED",
+          "returncode": 0
+        },
+        "regression": {
+          "evidence_id": "repair:c3e396d3-976d-46ac-ba9c-b201f4b8f4c6:regression",
+          "test_node": "tests/test_regression.py",
+          "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "mechanically_verifiable": true,
+          "verification_outcome": "TEST_PASSED",
+          "returncode": 0
+        }
+      }
+    }
+  },
+  "diff": "--- a/app.py\n+++ b/app.py\n@@ -1,3 +1,3 @@\n def connect_options(config):\n-    retries = int(config['retries'])\n+    retries = int(config.get('retries', 3))\n     return {'retries': retries, 'timeout': config.get('timeout', 5)}\n",
+  "reproduction_before": {
+    "returncode": 1,
+    "timed_out": false,
+    "environment_error": false,
+    "isolation": "docker",
+    "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_____________________________ test_default_retries _____________________________\n\n    def test_default_retries():\n>       assert connect_options({}) == {'retries': 3, 'timeout': 5}\n               ^^^^^^^^^^^^^^^^^^^\n\ntests/test_reproduction.py:4: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nconfig = {}\n\n    def connect_options(config):\n>       retries = int(config['retries'])\n                      ^^^^^^^^^^^^^^^^^\nE       KeyError: 'retries'\n\napp.py:2: KeyError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_default_retries - KeyError: 'retries'\n1 failed in 0.06s\n",
+    "security_blocked": false
+  },
+  "reproduction_after": {
+    "returncode": 0,
+    "timed_out": false,
+    "environment_error": false,
+    "isolation": "docker",
+    "output": ".                                                                        [100%]\n1 passed in 0.04s\n",
+    "security_blocked": false
+  },
+  "regression": {
+    "returncode": 0,
+    "timed_out": false,
+    "environment_error": false,
+    "isolation": "docker",
+    "output": "..                                                                       [100%]\n2 passed in 0.04s\n",
+    "security_blocked": false
+  },
+  "isolation": {
+    "mode": "docker",
+    "detail": "container isolation requested"
+  },
+  "error": null,
+  "timings": {
+    "materialize_ms": 95,
+    "reproduce_before_ms": 2911,
+    "generation_ms": 4944,
+    "apply_ms": 106,
+    "reproduce_after_ms": 2772,
+    "regression_ms": 2830,
+    "total_ms": 13828
+  },
+  "usage": {
+    "input_tokens": 1329,
+    "output_tokens": 218,
+    "load_duration_ns": 3711200,
+    "eval_duration_ns": 4045220000,
+    "estimated_cost": null
+  },
+  "review": null,
+  "created_at": "2026-11-05T17:39:53.990748+00:00",
+  "updated_at": "2026-11-05T17:40:07.818827+00:00"
+}

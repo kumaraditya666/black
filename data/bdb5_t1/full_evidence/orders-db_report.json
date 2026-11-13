@@ -1,0 +1,10 @@
+{
+  "anomaly": 5.0,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "",
+  "service": "orders-db",
+  "summary": "The telemetry data provided consists of a single metric value (15.0) repeated for every second in the incident window, alongside a service name ('orders-db') and task description. There are no logs, error counts, latency spikes, or resource utilization metrics included in the input to indicate a fault. Without evidence of elevated errors, increased latency, or resource saturation, it is impossible to identify a specific faulty service or assign a fault class from the F1-F5 taxonomy. The source cause is NOT_ESTABLISHED due to missing evidence."
+}

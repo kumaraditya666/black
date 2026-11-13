@@ -1,0 +1,30 @@
+{
+  "review": "Same author and scorer; unblinded, not independently adjudicated.",
+  "cases": [
+    {
+      "name": "m3f_feed_multi",
+      "expected": "diagnosable",
+      "ground_truth": "configuration lookup in a different module fails when key absent"
+    },
+    {
+      "name": "m3f_checksum",
+      "expected": "diagnosable",
+      "ground_truth": "loop visits len(values), one past final valid index"
+    },
+    {
+      "name": "m3f_misleading",
+      "expected": "diagnosable",
+      "ground_truth": "local empty-input branch raises misleading remote-service message"
+    },
+    {
+      "name": "m3f_origin",
+      "expected": "abstain",
+      "ground_truth": "non-numeric text reaches int; upstream source is not observed"
+    },
+    {
+      "name": "m3f_absent",
+      "expected": "negative_control",
+      "ground_truth": "claimed empty-input index error does not occur in registered scenario"
+    }
+  ]
+}

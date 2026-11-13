@@ -1,0 +1,167 @@
+{
+  "mode": "EXPLORATORY_LIVE_RUN_NOT_BENCHMARK",
+  "authorization": "EXPLORATORY_USER_AUTHORIZED_ONLY",
+  "independent_approval": false,
+  "approved": false,
+  "scored": false,
+  "case_id": "BDB5-R1",
+  "provider": "ollama-native",
+  "model": "qwen3.5:9b-q4_K_M",
+  "base_url": "http://localhost:11434",
+  "context_length": 8192,
+  "max_output_tokens": 2048,
+  "prepared_path": "C:\\Users\\Adi\\Documents\\ChatGPT\\black\\data\\bdb5_handoff\\bdb5_r1_prepared.json",
+  "payload_hash": "0e940779081d1fda071f4acec3c2847227a7480056bc46d1d4d897c3806b6c8c",
+  "gate": {
+    "kind": "EXPLORATORY_NOT_APPROVAL",
+    "hash": "209ce46e51e7c8a61ed614c1a9936ec2256996a954a9bb6b1d28dff10bb2db56",
+    "real_approval": false
+  },
+  "outcome": "RUN_READY_FOR_REVIEW",
+  "provider_calls": 1,
+  "http_status": 200,
+  "provider_run": {
+    "mode": "REAL_CASE_PROVIDER_ENVELOPE",
+    "case_id": "BDB5-R1",
+    "status": "PROVIDER_RESULT_READY_FOR_REVIEW",
+    "provider_calls": 1,
+    "scored": false,
+    "approved": false,
+    "request_hash": "8c10a3e9eb12dd1182705f319f2df58b9a4f6b00bb692c8a6615bd9cf307b341",
+    "response_hash": "fec9389937fa377849e157c0b9f3b453955cfe7623865c3794dc2949998e5870",
+    "usage": {
+      "input_tokens": 2924,
+      "output_tokens": 352,
+      "estimated_cost": null
+    },
+    "result_hash": "79d8c7ab0b9419bcd817b27587f59ce3a70606a7246142c0b262b469a6d1cbce",
+    "model_visible_only": true
+  },
+  "runner": {
+    "mode": "REAL_CASE_RUN_ENVELOPE",
+    "case_id": "BDB5-R1",
+    "status": "RUN_READY_FOR_REVIEW",
+    "approved": false,
+    "scored": false,
+    "provider_calls": 0,
+    "responder_invocations": 1,
+    "model_visible_keys": [
+      "case_id",
+      "schema_version",
+      "task_instructions",
+      "evidence",
+      "candidate_inventory",
+      "source_revision",
+      "artifact_hashes"
+    ],
+    "packet_review": {
+      "mode": "REAL_CASE_PACKET_REVIEW_ONLY",
+      "case_id": "BDB5-R1",
+      "status": "REVIEW_PASSED",
+      "approved": false,
+      "model_calls": 0,
+      "checks": {
+        "evaluator_object": true,
+        "known_case": true,
+        "manifest_case_matches": true,
+        "manifest_not_synthetic": true,
+        "manifest_present": true,
+        "manifest_readiness": true,
+        "manifest_validation_clean": true,
+        "mode": true,
+        "no_forbidden_keys": true,
+        "no_manifest_in_visible": true,
+        "no_model_calls": true,
+        "no_private_paths": true,
+        "no_top_level_manifest": true,
+        "packet_case_matches": true,
+        "packet_revision_matches": true,
+        "packet_schema": true,
+        "packet_validation_clean": true,
+        "packet_validation_present": true,
+        "payload_hash": true,
+        "preparation_validation_empty": true,
+        "prepared_not_approved": true,
+        "r1_ci_evidence": true,
+        "r1_primary_frame": true,
+        "r1_source_evidence": true,
+        "r1_source_id": true,
+        "r1_source_status": true,
+        "registry_revision": true,
+        "visible_keys": true,
+        "visible_packet_object": true
+      },
+      "issues": []
+    },
+    "validation_issues": [],
+    "result_hash": "79d8c7ab0b9419bcd817b27587f59ce3a70606a7246142c0b262b469a6d1cbce"
+  },
+  "result": {
+    "case_id": "BDB5-R1",
+    "claims": [
+      {
+        "category": "OBSERVATION",
+        "text": "CI job bwhmather-verktyg-109227527 failed with errors=3, failures=2. Primary failure is test_modified_url_encoding in test_requests.py.",
+        "evidence_ids": [
+          "ci:1",
+          "test:1"
+        ],
+        "material": true,
+        "confidence": null,
+        "uncertainty": null,
+        "asserts_execution": false
+      },
+      {
+        "category": "OBSERVATION",
+        "text": "The error traceback shows a UnicodeDecodeError occurring in stdlib/urllib/parse.py at line 98 within the _decode_args function.",
+        "evidence_ids": [
+          "ci:1"
+        ],
+        "material": true,
+        "confidence": null,
+        "uncertainty": null,
+        "asserts_execution": false
+      },
+      {
+        "category": "OBSERVATION",
+        "text": "The source code excerpt from verktyg/requests.py shows the args property calling parse_qsl with encoding and errors parameters.",
+        "evidence_ids": [
+          "source:1"
+        ],
+        "material": true,
+        "confidence": null,
+        "uncertainty": null,
+        "asserts_execution": false
+      }
+    ],
+    "service_ranked": [],
+    "fault_class": null,
+    "predicted_files": [],
+    "predicted_function": null,
+    "predicted_line": null,
+    "predicted_mechanism": null,
+    "mechanism_evidence_ids": [],
+    "l1_causal_status": "NOT_ASSESSED",
+    "l2_causal_status": "NOT_ESTABLISHED",
+    "abstention": {
+      "scope": "APPLICATION_SOURCE",
+      "reason": "The evidence does not establish an application-source cause.",
+      "missing_evidence": [
+        "application stack trace"
+      ],
+      "source_not_established": false,
+      "application_source_not_established": true
+    },
+    "patch": null,
+    "test_executions": [],
+    "claimed_source_revision": null
+  },
+  "contract": {
+    "passed": true,
+    "codes": [],
+    "details": []
+  },
+  "error": null,
+  "raw_response_path": null,
+  "result_path": "C:\\Users\\Adi\\Documents\\ChatGPT\\black\\data\\bdb5_exploratory\\bdb5_r1_exploratory_result.json"
+}

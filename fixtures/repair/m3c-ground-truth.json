@@ -1,0 +1,35 @@
+{
+  "cases": [
+    {
+      "name": "m3c_trim_total",
+      "expected": "diagnosable",
+      "ground_truth": "blank string is passed to int by parse_amount; cleaning should handle blank",
+      "positive_reproduction": true
+    },
+    {
+      "name": "m3c_window",
+      "expected": "diagnosable",
+      "ground_truth": "rolling_sum range includes an extra partial window; exception frame is downstream",
+      "positive_reproduction": true
+    },
+    {
+      "name": "m3c_config",
+      "expected": "diagnosable",
+      "ground_truth": "missing configuration key should use documented default not truthiness",
+      "positive_reproduction": true
+    },
+    {
+      "name": "m3c_ambiguous",
+      "expected": "abstain",
+      "ground_truth": "source of runtime input is missing and has multiple plausible upstream causes",
+      "positive_reproduction": true
+    },
+    {
+      "name": "m3c_negative",
+      "expected": "negative_control",
+      "ground_truth": "negative control: claimed historical IndexError does not occur on this input",
+      "positive_reproduction": false
+    }
+  ],
+  "review": "Authored and reviewed by the same operator; not independently blinded."
+}

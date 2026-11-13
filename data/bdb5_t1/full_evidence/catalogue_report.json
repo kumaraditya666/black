@@ -1,0 +1,10 @@
+{
+  "anomaly": 3.867,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "pre",
+  "service": "catalogue",
+  "summary": "The telemetry shows a sustained drop in the 'value' metric for the 'catalogue' service, falling from a baseline of ~4.267 to 3.867 and remaining low throughout the incident window. This persistent deviation indicates a fault within the catalogue service itself rather than an upstream issue. The fault class is NOT_ESTABLISHED because the provided telemetry only shows the metric value drop without specifying the underlying cause (e.g., resource exhaustion, code error, dependency failure)."
+}

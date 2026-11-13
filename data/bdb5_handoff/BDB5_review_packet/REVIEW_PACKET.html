@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BDB-5 Review Packet</title>
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; max-width: 1000px; margin: 32px auto; padding: 0 20px; line-height: 1.45; color: #17202a; }
+  h1 { margin-bottom: 4px; }
+  .note { background: #fff8e1; border-left: 4px solid #d4a017; padding: 12px 14px; }
+  .file { margin: 14px 0; border: 1px solid #ccd3da; border-radius: 8px; padding: 10px 12px; }
+  summary { cursor: pointer; font-weight: 600; }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; background: #f6f8fa; border-radius: 6px; padding: 12px; font-size: 13px; }
+  code { background: #f6f8fa; padding: 1px 4px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<h1>BDB-5 Review Packet</h1>
+<p>Review packet for R1, R2 and R3. The JSON files are the prepared packets; the two Markdown files are the checklist and plain-English instructions.</p>
+<p class="note"><strong>Important:</strong> this is a human packet-boundary review. It is not approval of a model result. The packet still needs two real reviewers.</p>
+<p>This HTML is a convenience copy. The files under <code>data/bdb5_handoff/</code> remain authoritative.</p>
+<details class="file"><summary>REVIEW_HANDOFF.md</summary><pre># BDB-5 R1/R2/R3 Independent Review Handoff
+
+**Date:** 2026-11-10
+
+**Status:** `AWAITING_TWO_REAL_REVIEWERS — R1_R2_R3_EXPLORATORY — NOT_APPROVED`
+
+## 1. Why this handoff exists
+
+The code can record a two-reviewer approval, but it cannot make a reviewer
+independent. No approval record has been created for R1, R2 or R3, and none will
+be created with invented identities.
+
+Two real people must each:
+
+1. read the model-visible packet and evaluator manifest;
+2. confirm the boundary and evidence checks below;
+3. provide a reviewer ID, an independence attestation and a conflict-free
+   attestation.
+
+The reviewer IDs may be pseudonymous, but they must identify the actual people
+who performed the review. They must not be the agent or a fabricated name.
+
+## 2. Case bindings
+
+The prepared payloads are in the durable handoff folder
+`data/bdb5_handoff/`. The hashes below bind an approval to the exact content.
+
+| Case | Prepared payload | Payload SHA-256 | Packet SHA-256 | Manifest SHA-256 | Readiness |
+|---|---|---|---|---|---|
+| `BDB5-R1` | `data/bdb5_handoff/bdb5_r1_prepared.json` | `0e940779081d1fda071f4acec3c2847227a7480056bc46d1d4d897c3806b6c8c` | `668c64cd4361ba1c6f2efe0095aff8fe6de55963ec3b63f700ca407fd93620ce` | `63c797f6c5aaf95cd66117f7b4ee44beb3a91701cd797dd667a677aa150dd2fd` | `PREPARED` |
+| `BDB5-R2` | `data/bdb5_handoff/bdb5_r2_prepared.json` | `5b72f085d22f9ae0d38ffde44142e6b5e6206d1e640cc5b62d386f715f82b735` | `a3657e6cb3b23540ec21eb643de8e8ac658280c67fc36fbd7e07aacf0b92b1d1` | `0862f96db453778d53f2cdcb31419e9a3cb548573cff22054b1da38c767ffb23` | `PREPARED` |
+| `BDB5-R3` | `data/bdb5_handoff/bdb5_r3_prepared.json` | `041ba6157049aa3df9d78a1cd83d0eb168e94e71a8afaa04b7f614da5c50e37f` | `c3123dfe63ca88a41cd756d3b1ea1d0b94d2ac3b7c8a0fc28955f9c5f33a42c3` | `46930d769995e2a20c354621f282163c7e31228b81e9fa2233eadec95e462a05` | `PREPARED` |
+
+Label vault binding: `bc01e4d46d7d2f8723dea7a774ed3a40d49f5c8d65f0f06acb8c9a8b2f1510a7`.
+
+The vault is evaluator-only. Reviewers do not need to open it and should not
+use it to judge whether the packet is answerable.
+
+## 3. Reviewer checklist
+
+For each case, review only:
+
+- `model_visible_packet` in the prepared JSON;
+- `evaluator_only.manifest` in the prepared JSON;
+- the pinned source or CI evidence named by the packet.
+
+Confirm:
+
+- [ ] The case ID in the packet and manifest matches the case being reviewed.
+- [ ] The packet contains no gold patch, fix commit, hidden test name, expected
+      answer, rubric, label or evaluator-only field.
+- [ ] The packet contains no host path, temporary directory or local username.
+- [ ] The manifest marks the case `PREPARED`, not synthetic and not approved.
+- [ ] The evidence is sufficient to investigate the stated task without the
+      evaluator truth.
+- [ ] For R1, the source frame and pinned revision are present and consistent.
+- [ ] For R2, the packet correctly exposes only the CI/test-harness evidence and
+      does not include application source as a claimed cause.
+- [ ] For R3, the Django issue and pinned `django/http/response.py` source are
+      present and consistent.
+- [ ] Running the read-only review reports `REVIEW_PASSED` with no issues.
+- [ ] The exploratory R2 result in section 7 was not treated as approval
+      evidence and was not scored before approval.
+- [ ] The reviewer has no conflict of interest with the case, its labels or this
+      evaluation.
+
+If any item fails, do not approve that case. Record the issue instead.
+
+Run the automated boundary check for each case:
+
+```bash
+python scripts/bdb5_review_prepared.py --prepared &quot;data/bdb5_handoff/bdb5_r1_prepared.json&quot;
+python scripts/bdb5_review_prepared.py --prepared &quot;data/bdb5_handoff/bdb5_r2_prepared.json&quot;
+python scripts/bdb5_review_prepared.py --prepared &quot;data/bdb5_handoff/bdb5_r3_prepared.json&quot;
+```
+
+Expected: `&quot;status&quot;:&quot;REVIEW_PASSED&quot;`, `&quot;issues&quot;:[]`, `&quot;model_calls&quot;:0`.
+
+## 4. Recording the sign-offs
+
+Each case needs exactly two distinct reviewers: one `PRIMARY` and one
+`SECONDARY`. The CLI assigns the first `--reviewer` as `PRIMARY` and the second
+as `SECONDARY`.
+
+Use reviewer IDs and an attestation that the reviewers themselves approve. For
+example, the attestation may say:
+
+&gt; I independently reviewed the R1 packet and manifest against the checklist,
+&gt; found no label leakage or boundary violation, and have no conflict of interest.
+
+The same attestation text is copied into both sign-offs by the current CLI, so
+it must be acceptable to both reviewers. Record each case separately:
+
+```bash
+python scripts/bdb5_record_approval.py \
+  --prepared &quot;data/bdb5_handoff/bdb5_r1_prepared.json&quot; \
+  --reviewer &quot;&lt;REVIEWER_A_ID&gt;&quot; \
+  --reviewer &quot;&lt;REVIEWER_B_ID&gt;&quot; \
+  --attestation &quot;&lt;REVIEWER_A_AND_B_ATTESTATION&gt;&quot; \
+  --attest-independent \
+  --attest-conflict-free
+
+python scripts/bdb5_record_approval.py \
+  --prepared &quot;data/bdb5_handoff/bdb5_r2_prepared.json&quot; \
+  --reviewer &quot;&lt;REVIEWER_A_ID&gt;&quot; \
+  --reviewer &quot;&lt;REVIEWER_B_ID&gt;&quot; \
+  --attestation &quot;&lt;REVIEWER_A_AND_B_ATTESTATION&gt;&quot; \
+  --attest-independent \
+  --attest-conflict-free
+
+python scripts/bdb5_record_approval.py \
+  --prepared &quot;data/bdb5_handoff/bdb5_r3_prepared.json&quot; \
+  --reviewer &quot;&lt;REVIEWER_A_ID&gt;&quot; \
+  --reviewer &quot;&lt;REVIEWER_B_ID&gt;&quot; \
+  --attestation &quot;&lt;REVIEWER_A_AND_B_ATTESTATION&gt;&quot; \
+  --attest-independent \
+  --attest-conflict-free
+```
+
+The recorder defaults to `%TEMP%\bdb5_approvals\`. For this handoff, pass
+`--output &quot;data/bdb5_handoff/approvals/BDB5-R1-approval.json&quot;` (or the matching
+case) so the record stays with the package. Approval files are not committed.
+The command prints `APPROVAL_RECORDED` and the approval hash.
+
+An approval is bound to the packet hash, manifest hash and label-vault hash. If
+any of those change, the approval is rejected as stale.
+
+## 5. What approval does and does not establish
+
+Approval establishes that two named people attested to the boundary review. It
+does not:
+
+- score a model result;
+- establish that a model is correct;
+- convert the exploratory R2 output into a benchmark result;
+- unblock T1 or P1.
+
+After approval, a result can be scored with:
+
+```bash
+python scripts/bdb5_score_prepared.py \
+  --prepared &quot;data/bdb5_handoff/bdb5_r2_prepared.json&quot; \
+  --result &quot;&lt;RESULT_JSON&gt;&quot; \
+  --approval &quot;&lt;APPROVAL_JSON&gt;&quot;
+```
+
+The scorer makes no provider call and emits
+`REAL_CASE_SCORE_NOT_BENCHMARK_RESULT`.
+
+## 6. Current state
+
+- R1, R2 and R3: `PREPARED`.
+- Technical packet review: `REVIEW_PASSED` for all three.
+- Independent human approval: **not recorded**.
+- Real approved model result: **none**.
+- Exploratory model output: the R2 9B, R1 9B and R3 9B results are
+  contract-valid and accepted for review. R1 and R3 abstained and made no
+  predictions. All remain unapproved and unscored.
+- The prior R2 4B result is historical and rejected by the artifact rule.
+  Documents 77 and 79.
+- Repository `LIVE_INFERENCE_ENABLED`: `False`.
+
+## 7. Prior exploratory R2 result (historical; not approval evidence)
+
+The fourth exploratory call produced a structured application-source
+abstention. It was accepted before the execution-artifact rule was added. It is
+now kept only as a historical record; it is not a current accepted result, not
+a sign-off and not a reason to approve R2.
+
+| Property | Value |
+|---|---|
+| Case | `BDB5-R2` |
+| Model | `qwen3.5:4b` via native Ollama |
+| Provider calls | `1` |
+| Provider outcome (historical) | `PROVIDER_ACCEPTED` |
+| Contract (historical) | passed, no codes |
+| Current contract | **rejected**, `missing_execution_artifact` |
+| Runner status (historical) | `RUN_READY_FOR_REVIEW` |
+| Validation issues | none |
+| Request hash | `b0bf2ee143f78516caf545bdaa5f760e8dfa57da5f4950a62e16e2a5f03fe59c` |
+| Response hash | `73a7688c45020cdb14fa0622b30902603b3e702046e82000031ac5c643bd786f` |
+| Result hash | `5198f8c74b3d137d5f883f22a4320dd4319480a84cc0f4c4e98666017a05a426` |
+| Record | `data/bdb5_handoff/historical/bdb5_r2_live4_record.json` |
+| Standalone result | `data/bdb5_handoff/historical/bdb5_r2_live4_result.json` |
+
+The result contains `l2_causal_status = NOT_ESTABLISHED` and an
+`APPLICATION_SOURCE` abstention with `application_source_not_established`
+true. It also contains a `REPRODUCTION_BEFORE` execution with no artifact hash,
+so the current provider contract rejects it with
+`missing_execution_artifact`. Do not score it as a current accepted result.
+
+After approval, score a result that satisfies the current contract with:
+
+```bash
+python scripts/bdb5_score_prepared.py \
+  --prepared &quot;data/bdb5_handoff/bdb5_r2_prepared.json&quot; \
+  --result &quot;&lt;CURRENT_CONTRACT_VALID_RESULT_JSON&gt;&quot; \
+  --approval &quot;&lt;APPROVAL_JSON&gt;&quot;
+```
+
+## 8. Current exploratory R2 result (9B; not approval evidence)
+
+The 9B comparison used the same packet and current contract.
+
+| Property | Value |
+|---|---|
+| Case | `BDB5-R2` |
+| Model | `qwen3.5:9b-q4_K_M` via native Ollama |
+| Provider calls | `1` |
+| Provider outcome | `PROVIDER_ACCEPTED` |
+| Contract | passed, no codes |
+| Runner status | `RUN_READY_FOR_REVIEW` |
+| Validation issues | none |
+| Request hash | `9c4a55ade43ae64e88fcb83a3dcf6533b4b098af87d18e6f9a040248d51a739d` |
+| Response hash | `0c810422207debdf2ea79e80d826f52daa3931d5434cc1401999e98cfcbb64fd` |
+| Result hash | `2658e475d5388778803a399cc188aae0ee177de75260ebf0723bf5b265166fde` |
+| Record | `data/bdb5_handoff/bdb5_r2_live6_record.json` |
+| Standalone result | `data/bdb5_handoff/bdb5_r2_live6_result.json` |
+
+The result contains `l2_causal_status = NOT_ESTABLISHED`, an
+`APPLICATION_SOURCE` abstention with `application_source_not_established`
+true, `OBSERVATION` and `HARNESS_CAUSE` claims, and no test executions. It is
+unapproved and unscored. After approval it can be scored with:
+
+```bash
+python scripts/bdb5_score_prepared.py \
+  --prepared &quot;data/bdb5_handoff/bdb5_r2_prepared.json&quot; \
+  --result &quot;data/bdb5_handoff/bdb5_r2_live6_result.json&quot; \
+  --approval &quot;&lt;APPROVAL_JSON&gt;&quot;
+```
+
+## 9. Current exploratory R1/R3 results (not approval evidence)
+
+These are 9B exploratory outputs. They are contract-valid, unapproved and
+unscored, and they are not approval evidence.
+
+| Case | Result | Result hash | Record |
+|---|---|---|---|
+| `BDB5-R1` | `RUN_READY_FOR_REVIEW`; `NOT_ESTABLISHED`; `APPLICATION_SOURCE` abstention | `79d8c7ab0b9419bcd817b27587f59ce3a70606a7246142c0b262b469a6d1cbce` | `data/bdb5_exploratory/bdb5_r1_exploratory_record.json` |
+| `BDB5-R3` | `RUN_READY_FOR_REVIEW`; `NOT_ESTABLISHED`; `APPLICATION_SOURCE` abstention | `e96496ca04f82fe280f3ec5eb1fc4c1eabb3c2988bee6ce0e373dce8d616c183` | `data/bdb5_exploratory/bdb5_r3_exploratory_record.json` |
+
+Both outputs contain observations only and no predicted file, function, line or
+fault class. Neither records a test execution or patch. The detailed summary is
+`data/bdb5_exploratory/README.md`. Do not score these before the matching
+approval exists.
+</pre></details>
+<details class="file"><summary>HOW_TO_APPROVE_SIMPLE.md</summary><pre># How to approve — plain English
+
+You do **not** need to code. I can run every command. Approval only needs two
+real people to read the review packet and confirm it is clean.
+
+## What approval means
+
+Approval means two people checked that the task given to the AI does not
+accidentally contain the answer, the fix, a hidden test, a label, or a local
+file path.
+
+It is a review of the **packet**, not a vote on whether the AI was right.
+
+## What you need
+
+- About 10–15 minutes per person.
+- Two real people. You can be one of them.
+- The second person can be a friend, coworker, or classmate.
+- No coding and no model run.
+
+The same two people can review all three cases: R1, R2 and R3.
+
+## Step 1 — Pick two people
+
+- Reviewer A: you, if you are willing to read the checklist.
+- Reviewer B: one other real person.
+
+Use a name or nickname for each reviewer ID. The ID must identify the actual
+person who did the review; it can be pseudonymous.
+
+Do not use me as a reviewer. Do not use two names for the same person. Do not
+give me names of people who did not actually read the packet.
+
+If you cannot find a second real person, the cases stay unapproved. That is the
+honest outcome; I will not invent a reviewer.
+
+## Step 2 — Both people read the review handoff
+
+Open this file:
+
+`data/bdb5_handoff/REVIEW_HANDOFF.md`
+
+Read sections 1–3. For each case, confirm:
+
+- [ ] The case ID is correct: R1, R2 or R3.
+- [ ] The model-visible packet does not contain the answer, the fix commit, a
+      hidden test name, a label, a rubric, or an expected answer.
+- [ ] The packet does not contain a local username, a Windows path, or a
+      temporary folder path.
+- [ ] The evidence is enough to investigate the task without the answer key.
+- [ ] R1 has a source frame and pinned revision.
+- [ ] R2 shows only CI/test-harness evidence and does not claim an application
+      source cause.
+- [ ] R3 has the Django issue and the pinned `django/http/response.py` source.
+- [ ] The reviewer has no conflict of interest with the case or its labels.
+- [ ] The exploratory R2 result was not used as approval evidence and was not
+      scored before approval.
+
+If everything passes, the reviewer says **PASS** for that case. If anything
+fails, the reviewer says **FAIL** and names the case and the problem.
+
+You do not have to run the Python commands. I can run the automated boundary
+check after you tell me the human review is done.
+
+## Step 3 — Each person replies
+
+Ask each reviewer to send a short reply like:
+
+&gt; I reviewed R1, R2 and R3 independently. I found no label leakage, answer
+&gt; leakage, hidden test, local path, or other boundary problem. I have no
+&gt; conflict of interest.
+
+They can also reply per case:
+
+&gt; R1: PASS. R2: PASS. R3: PASS. Reviewed independently; no conflict.
+
+If a reviewer says FAIL, stop. Do not record approval for that case.
+
+## Step 4 — Agree on one sentence
+
+The recorder copies one sentence into both sign-offs. Both reviewers must agree
+to the exact sentence before I record it.
+
+Example:
+
+&gt; We independently reviewed the R1, R2 and R3 packets, found no label leakage or
+&gt; boundary violation, and have no conflict of interest.
+
+Both people must approve that wording. Do not write it for someone who has not
+agreed to it.
+
+## Step 5 — Send me four things
+
+Send me:
+
+1. Reviewer A ID:
+2. Reviewer B ID:
+3. The exact agreed sentence:
+4. Confirmation that both people actually read the packet and said PASS.
+
+That is all I need. I will run the recorder for R1, R2 and R3 and save the
+approval files under:
+
+`data/bdb5_handoff/approvals/`
+
+## Step 6 — What I do next
+
+I will:
+
+- run the approval recorder for each case;
+- save `BDB5-R1-approval.json`, `BDB5-R2-approval.json` and
+  `BDB5-R3-approval.json`;
+- verify the two reviewer IDs, both attestations, and the packet hashes;
+- score R1, R2 and R3 only after their approval records exist.
+
+Approval does **not** unblock T1 or P1. Those are separate engineering blockers.
+
+## Copy-paste message for the second reviewer
+
+&gt; Hi — can you spend about 10 minutes reviewing three AI benchmark packets? You
+&gt; don’t need to code. Open `data/bdb5_handoff/REVIEW_HANDOFF.md`, read sections
+&gt; 1–3, and tell me PASS or FAIL for R1, R2 and R3. The main check is that the
+&gt; packet does not contain the answer, the fix, a hidden test, a label, or a local
+&gt; file path. If you’re willing, also confirm you have no conflict of interest.
+&gt; Thank you.
+
+## The short version
+
+1. You and one other real person read the checklist.
+2. Both say PASS for R1, R2 and R3.
+3. Both agree to one sentence.
+4. Send me the two IDs and the sentence.
+5. I record the approvals and verify them.
+</pre></details>
+<details class="file"><summary>bdb5_r1_prepared.json</summary><pre>{&quot;case_id&quot;:&quot;BDB5-R1&quot;,&quot;evaluator_only&quot;:{&quot;diagnostics&quot;:{&quot;failure_count&quot;:5,&quot;host_paths_removed&quot;:true,&quot;log_lines&quot;:1070,&quot;model_facing_packet_bytes&quot;:3671,&quot;note&quot;:&quot;Preparation only. This case is not approved and cannot enter the synthetic engine.&quot;,&quot;primary_frame&quot;:{&quot;function&quot;:&quot;args&quot;,&quot;line&quot;:356,&quot;path&quot;:&quot;verktyg/requests.py&quot;,&quot;source_line&quot;:&quot;encoding=self.url_charset, errors=self.encoding_errors,&quot;,&quot;stdlib&quot;:false,&quot;test_file&quot;:false}},&quot;manifest&quot;:{&quot;adapter_requirements&quot;:[&quot;bugswarm-ci-log-v1&quot;],&quot;allowed_files&quot;:[&quot;verktyg/requests.py&quot;],&quot;allowed_scope&quot;:[&quot;source&quot;],&quot;artifact_hashes&quot;:{&quot;artifact:ci-1&quot;:&quot;a000f8cdbf9013a67082633d162bef43554a87169bc3cf8534e6f395db7e7db7&quot;,&quot;artifact:full-log&quot;:&quot;378197f8aed6a5e2d094572802555c605e31957e0aaa211a050d52fa3a033701&quot;,&quot;artifact:source-1&quot;:&quot;569f2e243b1494b9ac2c60729ca4a2ab4d53bc2389ea8d6a84d7c14eea661b14&quot;,&quot;artifact:test-1&quot;:&quot;55a37d54e8a5d772f1c69d8c628fa77eeeb6b20c30324d48e1691a9e506337e2&quot;},&quot;case_category&quot;:&quot;CI_SOURCE&quot;,&quot;case_id&quot;:&quot;BDB5-R1&quot;,&quot;dataset&quot;:&quot;BugSwarm&quot;,&quot;dataset_revision&quot;:&quot;bwhmather-verktyg-109227527&quot;,&quot;evaluation_schema_version&quot;:&quot;bdb5-eval-v1&quot;,&quot;readiness&quot;:&quot;PREPARED&quot;,&quot;repository&quot;:&quot;https://github.com/bwhmather/verktyg&quot;,&quot;required_dimensions&quot;:[&quot;file_exactness&quot;,&quot;function_exactness&quot;,&quot;line_exactness&quot;,&quot;mechanism&quot;,&quot;causal_status&quot;,&quot;citation_validity&quot;,&quot;reproduction_before&quot;,&quot;unsupported_claim_rate&quot;],&quot;required_evidence_types&quot;:[&quot;CI_LOG&quot;,&quot;SOURCE_EXCERPT&quot;],&quot;schema_version&quot;:&quot;bdb5-case-v1&quot;,&quot;source_revision&quot;:&quot;71dc420c22fadbae064c46b426e093bec7b86f32&quot;,&quot;synthetic&quot;:false},&quot;packet_validation&quot;:{&quot;issues&quot;:[]},&quot;primary_failure&quot;:{&quot;class_name&quot;:&quot;verktyg.testsuite.test_requests.RequestsTestCase&quot;,&quot;exception&quot;:&quot;UnicodeDecodeError: &#x27;ascii&#x27; codec can&#x27;t decode byte 0xc1 in position 4: ordinal not in range(128)&quot;,&quot;frame&quot;:{&quot;function&quot;:&quot;args&quot;,&quot;line&quot;:356,&quot;path&quot;:&quot;verktyg/requests.py&quot;,&quot;source_line&quot;:&quot;encoding=self.url_charset, errors=self.encoding_errors,&quot;,&quot;stdlib&quot;:false,&quot;test_file&quot;:false},&quot;kind&quot;:&quot;ERROR&quot;,&quot;test&quot;:&quot;test_modified_url_encoding&quot;},&quot;source_status&quot;:&quot;resolved&quot;},&quot;mode&quot;:&quot;REAL_CASE_PREPARATION_ONLY&quot;,&quot;model_calls&quot;:0,&quot;model_visible_packet&quot;:{&quot;artifact_hashes&quot;:{&quot;artifact:ci-1&quot;:&quot;a000f8cdbf9013a67082633d162bef43554a87169bc3cf8534e6f395db7e7db7&quot;,&quot;artifact:full-log&quot;:&quot;378197f8aed6a5e2d094572802555c605e31957e0aaa211a050d52fa3a033701&quot;,&quot;artifact:source-1&quot;:&quot;569f2e243b1494b9ac2c60729ca4a2ab4d53bc2389ea8d6a84d7c14eea661b14&quot;,&quot;artifact:test-1&quot;:&quot;55a37d54e8a5d772f1c69d8c628fa77eeeb6b20c30324d48e1691a9e506337e2&quot;},&quot;candidate_inventory&quot;:[],&quot;case_id&quot;:&quot;BDB5-R1&quot;,&quot;evidence&quot;:[{&quot;evidence_id&quot;:&quot;ci:1&quot;,&quot;evidence_type&quot;:&quot;CI_LOG&quot;,&quot;source_revision&quot;:null,&quot;structured&quot;:{&quot;failure_kind&quot;:&quot;ERROR&quot;,&quot;job&quot;:&quot;bwhmather-verktyg-109227527&quot;,&quot;primary_test&quot;:&quot;test_modified_url_encoding&quot;,&quot;source_path_normalised&quot;:true,&quot;summary&quot;:&quot;FAILED (failures=2, errors=3)&quot;,&quot;test_count&quot;:247},&quot;text&quot;:&quot;test_exception_handlers (verktyg.testsuite.test_application.ApplicationTestCase) ... ok\ntest_middleware (verktyg.testsuite.test_application.ApplicationTestCase) ... ok\n\n======================================================================\nERROR: test_modified_url_encoding (verktyg.testsuite.test_requests.RequestsTestCase)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \&quot;verktyg/testsuite/test_requests.py\&quot;, line 521, in test_modified_url_encoding\n    self.assertEqual(req.args[&#x27;foo&#x27;], u&#x27;정상처리&#x27;)\n  File \&quot;verktyg/utils.py\&quot;, line 66, in __get__\n    value = self.func(obj)\n  File \&quot;verktyg/requests.py\&quot;, line 356, in args\n    encoding=self.url_charset, errors=self.encoding_errors,\n  File \&quot;stdlib/urllib/parse.py\&quot;, line 607, in parse_qsl\n    qs, _coerce_result = _coerce_args(qs)\n  File \&quot;stdlib/urllib/parse.py\&quot;, line 114, in _coerce_args\n    return _decode_args(args) + (_encode_result,)\n  File \&quot;stdlib/urllib/parse.py\&quot;, line 98, in _decode_args\n    return tuple(x.decode(encoding, errors) if x else &#x27;&#x27; for x in args)\n  File \&quot;stdlib/urllib/parse.py\&quot;, line 98, in &lt;genexpr&gt;\n    return tuple(x.decode(encoding, errors) if x else &#x27;&#x27; for x in args)\nUnicodeDecodeError: &#x27;ascii&#x27; codec can&#x27;t decode byte 0xc1 in position 4: ordinal not in range(128)\n\n======================================================================\nERROR: test_shallow_mode (verktyg.testsuite.test_requests.RequestsTestCase)\n----------------------------------------------------------------------&quot;},{&quot;evidence_id&quot;:&quot;test:1&quot;,&quot;evidence_type&quot;:&quot;TEST_RESULT&quot;,&quot;source_revision&quot;:null,&quot;structured&quot;:{&quot;exit_code&quot;:0,&quot;job&quot;:&quot;bwhmather-verktyg-109227527&quot;,&quot;primary_test&quot;:&quot;test_modified_url_encoding&quot;,&quot;summary&quot;:&quot;FAILED (failures=2, errors=3)&quot;,&quot;test_count&quot;:247},&quot;text&quot;:&quot;Recorded CI result: 247 tests; FAILED (failures=2, errors=3); primary failure test_modified_url_encoding (ERROR).\nUnicodeDecodeError: &#x27;ascii&#x27; codec can&#x27;t decode byte 0xc1 in position 4: ordinal not in range(128)&quot;},{&quot;evidence_id&quot;:&quot;source:1&quot;,&quot;evidence_type&quot;:&quot;SOURCE_EXCERPT&quot;,&quot;source_revision&quot;:&quot;71dc420c22fadbae064c46b426e093bec7b86f32&quot;,&quot;structured&quot;:{&quot;function&quot;:&quot;args&quot;,&quot;line&quot;:356,&quot;path&quot;:&quot;verktyg/requests.py&quot;,&quot;status&quot;:&quot;resolved&quot;},&quot;text&quot;:&quot;verktyg/requests.py:356 in args\n353:         \&quot;\&quot;\&quot;\n354:         return self.parameter_storage_class(parse_qsl(\n355:             wsgi_get_bytes(self.environ.get(&#x27;QUERY_STRING&#x27;, &#x27;&#x27;)),\n356:             encoding=self.url_charset, errors=self.encoding_errors,\n357:         ))\n358: \n359:     def get_data(self, cache=True, as_text=False, parse_form_data=False):&quot;}],&quot;schema_version&quot;:&quot;bdb5-evidence-v1&quot;,&quot;source_revision&quot;:&quot;71dc420c22fadbae064c46b426e093bec7b86f32&quot;,&quot;task_instructions&quot;:&quot;Investigate the recorded CI failure. Identify the source mechanism and cite the supplied evidence. Distinguish a static mechanism from an established runtime cause; do not assume the client-reported frames executed.&quot;},&quot;payload_hash&quot;:&quot;0e940779081d1fda071f4acec3c2847227a7480056bc46d1d4d897c3806b6c8c&quot;,&quot;readiness&quot;:&quot;PREPARED&quot;}
+</pre></details>
+<details class="file"><summary>bdb5_r2_prepared.json</summary><pre>{&quot;case_id&quot;:&quot;BDB5-R2&quot;,&quot;evaluator_only&quot;:{&quot;diagnostics&quot;:{&quot;failure_count&quot;:1,&quot;host_paths_removed&quot;:true,&quot;log_lines&quot;:586,&quot;model_facing_packet_bytes&quot;:2167,&quot;note&quot;:&quot;Preparation only. This case is not approved and cannot enter the synthetic engine.&quot;,&quot;primary_frame&quot;:{&quot;function&quot;:&quot;assert_file_equal&quot;,&quot;line&quot;:211,&quot;path&quot;:&quot;test_f90nml.py&quot;,&quot;source_line&quot;:&quot;with open(target_fname) as target:&quot;,&quot;stdlib&quot;:false,&quot;test_file&quot;:true}},&quot;manifest&quot;:{&quot;adapter_requirements&quot;:[&quot;bugswarm-ci-log-v1&quot;],&quot;allowed_files&quot;:[],&quot;allowed_scope&quot;:[&quot;test-harness&quot;],&quot;artifact_hashes&quot;:{&quot;artifact:ci-1&quot;:&quot;542370f1aabdc67e3b2144f736335d1edbe9e53b9b3be0aec377fdd3d95cc226&quot;,&quot;artifact:full-log&quot;:&quot;d72cbf634b969bd7e3e738ff8a5df88f583ef7bafe4f4c7a6eea3e83a10a48a0&quot;,&quot;artifact:test-1&quot;:&quot;0b40d6a899bc5d7015db64662f922bc3bac2746a9286f06e8faf38b50fcd0a4c&quot;},&quot;case_category&quot;:&quot;NEGATIVE_CONTROL&quot;,&quot;case_id&quot;:&quot;BDB5-R2&quot;,&quot;dataset&quot;:&quot;BugSwarm&quot;,&quot;dataset_revision&quot;:&quot;marshallward-f90nml-83523531&quot;,&quot;evaluation_schema_version&quot;:&quot;bdb5-eval-v1&quot;,&quot;readiness&quot;:&quot;PREPARED&quot;,&quot;repository&quot;:&quot;https://github.com/marshallward/f90nml&quot;,&quot;required_dimensions&quot;:[&quot;app_causal_status&quot;,&quot;app_abstention&quot;,&quot;app_source_claim&quot;,&quot;citation_validity&quot;,&quot;reproduction_before&quot;,&quot;unsupported_claim_rate&quot;],&quot;required_evidence_types&quot;:[&quot;CI_LOG&quot;,&quot;TEST_RESULT&quot;],&quot;schema_version&quot;:&quot;bdb5-case-v1&quot;,&quot;source_revision&quot;:&quot;d8d88884dea251fc1d9e63b9afcf19b81a785066&quot;,&quot;synthetic&quot;:false},&quot;packet_validation&quot;:{&quot;issues&quot;:[]},&quot;primary_failure&quot;:{&quot;class_name&quot;:&quot;__main__.Test&quot;,&quot;exception&quot;:&quot;IOError: [Errno 2] No such file or directory: &#x27;types_dict.nml&#x27;&quot;,&quot;frame&quot;:{&quot;function&quot;:&quot;assert_file_equal&quot;,&quot;line&quot;:211,&quot;path&quot;:&quot;test_f90nml.py&quot;,&quot;source_line&quot;:&quot;with open(target_fname) as target:&quot;,&quot;stdlib&quot;:false,&quot;test_file&quot;:true},&quot;kind&quot;:&quot;ERROR&quot;,&quot;test&quot;:&quot;test_dict_write&quot;},&quot;source_status&quot;:null},&quot;mode&quot;:&quot;REAL_CASE_PREPARATION_ONLY&quot;,&quot;model_calls&quot;:0,&quot;model_visible_packet&quot;:{&quot;artifact_hashes&quot;:{&quot;artifact:ci-1&quot;:&quot;542370f1aabdc67e3b2144f736335d1edbe9e53b9b3be0aec377fdd3d95cc226&quot;,&quot;artifact:full-log&quot;:&quot;d72cbf634b969bd7e3e738ff8a5df88f583ef7bafe4f4c7a6eea3e83a10a48a0&quot;,&quot;artifact:test-1&quot;:&quot;0b40d6a899bc5d7015db64662f922bc3bac2746a9286f06e8faf38b50fcd0a4c&quot;},&quot;candidate_inventory&quot;:[],&quot;case_id&quot;:&quot;BDB5-R2&quot;,&quot;evidence&quot;:[{&quot;evidence_id&quot;:&quot;ci:1&quot;,&quot;evidence_type&quot;:&quot;CI_LOG&quot;,&quot;source_revision&quot;:null,&quot;structured&quot;:{&quot;failure_kind&quot;:&quot;ERROR&quot;,&quot;job&quot;:&quot;marshallward-f90nml-83523531&quot;,&quot;primary_test&quot;:&quot;test_dict_write&quot;,&quot;source_path_normalised&quot;:true,&quot;summary&quot;:&quot;FAILED (errors=1)&quot;,&quot;test_count&quot;:38},&quot;text&quot;:&quot;travis_time:start:05ecd1db\n$ coverage run --source f90nml test_f90nml.py\n.......E..............................\n======================================================================\nERROR: test_dict_write (__main__.Test)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \&quot;test_f90nml.py\&quot;, line 483, in test_dict_write\n    self.assert_write(self.types_nml, &#x27;types_dict.nml&#x27;)\n  File \&quot;test_f90nml.py\&quot;, line 220, in assert_write\n    self.assert_file_equal(tmp_fname, target_fname)\n  File \&quot;test_f90nml.py\&quot;, line 211, in assert_file_equal\n    with open(target_fname) as target:\nIOError: [Errno 2] No such file or directory: &#x27;types_dict.nml&#x27;\n\n----------------------------------------------------------------------\nRan 38 tests in 0.107s\n&quot;},{&quot;evidence_id&quot;:&quot;test:1&quot;,&quot;evidence_type&quot;:&quot;TEST_RESULT&quot;,&quot;source_revision&quot;:null,&quot;structured&quot;:{&quot;exit_code&quot;:1,&quot;job&quot;:&quot;marshallward-f90nml-83523531&quot;,&quot;primary_test&quot;:&quot;test_dict_write&quot;,&quot;summary&quot;:&quot;FAILED (errors=1)&quot;,&quot;test_count&quot;:38},&quot;text&quot;:&quot;Recorded CI result: 38 tests; FAILED (errors=1); primary failure test_dict_write (ERROR).\nIOError: [Errno 2] No such file or directory: &#x27;types_dict.nml&#x27;&quot;}],&quot;schema_version&quot;:&quot;bdb5-evidence-v1&quot;,&quot;source_revision&quot;:&quot;d8d88884dea251fc1d9e63b9afcf19b81a785066&quot;,&quot;task_instructions&quot;:&quot;Investigate the recorded CI failure. State whether an application-source cause is established and separately identify any test-harness or fixture cause supported by the evidence. Do not convert a harness failure into an application-source claim.&quot;},&quot;payload_hash&quot;:&quot;5b72f085d22f9ae0d38ffde44142e6b5e6206d1e640cc5b62d386f715f82b735&quot;,&quot;readiness&quot;:&quot;PREPARED&quot;}
+</pre></details>
+<details class="file"><summary>bdb5_r3_prepared.json</summary><pre>{&quot;case_id&quot;:&quot;BDB5-R3&quot;,&quot;evaluator_only&quot;:{&quot;diagnostics&quot;:{&quot;issue_chars&quot;:710,&quot;model_facing_packet_bytes&quot;:2084,&quot;note&quot;:&quot;Preparation only. Hidden tests, gold patch and fix commit are excluded.&quot;,&quot;source_chars&quot;:19731,&quot;source_frame&quot;:{&quot;context&quot;:[{&quot;line&quot;:229,&quot;text&quot;:&quot;        # Handle string types -- we can&#x27;t rely on force_bytes here because:&quot;},{&quot;line&quot;:230,&quot;text&quot;:&quot;        # - Python attempts str conversion first&quot;},{&quot;line&quot;:231,&quot;text&quot;:&quot;        # - when self._charset != &#x27;utf-8&#x27; it re-encodes the content&quot;},{&quot;line&quot;:232,&quot;text&quot;:&quot;        if isinstance(value, bytes):&quot;},{&quot;line&quot;:233,&quot;text&quot;:&quot;            return bytes(value)&quot;},{&quot;line&quot;:234,&quot;text&quot;:&quot;        if isinstance(value, str):&quot;},{&quot;line&quot;:235,&quot;text&quot;:&quot;            return bytes(value.encode(self.charset))&quot;}],&quot;function&quot;:&quot;make_bytes&quot;,&quot;line&quot;:232,&quot;path&quot;:&quot;django/http/response.py&quot;,&quot;source_line&quot;:&quot;        if isinstance(value, bytes):&quot;,&quot;status&quot;:&quot;resolved&quot;}},&quot;manifest&quot;:{&quot;adapter_requirements&quot;:[&quot;swebench-issue-source-v1&quot;],&quot;allowed_files&quot;:[&quot;django/http/response.py&quot;],&quot;allowed_scope&quot;:[&quot;source&quot;],&quot;artifact_hashes&quot;:{&quot;issue_sha256&quot;:&quot;ed4194fddda5b74386064555b7910ceddf9adce5e1265e0df1cbe00a935a8d2b&quot;,&quot;source_sha256&quot;:&quot;a6b41d8e9bce659f1e05ecd26142dbcb5caf94f990fd836aac6b503c8950a50c&quot;},&quot;case_category&quot;:&quot;ISSUE_SOURCE&quot;,&quot;case_id&quot;:&quot;BDB5-R3&quot;,&quot;dataset&quot;:&quot;SWE-bench Verified&quot;,&quot;dataset_revision&quot;:&quot;78f471bf655a3137b2e8a75af1501690ec009ec3&quot;,&quot;evaluation_schema_version&quot;:&quot;bdb5-eval-v1&quot;,&quot;readiness&quot;:&quot;PREPARED&quot;,&quot;repository&quot;:&quot;https://github.com/django/django&quot;,&quot;required_dimensions&quot;:[&quot;file_exactness&quot;,&quot;function_exactness&quot;,&quot;mechanism&quot;,&quot;causal_status&quot;,&quot;citation_validity&quot;,&quot;unsupported_claim_rate&quot;],&quot;required_evidence_types&quot;:[&quot;ISSUE_TEXT&quot;,&quot;SOURCE_EXCERPT&quot;],&quot;schema_version&quot;:&quot;bdb5-case-v1&quot;,&quot;source_revision&quot;:&quot;879cc3da6249e920b8d54518a0ae06de835d7373&quot;,&quot;synthetic&quot;:false},&quot;packet_validation&quot;:{&quot;issues&quot;:[]},&quot;source_frame&quot;:{&quot;context&quot;:[{&quot;line&quot;:229,&quot;text&quot;:&quot;        # Handle string types -- we can&#x27;t rely on force_bytes here because:&quot;},{&quot;line&quot;:230,&quot;text&quot;:&quot;        # - Python attempts str conversion first&quot;},{&quot;line&quot;:231,&quot;text&quot;:&quot;        # - when self._charset != &#x27;utf-8&#x27; it re-encodes the content&quot;},{&quot;line&quot;:232,&quot;text&quot;:&quot;        if isinstance(value, bytes):&quot;},{&quot;line&quot;:233,&quot;text&quot;:&quot;            return bytes(value)&quot;},{&quot;line&quot;:234,&quot;text&quot;:&quot;        if isinstance(value, str):&quot;},{&quot;line&quot;:235,&quot;text&quot;:&quot;            return bytes(value.encode(self.charset))&quot;}],&quot;function&quot;:&quot;make_bytes&quot;,&quot;line&quot;:232,&quot;path&quot;:&quot;django/http/response.py&quot;,&quot;source_line&quot;:&quot;        if isinstance(value, bytes):&quot;,&quot;status&quot;:&quot;resolved&quot;},&quot;source_status&quot;:&quot;resolved&quot;},&quot;mode&quot;:&quot;REAL_CASE_PREPARATION_ONLY&quot;,&quot;model_calls&quot;:0,&quot;model_visible_packet&quot;:{&quot;artifact_hashes&quot;:{&quot;issue_sha256&quot;:&quot;ed4194fddda5b74386064555b7910ceddf9adce5e1265e0df1cbe00a935a8d2b&quot;,&quot;source_sha256&quot;:&quot;a6b41d8e9bce659f1e05ecd26142dbcb5caf94f990fd836aac6b503c8950a50c&quot;},&quot;candidate_inventory&quot;:[],&quot;case_id&quot;:&quot;BDB5-R3&quot;,&quot;evidence&quot;:[{&quot;evidence_id&quot;:&quot;issue:1&quot;,&quot;evidence_type&quot;:&quot;ISSUE_TEXT&quot;,&quot;source_revision&quot;:null,&quot;structured&quot;:{&quot;source&quot;:&quot;django-ticket-30294&quot;},&quot;text&quot;:&quot;I am trying to write a BinaryField retrieved from the database into a HttpResponse. When the database is Sqlite this works correctly, but Postgresql returns the contents of the field as a memoryview object and it seems like current Django doesn&#x27;t like this combination:\n\nfrom django.http import HttpResponse\n\n# String content\nresponse = HttpResponse(\&quot;My Content\&quot;)\nresponse.content\n\n# Out: b&#x27;My Content&#x27;\n# This is correct\n\n# Bytes content\nresponse = HttpResponse(b\&quot;My Content\&quot;)\nresponse.content\n\n# Out: b&#x27;My Content&#x27;\n# This is also correct\n\n# memoryview content\nresponse = HttpResponse(memoryview(b\&quot;My Content\&quot;))\nresponse.content\n\n# Out: b&#x27;&lt;memory at 0x...&gt;&#x27;\n# This is not correct, I am expecting b&#x27;My Content&#x27;&quot;},{&quot;evidence_id&quot;:&quot;source:1&quot;,&quot;evidence_type&quot;:&quot;SOURCE_EXCERPT&quot;,&quot;source_revision&quot;:&quot;879cc3da6249e920b8d54518a0ae06de835d7373&quot;,&quot;structured&quot;:{&quot;function&quot;:&quot;make_bytes&quot;,&quot;line&quot;:232,&quot;path&quot;:&quot;django/http/response.py&quot;,&quot;status&quot;:&quot;resolved&quot;},&quot;text&quot;:&quot; 229:         # Handle string types -- we can&#x27;t rely on force_bytes here because:\n 230:         # - Python attempts str conversion first\n 231:         # - when self._charset != &#x27;utf-8&#x27; it re-encodes the content\n 232:         if isinstance(value, bytes):\n 233:             return bytes(value)\n 234:         if isinstance(value, str):\n 235:             return bytes(value.encode(self.charset))&quot;}],&quot;schema_version&quot;:&quot;bdb5-evidence-v1&quot;,&quot;source_revision&quot;:&quot;879cc3da6249e920b8d54518a0ae06de835d7373&quot;,&quot;task_instructions&quot;:&quot;Investigate the supplied issue report using the pinned source excerpt. Identify the most likely source file and method, explain the mechanism, and cite the supplied evidence. Do not claim that a test or patch was run.&quot;},&quot;payload_hash&quot;:&quot;041ba6157049aa3df9d78a1cd83d0eb168e94e71a8afaa04b7f614da5c50e37f&quot;,&quot;readiness&quot;:&quot;PREPARED&quot;}
+</pre></details>
+<details class="file"><summary>HANDOFF_MANIFEST.json</summary><pre>{
+  &quot;mode&quot;: &quot;BDB5_REVIEW_HANDOFF&quot;,
+  &quot;created_at&quot;: &quot;2026-11-11T00:00:00+00:00&quot;,
+  &quot;status&quot;: &quot;APPROVAL_DEFERRED&quot;,
+  &quot;approval_recorded&quot;: false,
+  &quot;scored&quot;: false,
+  &quot;cases&quot;: [
+    &quot;BDB5-R1&quot;,
+    &quot;BDB5-R2&quot;,
+    &quot;BDB5-R3&quot;
+  ],
+  &quot;current_result&quot;: {
+    &quot;case_id&quot;: &quot;BDB5-R2&quot;,
+    &quot;model&quot;: &quot;qwen3.5:9b-q4_K_M&quot;,
+    &quot;provider_calls&quot;: 1,
+    &quot;contract&quot;: &quot;passed&quot;,
+    &quot;runner_status&quot;: &quot;RUN_READY_FOR_REVIEW&quot;,
+    &quot;request_hash&quot;: &quot;9c4a55ade43ae64e88fcb83a3dcf6533b4b098af87d18e6f9a040248d51a739d&quot;,
+    &quot;response_hash&quot;: &quot;0c810422207debdf2ea79e80d826f52daa3931d5434cc1401999e98cfcbb64fd&quot;,
+    &quot;result_hash&quot;: &quot;2658e475d5388778803a399cc188aae0ee177de75260ebf0723bf5b265166fde&quot;
+  },
+  &quot;exploratory_results&quot;: {
+    &quot;BDB5-R1&quot;: {
+      &quot;result_hash&quot;: &quot;79d8c7ab0b9419bcd817b27587f59ce3a70606a7246142c0b262b469a6d1cbce&quot;,
+      &quot;record&quot;: &quot;data/bdb5_exploratory/bdb5_r1_exploratory_record.json&quot;
+    },
+    &quot;BDB5-R3&quot;: {
+      &quot;result_hash&quot;: &quot;e96496ca04f82fe280f3ec5eb1fc4c1eabb3c2988bee6ce0e373dce8d616c183&quot;,
+      &quot;record&quot;: &quot;data/bdb5_exploratory/bdb5_r3_exploratory_record.json&quot;
+    }
+  },
+  &quot;files&quot;: [
+    {
+      &quot;path&quot;: &quot;APPROVAL_PLAN.md&quot;,
+      &quot;sha256&quot;: &quot;19589f4e6894a5816a113207fcf841c7666dd0d59c95e94d1a126cf12dbda2bb&quot;,
+      &quot;bytes&quot;: 10304
+    },
+    {
+      &quot;path&quot;: &quot;approvals/README.md&quot;,
+      &quot;sha256&quot;: &quot;f103304be6fcb2d60c0688c906b8b306ff943149b5f1a6250e503acb6bc0eaee&quot;,
+      &quot;bytes&quot;: 246
+    },
+    {
+      &quot;path&quot;: &quot;bdb5_r1_prepared.json&quot;,
+      &quot;sha256&quot;: &quot;5b4683ab8bc9c215a22f91caf735b099e2c14bfb7f5b63e9be60722340f19ae3&quot;,
+      &quot;bytes&quot;: 5821
+    },
+    {
+      &quot;path&quot;: &quot;bdb5_r2_live6_raw_response.json&quot;,
+      &quot;sha256&quot;: &quot;ab8f852bc57087b66f1848359265548072ccab3672b4fa420d4fbb7fa5d07239&quot;,
+      &quot;bytes&quot;: 1358
+    },
+    {
+      &quot;path&quot;: &quot;bdb5_r2_live6_record.json&quot;,
+      &quot;sha256&quot;: &quot;847f8c1cdf682ed9b2673916520d36e201eefbec894b1a0b40112f824f6ff12b&quot;,
+      &quot;bytes&quot;: 5054
+    },
+    {
+      &quot;path&quot;: &quot;bdb5_r2_live6_result.json&quot;,
+      &quot;sha256&quot;: &quot;9be245d6639a2498f74db0280d503dcb475faa0e082947acfe765668794bcefa&quot;,
+      &quot;bytes&quot;: 1532
+    },
+    {
+      &quot;path&quot;: &quot;bdb5_r2_prepared.json&quot;,
+      &quot;sha256&quot;: &quot;c5b172c1274d416a20a5b713c5c1c974af87893a13f60c33c7bc78b3672868e3&quot;,
+      &quot;bytes&quot;: 4079
+    },
+    {
+      &quot;path&quot;: &quot;bdb5_r3_prepared.json&quot;,
+      &quot;sha256&quot;: &quot;a11f92ec5ab52e697ec3127c16ea31c2f7f64526869b7d5f66188c18e2fc6cc0&quot;,
+      &quot;bytes&quot;: 4768
+    },
+    {
+      &quot;path&quot;: &quot;historical/bdb5_r2_live4_raw_response.json&quot;,
+      &quot;sha256&quot;: &quot;f27ed2c5745e2bb88025494953939b49fbf29105dabc664628c7dbd6997ca18e&quot;,
+      &quot;bytes&quot;: 1398
+    },
+    {
+      &quot;path&quot;: &quot;historical/bdb5_r2_live4_record.json&quot;,
+      &quot;sha256&quot;: &quot;069a91340d3c43bdda0630e7f3fe69ec8f4c3847a8dd48138650e011089a9fed&quot;,
+      &quot;bytes&quot;: 4834
+    },
+    {
+      &quot;path&quot;: &quot;historical/bdb5_r2_live4_result.json&quot;,
+      &quot;sha256&quot;: &quot;42dce3015ae1defb6f98879641432577b0d24274b11ada4edb88c264fe404f6d&quot;,
+      &quot;bytes&quot;: 1396
+    },
+    {
+      &quot;path&quot;: &quot;HOW_TO_APPROVE_SIMPLE.md&quot;,
+      &quot;sha256&quot;: &quot;7553c125074a99eeecdcb2158b84fdad3f0742f17cd488655b021f41174f119d&quot;,
+      &quot;bytes&quot;: 4651
+    },
+    {
+      &quot;path&quot;: &quot;README.md&quot;,
+      &quot;sha256&quot;: &quot;1ffdb578d57c3e4305b2eb6cea7fccad5a1b68ee96e4513e4d59e1cff8d6f51c&quot;,
+      &quot;bytes&quot;: 2282
+    },
+    {
+      &quot;path&quot;: &quot;REVIEW_HANDOFF.md&quot;,
+      &quot;sha256&quot;: &quot;d2b1309daf6e4362aa7e776061940465ef533149ca101b5c4119ca484111072c&quot;,
+      &quot;bytes&quot;: 10803
+    },
+    {
+      &quot;path&quot;: &quot;REVIEWER_REQUEST.md&quot;,
+      &quot;sha256&quot;: &quot;b8019e2285fbcdfcdb82e0850db4f4677651ae639eb01cc67dbf1ba1e6e2dc0d&quot;,
+      &quot;bytes&quot;: 1313
+    }
+  ]
+}
+</pre></details>
+</body>
+</html>

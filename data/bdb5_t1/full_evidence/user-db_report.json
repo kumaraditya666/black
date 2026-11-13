@@ -1,0 +1,10 @@
+{
+  "anomaly": 0.0,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "",
+  "service": "user-db",
+  "summary": "The telemetry data provided consists entirely of placeholder values (all metrics are 9.0) and a continuous sequence of timestamps without any actual metric readings, log entries, or error indicators. There is no evidence of latency spikes, error rate increases, resource exhaustion, or specific fault signatures within the supplied data. Consequently, it is impossible to identify a faulty service or assign a fault class from F1-F5 based on this input."
+}

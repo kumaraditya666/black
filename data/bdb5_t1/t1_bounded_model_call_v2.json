@@ -1,0 +1,32 @@
+{
+  "full_packet_in_prompt": false,
+  "gold_patch_in_prompt": false,
+  "hidden_tests_in_prompt": false,
+  "model": "qwen3.5:9b-q4_K_M",
+  "projection_chars": 21313,
+  "projection_path": "data\\bdb5_t1\\t1_bounded_projection_v2.json",
+  "request_hash": "b39c5ce02c8afac7d8c3b2926ed7460fb9992b565785cad7ba6e4340d363e2f1",
+  "response_hash": "d286e6f422eb6031c14b9707117e4a54af92598bb311049c9b0e59775f5b88ec",
+  "result": {
+    "confidence": "HIGH",
+    "evidence_ids": [
+      "log:13",
+      "log:14",
+      "log:15",
+      "log:16",
+      "metric:1"
+    ],
+    "fault_class": "F3",
+    "l2_reason": "NOT_ESTABLISHED",
+    "missing_evidence": [
+      "Evidence of the specific missing function call or exception handler logic within the 'orders' service codebase that causes the 'Unable to create order due to unspecified IO error' when the Docker socket is unavailable.",
+      "Logs from the upstream dependency (e.g., queue-master or a sidecar) showing the exact point where the connection attempt failed and was not caught by an exception handler."
+    ],
+    "rationale": "The telemetry shows a clear correlation between 'queue-master' failures (AFUNIXSocketException: No such file or directory on /var/run/docker.sock) and 'orders' service errors. The 'orders' logs explicitly state 'Unable to create order due to unspecified IO error'. This indicates the 'orders' service is attempting to call a function (likely interacting with Docker via queue-master) but failing because the upstream dependency is broken. Since the failure message is generic ('unspecified IO error') and does not map to a specific parameter value or return value mismatch, it fits F3 (missing function call/exception handling for the upstream failure). The 'front-end' errors are symptoms of this upstream failure.",
+    "service": "orders"
+  },
+  "usage": {
+    "eval_count": 333,
+    "prompt_eval_count": 7969
+  }
+}

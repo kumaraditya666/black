@@ -1,0 +1,23 @@
+{
+  "request_hash": "eea166238c2755e6f78520157fac8357f1e8308a52bc92eaca77ecb96eb1a38f",
+  "response_hash": "cc1659f476e963ac8d4f0623eebf4e11944690361e8f9f898a88eaaf1c97dfe5",
+  "result": {
+    "confidence": "HIGH",
+    "evidence_ids": [
+      "front-end"
+    ],
+    "fault_class": "F1",
+    "l2_reason": "The 'front-end' service exhibits the highest anomaly score (8.0) and a significant drop in metric values compared to others, indicating performance degradation or resource constraints. Other services show lower anomalies or no evidence of faults.",
+    "missing_evidence": [
+      "Logs",
+      "Error counts",
+      "Latency spikes"
+    ],
+    "rationale": "The 'front-end' service is the most likely upstream faulty service because it shows a consistent and significant drop in metric values (anomaly 8.0) compared to other services, suggesting resource constraints or performance degradation. The fault class is F1 (Performance Degradation/Resource Exhaustion) based on the observed anomaly. Other services either have no anomalies or their anomalies are less severe.",
+    "service": "front-end"
+  },
+  "usage": {
+    "eval_count": 220,
+    "prompt_eval_count": 2181
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "anomaly": 0.067,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "",
+  "service": "queue-master",
+  "summary": "The telemetry data provided consists of a single metric value (0.067) repeated for every second in the incident window, alongside a list of timestamps. There are no logs or additional metrics to correlate with this constant value. Without variation in the metric or accompanying log entries indicating errors, timeouts, or resource exhaustion, it is impossible to determine if 0.067 represents a healthy baseline or an anomalous state (e.g., low throughput vs. expected high throughput). Consequently, no source-level cause can be established from the provided packet."
+}

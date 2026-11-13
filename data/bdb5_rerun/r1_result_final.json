@@ -1,0 +1,49 @@
+{
+  "abstention": null,
+  "case_id": "BDB5-R1",
+  "claims": [
+    {
+      "asserts_execution": true,
+      "category": "MECHANISM",
+      "evidence_ids": [
+        "ci:1",
+        "test:1"
+      ],
+      "material": true,
+      "text": "The failure is caused by a UnicodeDecodeError where the ASCII codec cannot decode byte 0xc1, indicating an issue with ASCII decoding during URL parsing."
+    },
+    {
+      "asserts_execution": true,
+      "category": "SOURCE_CAUSE",
+      "evidence_ids": [
+        "ci:1",
+        "source:1"
+      ],
+      "material": true,
+      "text": "The source cause is located in verktyg/requests.py at line 356 within the args function, where parse_qsl is called with specific encoding parameters that trigger the decoding error."
+    }
+  ],
+  "l2_causal_status": "SUPPORTED",
+  "mechanism_evidence_ids": [
+    "ci:1",
+    "test:1"
+  ],
+  "postprocessing": {
+    "reproduction_artifact_source": "model_visible_packet.artifact:test-1"
+  },
+  "predicted_files": [
+    "verktyg/requests.py"
+  ],
+  "predicted_function": "args",
+  "predicted_line": 356,
+  "predicted_mechanism": "UnicodeDecodeError during ASCII decoding in parse_qsl",
+  "test_executions": [
+    {
+      "artifact_sha256": "55a37d54e8a5d772f1c69d8c628fa77eeeb6b20c30324d48e1691a9e506337e2",
+      "failure_signature_matched": true,
+      "name": "test_modified_url_encoding",
+      "outcome": "FAIL",
+      "role": "REPRODUCTION_BEFORE"
+    }
+  ]
+}

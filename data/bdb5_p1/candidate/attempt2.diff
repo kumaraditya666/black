@@ -1,0 +1,10 @@
+diff --git a/sympy/core/_print_helpers.py b/sympy/core/_print_helpers.py
+index 8c5e3f4..a1b2c3d 100644
+--- a/sympy/core/_print_helpers.py
++++ b/sympy/core/_print_helpers.py
+@@ -9,6 +9,7 @@ class Printable:
+     _repr_svg_ = _repr_disabled
+ 
+ 
++class Symbol(Printable):
+     pass

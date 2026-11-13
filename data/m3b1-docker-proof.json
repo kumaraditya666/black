@@ -1,0 +1,180 @@
+{
+  "id": "d8eb2e37-9fbf-4fd2-b9c5-97b37c2c1224",
+  "incident_id": 2,
+  "investigation_id": "1a04c626-96d9-4668-a35b-9a2fb6bff9ba",
+  "fixture": "argument_validation",
+  "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+  "status": "VERIFIED_IN_TEST_ENVIRONMENT",
+  "approval_id": "2303ccd0-6d95-4ef2-b768-3728ed7383f8",
+  "proposal": {
+    "summary": "Fix TypeError to ValueError in parse_port by catching TypeError alongside ValueError when converting input to int.",
+    "changes": [
+      {
+        "path": "app.py",
+        "find": "    try:\n        return int(value)\n    except ValueError:",
+        "replace": "    try:\n        return int(value)\n    except (ValueError, TypeError):",
+        "explanation": "Catches TypeError (raised when value is None) and re-raises it as ValueError with the expected message."
+      }
+    ],
+    "risks": []
+  },
+  "validation": {
+    "eligibility": {
+      "eligible": true,
+      "reasons": [],
+      "checks": [
+        {
+          "code": "investigation_exists",
+          "ok": true,
+          "detail": "investigation record exists"
+        },
+        {
+          "code": "investigation_completed",
+          "ok": true,
+          "detail": "investigation status is completed"
+        },
+        {
+          "code": "outcome_likely_cause",
+          "ok": true,
+          "detail": "investigation outcome is LIKELY_CAUSE"
+        },
+        {
+          "code": "fixture_known",
+          "ok": true,
+          "detail": "fixture argument_validation is registered"
+        },
+        {
+          "code": "repository_trusted",
+          "ok": true,
+          "detail": "trusted local fixture repository approved for Milestone 3A"
+        },
+        {
+          "code": "evidence_references_valid",
+          "ok": true,
+          "detail": "all references resolve"
+        },
+        {
+          "code": "recorded_revision",
+          "ok": true,
+          "detail": "revision b96840fef85585904c9348e213dbbec9c0ca521a is present in the repository"
+        },
+        {
+          "code": "source_pinned",
+          "ok": true,
+          "detail": "all fixture files match their pinned content hashes"
+        },
+        {
+          "code": "resolved_source_frame",
+          "ok": true,
+          "detail": "a cited source frame is resolved at the recorded revision"
+        },
+        {
+          "code": "frame_in_approved_file",
+          "ok": true,
+          "detail": "cited frame fixtures/repair/argument_validation/app.py is in the allowed patch files"
+        },
+        {
+          "code": "frame_matches_fixture",
+          "ok": true,
+          "detail": "cited frame matches the registered fixture failure location"
+        },
+        {
+          "code": "human_approval",
+          "ok": true,
+          "detail": "a human review record matches this hypothesis and evidence snapshot"
+        }
+      ],
+      "investigation_id": "1a04c626-96d9-4668-a35b-9a2fb6bff9ba",
+      "fixture": "argument_validation",
+      "hypothesis_index": 0,
+      "hypothesis_sha256": "b2c5ab8745f6cbbc111f88a964f7ef969a44b5bc50e5b1a37b93cfce388ed170",
+      "approval_id": "2303ccd0-6d95-4ef2-b768-3728ed7383f8",
+      "frame": {
+        "commit": "b96840fef85585904c9348e213dbbec9c0ca521a",
+        "context": [
+          {
+            "line": 4,
+            "text": "def parse_port(value):"
+          },
+          {
+            "line": 5,
+            "text": "    try:"
+          },
+          {
+            "line": 6,
+            "text": "        return int(value)"
+          },
+          {
+            "line": 7,
+            "text": "    except ValueError:"
+          },
+          {
+            "line": 8,
+            "text": "        raise ValueError('port must be numeric')"
+          }
+        ],
+        "function": "parse_port",
+        "id": "frame:0",
+        "line": 6,
+        "path": "fixtures/repair/argument_validation/app.py",
+        "source_line": "        return int(value)",
+        "status": "resolved",
+        "type": "stack_frame"
+      },
+      "commit": "b96840fef85585904c9348e213dbbec9c0ca521a"
+    },
+    "applied": true,
+    "changed_files": [
+      "app.py"
+    ]
+  },
+  "diff": "--- a/app.py\n+++ b/app.py\n@@ -4,5 +4,5 @@\n def parse_port(value):\n     try:\n         return int(value)\n-    except ValueError:\n+    except (ValueError, TypeError):\n         raise ValueError('port must be numeric')\n",
+  "reproduction_before": {
+    "returncode": 1,
+    "timed_out": false,
+    "environment_error": false,
+    "isolation": "docker",
+    "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n__________________ test_none_is_rejected_as_invalid_argument ___________________\n\n    def test_none_is_rejected_as_invalid_argument():\n        with pytest.raises(ValueError):\n>           parse_port(None)\n\ntests/test_reproduction.py:8: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nvalue = None\n\n    def parse_port(value):\n        try:\n>           return int(value)\n                   ^^^^^^^^^^\nE           TypeError: int() argument must be a string, a bytes-like object or a real number, not 'NoneType'\n\napp.py:6: TypeError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_none_is_rejected_as_invalid_argument\n1 failed in 0.05s\n",
+    "security_blocked": false
+  },
+  "reproduction_after": {
+    "returncode": 0,
+    "timed_out": false,
+    "environment_error": false,
+    "isolation": "docker",
+    "output": ".                                                                        [100%]\n1 passed in 0.03s\n",
+    "security_blocked": false
+  },
+  "regression": {
+    "returncode": 0,
+    "timed_out": false,
+    "environment_error": false,
+    "isolation": "docker",
+    "output": "...                                                                      [100%]\n3 passed in 0.03s\n",
+    "security_blocked": false
+  },
+  "isolation": {
+    "mode": "docker",
+    "detail": "container isolation requested"
+  },
+  "error": null,
+  "timings": {
+    "materialize_ms": 93,
+    "reproduce_before_ms": 2316,
+    "generation_ms": 9369,
+    "apply_ms": 121,
+    "reproduce_after_ms": 2301,
+    "regression_ms": 2235,
+    "total_ms": 16585
+  },
+  "usage": {
+    "input_tokens": 1372,
+    "output_tokens": 133,
+    "load_duration_ns": 6165370100,
+    "eval_duration_ns": 2464599000,
+    "estimated_cost": null
+  },
+  "review": null,
+  "created_at": "2026-11-05T16:07:03.477905+00:00",
+  "updated_at": "2026-11-05T16:07:20.063466+00:00"
+}

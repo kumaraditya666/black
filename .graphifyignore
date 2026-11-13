@@ -1,0 +1,9 @@
+# Generated benchmark/evaluation artifacts and copied repositories.
+data/
+graphify-out/
+.venv/
+__pycache__/
+.pytest_cache/
+.backup/
+sample_repo/
+*.zip

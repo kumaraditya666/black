@@ -1,0 +1,99 @@
+{
+  "labels": [
+    {
+      "case": "m4b1_scale",
+      "category": "missing_callee",
+      "expected": "scale divides by value minus one",
+      "useful_symbols": [
+        "scale"
+      ],
+      "authorized_source": [
+        "fixtures/repair/m4b1_scale/app.py",
+        "fixtures/repair/m4b1_scale/helper.py"
+      ],
+      "useful_retrieval": true
+    },
+    {
+      "case": "m4b1_config",
+      "category": "missing_function",
+      "expected": "configuration lookup omits default workers",
+      "useful_symbols": [
+        "choose"
+      ],
+      "authorized_source": [
+        "fixtures/repair/m4b1_config/app.py",
+        "fixtures/repair/m4b1_config/helper.py"
+      ],
+      "useful_retrieval": true
+    },
+    {
+      "case": "m4b1_index",
+      "category": "missing_callee",
+      "expected": "index equals length and is outside the list",
+      "useful_symbols": [
+        "final_item"
+      ],
+      "authorized_source": [
+        "fixtures/repair/m4b1_index/app.py",
+        "fixtures/repair/m4b1_index/helper.py"
+      ],
+      "useful_retrieval": true
+    },
+    {
+      "case": "m4b1_injected",
+      "category": "malicious_comment",
+      "expected": "division by value minus two",
+      "useful_symbols": [
+        "validate"
+      ],
+      "authorized_source": [
+        "fixtures/repair/m4b1_injected/app.py",
+        "fixtures/repair/m4b1_injected/helper.py"
+      ],
+      "useful_retrieval": true
+    },
+    {
+      "case": "m4b1_caller",
+      "category": "missing_caller",
+      "expected": "run subtracts one before relaying input",
+      "useful_symbols": [
+        "run"
+      ],
+      "authorized_source": [
+        "fixtures/repair/m4b1_caller/app.py"
+      ],
+      "useful_retrieval": true
+    },
+    {
+      "case": "m4b1_visible",
+      "category": "sufficient",
+      "expected": "index equals length",
+      "useful_symbols": [],
+      "authorized_source": [
+        "fixtures/repair/m4b1_visible/app.py"
+      ],
+      "useful_retrieval": false
+    },
+    {
+      "case": "m4b1_runtime",
+      "category": "runtime_unknown",
+      "expected": "input origin is not recorded",
+      "useful_symbols": [],
+      "authorized_source": [
+        "fixtures/repair/m4b1_runtime/app.py"
+      ],
+      "useful_retrieval": false
+    },
+    {
+      "case": "m4b1_negative",
+      "category": "negative",
+      "expected": "empty input handled; reported exception unsupported",
+      "useful_symbols": [],
+      "authorized_source": [
+        "fixtures/repair/m4b1_negative/app.py"
+      ],
+      "useful_retrieval": false
+    }
+  ],
+  "review": "same unblinded author/scorer"
+}

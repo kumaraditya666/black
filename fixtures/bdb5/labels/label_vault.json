@@ -1,0 +1,92 @@
+{
+  "schema_version": "bdb5-label-vault-v1",
+  "cases": {
+    "BDB5-R1": {
+      "truth": {
+        "case_id": "BDB5-R1",
+        "expected_files": [
+          "verktyg/requests.py"
+        ],
+        "expected_function": "args",
+        "expected_line": 356,
+        "expected_mechanism": "The WSGI query-string bytes are passed to parse_qsl, which coerces them with ASCII and raises UnicodeDecodeError before the request charset can decode them.",
+        "mechanism_term_groups": [
+          [
+            "ascii",
+            "decode"
+          ]
+        ],
+        "causal_level": "L3",
+        "expected_l2_status": "SUPPORTED",
+        "require_reproduction_before": true,
+        "forbidden_public_literals": [
+          "2c50fdf92f285a98badbdfa2d72ccc27f34d4b11"
+        ]
+      },
+      "rationale": "The failed Travis log and the failed checkout agree on the innermost application frame at verktyg/requests.py:356 in BaseRequest.args. The log records the UnicodeDecodeError from ASCII coercion of non-Latin-1 query bytes. The protected fix is outside the model-visible packet.",
+      "references": [
+        "fixtures/bdb5/bugswarm/109227527.log",
+        "bugswarm/images@sha256:0c915ddd2f49143477c97a24470a890d3692b57c2562b956075045447816ce86",
+        "71dc420c22fadbae064c46b426e093bec7b86f32"
+      ]
+    },
+    "BDB5-R2": {
+      "truth": {
+        "case_id": "BDB5-R2",
+        "expected_harness_terms": [
+          "types_dict.nml",
+          "test_f90nml.py:211"
+        ],
+        "causal_level": "L0",
+        "expected_l2_status": "NOT_ESTABLISHED",
+        "expected_abstention": true,
+        "expected_abstention_scope": "APPLICATION_SOURCE",
+        "expected_abstention_evidence": [
+          "application source traceback"
+        ],
+        "require_reproduction_before": true,
+        "forbidden_public_literals": [
+          "048e4689bd42c0df41554e517a42301718ac8d66"
+        ]
+      },
+      "rationale": "The failed test opens types_dict.nml and receives IOError because the fixture is absent. The passed revision only adds that fixture. The correct application-source status is NOT_ESTABLISHED, while naming the missing fixture and test frame is a separate harness claim.",
+      "references": [
+        "fixtures/bdb5/bugswarm/83523531.log",
+        "bugswarm/images@sha256:ff328c82ecf295da3c56148ac409c7a1021720229b2e5c393d4a6eaa2741b730",
+        "d8d88884dea251fc1d9e63b9afcf19b81a785066"
+      ]
+    },
+    "BDB5-R3": {
+      "truth": {
+        "case_id": "BDB5-R3",
+        "expected_files": [
+          "django/http/response.py"
+        ],
+        "expected_function": "make_bytes",
+        "expected_line": 232,
+        "expected_mechanism": "A memoryview is neither bytes nor str, so make_bytes falls through to str(value).encode(self.charset), producing a representation string instead of the underlying buffer.",
+        "mechanism_term_groups": [
+          [
+            "memoryview"
+          ],
+          [
+            "bytes",
+            "str"
+          ]
+        ],
+        "causal_level": "L3",
+        "expected_l2_status": "SUPPORTED",
+        "forbidden_public_literals": [
+          "9aa56cb0d5dede7fc176a46c745dfd3dacdad773",
+          "test_memoryview_content"
+        ]
+      },
+      "rationale": "The issue report shows HttpResponse(memoryview(...)) returning a representation string. At the pinned base revision, make_bytes handles only bytes and str before falling back to str(value).encode(...), which explains the observed representation string. The gold patch and hidden test are outside the model-visible packet.",
+      "references": [
+        "fixtures/bdb5/r3/issue.txt",
+        "fixtures/bdb5/r3/response.py",
+        "879cc3da6249e920b8d54518a0ae06de835d7373"
+      ]
+    }
+  }
+}

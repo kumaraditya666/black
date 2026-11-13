@@ -1,0 +1,23 @@
+{
+  "status": "template_only_no_model_calls",
+  "revision": "13bdc52bad27c49b77e85daac16876133f382009",
+  "arms": {
+    "A": {
+      "prompt": "current",
+      "schema": "current"
+    },
+    "B": {
+      "prompt": "layered",
+      "schema": "current"
+    },
+    "C": {
+      "prompt": "current",
+      "schema": "layered"
+    },
+    "D": {
+      "prompt": "layered",
+      "schema": "layered"
+    }
+  },
+  "results": []
+}

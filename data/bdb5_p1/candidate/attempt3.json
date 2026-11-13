@@ -1,0 +1,19 @@
+{
+  "apply_check_error": "error: corrupt patch at <stdin>:11\n",
+  "apply_check_returncode": 128,
+  "attempt": 3,
+  "changed_files": [
+    "sympy/core/_print_helpers.py"
+  ],
+  "gold_patch_in_prompt": false,
+  "hidden_tests_in_prompt": false,
+  "model": "qwen3.5:9b-q4_K_M",
+  "patch_chars": 388,
+  "request_hash": "33c3b554c0c485f09b3f4614c1ae9bf5d8a1ef5562ffa41de9aab9e48244e0e1",
+  "response_hash": "a60f0abba18f293212bfecbc37399a0bb34b2aeff65fe30c0e10dda5b00d0fb2",
+  "summary": "Added __slots__ = () to Printable class in sympy/core/_print_helpers.py to prevent accidental inheritance of __dict__ from parent classes, ensuring Symbol instances do not have a __dict__ attribute.",
+  "usage": {
+    "eval_count": 172,
+    "prompt_eval_count": 793
+  }
+}

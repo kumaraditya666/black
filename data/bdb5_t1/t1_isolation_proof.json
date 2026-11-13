@@ -1,0 +1,64 @@
+{
+  "case_id": "BDB5-T1",
+  "client": {
+    "cap_drop": [
+      "ALL"
+    ],
+    "container": "bdb5-t1-client-iso",
+    "image": "python:3.12.12-slim",
+    "label_vault_mounted": false,
+    "mounts": [
+      "/staging:ro",
+      "/out:rw"
+    ],
+    "no_new_privileges": true,
+    "read_only": true,
+    "repository_mounted": false,
+    "staging_contents": [
+      "request.json",
+      "run_isolated.py"
+    ]
+  },
+  "exact_hash_match": false,
+  "host_response_hash": "63ece2dc59d5ce89b0ba8253c5c2d60a9e717a9eedfa888420c7803bb814479c",
+  "kind": "ISOLATED_MODEL_SERVER_REPLAY",
+  "limitation": "The approved T1 packet is still represented by a bounded projection; full-packet context remains separate.",
+  "model": "qwen3.5:9b-q4_K_M",
+  "model_server": {
+    "container": "bdb5-ollama-isolated",
+    "image": "ollama/ollama:latest",
+    "image_digest": "sha256:910d0d8107b538fb0894e63163eb195de0cc7aefcbc666dc62d3b18f71124592",
+    "label_vault_mounted": false,
+    "model_cache_mount": {
+      "read_only": true,
+      "source": "host ~/.ollama/models",
+      "target": "/models"
+    },
+    "models_visible": [
+      "qwen3.5:4b",
+      "qwen3.5:9b-q4_K_M",
+      "qwen3:4b"
+    ],
+    "network": "bdb5-isolation",
+    "workspace_mounted": false
+  },
+  "request_hash": "fd0e34c29439cf845650cb036106721acd6da279b896c5126d5a9164d1a6bd82",
+  "response_hash": "de3b300c6e6669364d5dc1947dc4e83d8f6fa60e1ca25fdb617e1a481e382d6c",
+  "result": {
+    "confidence": "HIGH",
+    "evidence_ids": [
+      "log:1",
+      "metric:1"
+    ],
+    "fault_class": "F1",
+    "l2_reason": "The 'carts' service shows the largest relative error increase (+8.0) and is upstream of the failing 'orders' requests. The logs show generic IO errors downstream in 'orders', but the root cause lies in the 'carts' service metrics spiking while CPU/Mem remain stable, suggesting a logic or parameter handling fault within carts rather than resource exhaustion.",
+    "missing_evidence": [],
+    "rationale": "The metric deltas indicate 'carts_error' rose from 0.36 to 3.25 (relative +8.0), the largest relative upstream error change, while 'orders_error' rose only slightly (+0.65). The guidance explicitly states not to choose queue-master and notes that front-end errors are downstream. Since carts is upstream of orders and shows the highest error delta, it is the faulty service. The fault class F1 (incorrect parameter values) is selected because generic exceptions in logs often mask underlying parameter mismatches or validation failures in the upstream service, whereas F3 requires explicit evidence of a missing function call which is not present here.",
+    "service": "carts"
+  },
+  "same_service_and_fault": true,
+  "usage": {
+    "eval_count": 290,
+    "prompt_eval_count": 11920
+  }
+}

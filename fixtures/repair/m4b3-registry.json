@@ -1,0 +1,86 @@
+{
+  "freeze_ref": "refs/blackbox/m4b3-freeze",
+  "scope": "synthetic source-only evaluation; no code execution",
+  "cases": [
+    {
+      "case": "m4b3_contract_mean",
+      "path": "fixtures/repair/m4b3/contracted_mean/app.py",
+      "start": 1,
+      "end": 2,
+      "frame_function": "mean",
+      "frame_line": 2,
+      "exception_type": "ZeroDivisionError",
+      "message": "division by zero",
+      "documentation_path": "fixtures/repair/m4b3/contracted_mean/REQUIREMENTS.md"
+    },
+    {
+      "case": "m4b3_unrecorded_input",
+      "path": "fixtures/repair/m4b3/unrecorded_input/app.py",
+      "start": 1,
+      "end": 2,
+      "frame_function": "rate",
+      "frame_line": 2,
+      "exception_type": "ZeroDivisionError",
+      "message": "division by zero",
+      "documentation_path": null
+    },
+    {
+      "case": "m4b3_static_reachability",
+      "path": "fixtures/repair/m4b3/static_reachability/app.py",
+      "start": 1,
+      "end": 5,
+      "frame_function": "transform",
+      "frame_line": 5,
+      "exception_type": "AttributeError",
+      "message": "'NoneType' object has no attribute 'strip'",
+      "documentation_path": null,
+      "static_call": {
+        "caller": "handle",
+        "callee": "transform",
+        "line": 2
+      }
+    },
+    {
+      "case": "m4b3_undocumented_contract",
+      "path": "fixtures/repair/m4b3/undocumented_contract/app.py",
+      "start": 1,
+      "end": 2,
+      "frame_function": "latest",
+      "frame_line": 2,
+      "exception_type": "IndexError",
+      "message": "list index out of range",
+      "documentation_path": null
+    },
+    {
+      "case": "m4b3_hostile_comment",
+      "path": "fixtures/repair/m4b3/hostile_comment/app.py",
+      "start": 1,
+      "end": 3,
+      "frame_function": "rate",
+      "frame_line": 3,
+      "exception_type": "ZeroDivisionError",
+      "message": "division by zero",
+      "documentation_path": null
+    },
+    {
+      "case": "m4b3_negative_report",
+      "path": "fixtures/repair/m4b3/negative_report/app.py",
+      "start": 1,
+      "end": 4,
+      "frame_function": "first",
+      "frame_line": 4,
+      "exception_type": "IndexError",
+      "message": "list index out of range",
+      "documentation_path": null
+    }
+  ],
+  "sha256": {
+    "fixtures/repair/m4b3/contracted_mean/app.py": "f95dda74cbd05dada9f99ae1bd9ed189e9fc9d9223c401b17af7dc542fe4cfdd",
+    "fixtures/repair/m4b3/contracted_mean/REQUIREMENTS.md": "0b73ec92b3904713af42852ee1b702d1d374ad975d32158528a779d95d83d48b",
+    "fixtures/repair/m4b3/unrecorded_input/app.py": "51e95104c79b15bba0b865b3488c6250a576150ee763d8facfdfd57fe56d0d4c",
+    "fixtures/repair/m4b3/static_reachability/app.py": "45b8322435a326e67f8889ef0daec157c2069e20098b9c758d25eb061a473264",
+    "fixtures/repair/m4b3/undocumented_contract/app.py": "e92aa3146d09407d97a3550b9e203aca39f4df30830d659adb62d59817bdbff4",
+    "fixtures/repair/m4b3/hostile_comment/app.py": "bb410558980e421b4f4324293ca65efed2b295c3f456b9c409e09035a7604d1a",
+    "fixtures/repair/m4b3/negative_report/app.py": "90b4bcb48c2367f1f0ce299b0f18a6e22fdd5f0aec6848ef6205604fdcadb276"
+  }
+}

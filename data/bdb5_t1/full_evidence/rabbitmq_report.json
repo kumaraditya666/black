@@ -1,0 +1,10 @@
+{
+  "anomaly": 1.0,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "",
+  "service": "rabbitmq",
+  "summary": "The telemetry data provided consists solely of a continuous sequence of timestamps and a single static metric value (11.0) for the 'rabbitmq' service across the entire incident window. There are no fluctuating metrics, error counts, latency spikes, or log entries indicating a specific fault pattern (e.g., connection drops, memory exhaustion, queue buildup). Without variable data points showing degradation or failure states, it is impossible to identify a faulty component or assign a fault class from the F1-F5 taxonomy. The source cause cannot be established with the provided evidence."
+}

@@ -1,0 +1,52 @@
+{
+  "approval_created": true,
+  "approval_hash": "6f48124c44a61dbb30a2d05ec15f9289c3aabef6d608d4f19447f803bbbcf516",
+  "approval_path": "data\\bdb5_p1\\approvals\\BDB5-P1-v2-approval.json",
+  "approved_label_vault_sha256": "87839d1944aa04adbf3d46f81aed466aef893c2e9ea97e299ca8f54520430acf",
+  "approved_manifest_sha256": "2941591dbb0e518fc8a63bf224ca3d81df8e4a6a4f3dc78dd89d2a59b0b62ee2",
+  "approved_packet_sha256": "ad431bae06aadf5a3625cd5c2197f2621f9a3d187f64dfead08367760f12979a",
+  "case_id": "BDB5-P1",
+  "current_approval_hash": "f870fc6a1851d3f59868fa2b4b17f74a7ba9a8ecf163a77d3600c93124ed774d",
+  "manifest_unchanged": true,
+  "model_calls": 0,
+  "packet_unchanged": true,
+  "proposed_label_vault_path": "data/bdb5_p1/p1_label_vault_v2.json",
+  "proposed_label_vault_sha256": "2a7db5774ff015837be8a80bde5e2ed5599658763405c2aad5477f02d82d1854",
+  "proposed_pass_to_pass": [
+    "test__aresame",
+    "test_structure",
+    "test_equality",
+    "test_matches_basic",
+    "test_has",
+    "test_subs",
+    "test_subs_with_unicode_symbols",
+    "test_atoms",
+    "test_free_symbols_empty",
+    "test_doit",
+    "test_S",
+    "test_xreplace",
+    "test_preorder_traversal",
+    "test_sorted_args",
+    "test_call",
+    "test_rewrite",
+    "test_literal_evalf_is_number_is_zero_is_comparable",
+    "test_as_Basic",
+    "test_atomic",
+    "test_as_dummy",
+    "test_canonical_variables"
+  ],
+  "reason": "The approved P1 vault has an empty pass_to_pass list while the manifest requires pass_to_pass.",
+  "requirements": [
+    "Two independent reviewers must review and sign the proposed vault.",
+    "No existing approval is reused or silently rebound to the changed vault.",
+    "After a fresh approval exists, score the approved candidate against the v2 vault and report the result."
+  ],
+  "reviewers": [
+    "atharv",
+    "adi"
+  ],
+  "score_path": "data\\bdb5_scores\\BDB5-P1-v2-score.json",
+  "status": "APPROVED_AND_SCORED",
+  "strict_pass": true,
+  "strict_pass_claimed": true
+}

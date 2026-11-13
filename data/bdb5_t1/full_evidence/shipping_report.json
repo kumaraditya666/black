@@ -1,0 +1,10 @@
+{
+  "anomaly": 2.8,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "pre",
+  "service": "shipping",
+  "summary": "The telemetry data shows a consistent metric value of 2.8 across all timestamps in the incident window, with no significant deviations or anomalies detected. This uniformity suggests that the system is operating within normal parameters, and there is no evidence to pinpoint a specific faulty service or fault class based on the provided metrics."
+}

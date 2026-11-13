@@ -1,0 +1,47 @@
+{
+  "actual_test_command": "bin/test sympy/core/tests/test_basic.py::test_immutable --no-colors --no-subprocess",
+  "approved_packet_test_command_placeholder": "pytest <hidden test node>",
+  "base_commit": "cffd4e0f86fefd4802349a9f9b19ed70934ea354",
+  "base_fail_to_pass": {
+    "failed_as_expected": true,
+    "returncode": 1
+  },
+  "candidate_docstring_preserved": true,
+  "candidate_full_test_file": "23 passed",
+  "candidate_logs": {
+    "fail_to_pass": "data/bdb5_p1/candidate/test_immutable_v2.log",
+    "full": "data/bdb5_p1/candidate/full_test_file_v2.log"
+  },
+  "candidate_model_calls": 6,
+  "candidate_record": "data/bdb5_p1/candidate/candidate.json",
+  "candidate_test_immutable": "PASS",
+  "case_id": "BDB5-P1",
+  "execution_verified": true,
+  "gold_patch_fail_to_pass": {
+    "passed": true,
+    "returncode": 0
+  },
+  "gold_patch_full_test_file": {
+    "passed": true,
+    "returncode": 0,
+    "tests": "23 passed"
+  },
+  "gold_patch_is_environment_check_only": true,
+  "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-20590@sha256:bcdff110a35d19a6838fde5f678d1b5103610234bd034e5703df46878aad3b63",
+  "image_id": "sha256:bcdff110a35d19a6838fde5f678d1b5103610234bd034e5703df46878aad3b63",
+  "image_pulled": true,
+  "instance_id": "sympy__sympy-20590",
+  "isolation": "docker:bin/test, network none, user 65534, read-only root, cap-drop ALL, no-new-privileges",
+  "notes": "The gold patch was used only to verify that the evaluator environment can pass the hidden test. It is not a model result and is not scored.",
+  "p1_original_score": "data/bdb5_scores/BDB5-P1-score.json",
+  "p1_score": "data/bdb5_scores/BDB5-P1-v2-score.json",
+  "p1_score_failure": null,
+  "p1_strict_pass": true,
+  "p1_v2_approval": "data/bdb5_p1/approvals/BDB5-P1-v2-approval.json",
+  "p1_v2_approval_hash": "6f48124c44a61dbb30a2d05ec15f9289c3aabef6d608d4f19447f803bbbcf516",
+  "p1_v2_label_vault": "data/bdb5_p1/p1_label_vault_v2.json",
+  "p1_v2_label_vault_sha256": "2a7db5774ff015837be8a80bde5e2ed5599658763405c2aad5477f02d82d1854",
+  "prepared_payload_hash": "1353671dd6c86594dbdfb2bfc4defcaee3196239baad46aad1723d23d4dd954f",
+  "status": "P1_ENVIRONMENT_PREFLIGHT_PASSED",
+  "test_command": "bin/test sympy/core/tests/test_basic.py::test_immutable --no-colors --no-subprocess"
+}

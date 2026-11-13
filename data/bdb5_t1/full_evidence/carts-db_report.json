@@ -1,0 +1,10 @@
+{
+  "anomaly": 0.0,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "",
+  "service": "carts-db",
+  "summary": "The telemetry data provided consists solely of a continuous sequence of timestamps and a single metric value (28.0) for the 'carts-db' service across the entire incident window. There are no logs, error counts, latency spikes, or other metrics indicating a fault. Without comparative baseline data or any indication of deviation from normal operation, it is impossible to establish a source-level cause or identify a specific fault class. The evidence does not support the existence of an anomaly within the provided dataset."
+}

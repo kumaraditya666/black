@@ -10,3 +10,13 @@ sample_repo/
 
 # local recovery checkpoints
 .backup/
+
+# generated evaluation workspaces and graph caches
+data/bdb5_p1/repo/
+data/bdb5_p1/adapter_*/
+data/bdb5_p1/preflight_*/
+data/bdb5_p1/candidate_eval*/
+data/bdb5_p1/debug_*/
+data/bdb5_p1/graphify-update*.log
+graphify-out/cache/
+/*.zip

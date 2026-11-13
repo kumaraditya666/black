@@ -1,0 +1,10 @@
+{
+  "anomaly": 0.0,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "",
+  "service": "session-db",
+  "summary": "The telemetry metrics show a constant value of 3.0 across all timestamps for the session-db service, indicating no anomalies or faults were detected within the provided data window. The logs excerpt is empty and provides no additional evidence to suggest a fault. Therefore, the source cause is NOT_ESTABLISHED as there is no evidence of a specific fault class from the supplied taxonomy (F1-F5)."
+}

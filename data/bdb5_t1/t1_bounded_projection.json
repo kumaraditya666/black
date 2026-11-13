@@ -1,0 +1,448 @@
+{
+  "candidate_inventory": [
+    "carts",
+    "carts-db",
+    "catalogue",
+    "catalogue-db",
+    "front-end",
+    "orders",
+    "orders-db",
+    "payment",
+    "queue-master",
+    "rabbitmq",
+    "rabbitmq-exporter",
+    "session-db",
+    "shipping",
+    "user",
+    "user-db"
+  ],
+  "case_id": "BDB5-T1",
+  "log_evidence_ids": [
+    "log:1",
+    "log:10",
+    "log:11",
+    "log:12",
+    "log:13",
+    "log:14",
+    "log:15",
+    "log:16",
+    "log:17",
+    "log:18",
+    "log:19",
+    "log:2",
+    "log:20",
+    "log:21",
+    "log:22",
+    "log:23",
+    "log:24",
+    "log:3",
+    "log:4",
+    "log:5",
+    "log:6",
+    "log:7",
+    "log:8",
+    "log:9"
+  ],
+  "metric_anomaly_summary": [
+    {
+      "metric": "front-end_error",
+      "post_mean": 2.882297,
+      "pre_mean": 0.459836,
+      "relative": 5.268,
+      "z": 1.794
+    },
+    {
+      "metric": "carts_error",
+      "post_mean": 3.24622,
+      "pre_mean": 0.359619,
+      "relative": 8.027,
+      "z": 1.657
+    },
+    {
+      "metric": "carts_socket",
+      "post_mean": 35.936324,
+      "pre_mean": 24.968056,
+      "relative": 0.439,
+      "z": 0.985
+    },
+    {
+      "metric": "user-db_cpu",
+      "post_mean": 1.034455,
+      "pre_mean": 0.948828,
+      "relative": 0.09,
+      "z": 0.918
+    },
+    {
+      "metric": "carts-db_cpu",
+      "post_mean": 1.155046,
+      "pre_mean": 1.429298,
+      "relative": -0.192,
+      "z": -0.788
+    },
+    {
+      "metric": "user_cpu",
+      "post_mean": 1.009182,
+      "pre_mean": 0.945195,
+      "relative": 0.068,
+      "z": 0.758
+    },
+    {
+      "metric": "catalogue-db_cpu",
+      "post_mean": 0.251012,
+      "pre_mean": 0.234669,
+      "relative": 0.07,
+      "z": 0.751
+    },
+    {
+      "metric": "front-end_cpu",
+      "post_mean": 3.906397,
+      "pre_mean": 4.298844,
+      "relative": -0.091,
+      "z": -0.748
+    },
+    {
+      "metric": "orders_cpu",
+      "post_mean": 2.396477,
+      "pre_mean": 4.464594,
+      "relative": -0.463,
+      "z": -0.728
+    },
+    {
+      "metric": "payment_cpu",
+      "post_mean": 0.086539,
+      "pre_mean": 0.097363,
+      "relative": -0.111,
+      "z": -0.695
+    },
+    {
+      "metric": "carts-db_diskio",
+      "post_mean": 3734740.266985,
+      "pre_mean": 4697285.001538,
+      "relative": -0.205,
+      "z": -0.66
+    },
+    {
+      "metric": "carts-db_socket",
+      "post_mean": 22.868307,
+      "pre_mean": 18.6375,
+      "relative": 0.227,
+      "z": 0.637
+    },
+    {
+      "metric": "queue-master_cpu",
+      "post_mean": 0.599105,
+      "pre_mean": 1.300697,
+      "relative": -0.539,
+      "z": -0.559
+    },
+    {
+      "metric": "shipping_socket",
+      "post_mean": 5.128799,
+      "pre_mean": 6.083333,
+      "relative": -0.157,
+      "z": -0.55
+    },
+    {
+      "metric": "catalogue_latency-90",
+      "post_mean": 0.009303,
+      "pre_mean": 0.009261,
+      "relative": 0.004,
+      "z": 0.547
+    },
+    {
+      "metric": "carts_mem",
+      "post_mean": 453840326.946454,
+      "pre_mean": 388279608.888889,
+      "relative": 0.169,
+      "z": 0.524
+    },
+    {
+      "metric": "payment_workload",
+      "post_mean": 1.672894,
+      "pre_mean": 1.971667,
+      "relative": -0.152,
+      "z": -0.504
+    },
+    {
+      "metric": "queue-master_socket",
+      "post_mean": 5.0,
+      "pre_mean": 5.566667,
+      "relative": -0.102,
+      "z": -0.483
+    },
+    {
+      "metric": "session-db_diskio",
+      "post_mean": 35716.126348,
+      "pre_mean": 11981.006303,
+      "relative": 1.981,
+      "z": 0.473
+    },
+    {
+      "metric": "queue-master_mem",
+      "post_mean": 298406036.191028,
+      "pre_mean": 350131478.755556,
+      "relative": -0.148,
+      "z": -0.472
+    },
+    {
+      "metric": "shipping_mem",
+      "post_mean": 297409344.833575,
+      "pre_mean": 347710577.777778,
+      "relative": -0.145,
+      "z": -0.448
+    },
+    {
+      "metric": "orders_mem",
+      "post_mean": 333236956.063676,
+      "pre_mean": 471450794.666667,
+      "relative": -0.293,
+      "z": -0.445
+    },
+    {
+      "metric": "carts_cpu",
+      "post_mean": 10.203289,
+      "pre_mean": 7.370876,
+      "relative": 0.384,
+      "z": 0.441
+    },
+    {
+      "metric": "payment_latency-50",
+      "post_mean": 0.00144,
+      "pre_mean": 0.001218,
+      "relative": 0.183,
+      "z": 0.432
+    }
+  ],
+  "metric_evidence_id": "metric:1",
+  "metric_window": {
+    "columns": 80,
+    "end": 1732243923,
+    "inject_time": 1732243203,
+    "start": 1732242483,
+    "timesteps": 1441
+  },
+  "note": "Bounded, label-free projection of the approved packet for a local-context run. The complete packet remains unchanged.",
+  "post_injection_error_counts": [
+    {
+      "container": "queue-master",
+      "count": 63
+    },
+    {
+      "container": "front-end",
+      "count": 46
+    },
+    {
+      "container": "orders",
+      "count": 8
+    },
+    {
+      "container": "user",
+      "count": 5
+    },
+    {
+      "container": "catalogue",
+      "count": 3
+    },
+    {
+      "container": "carts",
+      "count": 1
+    }
+  ],
+  "post_injection_error_samples": [
+    {
+      "container": "catalogue",
+      "evidence_id": "log:13",
+      "message": "ts=2024-11-22T02:40:03Z caller=logging.go:36 method=List tags= order=id pageNum=1 pageSize=10 result=9 err=null took=4.522504ms",
+      "row": 43327,
+      "ts": 1732243204
+    },
+    {
+      "container": "catalogue",
+      "evidence_id": "log:13",
+      "message": "ts=2024-11-22T02:40:06Z caller=logging.go:62 method=Get id=3395a43e-2d88-40de-b95f-e00e1502085b sock=3395a43e-2d88-40de-b95f-e00e1502085b err=null took=4.218364ms",
+      "row": 43496,
+      "ts": 1732243207
+    },
+    {
+      "container": "user",
+      "evidence_id": "log:13",
+      "message": "ts=2024-11-22T02:40:18.250282822Z caller=middlewares.go:75 method=GetUsers id=673fef03b0df5c00019b01eb result=1 took=969.985\u00b5s",
+      "row": 44132,
+      "ts": 1732243218
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:13",
+      "message": "POST /orders 500 - ms - -",
+      "row": 44174,
+      "ts": 1732243219
+    },
+    {
+      "container": "orders",
+      "evidence_id": "log:13",
+      "message": "2024-11-22 02:40:24.574 ERROR [orders,,,] 6 --- [-nio-80-exec-14] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Unable to create order due to unspecified IO error.] with root cause\\n",
+      "row": 44428,
+      "ts": 1732243225
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:13",
+      "message": "DELETE /cart 503 - ms - -",
+      "row": 44640,
+      "ts": 1732243228
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:13",
+      "message": "User cart deleted with status: 503",
+      "row": 44979,
+      "ts": 1732243236
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:13",
+      "message": "Order response: {\"statusCode\":500,\"body\":{\"timestamp\":1732243243277,\"status\":500,\"error\":\"Internal Server Error\",\"exception\":\"java.lang.IllegalStateException\",\"message\":\"Unable to create order due to unspecified IO error.\",\"path\":\"/orders\"},\"headers\":{\"x-application-context\":\"orders:80\",\"content-type\":\"application/json;charset=UTF-8\",\"date\":\"Fri, 22 Nov 2024 02:40:43 GMT\",\"x-envoy-upstream-service-time\":\"58\",\"server\":\"envoy\",\"connection\":\"close\",\"transfer-encoding\":\"chunked\"},\"request\":{\"uri\":{\"protocol\":\"http:\",\"slashes\":true,\"auth\":null,\"host\":\"orders\",\"port\":80,\"hostname\":\"orders\",\"hash\":null,\"search\":null,\"query\":null,\"pathname\":\"/orders\",\"path\":\"/orders\",\"href\":\"http://orders/orders\"},\"method\":\"POST\",\"headers\":{\"accept\":\"application/json\",\"content-type\":\"application/json\",\"content-length\":232}}}",
+      "row": 45233,
+      "ts": 1732243243
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:13",
+      "message": "POST /cart 500 58.623 ms - 64",
+      "row": 45699,
+      "ts": 1732243254
+    },
+    {
+      "container": "catalogue",
+      "evidence_id": "log:13",
+      "message": "ts=2024-11-22T02:41:09Z caller=logging.go:62 method=Get id=3395a43e-2d88-40de-b95f-e00e1502085b sock=3395a43e-2d88-40de-b95f-e00e1502085b err=null took=4.540053ms",
+      "row": 46503,
+      "ts": 1732243270
+    },
+    {
+      "container": "orders",
+      "evidence_id": "log:13",
+      "message": "2024-11-22 02:41:14.248 ERROR [orders,,,] 6 --- [p-nio-80-exec-4] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Unable to create order due to unspecified IO error.] with root cause\\n",
+      "row": 46715,
+      "ts": 1732243274
+    },
+    {
+      "container": "orders",
+      "evidence_id": "log:14",
+      "message": "org.springframework.web.client.HttpServerErrorException: 503 Service Unavailable\\n\tat org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:94) ~[spring-web-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:700) ~[spring-web-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:653) ~[spring-web-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.web.client.RestTemplate.execute(RestTemplate.java:628) ~[spring-web-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:602) ~[spring-web-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat works.weave.socks.orders.services.AsyncGetService.getDataList(AsyncGetService.java:79) ~[classes!/:1.4.4.RELEASE]\\n\tat works.weave.socks.orders.services.AsyncGetService$$FastClassBySpringCGLIB$$2bee767d.invoke(<generated>) ~[classes!/:1.4.4.RELEASE]\\n\tat org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:204) ~[spring-core-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:721) ~[spring-aop-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157) ~[spring-aop-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:85) ~[spring-aop-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.cloud.sleuth.instrument.async.TraceAsyncAspect.traceBackgroundThread(TraceAsyncAspect.java:68) ~[spring-cloud-sleuth-core-1.1.0.RELEASE.jar!/:1.1.0.RELEASE]\\n\tat sun.reflect.GeneratedMethodAccessor104.invoke(Unknown Source) ~[na:na]\\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_131]\\n\tat java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_131]\\n\tat org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:629) ~[spring-aop-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:618) ~[spring-aop-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70) ~[spring-aop-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92) ~[spring-aop-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat org.springframework.aop.interceptor.AsyncExecutionInterceptor$1.call(AsyncExecutionInterceptor.java:115) ~[spring-aop-4.3.6.RELEASE.jar!/:4.3.6.RELEASE]\\n\tat java.util.concurrent.FutureTask.run(FutureTask.java:266) ~[na:1.8.0_131]\\n\tat org.springframework.cloud.sleuth.instrument.async.LocalComponentTraceRunnable.run(LocalComponentTraceRunnable.java:53) ~[spring-cloud-sleuth-core-1.1.0.RELEASE.jar!/:1.1.0.RELEASE]\\n\tat java.lang.Thread.run(Thread.java:748) [na:1.8.0_131]\\n",
+      "row": 46800,
+      "ts": 1732243276
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:14",
+      "message": "Order response: {\"timestamp\":1732243281137,\"status\":500,\"error\":\"Internal Server Error\",\"exception\":\"java.lang.IllegalStateException\",\"message\":\"Unable to create order due to unspecified IO error.\",\"path\":\"/orders\"}",
+      "row": 47054,
+      "ts": 1732243281
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:14",
+      "message": "Order response: {\"statusCode\":500,\"body\":{\"timestamp\":1732243291847,\"status\":500,\"error\":\"Internal Server Error\",\"exception\":\"java.lang.IllegalStateException\",\"message\":\"Unable to create order due to unspecified IO error.\",\"path\":\"/orders\"},\"headers\":{\"x-application-context\":\"orders:80\",\"content-type\":\"application/json;charset=UTF-8\",\"date\":\"Fri, 22 Nov 2024 02:41:31 GMT\",\"x-envoy-upstream-service-time\":\"78\",\"server\":\"envoy\",\"connection\":\"close\",\"transfer-encoding\":\"chunked\"},\"request\":{\"uri\":{\"protocol\":\"http:\",\"slashes\":true,\"auth\":null,\"host\":\"orders\",\"port\":80,\"hostname\":\"orders\",\"hash\":null,\"search\":null,\"query\":null,\"pathname\":\"/orders\",\"path\":\"/orders\",\"href\":\"http://orders/orders\"},\"method\":\"POST\",\"headers\":{\"accept\":\"application/json\",\"content-type\":\"application/json\",\"content-length\":232}}}",
+      "row": 47604,
+      "ts": 1732243292
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:14",
+      "message": "POST /cart 500 56.513 ms - 64",
+      "row": 48663,
+      "ts": 1732243317
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:15",
+      "message": "Order response: {\"timestamp\":1732243332648,\"status\":500,\"error\":\"Internal Server Error\",\"exception\":\"java.lang.IllegalStateException\",\"message\":\"Unable to create order due to unspecified IO error.\",\"path\":\"/orders\"}",
+      "row": 49510,
+      "ts": 1732243333
+    },
+    {
+      "container": "orders",
+      "evidence_id": "log:15",
+      "message": "2024-11-22 02:42:15.150 ERROR [orders,,,] 6 --- [-nio-80-exec-13] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Unable to create order due to unspecified IO error.] with root cause\\n",
+      "row": 49637,
+      "ts": 1732243335
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:15",
+      "message": "Order response: {\"statusCode\":500,\"body\":{\"timestamp\":1732243336871,\"status\":500,\"error\":\"Internal Server Error\",\"exception\":\"java.lang.IllegalStateException\",\"message\":\"Unable to create order due to unspecified IO error.\",\"path\":\"/orders\"},\"headers\":{\"x-application-context\":\"orders:80\",\"content-type\":\"application/json;charset=UTF-8\",\"date\":\"Fri, 22 Nov 2024 02:42:16 GMT\",\"x-envoy-upstream-service-time\":\"41\",\"server\":\"envoy\",\"connection\":\"close\",\"transfer-encoding\":\"chunked\"},\"request\":{\"uri\":{\"protocol\":\"http:\",\"slashes\":true,\"auth\":null,\"host\":\"orders\",\"port\":80,\"hostname\":\"orders\",\"hash\":null,\"search\":null,\"query\":null,\"pathname\":\"/orders\",\"path\":\"/orders\",\"href\":\"http://orders/orders\"},\"method\":\"POST\",\"headers\":{\"accept\":\"application/json\",\"content-type\":\"application/json\",\"content-length\":232}}}",
+      "row": 49807,
+      "ts": 1732243337
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:15",
+      "message": "POST to carts: http://carts/carts/673fef80b0df5c00019b0375/items body: {\"itemId\":\"3395a43e-2d88-40de-b95f-e00e1502085b\",\"unitPrice\":18}",
+      "row": 49849,
+      "ts": 1732243338
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:15",
+      "message": "Order response: {\"timestamp\":1732243340298,\"status\":500,\"error\":\"Internal Server Error\",\"exception\":\"java.lang.IllegalStateException\",\"message\":\"Unable to create order due to unspecified IO error.\",\"path\":\"/orders\"}",
+      "row": 49934,
+      "ts": 1732243340
+    },
+    {
+      "container": "queue-master",
+      "evidence_id": "log:15",
+      "message": "2024-11-22 02:42:50.920  INFO 6 --- [ool-6-thread-13] o.apache.http.impl.execchain.RetryExec   : I/O exception (org.newsclub.net.unix.AFUNIXSocketException) caught when processing request to {}->unix://localhost:80: No such file or directory",
+      "row": 51459,
+      "ts": 1732243371
+    },
+    {
+      "container": "front-end",
+      "evidence_id": "log:16",
+      "message": "{\"id\":\"3395a43e-2d88-40de-b95f-e00e1502085b\",\"name\":\"Colourful\",\"description\":\"proident occaecat irure et excepteur labore minim nisi amet irure\",\"imageUrl\":[\"/catalogue/images/colourful_socks.jpg\",\"/catalogue/images/colourful_socks.jpg\"],\"price\":18,\"count\":438,\"tag\":[\"brown\",\"blue\"]}\\n",
+      "row": 51586,
+      "ts": 1732243372
+    },
+    {
+      "container": "queue-master",
+      "evidence_id": "log:16",
+      "message": "2024-11-22 02:42:54.836  INFO 6 --- [ool-6-thread-19] o.apache.http.impl.execchain.RetryExec   : I/O exception (org.newsclub.net.unix.AFUNIXSocketException) caught when processing request to {}->unix://localhost:80: No such file or directory",
+      "row": 51713,
+      "ts": 1732243375
+    },
+    {
+      "container": "queue-master",
+      "evidence_id": "log:16",
+      "message": "2024-11-22 02:43:04.900  INFO 6 --- [ool-6-thread-28] o.apache.http.impl.execchain.RetryExec   : I/O exception (org.newsclub.net.unix.AFUNIXSocketException) caught when processing request to {}->unix://localhost:80: No such file or directory",
+      "row": 52306,
+      "ts": 1732243385
+    }
+  ],
+  "pre_injection_error_counts": [
+    {
+      "container": "queue-master",
+      "count": 52
+    },
+    {
+      "container": "front-end",
+      "count": 24
+    },
+    {
+      "container": "user",
+      "count": 5
+    },
+    {
+      "container": "carts",
+      "count": 4
+    },
+    {
+      "container": "orders",
+      "count": 3
+    },
+    {
+      "container": "catalogue",
+      "count": 2
+    }
+  ],
+  "task": "This is a telemetry investigation for the incident window. The metrics table is complete for the window. The logs are a deterministic, unranked excerpt from the same window. Identify the single most likely faulty service and exactly one fault class from the supplied F1-F5 taxonomy. Cite the telemetry evidence you rely on. If the packet does not establish a source-level cause, state that the source cause is NOT_ESTABLISHED and identify the missing evidence. Do not invent a source revision, stack frame, test result, or execution. Return both a service prediction and a fault-class prediction."
+}

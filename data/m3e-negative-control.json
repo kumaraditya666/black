@@ -1,0 +1,143 @@
+{
+  "id": "aef7d4fc-28f6-400f-8fb7-b699cabf6598",
+  "incident_id": 5,
+  "investigation_id": "62b1a5f9-fe8c-43ab-885c-936636f3e009",
+  "fixture": "m3c_negative",
+  "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+  "status": "UNVERIFIED",
+  "approval_id": "1fd1ee13-478d-4c22-9a33-a458c2a1b680",
+  "proposal": null,
+  "validation": {
+    "eligibility": {
+      "eligible": true,
+      "reasons": [],
+      "checks": [
+        {
+          "code": "investigation_exists",
+          "ok": true,
+          "detail": "investigation record exists"
+        },
+        {
+          "code": "investigation_completed",
+          "ok": true,
+          "detail": "investigation status is completed"
+        },
+        {
+          "code": "outcome_likely_cause",
+          "ok": true,
+          "detail": "investigation outcome is LIKELY_CAUSE"
+        },
+        {
+          "code": "fixture_known",
+          "ok": true,
+          "detail": "fixture m3c_negative is registered"
+        },
+        {
+          "code": "repository_trusted",
+          "ok": true,
+          "detail": "trusted local fixture repository approved for Milestone 3A"
+        },
+        {
+          "code": "evidence_references_valid",
+          "ok": true,
+          "detail": "all references resolve"
+        },
+        {
+          "code": "recorded_revision",
+          "ok": true,
+          "detail": "revision 2221398fc77cdffaad69db6ac615e6c8be661056 is present in the repository"
+        },
+        {
+          "code": "source_pinned",
+          "ok": true,
+          "detail": "all fixture files match their pinned content hashes"
+        },
+        {
+          "code": "resolved_source_frame",
+          "ok": true,
+          "detail": "a cited source frame is resolved at the recorded revision"
+        },
+        {
+          "code": "frame_in_approved_file",
+          "ok": true,
+          "detail": "cited frame fixtures/repair/m3c_negative/app.py is in the allowed patch files"
+        },
+        {
+          "code": "frame_matches_fixture",
+          "ok": true,
+          "detail": "cited frame matches the registered fixture failure location"
+        },
+        {
+          "code": "human_approval",
+          "ok": true,
+          "detail": "a human review record matches this hypothesis and evidence snapshot"
+        }
+      ],
+      "investigation_id": "62b1a5f9-fe8c-43ab-885c-936636f3e009",
+      "fixture": "m3c_negative",
+      "hypothesis_index": 0,
+      "hypothesis_sha256": "f37020fbfdd80e395fd25fec01c802a616cad862ef0116ba6bfb41ce7e8841f4",
+      "approval_id": "1fd1ee13-478d-4c22-9a33-a458c2a1b680",
+      "frame": {
+        "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+        "context": [
+          {
+            "line": 1,
+            "text": "def first_or_none(items):"
+          },
+          {
+            "line": 2,
+            "text": "    return items[0] if items else None"
+          }
+        ],
+        "function": "first_or_none",
+        "id": "frame:0",
+        "line": 2,
+        "path": "fixtures/repair/m3c_negative/app.py",
+        "source_line": "    return items[0] if items else None",
+        "status": "resolved",
+        "type": "stack_frame"
+      },
+      "commit": "2221398fc77cdffaad69db6ac615e6c8be661056"
+    },
+    "semantic_execution": {
+      "status": "CONTRADICTED_IN_REGISTERED_FIXTURE_SCENARIO",
+      "notice": "The pinned registered fixture scenario passed; this does not disprove any historical incident.",
+      "checks": {
+        "reproduction_before": {
+          "evidence_id": "repair:aef7d4fc-28f6-400f-8fb7-b699cabf6598:reproduction_before",
+          "test_node": "tests/test_reproduction.py::test_empty_list",
+          "commit": "2221398fc77cdffaad69db6ac615e6c8be661056",
+          "mechanically_verifiable": true,
+          "verification_outcome": "TEST_PASSED",
+          "returncode": 0
+        }
+      }
+    }
+  },
+  "diff": null,
+  "reproduction_before": {
+    "returncode": 0,
+    "timed_out": false,
+    "environment_error": false,
+    "isolation": "docker",
+    "output": ".                                                                        [100%]\n1 passed in 0.04s\n",
+    "security_blocked": false
+  },
+  "reproduction_after": null,
+  "regression": null,
+  "isolation": {
+    "mode": "docker",
+    "detail": "container isolation requested"
+  },
+  "error": "the reproduction test already passes at the recorded revision; bug not reproduced",
+  "timings": {
+    "materialize_ms": 92,
+    "reproduce_before_ms": 2788,
+    "total_ms": 3034
+  },
+  "usage": null,
+  "review": null,
+  "created_at": "2026-11-05T17:39:36.547572+00:00",
+  "updated_at": "2026-11-05T17:39:39.581886+00:00"
+}

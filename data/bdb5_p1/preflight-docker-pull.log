@@ -1,0 +1,34 @@
+docker.io/swebench/sweb.eval.x86_64.sympy_1776_sympy-20590@sha256:bcdff110a35d19a6838fde5f678d1b5103610234bd034e5703df46878aad3b63: Pulling from swebench/sweb.eval.x86_64.sympy_1776_sympy-20590
+4f4fb700ef54: Pulling fs layer
+a4d326e88417: Pulling fs layer
+3b8e43f99ec6: Pulling fs layer
+fd7a87c0b95b: Pulling fs layer
+c271b27e967a: Pulling fs layer
+d07e7f5cb3eb: Pulling fs layer
+3d473160e8e5: Pulling fs layer
+dc407fa36252: Pulling fs layer
+39a945af8df2: Pulling fs layer
+6a99d82d9a89: Pulling fs layer
+6a99d82d9a89: Download complete
+4f4fb700ef54: Download complete
+3b8e43f99ec6: Download complete
+a4d326e88417: Download complete
+d07e7f5cb3eb: Download complete
+3d473160e8e5: Download complete
+39a945af8df2: Download complete
+c271b27e967a: Download complete
+39a945af8df2: Pull complete
+a4d326e88417: Pull complete
+dc407fa36252: Download complete
+fd7a87c0b95b: Download complete
+6a99d82d9a89: Pull complete
+d07e7f5cb3eb: Pull complete
+3d473160e8e5: Pull complete
+fd7a87c0b95b: Pull complete
+dc407fa36252: Pull complete
+c271b27e967a: Pull complete
+4f4fb700ef54: Pull complete
+3b8e43f99ec6: Pull complete
+Digest: sha256:bcdff110a35d19a6838fde5f678d1b5103610234bd034e5703df46878aad3b63
+Status: Downloaded newer image for swebench/sweb.eval.x86_64.sympy_1776_sympy-20590@sha256:bcdff110a35d19a6838fde5f678d1b5103610234bd034e5703df46878aad3b63
+docker.io/swebench/sweb.eval.x86_64.sympy_1776_sympy-20590@sha256:bcdff110a35d19a6838fde5f678d1b5103610234bd034e5703df46878aad3b63

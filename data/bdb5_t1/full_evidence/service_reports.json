@@ -1,0 +1,150 @@
+{
+  "carts": {
+    "anomaly": 6.2,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "pre",
+    "service": "carts",
+    "summary": "The telemetry data shows a significant drop in the metric value for the 'carts' service at timestamp 1732242483 (value 6.2), which is much lower than the surrounding values (around 7.0 - 9.0). This sudden decrease suggests a potential issue with the 'carts' service, possibly related to performance degradation or resource constraints. The fault class is likely F1 (Performance Degradation) based on the observed anomaly in the metric value."
+  },
+  "carts-db": {
+    "anomaly": 0.0,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "",
+    "service": "carts-db",
+    "summary": "The telemetry data provided consists solely of a continuous sequence of timestamps and a single metric value (28.0) for the 'carts-db' service across the entire incident window. There are no logs, error counts, latency spikes, or other metrics indicating a fault. Without comparative baseline data or any indication of deviation from normal operation, it is impossible to establish a source-level cause or identify a specific fault class. The evidence does not support the existence of an anomaly within the provided dataset."
+  },
+  "catalogue": {
+    "anomaly": 3.867,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "pre",
+    "service": "catalogue",
+    "summary": "The telemetry shows a sustained drop in the 'value' metric for the 'catalogue' service, falling from a baseline of ~4.267 to 3.867 and remaining low throughout the incident window. This persistent deviation indicates a fault within the catalogue service itself rather than an upstream issue. The fault class is NOT_ESTABLISHED because the provided telemetry only shows the metric value drop without specifying the underlying cause (e.g., resource exhaustion, code error, dependency failure)."
+  },
+  "catalogue-db": {
+    "anomaly": 0.0,
+    "evidence_ids": [],
+    "likely_upstream": false,
+    "pre_post": "none",
+    "service": "catalogue-db",
+    "summary": "The telemetry data shows no anomalies; all metrics are at baseline (4.0). No logs or evidence indicate a fault. The source cause is NOT_ESTABLISHED due to lack of anomalous signals."
+  },
+  "front-end": {
+    "anomaly": 8.0,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "pre",
+    "service": "front-end",
+    "summary": "The telemetry data shows a consistent and significant drop in the metric value for the 'front-end' service compared to other services. The values for 'front-end' are consistently lower (e.g., 8.0, 24.8) than those of other services (e.g., 25.467, 26.0). This suggests a potential issue with the 'front-end' service, possibly related to resource constraints or performance degradation. The fault class is likely F1: Resource Exhaustion, as the lower values could indicate insufficient resources allocated to the 'front-end' service."
+  },
+  "orders": {
+    "anomaly": 2.6,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "pre",
+    "service": "orders",
+    "summary": "The telemetry data shows a sustained spike in the 'orders' service's metric value to 2.6, which is significantly higher than the baseline values observed earlier in the window (e.g., 1.333, 1.733, 2.0). This persistent elevation indicates a performance degradation or resource exhaustion specific to the 'orders' service. No logs are provided to correlate with this metric spike for a root cause analysis."
+  },
+  "orders-db": {
+    "anomaly": 5.0,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "",
+    "service": "orders-db",
+    "summary": "The telemetry data provided consists of a single metric value (15.0) repeated for every second in the incident window, alongside a service name ('orders-db') and task description. There are no logs, error counts, latency spikes, or resource utilization metrics included in the input to indicate a fault. Without evidence of elevated errors, increased latency, or resource saturation, it is impossible to identify a specific faulty service or assign a fault class from the F1-F5 taxonomy. The source cause is NOT_ESTABLISHED due to missing evidence."
+  },
+  "payment": {
+    "anomaly": 1.8,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "pre",
+    "service": "payment",
+    "summary": "The telemetry data shows a significant drop in the metric value from 2.0 to 1.8 at timestamp 1732242576, which is outside the normal range observed in the rest of the window. This anomaly suggests a potential issue with the payment service. The fault class is NOT_ESTABLISHED as there is no specific evidence provided to pinpoint the exact cause of this drop."
+  },
+  "queue-master": {
+    "anomaly": 0.067,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "",
+    "service": "queue-master",
+    "summary": "The telemetry data provided consists of a single metric value (0.067) repeated for every second in the incident window, alongside a list of timestamps. There are no logs or additional metrics to correlate with this constant value. Without variation in the metric or accompanying log entries indicating errors, timeouts, or resource exhaustion, it is impossible to determine if 0.067 represents a healthy baseline or an anomalous state (e.g., low throughput vs. expected high throughput). Consequently, no source-level cause can be established from the provided packet."
+  },
+  "rabbitmq": {
+    "anomaly": 1.0,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "",
+    "service": "rabbitmq",
+    "summary": "The telemetry data provided consists solely of a continuous sequence of timestamps and a single static metric value (11.0) for the 'rabbitmq' service across the entire incident window. There are no fluctuating metrics, error counts, latency spikes, or log entries indicating a specific fault pattern (e.g., connection drops, memory exhaustion, queue buildup). Without variable data points showing degradation or failure states, it is impossible to identify a faulty component or assign a fault class from the F1-F5 taxonomy. The source cause cannot be established with the provided evidence."
+  },
+  "rabbitmq-exporter": {
+    "anomaly": 1.0,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "",
+    "service": "rabbitmq-exporter",
+    "summary": "The telemetry data provided consists entirely of uniform metric values (all 1.0) and a sequential list of timestamps with no variation, missing error counts, latency spikes, or queue depth anomalies. Without any deviation from the baseline in the metrics table or logs, it is impossible to identify a specific faulty service or fault class. The source cause is NOT_ESTABLISHED due to the absence of distinguishing telemetry evidence."
+  },
+  "session-db": {
+    "anomaly": 0.0,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "",
+    "service": "session-db",
+    "summary": "The telemetry metrics show a constant value of 3.0 across all timestamps for the session-db service, indicating no anomalies or faults were detected within the provided data window. The logs excerpt is empty and provides no additional evidence to suggest a fault. Therefore, the source cause is NOT_ESTABLISHED as there is no evidence of a specific fault class from the supplied taxonomy (F1-F5)."
+  },
+  "shipping": {
+    "anomaly": 2.8,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "pre",
+    "service": "shipping",
+    "summary": "The telemetry data shows a consistent metric value of 2.8 across all timestamps in the incident window, with no significant deviations or anomalies detected. This uniformity suggests that the system is operating within normal parameters, and there is no evidence to pinpoint a specific faulty service or fault class based on the provided metrics."
+  },
+  "user": {
+    "anomaly": 16.667,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "pre",
+    "service": "user",
+    "summary": "The telemetry shows a sudden spike in latency at the beginning of the window (16.667ms) followed by a return to normal levels (~15.867ms), then another sustained increase later (up to 20.8ms). This pattern suggests transient issues rather than a persistent fault in a single service. However, without logs or additional context linking these spikes to specific services, the source cause is NOT_ESTABLISHED."
+  },
+  "user-db": {
+    "anomaly": 0.0,
+    "evidence_ids": [
+      ""
+    ],
+    "likely_upstream": false,
+    "pre_post": "",
+    "service": "user-db",
+    "summary": "The telemetry data provided consists entirely of placeholder values (all metrics are 9.0) and a continuous sequence of timestamps without any actual metric readings, log entries, or error indicators. There is no evidence of latency spikes, error rate increases, resource exhaustion, or specific fault signatures within the supplied data. Consequently, it is impossible to identify a faulty service or assign a fault class from F1-F5 based on this input."
+  }
+}

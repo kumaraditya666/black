@@ -1,0 +1,163 @@
+{
+  "aggregation": "count of strict passes over the fixed five approved pilot cases; no dimension averaging",
+  "case_count": 5,
+  "cases": [
+    {
+      "approval_hash": "205d465cf7048cfeb52ed394c1249d97e836cd670ba117a074f9512d752b15d1",
+      "case_id": "BDB5-R1",
+      "dimension_values": {
+        "causal_status": 1.0,
+        "citation_validity": 1.0,
+        "file_exactness": 1.0,
+        "function_exactness": 1.0,
+        "line_exactness": 1.0,
+        "mechanism": 1.0,
+        "reproduction_before": 1.0,
+        "unsupported_claim_rate": 0.0
+      },
+      "failures": [],
+      "provider_calls": 2,
+      "required_dimensions": [
+        "file_exactness",
+        "function_exactness",
+        "line_exactness",
+        "mechanism",
+        "causal_status",
+        "citation_validity",
+        "reproduction_before",
+        "unsupported_claim_rate"
+      ],
+      "result_hash": "848e18cf420c5aa717ff0334f0a9f205b73df06454c025aa006b98ed744f8a4d",
+      "score_path": "data\\bdb5_scores\\BDB5-R1-v2-score.json",
+      "strict_pass": true
+    },
+    {
+      "approval_hash": "ab68d3120ada2468776973b1a2dfed46275cf1ecc8905229177ed369ff50d1f3",
+      "case_id": "BDB5-R2",
+      "dimension_values": {
+        "app_abstention": 1.0,
+        "app_causal_status": 1.0,
+        "app_source_claim": 0.0,
+        "citation_validity": 1.0,
+        "reproduction_before": 1.0,
+        "unsupported_claim_rate": 0.0
+      },
+      "failures": [],
+      "provider_calls": 2,
+      "required_dimensions": [
+        "app_causal_status",
+        "app_abstention",
+        "app_source_claim",
+        "citation_validity",
+        "reproduction_before",
+        "unsupported_claim_rate"
+      ],
+      "result_hash": "2eabd5a209a25e8235ea4dc672af60d63861880ab36a9e90faaa0aaec5e15757",
+      "score_path": "data\\bdb5_scores\\BDB5-R2-v2-score.json",
+      "strict_pass": true
+    },
+    {
+      "approval_hash": "b4ed0b669a9ab0376d1e754755f586b1392bcdf9db29fe954dc4b1c8690e0d47",
+      "case_id": "BDB5-R3",
+      "dimension_values": {
+        "causal_status": 1.0,
+        "citation_validity": 1.0,
+        "file_exactness": 1.0,
+        "function_exactness": 1.0,
+        "mechanism": 1.0,
+        "unsupported_claim_rate": 0.0
+      },
+      "failures": [],
+      "provider_calls": 2,
+      "required_dimensions": [
+        "file_exactness",
+        "function_exactness",
+        "mechanism",
+        "causal_status",
+        "citation_validity",
+        "unsupported_claim_rate"
+      ],
+      "result_hash": "22b2220bd73790d43cc19ef4a84eef0b66d2e3257b375e60e6f46b399661f0b5",
+      "score_path": "data\\bdb5_scores\\BDB5-R3-v2-score.json",
+      "strict_pass": true
+    },
+    {
+      "approval_hash": "9df50d7d187c934f4b9c03c5aaa0ed1208a2740932ce017b785fc845b4db8b02",
+      "case_id": "BDB5-T1",
+      "dimension_values": {
+        "citation_coverage": 1.0,
+        "citation_validity": 1.0,
+        "fault_accuracy": 1.0,
+        "l1_causal_status": 1.0,
+        "l2_abstention": 1.0,
+        "l2_causal_status": 1.0,
+        "service_top1": 1.0,
+        "service_top3": 1.0,
+        "unsupported_claim_rate": 0.0
+      },
+      "failures": [],
+      "provider_calls": 1,
+      "required_dimensions": [
+        "service_top1",
+        "service_top3",
+        "fault_accuracy",
+        "citation_validity",
+        "citation_coverage",
+        "l1_causal_status",
+        "l2_causal_status",
+        "l2_abstention",
+        "unsupported_claim_rate"
+      ],
+      "result_hash": "87fd202515e1db8133067b7613fca3d778e0ed73d8ac6bb82a9eb08b89050ec7",
+      "score_path": "data/bdb5_scores/BDB5-T1-isolated-score.json",
+      "strict_pass": true
+    },
+    {
+      "approval_hash": "6f48124c44a61dbb30a2d05ec15f9289c3aabef6d608d4f19447f803bbbcf516",
+      "case_id": "BDB5-P1",
+      "dimension_values": {
+        "fail_to_pass": 1.0,
+        "pass_to_pass": 1.0,
+        "patch_applies": 1.0,
+        "patch_scope": 1.0,
+        "regression_safety": 1.0,
+        "reproduction_after": 1.0,
+        "reproduction_before": 1.0
+      },
+      "failures": [],
+      "provider_calls": 6,
+      "required_dimensions": [
+        "patch_applies",
+        "patch_scope",
+        "fail_to_pass",
+        "pass_to_pass",
+        "reproduction_before",
+        "reproduction_after",
+        "regression_safety"
+      ],
+      "result_hash": "33c36432983c0ab0cf24334271123b421d38626b11189898395b96cf9747248a",
+      "score_path": "data\\bdb5_scores\\BDB5-P1-v2-score.json",
+      "strict_pass": true
+    }
+  ],
+  "leaderboard": [
+    {
+      "case_count": 5,
+      "model": "qwen3.5:9b-q4_K_M",
+      "note": "single-entrant pilot; not an external comparison",
+      "strict_pass_count": 5,
+      "strict_pass_rate": 1.0
+    }
+  ],
+  "non_claims": [
+    "Not an aggregate accuracy score.",
+    "Not an external or blind leaderboard.",
+    "T1 uses the isolated model-server result but its approved packet is represented by a bounded projection.",
+    "Original R1/R2/R3 strict-fail scores remain audit records and are excluded from this current aggregate."
+  ],
+  "result_class": "BDB5_PILOT_AGGREGATE_NOT_EXTERNAL_LEADERBOARD",
+  "strict_pass_count": 5,
+  "strict_pass_rate": 1.0,
+  "suite": "BDB5-PILOT",
+  "version": "2026-11-13"
+}

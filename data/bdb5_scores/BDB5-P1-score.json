@@ -1,0 +1,190 @@
+{
+  "approval_hash": "f870fc6a1851d3f59868fa2b4b17f74a7ba9a8ecf163a77d3600c93124ed774d",
+  "approved": true,
+  "benchmark_result": false,
+  "candidate_attempts": [
+    {
+      "apply_check_returncode": 1,
+      "attempt": 1,
+      "result": "scoped but malformed unified diff"
+    },
+    {
+      "apply_check_returncode": 128,
+      "attempt": 2,
+      "result": "malformed unified diff"
+    },
+    {
+      "apply_check_returncode": 128,
+      "attempt": 3,
+      "result": "malformed unified diff"
+    },
+    {
+      "attempt": 4,
+      "docstring_preserved": false,
+      "result": "applicable but inserted __slots__ before the Printable docstring"
+    },
+    {
+      "apply_check_returncode": 1,
+      "attempt": 5,
+      "result": "docstring-preserving replacement did not apply"
+    },
+    {
+      "apply_check_returncode": 0,
+      "attempt": 6,
+      "docstring_preserved": true,
+      "result": "applicable docstring-preserving replacement"
+    }
+  ],
+  "candidate_checks": {
+    "actual_test_command": "bin/test sympy/core/tests/test_basic.py --no-colors --no-subprocess",
+    "approved_packet_test_command_placeholder": "pytest <hidden test node>",
+    "changed_files": [
+      "sympy/core/_print_helpers.py"
+    ],
+    "docstring_preserved": true,
+    "full_test_file": "23 passed",
+    "gold_patch_sent_to_model": false,
+    "hidden_tests_sent_to_model": false,
+    "patch_applied": true,
+    "test_immutable": "PASS"
+  },
+  "case_id": "BDB5-P1",
+  "limitations": [
+    "The approved P1 vault pass_to_pass list is empty while the approved manifest requires pass_to_pass; therefore the strict score records pass_to_pass=null and cannot strict-pass even though all 23 tests passed.",
+    "The candidate was produced by 6 local Ollama calls; attempts 1-3 were malformed, attempt 4 broke the Printable docstring, and attempts 5-6 were the docstring-preserving repair. Only the final candidate is scored.",
+    "The approved packet still carries the older pytest test_command placeholder; correcting the packet metadata requires a new approval."
+  ],
+  "mode": "REAL_CASE_SCORED",
+  "model_call_record": {
+    "attempt": 2,
+    "changed_files": [
+      "sympy/core/_print_helpers.py"
+    ],
+    "docstring_preserved": true,
+    "find": "\"\"\"\n    The default implementation of printing for SymPy classes.\n\n    This implements a hack that allows us to print elements of built-in\n    Python containers in a readable way. Natively Python uses ``repr()``\n    even if ``str()`` was explicitly requested. Mix in this trait into\n    a class to get proper default printing.\n\n    This also adds support for LaTeX printing in jupyter notebooks.\n    \"\"\"",
+    "gold_patch_in_prompt": false,
+    "hidden_tests_in_prompt": false,
+    "model": "qwen3.5:9b-q4_K_M",
+    "model_calls_this_generation": 2,
+    "patch_chars": 326,
+    "prior_docstring_breaking_candidate": "data/bdb5_p1/candidate/candidate_docstring_broken.diff",
+    "replace": "\"\"\"\n    The default implementation of printing for SymPy classes.\n\n    This implements a hack that allows us to print elements of built-in\n    Python containers in a readable way. Natively Python uses ``repr()``\n    even if ``str()`` was explicitly requested. Mix in this trait into\n    a class to get proper default printing.\n\n    This also adds support for LaTeX printing in jupyter notebooks.\n    \"\"\"\n    __slots__ = ()",
+    "request_hash": "6f073b874935d919844f61e5abfd8a55003c6219664ac69bf15297abd72b477b",
+    "response_hash": "3f1733060c083f80b1bcd8f382786c0e1d5926f28b7a6d7a804e20f362bb2353",
+    "summary": "Added `__slots__ = ()` immediately after the Printable class docstring to prevent accidental `__dict__` creation and maintain memory efficiency.",
+    "total_model_calls": 6,
+    "usage": {
+      "eval_count": 249,
+      "prompt_eval_count": 837
+    }
+  },
+  "provider_calls": 6,
+  "score": {
+    "case_id": "BDB5-P1",
+    "citations": {
+      "cited": [
+        "issue:1",
+        "source:1"
+      ],
+      "coverage": 1.0,
+      "fabricated_rate": 0.0,
+      "invalid": [],
+      "required_evidence_types": [
+        "ISSUE_TEXT",
+        "SOURCE_EXCERPT"
+      ],
+      "valid": [
+        "issue:1",
+        "source:1"
+      ],
+      "valid_evidence_types": [
+        "ISSUE_TEXT",
+        "SOURCE_EXCERPT"
+      ],
+      "validity": 1.0
+    },
+    "dimension_explanations": {
+      "app_abstention": "value=None",
+      "app_causal_status": "value=None",
+      "app_source_claim": "value=0.0",
+      "causal_status": "value=None; expected='NOT_ASSESSED'",
+      "citation_coverage": "value=1.0",
+      "citation_validity": "value=1.0",
+      "execution_overclaims": "value=0",
+      "fabricated_citations": "value=0.0",
+      "fail_to_pass": "value=1.0",
+      "false_abstention": "value=None",
+      "fault_accuracy": "value=None; expected=None",
+      "file_exactness": "value=1.0; expected=('sympy/core/_print_helpers.py',)",
+      "function_exactness": "value=None; expected=None",
+      "harness_claim": "value=0.0",
+      "harness_identification": "value=None",
+      "l1_causal_status": "value=None; expected='NOT_ASSESSED'",
+      "l2_abstention": "value=None",
+      "l2_causal_status": "value=None; expected='NOT_ASSESSED'",
+      "line_exactness": "value=None; expected=None",
+      "mechanism": "value=None",
+      "pass_to_pass": "value=None",
+      "patch_applies": "value=1.0",
+      "patch_scope": "value=1.0",
+      "regression_safety": "value=1.0",
+      "reproduction_after": "value=1.0",
+      "reproduction_before": "value=1.0",
+      "service_top1": "value=None; expected=None",
+      "service_top3": "value=None",
+      "unsupported_claim_rate": "value=0.0"
+    },
+    "dimensions": {
+      "app_abstention": null,
+      "app_causal_status": null,
+      "app_source_claim": 0.0,
+      "causal_status": null,
+      "citation_coverage": 1.0,
+      "citation_validity": 1.0,
+      "execution_overclaims": 0,
+      "fabricated_citations": 0.0,
+      "fail_to_pass": 1.0,
+      "false_abstention": null,
+      "fault_accuracy": null,
+      "file_exactness": 1.0,
+      "function_exactness": null,
+      "harness_claim": 0.0,
+      "harness_identification": null,
+      "l1_causal_status": null,
+      "l2_abstention": null,
+      "l2_causal_status": null,
+      "line_exactness": null,
+      "mechanism": null,
+      "pass_to_pass": null,
+      "patch_applies": 1.0,
+      "patch_scope": 1.0,
+      "regression_safety": 1.0,
+      "reproduction_after": 1.0,
+      "reproduction_before": 1.0,
+      "service_top1": null,
+      "service_top3": null,
+      "unsupported_claim_rate": 0.0
+    },
+    "failures": [
+      "pass_to_pass: value None does not satisfy the strict rule"
+    ],
+    "mode": "REAL_CASE_EVALUATION",
+    "required_dimensions": [
+      "patch_applies",
+      "patch_scope",
+      "fail_to_pass",
+      "pass_to_pass",
+      "reproduction_before",
+      "reproduction_after",
+      "regression_safety"
+    ],
+    "result_class": "REAL_CASE_SCORE_NOT_BENCHMARK_RESULT",
+    "result_hash": "4f36cd7c0148f3fd5db7d7bd7ceef11cb411e7f19bc0849ee40d46b58eebf3d4",
+    "scenario": null,
+    "strict_pass": false,
+    "synthetic": false,
+    "validation_issues": []
+  },
+  "scored": true,
+  "status": "REAL_CASE_SCORED"
+}

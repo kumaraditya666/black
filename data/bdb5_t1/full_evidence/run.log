@@ -1,0 +1,16 @@
+skip carts
+skip carts-db
+skip catalogue
+skip catalogue-db
+skip front-end
+orders 2.6 False 16386 140
+orders-db 5.0 False 16386 158
+payment 1.8 False 16386 132
+queue-master 0.067 False 16386 160
+rabbitmq 1.0 False 16386 160
+rabbitmq-exporter 1.0 False 16386 131
+session-db 0.0 False 16386 126
+shipping 2.8 False 16386 110
+user 16.667 False 16386 143
+user-db 0.0 False 16386 133
+FINAL {"confidence": "HIGH", "evidence_ids": ["front-end"], "fault_class": "F1", "l2_reason": "The 'front-end' service exhibits the highest anomaly score (8.0) and a significant drop in metric values compared to others, indicating performance degradation or resource constraints. Other services show lower anomalies or no evidence of faults.", "missing_evidence": ["Logs", "Error counts", "Latency spikes"], "rationale": "The 'front-end' service is the most likely upstream faulty service because it shows a consistent and significant drop in metric values (anomaly 8.0) compared to other services, suggesting resource constraints or performance degradation. The fault class is F1 (Performance Degradation/Resource Exhaustion) based on the observed anomaly. Other services either have no anomalies or their anomalies are less severe.", "service": "front-end"}

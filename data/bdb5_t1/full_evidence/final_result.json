@@ -1,0 +1,15 @@
+{
+  "confidence": "HIGH",
+  "evidence_ids": [
+    "front-end"
+  ],
+  "fault_class": "F1",
+  "l2_reason": "The 'front-end' service exhibits the highest anomaly score (8.0) and a significant drop in metric values compared to others, indicating performance degradation or resource constraints. Other services show lower anomalies or no evidence of faults.",
+  "missing_evidence": [
+    "Logs",
+    "Error counts",
+    "Latency spikes"
+  ],
+  "rationale": "The 'front-end' service is the most likely upstream faulty service because it shows a consistent and significant drop in metric values (anomaly 8.0) compared to other services, suggesting resource constraints or performance degradation. The fault class is F1 (Performance Degradation/Resource Exhaustion) based on the observed anomaly. Other services either have no anomalies or their anomalies are less severe.",
+  "service": "front-end"
+}

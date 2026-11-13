@@ -1,0 +1,19 @@
+{
+  "apply_check_error": "error: corrupt patch at <stdin>:11\n",
+  "apply_check_returncode": 128,
+  "attempt": 2,
+  "changed_files": [
+    "sympy/core/_print_helpers.py"
+  ],
+  "gold_patch_in_prompt": false,
+  "hidden_tests_in_prompt": false,
+  "model": "qwen3.5:9b-q4_K_M",
+  "patch_chars": 279,
+  "request_hash": "ad4ca5c5449e5bcf500e38cda63bfb0e7fdc0cbbeb772e255b15fa4eb45fa01f",
+  "response_hash": "95dddefdae81ca5cb0a237f7e6887de802aa7390f3a3c47bd0df7ba19c3a8eb0",
+  "summary": "Added a Symbol subclass to Printable to restore __dict__ functionality.",
+  "usage": {
+    "eval_count": 137,
+    "prompt_eval_count": 812
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "case_id": "BDB5-P1",
+  "evaluator_only": {
+    "external_repair": {
+      "adapter": "isolated-external-repair-v1",
+      "allowed_files": [
+        "sympy/core/_print_helpers.py"
+      ],
+      "base_commit": "cffd4e0f86fefd4802349a9f9b19ed70934ea354",
+      "execution_verified": true,
+      "hidden_test_location": "evaluator_only",
+      "image": "swebench/sweb.eval.x86_64.sympy_1776_sympy-20590@sha256:bcdff110a35d19a6838fde5f678d1b5103610234bd034e5703df46878aad3b63",
+      "image_pulled": true,
+      "test_command": "bin/test sympy/core/tests/test_basic.py::test_immutable --no-colors --no-subprocess"
+    },
+    "manifest": {
+      "adapter_requirements": [
+        "isolated-external-repair-v1"
+      ],
+      "allowed_files": [
+        "sympy/core/_print_helpers.py"
+      ],
+      "allowed_scope": [
+        "sympy/core/_print_helpers.py"
+      ],
+      "artifact_hashes": {
+        "issue_text": "257e960a9065e139e79446b06d4369cac9f64f781d88f7c59daeb2c0fcd1dc87",
+        "source_excerpt": "843d100a6cb83f27096999d6b19ec9d9e88e405cb5b1df0a222c344cfbce3b4d"
+      },
+      "case_category": "REPAIR",
+      "case_id": "BDB5-P1",
+      "dataset": "SWE-bench Verified",
+      "dataset_revision": "78f471bf655a3137b2e8a75af1501690ec009ec3",
+      "evaluation_schema_version": "bdb5-eval-v1",
+      "readiness": "PREPARED",
+      "repository": "https://github.com/sympy/sympy",
+      "required_dimensions": [
+        "patch_applies",
+        "patch_scope",
+        "fail_to_pass",
+        "pass_to_pass",
+        "reproduction_before",
+        "reproduction_after",
+        "regression_safety"
+      ],
+      "required_evidence_types": [
+        "ISSUE_TEXT",
+        "SOURCE_EXCERPT"
+      ],
+      "schema_version": "bdb5-case-v1",
+      "source_revision": "cffd4e0f86fefd4802349a9f9b19ed70934ea354",
+      "synthetic": false
+    },
+    "packet_validation": {
+      "issues": []
+    },
+    "source_frame": {
+      "function": "Printable",
+      "path": "sympy/core/_print_helpers.py",
+      "revision": "cffd4e0f86fefd4802349a9f9b19ed70934ea354"
+    }
+  },
+  "mode": "REAL_CASE_PREPARATION_ONLY",
+  "model_calls": 0,
+  "model_visible_packet": {
+    "artifact_hashes": {
+      "issue_text": "257e960a9065e139e79446b06d4369cac9f64f781d88f7c59daeb2c0fcd1dc87",
+      "source_excerpt": "843d100a6cb83f27096999d6b19ec9d9e88e405cb5b1df0a222c344cfbce3b4d"
+    },
+    "candidate_inventory": [],
+    "case_id": "BDB5-P1",
+    "evidence": [
+      {
+        "evidence_id": "issue:1",
+        "evidence_type": "ISSUE_TEXT",
+        "source_revision": null,
+        "structured": {
+          "reference": "https://github.com/sympy/sympy/issues/20567"
+        },
+        "text": "# Symbol instances have __dict__ since 1.7?\n\nIn version 1.6.2 Symbol instances had no `__dict__` attribute\n\n```python\n\n>>> sympy.Symbol('s').__dict__\n\n---------------------------------------------------------------------------\n\nAttributeError                            Traceback (most recent call last)\n\n<ipython-input-3-e2060d5eec73> in <module>\n\n----> 1 sympy.Symbol('s').__dict__\n\n\n\nAttributeError: 'Symbol' object has no attribute '__dict__'\n\n>>> sympy.Symbol('s').__slots__\n\n('name',)\n\n```\n\n\n\nThis changes in 1.7 where `sympy.Symbol('s').__dict__` now exists (and returns an empty dict)\n\nI may misinterpret this, but given the purpose of `__slots__`, I assume this is a bug, introduced because some parent class accidentally stopped defining `__slots__`.\n"
+      },
+      {
+        "evidence_id": "source:1",
+        "evidence_type": "SOURCE_EXCERPT",
+        "source_revision": "cffd4e0f86fefd4802349a9f9b19ed70934ea354",
+        "structured": {
+          "path": "sympy/core/_print_helpers.py",
+          "revision": "cffd4e0f86fefd4802349a9f9b19ed70934ea354"
+        },
+        "text": "\"\"\"\nBase class to provide str and repr hooks that `init_printing` can overwrite.\n\nThis is exposed publicly in the `printing.defaults` module,\nbut cannot be defined there without causing circular imports.\n\"\"\"\n\nclass Printable:\n    \"\"\"\n    The default implementation of printing for SymPy classes.\n\n    This implements a hack that allows us to print elements of built-in\n    Python containers in a readable way. Natively Python uses ``repr()``\n    even if ``str()`` was explicitly requested. Mix in this trait into\n    a class to get proper default printing.\n\n    This also adds support for LaTeX printing in jupyter notebooks.\n    \"\"\"\n\n    # Note, we always use the default ordering (lex) in __str__ and __repr__,\n    # regardless of the global setting. See issue 5487.\n    def __str__(self):\n        from sympy.printing.str import sstr\n        return sstr(self, order=None)\n\n    __repr__ = __str__\n\n    def _repr_disabled(self):\n        \"\"\"\n        No-op repr function used to disable jupyter display hooks.\n\n        When :func:`sympy.init_printing` is used to disable certain display\n        formats, this function is copied into the appropriate ``_repr_*_``\n        attributes.\n\n        While we could just set the attributes to `None``, doing it this way\n        allows derived classes to call `super()`.\n        \"\"\"\n        return None\n\n    # We don't implement _repr_png_ here because it would add a large amount of\n    # data to any notebook containing SymPy expressions, without adding\n    # anything useful to the notebook. It can still enabled manually, e.g.,\n    # for the qtconsole, with init_printing().\n    _repr_png_ = _repr_disabled\n\n    _repr_svg_ = _repr_disabled\n"
+      }
+    ],
+    "schema_version": "bdb5-evidence-v1",
+    "source_revision": "cffd4e0f86fefd4802349a9f9b19ed70934ea354",
+    "task_instructions": "You are repairing an external Python repository at the pinned revision. Read the issue and the supplied pinned source excerpt. Return a patch proposal for the allowed file only. Do not modify tests or any other file. The hidden tests are not provided; do not claim that a test ran or passed unless an execution artifact is supplied. The patch must target the observed regression and preserve existing behavior."
+  },
+  "payload_hash": "1353671dd6c86594dbdfb2bfc4defcaee3196239baad46aad1723d23d4dd954f",
+  "readiness": "PREPARED"
+}

@@ -1,0 +1,70 @@
+{
+  "revision": "2221398fc77cdffaad69db6ac615e6c8be661056",
+  "fixtures": [
+    {
+      "name": "m3c_trim_total",
+      "pinned": true,
+      "result": {
+        "returncode": 1,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n________________________ test_blank_values_are_ignored _________________________\n\n    def test_blank_values_are_ignored():\n>       assert total([' 12 ', '', '1,000']) == 1012\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_reproduction.py:4: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \napp.py:4: in total\n    return sum(parse_amount(item) for item in records)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\napp.py:4: in <genexpr>\n    return sum(parse_amount(item) for item in records)\n               ^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nvalue = ''\n\n    def parse_amount(value):\n        cleaned = value.strip()\n>       return int(cleaned.replace(',', ''))\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       ValueError: invalid literal for int() with base 10: ''\n\ncleaner.py:3: ValueError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_blank_values_are_ignored - ValueError...\n1 failed in 0.08s\n",
+        "security_blocked": false
+      },
+      "marker_found": true
+    },
+    {
+      "name": "m3c_window",
+      "pinned": true,
+      "result": {
+        "returncode": 1,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n______________________________ test_exact_window _______________________________\n\n    def test_exact_window():\n>       assert require_full_window([1, 2, 3], 3) == [6]\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\ntests/test_reproduction.py:4: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nvalues = [1, 2, 3], size = 3\n\n    def require_full_window(values, size):\n        windows = rolling_sum(values, size)\n        if any(len(values[i:i + size]) != size for i in range(len(windows))):\n>           raise IndexError('partial window')\nE           IndexError: partial window\n\napp.py:7: IndexError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_exact_window - IndexError: partial wi...\n1 failed in 0.06s\n",
+        "security_blocked": false
+      },
+      "marker_found": true
+    },
+    {
+      "name": "m3c_config",
+      "pinned": true,
+      "result": {
+        "returncode": 1,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n_____________________________ test_default_retries _____________________________\n\n    def test_default_retries():\n>       assert connect_options({}) == {'retries': 3, 'timeout': 5}\n               ^^^^^^^^^^^^^^^^^^^\n\ntests/test_reproduction.py:4: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nconfig = {}\n\n    def connect_options(config):\n>       retries = int(config['retries'])\n                      ^^^^^^^^^^^^^^^^^\nE       KeyError: 'retries'\n\napp.py:2: KeyError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_default_retries - KeyError: 'retries'\n1 failed in 0.10s\n",
+        "security_blocked": false
+      },
+      "marker_found": true
+    },
+    {
+      "name": "m3c_ambiguous",
+      "pinned": true,
+      "result": {
+        "returncode": 1,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": "F                                                                        [100%]\n=================================== FAILURES ===================================\n____________________________ test_bad_runtime_value ____________________________\n\n    def test_bad_runtime_value():\n>       load_number('red')\n\ntests/test_reproduction.py:4: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\ntext = 'red'\n\n    def load_number(text):\n>       return int(text)\n               ^^^^^^^^^\nE       ValueError: invalid literal for int() with base 10: 'red'\n\napp.py:2: ValueError\n=========================== short test summary info ============================\nFAILED tests/test_reproduction.py::test_bad_runtime_value - ValueError: inval...\n1 failed in 0.07s\n",
+        "security_blocked": false
+      },
+      "marker_found": true
+    },
+    {
+      "name": "m3c_negative",
+      "pinned": true,
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "environment_error": false,
+        "isolation": "docker",
+        "output": ".                                                                        [100%]\n1 passed in 0.07s\n",
+        "security_blocked": false
+      },
+      "marker_found": false
+    }
+  ]
+}

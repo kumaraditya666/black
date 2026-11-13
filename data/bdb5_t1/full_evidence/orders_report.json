@@ -1,0 +1,10 @@
+{
+  "anomaly": 2.6,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "pre",
+  "service": "orders",
+  "summary": "The telemetry data shows a sustained spike in the 'orders' service's metric value to 2.6, which is significantly higher than the baseline values observed earlier in the window (e.g., 1.333, 1.733, 2.0). This persistent elevation indicates a performance degradation or resource exhaustion specific to the 'orders' service. No logs are provided to correlate with this metric spike for a root cause analysis."
+}

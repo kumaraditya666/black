@@ -1,0 +1,10 @@
+{
+  "anomaly": 1.8,
+  "evidence_ids": [
+    ""
+  ],
+  "likely_upstream": false,
+  "pre_post": "pre",
+  "service": "payment",
+  "summary": "The telemetry data shows a significant drop in the metric value from 2.0 to 1.8 at timestamp 1732242576, which is outside the normal range observed in the rest of the window. This anomaly suggests a potential issue with the payment service. The fault class is NOT_ESTABLISHED as there is no specific evidence provided to pinpoint the exact cause of this drop."
+}

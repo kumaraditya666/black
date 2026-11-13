@@ -1,0 +1,144 @@
+{
+  "mode": "EXPLORATORY_LIVE_RUN_NOT_BENCHMARK",
+  "authorization": "EXPLORATORY_USER_AUTHORIZED_ONLY",
+  "independent_approval": false,
+  "approved": false,
+  "scored": false,
+  "case_id": "BDB5-R3",
+  "provider": "ollama-native",
+  "model": "qwen3.5:9b-q4_K_M",
+  "base_url": "http://localhost:11434",
+  "context_length": 8192,
+  "max_output_tokens": 2048,
+  "prepared_path": "C:\\Users\\Adi\\Documents\\ChatGPT\\black\\data\\bdb5_handoff\\bdb5_r3_prepared.json",
+  "payload_hash": "041ba6157049aa3df9d78a1cd83d0eb168e94e71a8afaa04b7f614da5c50e37f",
+  "gate": {
+    "kind": "EXPLORATORY_NOT_APPROVAL",
+    "hash": "418c93f1712dd088736de4869b36bd69bc43555df8136bc605f047c08316c976",
+    "real_approval": false
+  },
+  "outcome": "RUN_READY_FOR_REVIEW",
+  "provider_calls": 1,
+  "http_status": 200,
+  "provider_run": {
+    "mode": "REAL_CASE_PROVIDER_ENVELOPE",
+    "case_id": "BDB5-R3",
+    "status": "PROVIDER_RESULT_READY_FOR_REVIEW",
+    "provider_calls": 1,
+    "scored": false,
+    "approved": false,
+    "request_hash": "82e530e38057f27a46bd1550659577fed72006bb912f5d252dec25ef8dba60e8",
+    "response_hash": "c792c3a0947be3a076fe9d204d3476c6e503c6f98aa3787cef951b80c0aed2fc",
+    "usage": {
+      "input_tokens": 2404,
+      "output_tokens": 228,
+      "estimated_cost": null
+    },
+    "result_hash": "e96496ca04f82fe280f3ec5eb1fc4c1eabb3c2988bee6ce0e373dce8d616c183",
+    "model_visible_only": true
+  },
+  "runner": {
+    "mode": "REAL_CASE_RUN_ENVELOPE",
+    "case_id": "BDB5-R3",
+    "status": "RUN_READY_FOR_REVIEW",
+    "approved": false,
+    "scored": false,
+    "provider_calls": 0,
+    "responder_invocations": 1,
+    "model_visible_keys": [
+      "case_id",
+      "schema_version",
+      "task_instructions",
+      "evidence",
+      "candidate_inventory",
+      "source_revision",
+      "artifact_hashes"
+    ],
+    "packet_review": {
+      "mode": "REAL_CASE_PACKET_REVIEW_ONLY",
+      "case_id": "BDB5-R3",
+      "status": "REVIEW_PASSED",
+      "approved": false,
+      "model_calls": 0,
+      "checks": {
+        "evaluator_object": true,
+        "known_case": true,
+        "manifest_case_matches": true,
+        "manifest_not_synthetic": true,
+        "manifest_present": true,
+        "manifest_readiness": true,
+        "manifest_validation_clean": true,
+        "mode": true,
+        "no_forbidden_keys": true,
+        "no_manifest_in_visible": true,
+        "no_model_calls": true,
+        "no_private_paths": true,
+        "no_top_level_manifest": true,
+        "packet_case_matches": true,
+        "packet_revision_matches": true,
+        "packet_schema": true,
+        "packet_validation_clean": true,
+        "packet_validation_present": true,
+        "payload_hash": true,
+        "preparation_validation_empty": true,
+        "prepared_not_approved": true,
+        "r3_issue_evidence": true,
+        "r3_source_evidence": true,
+        "r3_source_frame": true,
+        "r3_source_id": true,
+        "r3_source_status": true,
+        "visible_keys": true,
+        "visible_packet_object": true
+      },
+      "issues": []
+    },
+    "validation_issues": [],
+    "result_hash": "e96496ca04f82fe280f3ec5eb1fc4c1eabb3c2988bee6ce0e373dce8d616c183"
+  },
+  "result": {
+    "case_id": "BDB5-R3",
+    "claims": [
+      {
+        "category": "OBSERVATION",
+        "text": "The issue report describes a bug where HttpResponse.content returns a memoryview object instead of bytes when initialized with a memoryview in PostgreSQL, while working correctly in SQLite. The provided source excerpt shows the make_bytes function handling bytes and str types but does not show logic to handle memoryview objects.",
+        "evidence_ids": [
+          "issue:1",
+          "source:1"
+        ],
+        "material": true,
+        "confidence": null,
+        "uncertainty": null,
+        "asserts_execution": false
+      }
+    ],
+    "service_ranked": [],
+    "fault_class": null,
+    "predicted_files": [],
+    "predicted_function": null,
+    "predicted_line": null,
+    "predicted_mechanism": null,
+    "mechanism_evidence_ids": [],
+    "l1_causal_status": "NOT_ASSESSED",
+    "l2_causal_status": "NOT_ESTABLISHED",
+    "abstention": {
+      "scope": "APPLICATION_SOURCE",
+      "reason": "The evidence does not establish an application-source cause.",
+      "missing_evidence": [
+        "application stack trace"
+      ],
+      "source_not_established": false,
+      "application_source_not_established": true
+    },
+    "patch": null,
+    "test_executions": [],
+    "claimed_source_revision": null
+  },
+  "contract": {
+    "passed": true,
+    "codes": [],
+    "details": []
+  },
+  "error": null,
+  "raw_response_path": null,
+  "result_path": "C:\\Users\\Adi\\Documents\\ChatGPT\\black\\data\\bdb5_exploratory\\bdb5_r3_exploratory_result.json"
+}

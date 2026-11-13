@@ -1,0 +1,165 @@
+{
+  "fixtures": [
+    {
+      "name": "m3c_trim_total",
+      "approved_for_m3a": true,
+      "description": "Frozen M3C locally authored trusted fixture",
+      "expected_behavior": "total must ignore blank/whitespace entries and sum other integer strings",
+      "files": {
+        "app.py": "204ffbf097bddec08a33c7a5de56b979fa382d27adb97842a33bf0880f63353b",
+        "cleaner.py": "43de37263161192ed60099f7301a230f451650e9c6646b9ed312b0de4d7cffc5",
+        "tests/test_reproduction.py": "1ea45f4ac05855ecbc042998eb73c2ac818308a860a59ef6a1b99a6d2c593186",
+        "tests/test_regression.py": "52cee2c07319ebfb282580283fcec8fa361197624ab48ef760c24c5977d0ded1",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "cleaner.py"
+      ],
+      "event": {
+        "exception_type": "ValueError",
+        "message": "invalid literal for int() with base 10: ''",
+        "frame": {
+          "path": "fixtures/repair/m3c_trim_total/cleaner.py",
+          "line": 3,
+          "function": "parse_amount"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_blank_values_are_ignored",
+        "failure_marker": "ValueError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m3c_window",
+      "approved_for_m3a": true,
+      "description": "Frozen M3C locally authored trusted fixture",
+      "expected_behavior": "return only full windows with correct sums",
+      "files": {
+        "app.py": "0c0935232272ca7e33a3473c7e064a5fcaf2765c2372cda8f1b8554e2ab8fa37",
+        "tests/test_reproduction.py": "a1bfbcbc4d0fce594de0ade447f827e655569df407c5a3fd96ca0fff78512c70",
+        "tests/test_regression.py": "67ae3483c1dcc16404044dc74d8f2680e7f7d6e6b2670e456480f674bc35fd3d",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "IndexError",
+        "message": "partial window",
+        "frame": {
+          "path": "fixtures/repair/m3c_window/app.py",
+          "line": 7,
+          "function": "require_full_window"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_exact_window",
+        "failure_marker": "IndexError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m3c_config",
+      "approved_for_m3a": true,
+      "description": "Frozen M3C locally authored trusted fixture",
+      "expected_behavior": "missing retries defaults to 3 while preserving explicit zero and timeout",
+      "files": {
+        "app.py": "0f8b60c6fba88dbf4427777564b65d48022f9f8261d3e9149d455f2053dc19b9",
+        "tests/test_reproduction.py": "3ef878145bc1329597174667e17d2ab6bac221134abc6d37e98ee154815f5694",
+        "tests/test_regression.py": "71d6c6dbbf0a75725b96dcf01084cab9307e906cc046afed8a4294c3c362857c",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "KeyError",
+        "message": "'retries'",
+        "frame": {
+          "path": "fixtures/repair/m3c_config/app.py",
+          "line": 2,
+          "function": "connect_options"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_default_retries",
+        "failure_marker": "KeyError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m3c_ambiguous",
+      "approved_for_m3a": true,
+      "description": "Frozen M3C locally authored trusted fixture",
+      "expected_behavior": "invalid input may originate from multiple upstream sources; do not infer which",
+      "files": {
+        "app.py": "93981247d80d55d42e3f0193a3644438feedec5f87bb9e31af61773372a1e293",
+        "tests/test_reproduction.py": "3107062bdb0637e54d5b6823c8df79905713698391a34cf87af8e3a5caeceaa7",
+        "tests/test_regression.py": "f2725fdadcc3bfe9e2f02e20b63f283549e1f463430d4e539d3da3d34ea4ce4c",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "ValueError",
+        "message": "invalid literal for int() with base 10: 'red'",
+        "frame": {
+          "path": "fixtures/repair/m3c_ambiguous/app.py",
+          "line": 2,
+          "function": "load_number"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_bad_runtime_value",
+        "failure_marker": "ValueError",
+        "reproducible": true
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    },
+    {
+      "name": "m3c_negative",
+      "approved_for_m3a": true,
+      "description": "Frozen M3C locally authored trusted fixture",
+      "expected_behavior": "empty input returns None and nonempty input returns first item",
+      "files": {
+        "app.py": "e08b232d3fa7751e6d80b4f24cb0090963bb9c97345e528300875ecedf6b4608",
+        "tests/test_reproduction.py": "1290a41d7656628111b5143dd11fe950388feab4b84a7bc45e3e56233fa39012",
+        "tests/test_regression.py": "480ea2dcd80347345bd68362ebfc19bebad3c69398b5f9225aa2dc9d2d9fc2f6",
+        "conftest.py": "15bb29f51370f3e55cc795c1bf3ea658d865d12ef37d2feb70b0d99f07b84f2e"
+      },
+      "allowed_files": [
+        "app.py"
+      ],
+      "event": {
+        "exception_type": "IndexError",
+        "message": "list index out of range",
+        "frame": {
+          "path": "fixtures/repair/m3c_negative/app.py",
+          "line": 2,
+          "function": "first_or_none"
+        }
+      },
+      "reproduction": {
+        "test": "tests/test_reproduction.py::test_empty_list",
+        "failure_marker": "IndexError",
+        "reproducible": false
+      },
+      "regression": {
+        "test": "tests/test_regression.py"
+      }
+    }
+  ]
+}
