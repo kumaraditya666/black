@@ -17,6 +17,8 @@ from fastapi import FastAPI
 
 LOGGER = logging.getLogger('blackbox.capture')
 LOOPBACK_HOSTS = {'127.0.0.1', 'localhost', '::1'}
+EXCLUDED_PARTS = {'.venv', 'venv', 'site-packages', 'node_modules', '.git', '__pycache__'}
+THIS_FILE = Path(__file__).resolve()
 
 
 def _repo_path(repo: str | Path | None) -> Path:
@@ -57,8 +59,13 @@ def _relative_frames(exc: BaseException, repo: Path) -> list[dict[str, Any]]:
     frames: list[dict[str, Any]] = []
     for frame in traceback.extract_tb(exc.__traceback__):
         try:
-            relative = Path(frame.filename).resolve().relative_to(repo).as_posix()
+            absolute = Path(frame.filename).resolve()
+            relative = absolute.relative_to(repo).as_posix()
         except (OSError, ValueError):
+            continue
+        # A local virtualenv can live inside the repository. Its packages are
+        # dependencies, not application source, and must not become evidence.
+        if absolute == THIS_FILE or any(part.lower() in EXCLUDED_PARTS for part in absolute.parts):
             continue
         frames.append({'path': relative, 'line': frame.lineno, 'function': frame.name})
     return frames

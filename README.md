@@ -57,7 +57,7 @@ $env:PYTHONPATH = 'C:\Users\Adi\Documents\ChatGPT\black'
 .\.venv\Scripts\python -m uvicorn your_app:app --host 127.0.0.1 --port 8100
 ```
 
-The middleware captures unhandled exceptions only. It always re-raises the original error, skips traceback frames outside the configured repository, and logs capture failures without changing the application response. The endpoint must be loopback and the repository must contain the full commit that produced the error. Handled `HTTPException` responses are not failures and are not captured.
+The middleware captures unhandled exceptions only. It always re-raises the original error, skips dependency, virtualenv and capture-internal frames, and logs capture failures without changing the application response. The endpoint must be loopback and the repository must contain the full commit that produced the error. Handled `HTTPException` responses are not failures and are not captured.
 
 The included demo exercises the full path:
 

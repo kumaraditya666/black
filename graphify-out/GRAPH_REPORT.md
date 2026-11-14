@@ -1,17 +1,17 @@
 # Graph Report - black  (2026-11-14)
 
 ## Corpus Check
-- 251 files · ~206,938 words
+- 252 files · ~208,524 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 6 file(s) not represented in the graph (top: (none) 2, .log 2, .example 1)
+- Unclassified: 9 file(s) not represented in the graph (top: .log 4, (none) 2, .example 1)
 
 ## Summary
-- 2254 nodes · 6561 edges · 199 communities (80 shown, 119 thin omitted)
+- 2255 nodes · 6563 edges · 195 communities (77 shown, 118 thin omitted)
 - Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 635 edges (avg confidence: 0.92)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `734ead11`
+- Built from commit: `0aeca1ff`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -22,7 +22,8 @@
 - test_m4b3_ledger.py
 - execution.py
 - test_approval_scoring.py
-- bdb5/__init__.py
+- M4B3OllamaDispatcher
+- pathlib
 - Milestone 4B.1 — tool-use feasibility
 - AI engineering design
 - test_repair.py
@@ -30,7 +31,7 @@
 - 4. Tests
 - MalformedAbstention
 - 01_RESEARCH_MASTER_PLAN.md
-- m4b3_ledger.py
+- RunLock
 - test_evidence_facts.py
 - configuration.py
 - input_handling.py
@@ -43,7 +44,7 @@
 - Quality and evaluation plan
 - CaseId
 - Codex handoff: repair evaluation
-- InvestigationResult
+- models.py
 - 42_M4A_BLACKBOX_GAP_ANALYSIS.md
 - Milestone 4A — experiment designs
 - test_ollama_adapter_sends_bounded_schema_and_adaptive_budget
@@ -85,11 +86,11 @@
 - investigate.py
 - HttpResponseBase
 - field_validator
-- capture.py
-- manifest_fingerprint
+- test_capture.py
+- LedgerBlocked
 - EvidencePacket
-- deadline_worker.py
-- cli.py
+- .analyze
+- Milestone 4A — competitor architectures
 - Milestone 2.8 handoff completion
 - test_real_review.py
 - Milestone 3E — semantic reasoning and safe abstention
@@ -103,25 +104,22 @@
 - evaluate_m4b3.py
 - _ReceiverHandler
 - Milestone 2.9.1 — bounded model schema and adaptive output budget, 2026-11-04
-- issue_cases.py
+- digest
 - _ResponseMutationTransport
 - .__init__
 - BLACKBOX â€” local evidence and AI investigation
 - Milestone 2.8 — deterministic evidence layer and abstention reliability, 2026-11-04
-- _retry_inputs
+- Milestone 4B failure analysis and next test
 - test_ollama_rejects_truncated_completion
 - Milestone 3A — restricted Proof-of-Fix, 2026-11-04
-- total
+- test_fake_cli_defaults_lock_beside_temporary_ledger
 - ._content_type_for_repr
 - ._convert_to_charset
-- json
-- fastapi_capture_demo.py
+- providers.py
+- capture.py
 - 3. Mechanical results
 - Job
-- Milestone 3B.1 — Docker lifecycle validation
 - division_by_zero/tests/test_regression.py
-- Milestone 4B paired evaluation
-- CauseProvider
 - snapshot
 
 ## God Nodes (most connected - your core abstractions)
@@ -143,59 +141,63 @@
   research/30_M3B_DOCKER_VALIDATION.md → blackbox/repair/execution.py
 - `Pinned fixture checks` --references--> `run_tests()`  [INFERRED]
   research/30_M3B_DOCKER_VALIDATION.md → blackbox/repair/execution.py
-- `Primary results` --references--> `finish()`  [INFERRED]
-  research/46_M4B_PAIRED_EVALUATION.md → blackbox/repair/pipeline.py
-- `Preregistration, before live 4B.1 model calls` --references--> `finish()`  [INFERRED]
-  research/48_M4B1_TOOL_USE_FEASIBILITY.md → blackbox/repair/pipeline.py
+- `Milestone 2.9 — repetition and stability, 2026-11-04` --references--> `evidence_hash()`  [INFERRED]
+  EVALUATION.md → blackbox/investigator.py
+- `AI investigation (opt-in)` --references--> `evidence_hash()`  [INFERRED]
+  README.md → blackbox/investigator.py
 
 ## Import Cycles
 - None detected.
 
-## Communities (199 total, 119 thin omitted)
+## Communities (195 total, 118 thin omitted)
 
 ### Community 0 - "pipeline.py"
-Cohesion: 0.16
-Nodes (8): build_prompt(), parse_proposal(), PatchFormatError, PatchRejected, validate_and_apply(), PatchChange, PatchProposal, Proposed reviewable implementation boundary
+Cohesion: 0.18
+Nodes (7): build_prompt(), parse_proposal(), PatchFormatError, PatchRejected, validate_and_apply(), PatchChange, PatchProposal
 
 ### Community 1 - "LedgerBlocked"
 Cohesion: 0.08
-Nodes (23): canonical_bytes(), _completion_derivation_sha256(), _derive_completion_from_response(), DispatchPermit, DispatchResponseReceipt, EvaluationState, _event_hash(), FailureEvidence (+15 more)
+Nodes (17): _completion_derivation_sha256(), _derive_completion_from_response(), DispatchPermit, DispatchResponseReceipt, EvaluationState, FailureEvidence, _is_hash(), Ledger (+9 more)
 
 ### Community 2 - "test_engine.py"
 Cohesion: 0.08
 Nodes (33): git(), plan(), source(), validate_response(), validate_template(), verify_local_model(), verify_model_config(), Attribution (+25 more)
 
 ### Community 3 - "test_m4b3_ledger.py"
-Cohesion: 0.08
-Nodes (63): M4B3OllamaDispatcher, PreparedRequest, TransportOutcome, execute(), dispatcher(), _completion_metadata(), _completion_result(), _eval_id() (+55 more)
+Cohesion: 0.10
+Nodes (52): execute(), _eval_id(), FakeReceiver, _fresh_process_summary(), _history(), _make_experiment(), _open_fake_session(), _open_session() (+44 more)
 
 ### Community 4 - "execution.py"
-Cohesion: 0.10
-Nodes (28): detect_isolation(), _docker(), _docker_command(), _environment(), ExecutionResult, _inspect_owned(), Isolation, _journal_event() (+20 more)
+Cohesion: 0.11
+Nodes (25): _docker(), _docker_command(), _environment(), ExecutionResult, _inspect_owned(), Isolation, _journal_event(), recover_container() (+17 more)
 
 ### Community 5 - "test_approval_scoring.py"
 Cohesion: 0.07
-Nodes (31): _approval_base(), ApprovalError, ApprovalRecord, build_approval(), _manifest_and_packet(), ReviewerSignoff, validate_approval(), label_vault_hash() (+23 more)
+Nodes (32): _approval_base(), ApprovalError, ApprovalRecord, build_approval(), _manifest_and_packet(), ReviewerSignoff, validate_approval(), label_vault_hash() (+24 more)
 
-### Community 6 - "bdb5/__init__.py"
-Cohesion: 0.18
-Nodes (11): _ensure_evaluable(), evaluate_suite(), BDB5Error, BlockedCaseError, ManifestValidationError, PacketValidationError, UnsupportedModeError, CaseScore (+3 more)
+### Community 6 - "M4B3OllamaDispatcher"
+Cohesion: 0.12
+Nodes (19): M4B3OllamaDispatcher, PreparedRequest, TransportOutcome, dispatcher(), _completion_metadata(), _completion_result(), _prepare_dispatch(), test_completion_is_rederived_from_receipt_and_schema() (+11 more)
+
+### Community 8 - "pathlib"
+Cohesion: 0.07
+Nodes (6): _BasicLimits, _ExtendedLimits, _IOCounters, Claim, Hypothesis, InvestigationRequest
 
 ### Community 9 - "Milestone 4B.1 — tool-use feasibility"
 Cohesion: 0.14
 Nodes (14): calculate(), relay(), run(), choose(), setup(), final_item(), prepare(), convert() (+6 more)
 
 ### Community 10 - "AI engineering design"
-Cohesion: 0.14
-Nodes (19): ProviderResult, test_abstention_citing_recorded_unresolved_frame_line_is_accepted(), analyze(), test_abstention_pasting_missing_evidence_text_is_accepted(), analyze(), test_fabricated_hypothesis_reference_persists_failure(), analyze(), test_fake_file_reference_is_rejected() (+11 more)
+Cohesion: 0.11
+Nodes (25): ProviderResult, test_abstention_citing_recorded_unresolved_frame_line_is_accepted(), analyze(), test_abstention_pasting_missing_evidence_text_is_accepted(), analyze(), test_fake_file_reference_is_rejected(), generate(), test_injected_text_is_not_promoted_to_verified_facts() (+17 more)
 
 ### Community 11 - "test_repair.py"
-Cohesion: 0.09
-Nodes (14): 4. Tests executed, MockProvider, setup(), test_abstention_requires_missing_information_and_no_primary_hypothesis(), test_completed_result_marks_model_diagnosis_source(), test_invalid_events(), test_invalid_path(), test_investigation_caching_and_new_evidence() (+6 more)
+Cohesion: 0.10
+Nodes (12): MockProvider, setup(), test_abstention_requires_missing_information_and_no_primary_hypothesis(), test_completed_result_marks_model_diagnosis_source(), test_invalid_events(), test_invalid_path(), test_investigation_caching_and_new_evidence(), test_mocked_scenarios() (+4 more)
 
 ### Community 12 - "investigate"
-Cohesion: 0.09
-Nodes (17): create_app(), context(), report(), start_investigation(), collect(), evidence_hash(), fallback_findings(), investigate() (+9 more)
+Cohesion: 0.08
+Nodes (16): create_app(), context(), start_investigation(), collect(), evidence_hash(), fallback_findings(), investigate(), _summed_usage() (+8 more)
 
 ### Community 13 - "4. Tests"
 Cohesion: 0.22
@@ -205,9 +207,9 @@ Nodes (9): 4. Tests, test_model_facing_schema_bounds_observation_and_step_lists(
 Cohesion: 0.12
 Nodes (8): Tool readiness, Architecture hypotheses, Dependency graphs and limits, Proposed system architecture, Technology feasibility and costs, Development roadmap — proposed, Source index, Open questions and risks
 
-### Community 16 - "m4b3_ledger.py"
-Cohesion: 0.06
-Nodes (29): _absolute_path(), CommitAmbiguous, _configure(), _file_identity_from_stat(), _insert_event(), LedgerError, LockUnavailable, _PermitUse (+21 more)
+### Community 16 - "RunLock"
+Cohesion: 0.13
+Nodes (8): _absolute_path(), _file_identity_from_stat(), LockUnavailable, RunLock, _sqlite_ro_uri(), _sqlite_rw_uri(), test_forked_child_cannot_reuse_or_release_parent_run_lock(), test_lock_ownership_detects_path_replacement_and_database_identity()
 
 ### Community 17 - "test_evidence_facts.py"
 Cohesion: 0.21
@@ -215,19 +217,19 @@ Nodes (20): Findings, missing_evidence_references(), normalize_abstention(), _re
 
 ### Community 18 - "configuration.py"
 Cohesion: 0.12
-Nodes (10): Engine and image, Existing runner and measured controls, Milestone 3B — Docker isolation validation, Pinned fixture checks, Project regression and remaining work, Real Proof-of-Fix, Milestone 4B: bounded retrieval experiment, Milestone 4B failure analysis and next test (+2 more)
+Nodes (12): Engine and image, Existing runner and measured controls, Milestone 3B — Docker isolation validation, Pinned fixture checks, Project regression and remaining work, Real Proof-of-Fix, Milestone 4B: bounded retrieval experiment, Cost and timing (+4 more)
 
 ### Community 19 - "input_handling.py"
-Cohesion: 0.19
-Nodes (10): require_full_window(), rolling_sum(), Baseline, freeze and protocol, Ground truth and measured primary runs, Milestone 3C — Complex debugging evaluation, Post-evaluation regression, Recommendation, Reproducibility and limits (+2 more)
+Cohesion: 0.12
+Nodes (18): total(), parse_amount(), require_full_window(), rolling_sum(), Baseline, freeze and protocol, Ground truth and measured primary runs, Milestone 3C — Complex debugging evaluation, Post-evaluation regression (+10 more)
 
 ### Community 20 - "buggy_apps/README.md"
 Cohesion: 0.18
 Nodes (11): 10. Limits, 11. Recommended targeted fixes (not implemented), 12. Readiness for a restricted Proof-of-Fix prototype, 1. Objective and method, 2. Repository and regression state, 4. Deterministic facts versus model hypotheses, 5. Contradictory explanations for identical evidence, 7. Failure mode analysis (+3 more)
 
 ### Community 21 - "fixtures.py"
-Cohesion: 0.13
-Nodes (24): Eligibility, evaluate(), evidence_reference_errors(), hypothesis_digest(), content_pinned(), fixture_path(), _git(), load_registry() (+16 more)
+Cohesion: 0.09
+Nodes (32): configured_provider(), Eligibility, evaluate(), evidence_reference_errors(), hypothesis_digest(), detect_isolation(), content_pinned(), fixture_path() (+24 more)
 
 ### Community 22 - "Investigation evaluation record"
 Cohesion: 0.14
@@ -238,7 +240,7 @@ Cohesion: 0.14
 Nodes (13): 1. Confirmed failure mechanism, 2. Schema fix, 3. Adaptive output budget, 5. Revalidation protocol, 6. Results, 7. Quality gate, 8. Remaining issues, 9. Readiness for a restricted Proof-of-Fix prototype (+5 more)
 
 ### Community 24 - "pytest"
-Cohesion: 0.13
+Cohesion: 0.11
 Nodes (7): test_invalid_text_is_rejected(), test_none_is_rejected(), test_none_is_rejected_as_invalid_argument(), test_average_rejects_empty_input(), test_case(), test_bad_input(), test_average_rejects_empty_input()
 
 ### Community 25 - "Open-source architecture research"
@@ -250,20 +252,20 @@ Cohesion: 0.20
 Nodes (8): Baseline and diagnosis of the 3E failure, Changes, Controlled comparison and interpretation, Frozen new cases and ground truth, Milestone 3F — evidence-grounded causal reasoning, Remaining risks and next work, Final validation iteration (registered after exploratory run, before this iteration), Milestone 3F preregistration
 
 ### Community 27 - "CaseId"
-Cohesion: 0.14
-Nodes (46): Abstention, AbstentionScope, CaseCategory, CaseId, CausalStatus, Claim, ClaimCategory, EvidenceItem (+38 more)
+Cohesion: 0.12
+Nodes (36): build_parser(), _default_output(), _emit(), main(), evaluate_suite(), CaseCategory, CaseId, EvidenceItem (+28 more)
 
 ### Community 28 - "Codex handoff: repair evaluation"
 Cohesion: 0.33
 Nodes (5): Baseline and environment, Codex handoff: repair evaluation, Fresh live run, Handoff and provenance, Independent fixture audit
 
-### Community 29 - "InvestigationResult"
-Cohesion: 0.26
-Nodes (13): InvestigationResult, _citation_audit(), _explanations(), _has_app_claim(), _has_harness_claim(), _has_source_claim(), _has_valid_evidence(), _is_test_path() (+5 more)
+### Community 29 - "models.py"
+Cohesion: 0.14
+Nodes (34): Abstention, AbstentionScope, CaseScore, CausalStatus, Claim, ClaimCategory, EvaluationMode, InvestigationResult (+26 more)
 
 ### Community 30 - "42_M4A_BLACKBOX_GAP_ANALYSIS.md"
 Cohesion: 0.16
-Nodes (10): Milestone 4A — competitor architectures, OpenHands repository boundary, OpenHands / Software Agent SDK, Sentry Seer / Autofix, SWE-agent, Synthesis, Differences worth testing, Gap matrix (+2 more)
+Nodes (9): Changes, Engine, image and live integration tests, Genuine model repair, Milestone 3B.1 — Docker lifecycle validation, Remaining limitations, Differences worth testing, Gap matrix, Milestone 4A — BLACKBOX gap analysis (+1 more)
 
 ### Community 31 - "Milestone 4A — experiment designs"
 Cohesion: 0.22
@@ -282,12 +284,12 @@ Cohesion: 0.11
 Nodes (18): find_index(), 10. Deterministic integration results, 11. What remains unverified, 12. Is Milestone 3B justified?, 13. Not built, 1. What this milestone is, 2. Preserved baseline, 3. Eligibility gate (+10 more)
 
 ### Community 35 - "test_repair.py"
-Cohesion: 0.21
+Cohesion: 0.20
 Nodes (15): approval_for(), attempt_for(), FakeStore, make_case(), reasons(), test_approval_is_idempotent_and_review_cannot_change_status(), test_gate_blocks_failed_and_abstained_investigations(), test_gate_blocks_missing_revision_unresolved_frame_and_bad_references() (+7 more)
 
 ### Community 36 - "test_semantic_verification.py"
 Cohesion: 0.11
-Nodes (19): clean_observations(), redact(), _git(), _safe_path(), assess_execution(), assess_snapshot(), add(), _check_source() (+11 more)
+Nodes (21): report(), clean_observations(), sanitize_output(), validate_frame_narrative(), redact(), _git(), _safe_path(), assess_snapshot() (+13 more)
 
 ### Community 37 - "test_telemetry.py"
 Cohesion: 0.09
@@ -295,7 +297,7 @@ Nodes (29): build_t1_payload(), _evidence_hash(), load_inventory(), make_log_evi
 
 ### Community 38 - "OpenAICompatibleProvider"
 Cohesion: 0.06
-Nodes (47): load_approval(), _content(), _finish_reason(), FullPacketError, FullPacketRun, FullPacketRunner, _provider_input_tokens(), _usage() (+39 more)
+Nodes (50): load_approval(), _content(), _finish_reason(), FullPacketError, FullPacketRun, FullPacketRunner, _provider_input_tokens(), _usage() (+42 more)
 
 ### Community 39 - "test_ollama_adapter_sends_bounded_schema_and_adaptive_budget"
 Cohesion: 0.33
@@ -306,16 +308,16 @@ Cohesion: 0.33
 Nodes (5): AI engineering design, Investigation, Orchestration alternatives, Repair and verification, Repository intelligence
 
 ### Community 41 - "extract_facts"
-Cohesion: 0.14
-Nodes (14): AtomicClaim, check_atomic_claim(), _division_denominator(), extract_facts(), add(), provenance(), ProvenanceEntry, validate_frame_narrative() (+6 more)
+Cohesion: 0.16
+Nodes (13): AtomicClaim, check_atomic_claim(), _division_denominator(), extract_facts(), add(), provenance(), ProvenanceEntry, 1. Original Codex state (+5 more)
 
 ### Community 42 - "test_agent_retrieval.py"
 Cohesion: 0.09
-Nodes (24): Dispatcher, _FinalProvider, investigate_with_retrieval(), _investigate_with_retrieval(), Request, RetrievalError, output_budget(), get_fixture() (+16 more)
+Nodes (21): Dispatcher, _investigate_with_retrieval(), Request, RetrievalError, main(), get_fixture(), UNDERSTAND WHAT WE JUST BUILT, oracle_excerpt() (+13 more)
 
 ### Community 45 - "real_cases.py"
-Cohesion: 0.08
-Nodes (35): GroundTruth, Readiness, _artifacts(), _bounded_excerpt(), CiCaseConfig, CiFailure, CiLog, ensure_not_approved() (+27 more)
+Cohesion: 0.11
+Nodes (28): Readiness, _artifacts(), _bounded_excerpt(), CiFailure, CiLog, ensure_not_approved(), _is_test_path(), _normalise_path() (+20 more)
 
 ### Community 50 - "12_COMPETITIVE_GAP_ANALYSIS.md"
 Cohesion: 0.50
@@ -338,16 +340,16 @@ Cohesion: 0.50
 Nodes (3): ₹0 development MVP plan, Exit checks, Scope and dependency order
 
 ### Community 102 - "repair_cli.py"
-Cohesion: 0.14
-Nodes (16): ProviderError, main(), command_approve(), command_attempt(), command_eligibility(), command_list(), command_review(), command_show() (+8 more)
+Cohesion: 0.16
+Nodes (15): _dedupe(), main(), main(), command_approve(), command_attempt(), command_eligibility(), command_list(), command_review() (+7 more)
 
 ### Community 139 - "Store"
-Cohesion: 0.10
-Nodes (16): Provider, Event, Frame, ConflictError, Store, head(), main(), make_incident() (+8 more)
+Cohesion: 0.11
+Nodes (19): investigate_with_retrieval(), run_contained(), Provider, load_registry(), Event, Frame, ConflictError, Boundary and security checks (+11 more)
 
 ### Community 141 - "Milestone 3D — repository intelligence and paired evaluation"
-Cohesion: 0.22
-Nodes (7): Milestone 3D paired experiment preregistration, Cost and limitations, Design and data flow, Milestone 3D — repository intelligence and paired evaluation, Pre-registered paired protocol, Primary outcomes, Testing and next milestone
+Cohesion: 0.25
+Nodes (6): Milestone 3D paired experiment preregistration, Cost and limitations, Milestone 3D — repository intelligence and paired evaluation, Pre-registered paired protocol, Primary outcomes, Testing and next milestone
 
 ### Community 142 - "retrieve"
 Cohesion: 0.15
@@ -357,33 +359,29 @@ Nodes (19): _calls(), _LimitedNotes, retrieve(), frame(), repository(), commit()
 Cohesion: 0.17
 Nodes (13): _apply_patch(), build_evaluator_workspace(), build_workspaces(), changed_files_from_patch(), _copy_worktree(), ExternalRepairError, ExternalRepairSpec, _git() (+5 more)
 
-### Community 145 - "investigate.py"
-Cohesion: 0.21
-Nodes (4): build_parser(), main(), main(), request()
-
 ### Community 147 - "field_validator"
-Cohesion: 0.08
-Nodes (4): CaseManifest, _relative_path(), _safe_id(), _unique()
+Cohesion: 0.07
+Nodes (6): CaseManifest, GroundTruth, PatchRecord, _relative_path(), _safe_id(), _unique()
 
-### Community 148 - "capture.py"
+### Community 148 - "test_capture.py"
+Cohesion: 0.18
+Nodes (9): build_event(), _relative_frames(), _raise_from_repo(), _raise_outside(), repo(), test_build_event_ignores_dependency_frames_inside_the_repository(), test_build_event_maps_only_repository_frames(), test_build_event_rejects_an_exception_without_repository_frames() (+1 more)
+
+### Community 149 - "LedgerBlocked"
 Cohesion: 0.12
-Nodes (16): _api_url(), build_event(), _head_commit(), install_blackbox(), capture_exception(), _relative_frames(), _repo_path(), send_event() (+8 more)
-
-### Community 149 - "manifest_fingerprint"
-Cohesion: 0.15
-Nodes (15): manifest_fingerprint(), _open_fake_session_for_tests(), _approval_manifest(), _build_run_manifest(), _open_fake_session(), _rehash_events(), _test_approval_verifier(), test_individual_fingerprint_inputs_are_resume_blocking() (+7 more)
+Nodes (26): LedgerBlocked, _validate_wal_sidecar(), initialize_experiment(), _approval_manifest(), _build_run_manifest(), _seed_attempt(), test_approval_verification_fails_closed_and_test_verifier_is_isolated(), _test_approval_verifier() (+18 more)
 
 ### Community 150 - "EvidencePacket"
-Cohesion: 0.14
-Nodes (24): evaluate_case(), EvidencePacket, ValidationIssue, ValidationReport, ValidationSeverity, issue(), _scan_public_payload(), _strings() (+16 more)
+Cohesion: 0.11
+Nodes (28): _ensure_evaluable(), evaluate_case(), BDB5Error, BlockedCaseError, ManifestValidationError, PacketValidationError, UnsupportedModeError, EvidencePacket (+20 more)
 
-### Community 151 - "deadline_worker.py"
-Cohesion: 0.18
-Nodes (6): _BasicLimits, _ExtendedLimits, _IOCounters, run_contained(), Boundary and security checks, test_user_cancellation_terminates_worker()
+### Community 151 - ".analyze"
+Cohesion: 0.22
+Nodes (8): 4. Tests executed, test_fabricated_hypothesis_reference_persists_failure(), analyze(), test_likely_cause_requires_resolved_source_and_event(), analyze(), test_model_cannot_assert_verified_root_cause(), analyze(), test_unverifiable_observation_is_discarded_not_fatal()
 
-### Community 152 - "cli.py"
-Cohesion: 0.18
-Nodes (9): build_parser(), _default_output(), _emit(), main(), run_spec_checks(), self_test(), synthetic_case(), test_cli_synthetic_case_and_suite_are_read_only_and_classified() (+1 more)
+### Community 152 - "Milestone 4A — competitor architectures"
+Cohesion: 0.33
+Nodes (6): Milestone 4A — competitor architectures, OpenHands repository boundary, OpenHands / Software Agent SDK, Sentry Seer / Autofix, SWE-agent, Synthesis
 
 ### Community 153 - "Milestone 2.8 handoff completion"
 Cohesion: 0.33
@@ -406,12 +404,12 @@ Cohesion: 0.20
 Nodes (18): scenario(), score(), test_p1_incomplete_f2p_unexecuted_pass_and_regression_failure(), test_p1_invalid_scope_and_test_modification_are_rejected(), test_p1_patch_test_and_regression_dimensions(), test_r1_missing_reproduction_and_citation(), test_r1_patch_free_source_scoring_dimensions(), test_r1_unexecuted_pass_is_an_execution_overclaim() (+10 more)
 
 ### Community 158 - "response.py"
-Cohesion: 0.13
+Cohesion: 0.12
 Nodes (4): Http404, HttpResponsePermanentRedirect, HttpResponseRedirect, HttpResponseRedirectBase
 
 ### Community 160 - "bdb5/__init__.py"
-Cohesion: 0.10
-Nodes (23): _keys(), PacketReview, _registry_entry(), review_file(), review_payload(), _strings(), accept_prepared_result(), _case_objects() (+15 more)
+Cohesion: 0.08
+Nodes (26): _keys(), PacketReview, _registry_entry(), review_file(), review_payload(), _strings(), accept_prepared_result(), _case_objects() (+18 more)
 
 ### Community 161 - "HttpResponse"
 Cohesion: 0.14
@@ -422,16 +420,16 @@ Cohesion: 0.16
 Nodes (13): build_p1_payload(), check_patch_scope(), prepare_p1_case(), sha256_text(), build_parser(), main(), _payload(), test_p1_payload_is_prepared_and_review_passes() (+5 more)
 
 ### Community 163 - "evaluate_m4b3.py"
-Cohesion: 0.08
-Nodes (28): evaluation_id(), request_spec_hash(), M4B3TransportPhase, _assert_registered_session(), build_run_manifest(), digest(), _document_hash(), _execute_registered() (+20 more)
+Cohesion: 0.07
+Nodes (36): canonical_bytes(), CommitAmbiguous, _configure(), evaluation_id(), _event_hash(), _insert_event(), LedgerError, manifest_fingerprint() (+28 more)
 
 ### Community 165 - "Milestone 2.9.1 — bounded model schema and adaptive output budget, 2026-11-04"
 Cohesion: 0.33
 Nodes (6): Changes, Confirmed cause, Milestone 2.9.1 — bounded model schema and adaptive output budget, 2026-11-04, Readiness, Remaining issues, Revalidation
 
-### Community 166 - "issue_cases.py"
-Cohesion: 0.20
-Nodes (10): IssueCaseConfig, IssuePreparationError, prepare_issue_case(), PreparedIssueCase, _sha(), _source_excerpt(), _prepared(), _reviewers() (+2 more)
+### Community 166 - "digest"
+Cohesion: 0.13
+Nodes (15): IssueCaseConfig, IssuePreparationError, prepare_issue_case(), PreparedIssueCase, _sha(), _source_excerpt(), canonical_json(), digest() (+7 more)
 
 ### Community 169 - "BLACKBOX â€” local evidence and AI investigation"
 Cohesion: 0.29
@@ -441,55 +439,43 @@ Nodes (7): AI investigation (opt-in), BLACKBOX â€” local evidence and AI in
 Cohesion: 0.33
 Nodes (6): Continuation fixes (after the interrupted Codex state), Deterministic layer, Milestone 2.8 — deterministic evidence layer and abstention reliability, 2026-11-04, Not measured, Recorded failures, kept separate, Tests
 
-### Community 172 - "_retry_inputs"
-Cohesion: 0.18
-Nodes (11): _retry_inputs(), test_incomplete_abstention_is_not_promoted(), analyze(), test_malformed_retry_is_failure_not_abstention(), analyze(), test_missing_reference_gets_one_validated_retry_not_fabricated(), analyze(), test_unknown_reference_does_not_get_retry() (+3 more)
+### Community 172 - "Milestone 4B failure analysis and next test"
+Cohesion: 0.50
+Nodes (3): Milestone 4B failure analysis and next test, Most informative next test, Security and coverage status
 
 ### Community 174 - "Milestone 3A — restricted Proof-of-Fix, 2026-11-04"
 Cohesion: 0.33
 Nodes (6): Deterministic tests and isolation, Measured cost, Milestone 3A — restricted Proof-of-Fix, 2026-11-04, Result, The key inversion, Visible limitations
 
-### Community 175 - "total"
-Cohesion: 0.28
-Nodes (7): total(), parse_amount(), Decision, Evaluation gate, Milestone 4A — Codex implementation handoff, Start from the actual state, UNDERSTAND WHAT WE LEARNED
+### Community 181 - "providers.py"
+Cohesion: 0.12
+Nodes (8): _FinalProvider, output_budget(), ProviderError, Implemented interface and limits, main(), test_ollama_local_only(), test_retry_provider_failure_keeps_both_usage_and_fails(), analyze()
 
-### Community 181 - "json"
-Cohesion: 0.11
-Nodes (10): main(), Claim, Hypothesis, InvestigationRequest, _dedupe(), configured_provider(), main(), main() (+2 more)
-
-### Community 182 - "fastapi_capture_demo.py"
-Cohesion: 0.38
-Nodes (3): calculate_average(), crash(), health()
+### Community 182 - "capture.py"
+Cohesion: 0.16
+Nodes (10): _api_url(), _head_commit(), install_blackbox(), capture_exception(), _repo_path(), send_event(), calculate_average(), crash() (+2 more)
 
 ### Community 183 - "3. Mechanical results"
 Cohesion: 0.50
 Nodes (4): 3.1 Fresh pins (equivalent but different snapshots), 3.2 Replay of the exact Milestone 2.8 snapshots, 3.3 Determinism, 3. Mechanical results
 
-### Community 185 - "Milestone 3B.1 — Docker lifecycle validation"
-Cohesion: 0.33
-Nodes (5): Changes, Engine, image and live integration tests, Genuine model repair, Milestone 3B.1 — Docker lifecycle validation, Remaining limitations
-
-### Community 193 - "Milestone 4B paired evaluation"
-Cohesion: 0.40
-Nodes (5): Cost and timing, Method and integrity, Milestone 4B paired evaluation, One approved proof of fix, separate from diagnosis, Primary results
-
 ## Knowledge Gaps
-- **119 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **118 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `evidence_hash()` connect `investigate` to `BLACKBOX â€” local evidence and AI investigation`, `buggy_apps/README.md`, `fixtures.py`, `json`, `Investigation evaluation record`, `Milestone 2.9.1 — structured-output reliability fix and revalidation`?**
-  _High betweenness centrality (0.042) - this node is a cross-community bridge._
+- **Why does `evidence_hash()` connect `investigate` to `test_semantic_verification.py`, `repair_cli.py`, `BLACKBOX â€” local evidence and AI investigation`, `buggy_apps/README.md`, `Investigation evaluation record`, `Milestone 2.9.1 — structured-output reliability fix and revalidation`?**
+  _High betweenness centrality (0.040) - this node is a cross-community bridge._
 - **Are the 48 inferred relationships involving `LedgerBlocked` (e.g. with `M4B3OllamaDispatcher` and `_open_fake_session()`) actually correct?**
   _`LedgerBlocked` has 48 INFERRED edges - model-reasoned connections that need verification._
 - **Should `LedgerBlocked` be split into smaller, more focused modules?**
-  _Cohesion score 0.07901234567901234 - nodes in this community are weakly interconnected._
-- **Why does `investigate()` connect `investigate` to `test_repair.py`, `test_semantic_verification.py`, `execution.py`, `repair_cli.py`, `extract_facts`, `test_agent_retrieval.py`, `Store`, `_retry_inputs`, `test_evidence_facts.py`, `json`, `fixtures.py`?**
-  _High betweenness centrality (0.038) - this node is a cross-community bridge._
+  _Cohesion score 0.07927565392354124 - nodes in this community are weakly interconnected._
+- **Why does `HttpResponseBase` connect `HttpResponseBase` to `HttpResponse`, `._content_type_for_repr`, `._convert_to_charset`, `.serialize_headers`, `response.py`, `StreamingHttpResponse`?**
+  _High betweenness centrality (0.029) - this node is a cross-community bridge._
 - **Are the 43 inferred relationships involving `Ledger` (e.g. with `_open_fake_session()` and `RunSession`) actually correct?**
   _`Ledger` has 43 INFERRED edges - model-reasoned connections that need verification._
 - **Should `test_engine.py` be split into smaller, more focused modules?**
   _Cohesion score 0.08170731707317073 - nodes in this community are weakly interconnected._
-- **Why does `Investigation evaluation record` connect `Investigation evaluation record` to `Milestone 2.8 — deterministic evidence layer and abstention reliability, 2026-11-04`, `configuration.py`, `Milestone 2.9.1 — bounded model schema and adaptive output budget, 2026-11-04`, `Milestone 3A — restricted Proof-of-Fix, 2026-11-04`?**
-  _High betweenness centrality (0.030) - this node is a cross-community bridge._
+- **Why does `investigate()` connect `investigate` to `test_repair.py`, `test_semantic_verification.py`, `repair_cli.py`, `extract_facts`, `test_agent_retrieval.py`, `Store`, `AI engineering design`, `test_evidence_facts.py`, `providers.py`, `fixtures.py`?**
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._

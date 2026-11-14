@@ -74,9 +74,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1794655311.2921305,
-    "seen": 1794655326.2401469,
-    "ast_hash": "33f18a280ddd34c0cb5563be8171a536",
+    "mtime": 1794655550.3754468,
+    "seen": 1794655557.9700348,
+    "ast_hash": "17d18bf45b51e15134f0ce9e949bfb3d",
     "semantic_hash": ""
   },
   "requirements.txt": {
@@ -2018,9 +2018,9 @@
     "semantic_hash": ""
   },
   "blackbox/capture.py": {
-    "mtime": 1794655231.1820028,
-    "seen": 1794655326.2396932,
-    "ast_hash": "6a85cf0b7b23bcaf6e0096f79422277d",
+    "mtime": 1794655462.7382462,
+    "seen": 1794655557.9695654,
+    "ast_hash": "02c05df070d1591acf17ca701fba774d",
     "semantic_hash": ""
   },
   "examples/fastapi_capture_demo.py": {
@@ -2036,9 +2036,15 @@
     "semantic_hash": ""
   },
   "tests/test_capture.py": {
-    "mtime": 1794655281.5780318,
-    "seen": 1794655326.2401228,
-    "ast_hash": "84963a6fe55e8b0b31889f5670e1dc1c",
+    "mtime": 1794655463.8636794,
+    "seen": 1794655557.9700084,
+    "ast_hash": "d49acd5034a749fdd3d67621457e2bd1",
+    "semantic_hash": ""
+  },
+  ".investigation.json": {
+    "mtime": 1794655534.0022292,
+    "seen": 1794655557.9694946,
+    "ast_hash": "280aea257cefa4371d193f3c4726267c",
     "semantic_hash": ""
   }
 }

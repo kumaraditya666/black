@@ -56,6 +56,19 @@ def test_build_event_rejects_an_exception_without_repository_frames(repo):
         build_event(_raise_outside(repo), repo)
 
 
+def test_build_event_ignores_dependency_frames_inside_the_repository(repo):
+    dependency = repo / '.venv' / 'Lib' / 'site-packages' / 'pkg.py'
+    dependency.parent.mkdir(parents=True)
+    dependency.write_text('def fail():\n    raise RuntimeError("dependency")\n', encoding='utf8')
+    namespace = {}
+    exec(compile(dependency.read_text(encoding='utf8'), str(dependency), 'exec'), namespace)
+    with pytest.raises(RuntimeError) as caught:
+        namespace['fail']()
+
+    with pytest.raises(ValueError, match='No traceback frame'):
+        build_event(caught.value, repo)
+
+
 def _raise_outside(repo):
     try:
         raise RuntimeError('outside')
