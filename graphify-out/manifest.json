@@ -74,9 +74,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1794602448.5501719,
-    "seen": 1794602460.6125276,
-    "ast_hash": "a2a604324bb7a8f8376eb6009e878188",
+    "mtime": 1794655311.2921305,
+    "seen": 1794655326.2401469,
+    "ast_hash": "33f18a280ddd34c0cb5563be8171a536",
     "semantic_hash": ""
   },
   "requirements.txt": {
@@ -2015,6 +2015,30 @@
     "mtime": 1794598321.1243527,
     "seen": 1794598621.5865018,
     "ast_hash": "10bc229ed0c134f31733130d1d4a1865",
+    "semantic_hash": ""
+  },
+  "blackbox/capture.py": {
+    "mtime": 1794655231.1820028,
+    "seen": 1794655326.2396932,
+    "ast_hash": "6a85cf0b7b23bcaf6e0096f79422277d",
+    "semantic_hash": ""
+  },
+  "examples/fastapi_capture_demo.py": {
+    "mtime": 1794655232.3855045,
+    "seen": 1794655326.2397382,
+    "ast_hash": "afa17e73f6da4709542fb16a1f42e3f2",
+    "semantic_hash": ""
+  },
+  "scripts/start_local.ps1": {
+    "mtime": 1794655259.365509,
+    "seen": 1794655326.240082,
+    "ast_hash": "e289d2b462542db21e3693829f668432",
+    "semantic_hash": ""
+  },
+  "tests/test_capture.py": {
+    "mtime": 1794655281.5780318,
+    "seen": 1794655326.2401228,
+    "ast_hash": "84963a6fe55e8b0b31889f5670e1dc1c",
     "semantic_hash": ""
   }
 }

@@ -32,6 +32,49 @@ Set `BLACKBOX_DB` and `BLACKBOX_REPO` to select the database and an authorized l
 
 The resolver reads committed Git objects, never working-tree content. Missing commits, files, lines, Git errors, binary files and oversized source files are explicitly reported unresolved. Repository location is configured on the server, not supplied per event. Reports resolve on request; retain the repository and referenced Git objects for later access.
 
+## Capture exceptions from your own FastAPI app
+
+Start the local API against your repository. The launcher uses `data/blackbox-local.db` and local Ollama by default; pass `-NoAi` for evidence collection only:
+
+```powershell
+.\scripts\start_local.ps1 -Repo C:\path\to\your\repo
+```
+
+Add the capture middleware once, at app startup:
+
+```python
+from blackbox.capture import install_blackbox
+
+install_blackbox(app)
+```
+
+Run your app with these environment variables. `PYTHONPATH` lets your app import this project's `blackbox` package:
+
+```powershell
+$env:BLACKBOX_REPO = 'C:\path\to\your\repo'
+$env:BLACKBOX_API_URL = 'http://127.0.0.1:8000/events'
+$env:PYTHONPATH = 'C:\Users\Adi\Documents\ChatGPT\black'
+.\.venv\Scripts\python -m uvicorn your_app:app --host 127.0.0.1 --port 8100
+```
+
+The middleware captures unhandled exceptions only. It always re-raises the original error, skips traceback frames outside the configured repository, and logs capture failures without changing the application response. The endpoint must be loopback and the repository must contain the full commit that produced the error. Handled `HTTPException` responses are not failures and are not captured.
+
+The included demo exercises the full path:
+
+```powershell
+$env:BLACKBOX_REPO = (Get-Location).Path
+$env:BLACKBOX_API_URL = 'http://127.0.0.1:8000/events'
+.\.venv\Scripts\python -m uvicorn examples.fastapi_capture_demo:app --host 127.0.0.1 --port 8100
+```
+
+In another window, trigger its real `ZeroDivisionError`, then inspect the resulting incident:
+
+```powershell
+curl.exe -s -o NUL -w "status=%{http_code}`n" http://127.0.0.1:8100/crash
+.\.venv\Scripts\python scripts/investigate.py list
+.\.venv\Scripts\python scripts/investigate.py preview 1
+```
+
 ## Limits
 
 This is a local, single-user prototype with no authentication or tenant isolation; do not expose it on a public network or use production secrets. Redaction is a best-effort set of patterns for common key/value secrets and token formats, not a guarantee against all secrets, personal data, multiline credentials or secrets embedded in arbitrary file paths. Minimize data before sending it, and inspect reports before sharing. Validation errors may echo invalid input. Exact duplicates are compared after redaction, so two payloads differing only in redacted values are indistinguishable. Existing SQLite files, the sample Git history and generated reports are not encrypted or automatically deleted. Event grouping is a simple stack signature and is not causal analysis. Incoming frames are client-provided evidence, not proof the reported code actually executed. Only one configured local repository is supported, and only full SHA-1 Git commits are accepted. Repair is a restricted local proposal-and-test workflow on pinned trusted fixtures; there is no merge, pull request, deployment or autonomous repair permission.
