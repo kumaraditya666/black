@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BLACKBOX Cloud</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="mark">B</span><div><strong>BLACKBOX</strong><small>error intelligence</small></div></div>
+    <div class="top-actions">
+      <span class="local-badge">LOCAL PROTOTYPE</span>
+      <button id="logout" class="quiet" hidden>Sign out</button>
+    </div>
+  </header>
+
+  <main id="auth" class="auth-shell">
+    <section class="auth-copy">
+      <div class="eyebrow">Hosted error intelligence</div>
+      <h1>See the failure.<br><span>Find the cause.</span></h1>
+      <p>Capture exceptions from your apps, group repeated failures, inspect the exact source revision, and ask a local model for a reviewed explanation.</p>
+      <div class="steps">
+        <div><b>01</b><span>Create a project</span></div>
+        <div><b>02</b><span>Send an exception</span></div>
+        <div><b>03</b><span>Investigate with evidence</span></div>
+      </div>
+    </section>
+    <section class="auth-card">
+      <div class="eyebrow">Account</div>
+      <h2 id="auth-title">Create an account</h2>
+      <form id="auth-form">
+        <label>Email<input id="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+        <label>Password<input id="password" type="password" autocomplete="current-password" minlength="8" required placeholder="At least 8 characters"></label>
+        <button id="auth-submit" class="primary" type="submit">Create account</button>
+        <p id="auth-error" class="error" role="alert"></p>
+      </form>
+      <button id="switch-auth" class="link-button" type="button">Already have an account? Sign in</button>
+      <p class="fine">This local prototype stores accounts in <code>data/cloud.db</code>. Do not expose it publicly without production auth, TLS and rate limiting.</p>
+    </section>
+  </main>
+
+  <main id="app" class="app-shell" hidden>
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <span>Projects</span>
+        <button id="new-project" class="tiny" type="button">+ New</button>
+      </div>
+      <div id="project-list" class="project-list"></div>
+      <div class="sidebar-foot"><span id="user-email"></span></div>
+    </aside>
+    <section class="content">
+      <div id="content-head" class="content-head">
+        <div><div class="eyebrow">Workspace</div><h2>Select a project</h2></div>
+      </div>
+      <div id="content-body" class="content-body">
+        <div class="empty"><h3>Create your first project</h3><p>Projects separate API keys, events and issues.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="project-dialog">
+    <form id="project-form" method="dialog">
+      <div class="eyebrow">New project</div>
+      <h2>Connect an application</h2>
+      <label>Project name<input id="project-name" required maxlength="80" placeholder="My API"></label>
+      <label>Local repository path <small>(optional)</small><input id="project-repo" maxlength="1024" placeholder="C:\path\to\repo"></label>
+      <p class="fine">The repo path is used for source evidence. It is not exposed to other accounts.</p>
+      <div class="dialog-actions"><button type="button" id="cancel-project" class="quiet">Cancel</button><button class="primary" type="submit">Create project</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="key-dialog">
+    <div class="eyebrow">Project created</div>
+    <h2>Save this API key</h2>
+    <p>It is shown only once. Use it as <code>X-Blackbox-Project-Key</code>.</p>
+    <pre id="project-key"></pre>
+    <p class="fine">Ingest endpoint: <code id="ingest-url"></code></p>
+    <div class="dialog-actions"><button id="close-key" class="primary" type="button">Done</button></div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

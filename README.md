@@ -32,6 +32,43 @@ Set `BLACKBOX_DB` and `BLACKBOX_REPO` to select the database and an authorized l
 
 The resolver reads committed Git objects, never working-tree content. Missing commits, files, lines, Git errors, binary files and oversized source files are explicitly reported unresolved. Repository location is configured on the server, not supplied per event. Reports resolve on request; retain the repository and referenced Git objects for later access.
 
+## Hosted-style local dashboard
+
+This is the multi-user product slice: accounts, projects, per-project API keys, event ingestion, issue grouping, source evidence and AI explanations. It runs on the same machine for now:
+
+```powershell
+.\scripts\start_cloud.ps1
+```
+
+Open `http://127.0.0.1:8200/`, create an account, then create a project. The project key is shown once. Send one event with:
+
+```powershell
+$body = @{
+  event_id = [guid]::NewGuid().ToString()
+  occurred_at = (Get-Date).ToUniversalTime().ToString('o')
+  commit = (git rev-parse HEAD)
+  exception_type = 'ZeroDivisionError'
+  message = 'division by zero'
+  traceback = 'Traceback ...'
+  frames = @(@{ path = 'app.py'; line = 2; function = 'fail' })
+} | ConvertTo-Json -Depth 5
+Invoke-RestMethod -Method Post -Uri 'http://127.0.0.1:8200/api/ingest' `
+  -Headers @{ 'X-Blackbox-Project-Key' = 'bbx_YOUR_KEY' } -ContentType 'application/json' -Body $body
+```
+
+The existing FastAPI middleware can send directly to a cloud project:
+
+```python
+install_blackbox(
+    app,
+    repo=r'C:\path\to\your\repo',
+    api_url='http://127.0.0.1:8200/api/ingest',
+    project_key='bbx_YOUR_KEY',
+)
+```
+
+Each account can only see its own projects and issues; project keys are stored hashed and shown once. The dashboard uses `data/cloud.db`, password sessions and loopback-only configuration. It is a local prototype, not a production deployment: add TLS, email verification, rate limiting, password reset, a job queue, Postgres/ClickHouse and an external auth provider before exposing it to real users.
+
 ## Scan a whole codebase
 
 This is a separate workflow from runtime capture. Give it a source directory and it reads every Python file in that working tree, without executing the target:

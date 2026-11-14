@@ -90,12 +90,16 @@ def build_event(exc: BaseException, repo: str | Path, commit: str | None = None)
     }
 
 
-def send_event(payload: dict[str, Any], api_url: str | None = None, timeout: float = 2.0) -> None:
-    """Send one event to the local BLACKBOX API."""
+def send_event(payload: dict[str, Any], api_url: str | None = None, timeout: float = 2.0,
+               project_key: str | None = None) -> None:
+    """Send one event to a local BLACKBOX or BLACKBOX Cloud endpoint."""
+    headers = {'Content-Type': 'application/json'}
+    if project_key:
+        headers['X-Blackbox-Project-Key'] = project_key
     request = urllib.request.Request(
         _api_url(api_url),
         data=json.dumps(payload).encode('utf-8'),
-        headers={'Content-Type': 'application/json'},
+        headers=headers,
         method='POST',
     )
     with urllib.request.urlopen(request, timeout=timeout) as response:
@@ -108,6 +112,7 @@ def install_blackbox(
     repo: str | Path | None = None,
     api_url: str | None = None,
     timeout: float = 2.0,
+    project_key: str | None = None,
 ) -> None:
     """Capture unhandled exceptions from a FastAPI app.
 
@@ -126,7 +131,7 @@ def install_blackbox(
             return await call_next(request)
         except Exception as exc:
             try:
-                send_event(build_event(exc, repo_path, commit), endpoint, timeout)
+                send_event(build_event(exc, repo_path, commit), endpoint, timeout, project_key=project_key)
             except Exception:
                 LOGGER.exception('BLACKBOX capture failed for %s %s', request.method, request.url.path)
             raise

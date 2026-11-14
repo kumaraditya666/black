@@ -79,8 +79,8 @@ def _raise_outside(repo):
 def test_fastapi_middleware_sends_the_event_and_preserves_the_error(repo, monkeypatch):
     sent = []
 
-    def fake_send(payload, api_url=None, timeout=0):
-        sent.append((payload, api_url, timeout))
+    def fake_send(payload, api_url=None, timeout=0, project_key=None):
+        sent.append((payload, api_url, timeout, project_key))
 
     monkeypatch.setattr(capture, 'send_event', fake_send)
     app = FastAPI()
@@ -94,8 +94,9 @@ def test_fastapi_middleware_sends_the_event_and_preserves_the_error(repo, monkey
 
     assert response.status_code == 500
     assert len(sent) == 1
-    payload, endpoint, _ = sent[0]
+    payload, endpoint, _, key = sent[0]
     assert endpoint == 'http://127.0.0.1:8000/events'
+    assert key is None
     assert payload['message'] == 'route failed'
     assert any(frame['path'] == 'route.py' for frame in payload['frames'])
 

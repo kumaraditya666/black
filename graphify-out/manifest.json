@@ -74,9 +74,9 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1794662215.077299,
-    "seen": 1794662356.183856,
-    "ast_hash": "7a48bf11529c5900531b38750964fb21",
+    "mtime": 1794662976.8796105,
+    "seen": 1794662992.823197,
+    "ast_hash": "d157805bc9c2cb14cc982a4c4bc4c0fa",
     "semantic_hash": ""
   },
   "requirements.txt": {
@@ -2018,9 +2018,9 @@
     "semantic_hash": ""
   },
   "blackbox/capture.py": {
-    "mtime": 1794655462.7382462,
-    "seen": 1794655557.9695654,
-    "ast_hash": "02c05df070d1591acf17ca701fba774d",
+    "mtime": 1794662963.1937227,
+    "seen": 1794662992.8229403,
+    "ast_hash": "4c1fc798ccf8b4da5699a502dec676ab",
     "semantic_hash": ""
   },
   "examples/fastapi_capture_demo.py": {
@@ -2036,9 +2036,9 @@
     "semantic_hash": ""
   },
   "tests/test_capture.py": {
-    "mtime": 1794655463.8636794,
-    "seen": 1794655557.9700084,
-    "ast_hash": "d49acd5034a749fdd3d67621457e2bd1",
+    "mtime": 1794662964.7369022,
+    "seen": 1794662992.8231819,
+    "ast_hash": "c8b377ddd09054ec28069e2c9d5d0946",
     "semantic_hash": ""
   },
   "blackbox/codebase_audit.py": {
@@ -2059,16 +2059,34 @@
     "ast_hash": "17f729dfd473f36385d3a03b05c80a22",
     "semantic_hash": ""
   },
-  ".scan-ai-output.txt": {
-    "mtime": 1794662315.5202415,
-    "seen": 1794662356.1838393,
-    "ast_hash": "73a33c1f68d9c9d10b4f40be8c497a9a",
+  "blackbox/cloud.py": {
+    "mtime": 1794662717.7534387,
+    "seen": 1794662992.8229423,
+    "ast_hash": "62e84ec0a418505c7adf648a208fab90",
     "semantic_hash": ""
   },
-  ".scan-output.txt": {
-    "mtime": 1794662290.1150076,
-    "seen": 1794662356.1838481,
-    "ast_hash": "bc44f302950548ea909da85efbeb4eb3",
+  "blackbox/cloud_ui/app.js": {
+    "mtime": 1794662885.5406733,
+    "seen": 1794662992.8229463,
+    "ast_hash": "264dc6a01eaf0bee7f861bc4a375e675",
+    "semantic_hash": ""
+  },
+  "scripts/start_cloud.ps1": {
+    "mtime": 1794662656.925507,
+    "seen": 1794662992.823159,
+    "ast_hash": "8817108f75be86a5e68ecdd47e8807a5",
+    "semantic_hash": ""
+  },
+  "tests/test_cloud.py": {
+    "mtime": 1794662675.8721483,
+    "seen": 1794662992.8231828,
+    "ast_hash": "7b31865d65cb348ee24c3bdefe51275e",
+    "semantic_hash": ""
+  },
+  "blackbox/cloud_ui/index.html": {
+    "mtime": 1794662619.706155,
+    "seen": 1794662992.8231988,
+    "ast_hash": "41f0a48da607445d89a69b6ee1dd84fb",
     "semantic_hash": ""
   }
 }
