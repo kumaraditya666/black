@@ -32,6 +32,26 @@ Set `BLACKBOX_DB` and `BLACKBOX_REPO` to select the database and an authorized l
 
 The resolver reads committed Git objects, never working-tree content. Missing commits, files, lines, Git errors, binary files and oversized source files are explicitly reported unresolved. Repository location is configured on the server, not supplied per event. Reports resolve on request; retain the repository and referenced Git objects for later access.
 
+## Scan a whole codebase
+
+This is a separate workflow from runtime capture. Give it a source directory and it reads every Python file in that working tree, without executing the target:
+
+```powershell
+.\\.venv\\Scripts\\python scripts/scan_codebase.py C:\\path\\to\\your\\project
+```
+
+It uses Pyflakes for undefined names, syntax errors, unused imports and redefinitions, plus bounded AST checks for bare exceptions, mutable defaults, `eval`/`exec`, shell execution, identity comparisons and literal division by zero. Findings include file, line, rule, a code snippet and a concrete fix suggestion. The command exits with status `1` when it finds errors.
+
+Add `--include-tests`, write a full JSON report with `--json report.json`, or ask the configured local model to explain and extend the top findings:
+
+```powershell
+$env:BLACKBOX_AI_PROVIDER = 'ollama'
+$env:BLACKBOX_AI_MODEL = 'qwen3.5:4b'
+.\\.venv\\Scripts\\python scripts/scan_codebase.py C:\\path\\to\\your\\project --ai --max-ai-findings 10 --json report.json
+```
+
+The scanner skips virtualenvs, dependencies, caches and build directories by default. Static findings are concrete observations, but fixes and AI explanations still require review; this does not prove semantic correctness or replace running tests.
+
 ## Capture exceptions from your own FastAPI app
 
 Start the local API against your repository. The launcher uses `data/blackbox-local.db` and local Ollama by default; pass `-NoAi` for evidence collection only:
